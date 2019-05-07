@@ -1,5 +1,9 @@
 dependencies:
+  axios: 0.18.0
   core-js: 2.6.5
+  element-ui: 2.8.2
+  lockr: 0.8.5
+  qs: 6.7.0
   vue: 2.6.10
   vue-router: 3.0.6
   vuex: 3.1.0
@@ -1676,6 +1680,13 @@ packages:
     resolution:
       integrity: sha1-ePrtjD0HSrgfIrTphdeehzj3IPg=
       tarball: /async-limiter/download/async-limiter-1.0.0.tgz
+  /async-validator/1.8.5:
+    dependencies:
+      babel-runtime: 6.26.0
+    dev: false
+    resolution:
+      integrity: sha1-3D4I7B/Q3dtn5ghC8CwM0c7G1/A=
+      tarball: /async-validator/download/async-validator-1.8.5.tgz
   /async/1.5.2:
     dev: true
     resolution:
@@ -1719,6 +1730,14 @@ packages:
     resolution:
       integrity: sha1-8OAD2cqef1nHpQiUXXsu+aBKVC8=
       tarball: /aws4/download/aws4-1.8.0.tgz
+  /axios/0.18.0:
+    dependencies:
+      follow-redirects: 1.7.0
+      is-buffer: 1.1.6
+    dev: false
+    resolution:
+      integrity: sha1-MtU+SFHv3AoRmTts0AB4nXDAUQI=
+      tarball: /axios/download/axios-0.18.0.tgz
   /babel-code-frame/6.26.0:
     dependencies:
       chalk: 1.1.3
@@ -1761,6 +1780,11 @@ packages:
     resolution:
       integrity: sha1-kZaB3AmWFM19MdRciQhpUJKh+u0=
       tarball: /babel-eslint/download/babel-eslint-10.0.1.tgz
+  /babel-helper-vue-jsx-merge-props/2.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-Iq69OzOQIyjlEyk6jkmSs4T58bY=
+      tarball: /babel-helper-vue-jsx-merge-props/download/babel-helper-vue-jsx-merge-props-2.0.3.tgz
   /babel-loader/8.0.5_@babel+core@7.4.4+webpack@4.28.4:
     dependencies:
       '@babel/core': 7.4.4
@@ -1798,6 +1822,14 @@ packages:
     resolution:
       integrity: sha1-3fpeMB47mqEthSqZefGLN4gf9ac=
       tarball: /babel-plugin-module-resolver/download/babel-plugin-module-resolver-3.2.0.tgz
+  /babel-runtime/6.26.0:
+    dependencies:
+      core-js: 2.6.5
+      regenerator-runtime: 0.11.1
+    dev: false
+    resolution:
+      integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
+      tarball: /babel-runtime/download/babel-runtime-6.26.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-runtime%2Fdownload%2Fbabel-runtime-6.26.0.tgz
   /balanced-match/1.0.0:
     dev: true
     resolution:
@@ -3009,7 +3041,6 @@ packages:
   /debug/3.2.6:
     dependencies:
       ms: 2.1.1
-    dev: true
     resolution:
       integrity: sha1-6D0X3hbYp++3cX7b5fsQE17uYps=
       tarball: /debug/download/debug-3.2.6.tgz
@@ -3050,7 +3081,6 @@ packages:
       integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
       tarball: /deep-is/download/deep-is-0.1.3.tgz
   /deepmerge/1.5.2:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -3363,6 +3393,20 @@ packages:
     resolution:
       integrity: sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
       tarball: /elegant-spinner/download/elegant-spinner-1.0.1.tgz
+  /element-ui/2.8.2:
+    dependencies:
+      async-validator: 1.8.5
+      babel-helper-vue-jsx-merge-props: 2.0.3
+      deepmerge: 1.5.2
+      normalize-wheel: 1.0.1
+      resize-observer-polyfill: 1.5.1
+      throttle-debounce: 1.1.0
+    dev: false
+    peerDependencies:
+      vue: ^2.5.16
+    resolution:
+      integrity: sha1-Iaeky5Jhaw+LddTU5jfToc2MCd4=
+      tarball: /element-ui/download/element-ui-2.8.2.tgz
   /elliptic/6.4.1:
     dependencies:
       bn.js: 4.11.8
@@ -4293,7 +4337,6 @@ packages:
   /follow-redirects/1.7.0:
     dependencies:
       debug: 3.2.6
-    dev: true
     engines:
       node: '>=4.0'
     resolution:
@@ -5135,7 +5178,6 @@ packages:
       integrity: sha1-dfFmQrSA8YenEcgUFh/TpKdlWJg=
       tarball: /is-binary-path/download/is-binary-path-1.0.1.tgz
   /is-buffer/1.1.6:
-    dev: true
     resolution:
       integrity: sha1-76ouqdqg16suoTqXsritUf776L4=
       tarball: /is-buffer/download/is-buffer-1.1.6.tgz
@@ -5865,6 +5907,13 @@ packages:
     resolution:
       integrity: sha1-2+w7OrdZdYBxtY/ln8QYca8hQA4=
       tarball: /locate-path/download/locate-path-3.0.0.tgz
+  /lockr/0.8.5:
+    dev: false
+    engines:
+      node: '>= 0.8.0'
+    resolution:
+      integrity: sha1-7QIZeNrch6/oyOyL1Q/OFfWj2E4=
+      tarball: /lockr/download/lockr-0.8.5.tgz
   /lodash.defaultsdeep/4.6.0:
     dev: true
     resolution:
@@ -6271,7 +6320,6 @@ packages:
       integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
       tarball: /ms/download/ms-2.0.0.tgz
   /ms/2.1.1:
-    dev: true
     resolution:
       integrity: sha1-MKWGTrPrsKZvLr5tcnrwagnYbgo=
       tarball: /ms/download/ms-2.1.1.tgz
@@ -6467,6 +6515,11 @@ packages:
     resolution:
       integrity: sha1-suHE3E98bVd0PfczpPWXjRhlBVk=
       tarball: /normalize-url/download/normalize-url-3.3.0.tgz
+  /normalize-wheel/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-rsiGr/2wRQcNhWRH32Ls+GFG7EU=
+      tarball: /normalize-wheel/download/normalize-wheel-1.0.1.tgz
   /npm-path/2.0.4:
     dependencies:
       which: 1.3.1
@@ -7639,6 +7692,13 @@ packages:
     resolution:
       integrity: sha1-yzroBuh0BERYTvFUzo7pjUA/PjY=
       tarball: /qs/download/qs-6.5.2.tgz
+  /qs/6.7.0:
+    dev: false
+    engines:
+      node: '>=0.6'
+    resolution:
+      integrity: sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
+      tarball: /qs/download/qs-6.7.0.tgz
   /query-string/5.1.1:
     dependencies:
       decode-uri-component: 0.2.0
@@ -7785,6 +7845,11 @@ packages:
     resolution:
       integrity: sha1-SoVuxLVuQHfFV1icroXnpMiGmhE=
       tarball: /regenerate/download/regenerate-1.4.0.tgz
+  /regenerator-runtime/0.11.1:
+    dev: false
+    resolution:
+      integrity: sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
+      tarball: /regenerator-runtime/download/regenerator-runtime-0.11.1.tgz
   /regenerator-runtime/0.13.2:
     dev: true
     resolution:
@@ -8011,6 +8076,11 @@ packages:
     resolution:
       integrity: sha1-79qpjqdFEyTQkrKyFjpqHXqaIUc=
       tarball: /reselect/download/reselect-3.0.1.tgz
+  /resize-observer-polyfill/1.5.1:
+    dev: false
+    resolution:
+      integrity: sha1-DpAg3T0hAkRY1OvSfiPkAmmBBGQ=
+      tarball: /resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz
   /resolve-cwd/2.0.0:
     dependencies:
       resolve-from: 3.0.0
@@ -8998,6 +9068,13 @@ packages:
     resolution:
       integrity: sha1-9YXdOOhSx/nN7V0JKZIQgUj16zA=
       tarball: /thread-loader/download/thread-loader-2.1.2.tgz
+  /throttle-debounce/1.1.0:
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-UYU9o3vmihVctugns1FKPEIuic0=
+      tarball: /throttle-debounce/download/throttle-debounce-1.1.0.tgz
   /through/2.3.8:
     dev: true
     resolution:
@@ -9902,11 +9979,15 @@ specifiers:
   '@vue/cli-plugin-eslint': ^3.7.0
   '@vue/cli-service': ^3.7.0
   '@vue/eslint-config-standard': ^4.0.0
+  axios: ^0.18.0
   babel-eslint: ^10.0.1
   core-js: ^2.6.5
+  element-ui: ^2.8.2
   eslint: ^5.16.0
   eslint-plugin-vue: ^5.0.0
   lint-staged: ^8.1.5
+  lockr: ^0.8.5
+  qs: ^6.7.0
   vue: ^2.6.10
   vue-router: ^3.0.3
   vue-template-compiler: ^2.5.21
