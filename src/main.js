@@ -7,43 +7,71 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
-
-Vue.config.productionTip = false
+import { showLoading, hideLoading } from './loading'
 
 Vue.use(ElementUI)
+
+Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 Vue.prototype.qs = qs
 Vue.prototype.lockr = lockr
 
-lockr.prefix = 'ex'
+// =============== router control ====================
+router.beforeEach((to, from, next) => {
+  showLoading()
+  next()
+})
+
+router.afterEach((to, from) => {
+  hideLoading()
+})
+
+// =============== lockr control ====================
+lockr.prefix = 'tfcms'
+
+// =============== axios control ====================
+
 // axios.defaults.baseURL = (process.env.NODE_ENV === 'production' ? "http://192.168.64.88" : "http://192.168.64.88")
 axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(
-  config => {
+  request => {
+    showLoading()
     // add token
     lockr.set('token', 'test')
     var token = lockr.get('token')
-    if (config.method === 'post') {
-      config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-      let data = qs.parse(config.data)
+    if (request.method === 'post') {
+      request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+      let data = qs.parse(request.data)
 
-      config.data = qs.stringify({
+      request.data = qs.stringify({
         token: token,
         ...data
       })
-    } else if (config.method === 'get') {
-      config.params = {
+    } else if (request.method === 'get') {
+      request.params = {
         token: token,
-        ...config.params
+        ...request.params
       }
     }
-    return config
+    return request
   },
   error => {
+    hideLoading()
     console.log(error)
+    Promise.reject(error)
+  }
+)
+
+axios.interceptors.response.use(
+  response => {
+    hideLoading()
+    return response
+  },
+  error => {
+    hideLoading()
     Promise.reject(error)
   }
 )
