@@ -60,7 +60,6 @@ axios.interceptors.request.use(
   },
   error => {
     hideLoading()
-    console.log(error)
     Promise.reject(error)
   }
 )
