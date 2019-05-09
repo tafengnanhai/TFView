@@ -1,28 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+    <div id="nav" class="f16">
+      <router-link to="/Admin" class="el-icon-s-grid">&nbsp;TFView管理面板</router-link>
+      <router-link to="/Login" class="el-icon-s-custom">&nbsp;登录</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  text-align: center;
-  color: #2c3e50;
-}
 #nav {
+  width: 280px;
+  margin: 0 auto;
   padding: 30px;
 }
 
 #nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  display: block;
+  width: 140px;
+  text-align: center;
+  color: white;
+  float: left;
 }
 </style>
