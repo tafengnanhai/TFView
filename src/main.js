@@ -19,7 +19,11 @@ Vue.prototype.lockr = lockr
 
 // =============== router control ====================
 router.beforeEach((to, from, next) => {
-  showLoading()
+  if (to.name === 'login') {
+    showLoading('body', true)
+  } else {
+    showLoading()
+  }
   next()
 })
 
@@ -28,7 +32,7 @@ router.afterEach((to, from) => {
 })
 
 // =============== lockr control ====================
-lockr.prefix = 'tfcms'
+lockr.prefix = 'tfview'
 
 // =============== axios control ====================
 
