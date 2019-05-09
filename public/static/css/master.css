@@ -1,0 +1,24 @@
+html, body, #app{ height: 100%; }
+body { font-size: 13px; margin: 0; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; }
+a { color: #000; outline: none; text-decoration: none; }
+img { border: 0; }
+p { margin: 0; text-indent: 2em; }
+table, div { word-wrap: break-word; }
+.black, .black a { color: black; }
+.white, .white a { color: white; }
+.gray, .gray a { color: #434343; }
+.red, .red a { color: red; }
+.green, .green a { color: #73BD12; }
+.blue, .blue a { color: #006CFF; }
+.orange, .orange a { color: orange; }
+a:hover { color: #73BD12; }
+ul, li { list-style: none; margin: 0; padding: 0; overflow: hidden; }
+.b { font-weight: bold; }
+.f12 { font-size: 12px; }
+.f13 { font-size: 13px; }
+.f14 { font-size: 14px; }
+.f16 { font-size: 16px; }
+.f18 { font-size: 18px; }
+.f20 { font-size: 20px; }
+.f26 { font-size:26px; }
+.f30 { font-size:30px; }
