@@ -2,37 +2,59 @@
   <div>
     <div class="panel gray">
       <div class="title f20">登录</div>
-      <div class="margin">
-        <el-input
-          v-model="username"
-          placeholder="请输入用户名"
-          prefix-icon="el-icon-user"
-          class="input"
-          autocomplete="off"
-        ></el-input>
-      </div>
-      <div class="margin">
-        <el-input
-          v-model="password"
-          placeholder="请输入密码"
-          prefix-icon="el-icon-lock"
-          class="input"
-          show-password
-        ></el-input>
-      </div>
-      <div class="margin">
-        <el-button type="primary" class="loginSubmit" size="medium" round>登录</el-button>
-      </div>
+      <el-form :model="operForm" :rules="rules" ref="operForm">
+        <el-form-item prop="username">
+          <el-input
+            v-model="operForm.username"
+            placeholder="请输入用户名"
+            prefix-icon="el-icon-user"
+            class="input margin"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            v-model="operForm.password"
+            placeholder="请输入密码"
+            prefix-icon="el-icon-lock"
+            class="input margin"
+            show-password
+          ></el-input>
+        </el-form-item>
+        <el-button
+          type="primary"
+          class="loginSubmit margin"
+          size="medium"
+          round
+          @click="submitForm('operForm')"
+        >登录</el-button>
+      </el-form>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'login',
   data () {
     return {
-      username: null,
-      password: null
+      operForm: {
+        username: '',
+        password: ''
+      },
+      rules: {
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+      }
+    }
+  },
+  methods: {
+    submitForm: function (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('ok')
+        } else {
+          return false
+        }
+      })
     }
   }
 }
@@ -57,7 +79,11 @@ export default {
   width: 280px;
 }
 .margin {
-  margin-top: 30px;
+  margin-top: 15px;
+}
+.el-form-item__error {
+  margin-left: 20px;
+  margin-top: 5px;
 }
 @media screen and (max-width: 320px) {
   .panel {
