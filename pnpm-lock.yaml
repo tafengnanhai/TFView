@@ -3,6 +3,7 @@ dependencies:
   core-js: 2.6.5
   element-ui: 2.8.2
   lockr: 0.8.5
+  mockjs: 1.0.1-beta3
   qs: 6.7.0
   vue: 2.6.10
   vue-router: 3.0.6
@@ -2526,7 +2527,6 @@ packages:
       integrity: sha1-9hmKqE5bg8RgVLlN3tv+1e6f8So=
       tarball: /commander/download/commander-2.19.0.tgz
   /commander/2.20.0:
-    dev: true
     resolution:
       integrity: sha1-1YuytcHuj4ew00ACfp6U4iLFpCI=
       tarball: /commander/download/commander-2.20.0.tgz
@@ -6302,6 +6302,14 @@ packages:
     resolution:
       integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
       tarball: /mkdirp/download/mkdirp-0.5.1.tgz
+  /mockjs/1.0.1-beta3:
+    dependencies:
+      commander: 2.20.0
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-0jTzwnJWOXVk8slVFC6JGQlTcgk=
+      tarball: /mockjs/download/mockjs-1.0.1-beta3.tgz
   /move-concurrently/1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -9987,6 +9995,7 @@ specifiers:
   eslint-plugin-vue: ^5.0.0
   lint-staged: ^8.1.5
   lockr: ^0.8.5
+  mockjs: ^1.0.1-beta3
   qs: ^6.7.0
   vue: ^2.6.10
   vue-router: ^3.0.3
