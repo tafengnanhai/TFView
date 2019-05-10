@@ -1,14 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import lockr from 'lockr'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    showRouterLink: true
+    showRouterLink: false,
+    username: '',
+    token: '',
+    testToken: 'this is test token which will be replaced by backend'
   },
   mutations: {
-
+    initAccount: (state, data) => {
+      lockr.set('username', data.username)
+      lockr.set('token', data.token)
+      state.username = data.username
+      state.token = data.token
+    },
+    recoverAccount: (state) => {
+      state.username = lockr.get('username')
+      state.token = lockr.get('token')
+    }
   },
   actions: {
 

@@ -53,10 +53,11 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.get('/art/').then((res) => {
+          this.$http.get('/check/').then((res) => {
             if (res.data.username === this.operForm.username && res.data.password === this.operForm.password) {
               this.tipText = '登录成功'
               this.tip = 'tip green'
+              this.$store.commit('initAccount', { username: res.data.username, token: res.data.token })
             } else {
               this.tipText = '用户名或者密码错误'
               this.tip = 'tip red'
@@ -70,7 +71,7 @@ export default {
   }
 }
 </script>
-<style scope>
+<style scoped>
 .panel {
   width: 320px;
   height: 300px;

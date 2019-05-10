@@ -19,6 +19,9 @@ Vue.prototype.$http = axios
 Vue.prototype.qs = qs
 Vue.prototype.lockr = lockr
 
+// recover account
+store.commit('recoverAccount')
+
 // router control
 router.beforeEach((to, from, next) => {
   store.state.showRouterLink = to.meta.showRouterLink
@@ -34,11 +37,7 @@ router.afterEach((to, from) => {
   hideLoading()
 })
 
-// lockr control
-lockr.prefix = 'tfview'
-
 // axios control
-
 // axios.defaults.baseURL = 'http://api.tfview.com'
 axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
@@ -46,8 +45,6 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 axios.interceptors.request.use(
   request => {
     showLoading()
-    // add token
-    lockr.set('token', 'test')
     var token = lockr.get('token')
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
