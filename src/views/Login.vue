@@ -37,8 +37,8 @@ export default {
   data () {
     return {
       operForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: 'admin'
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -50,7 +50,13 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('ok')
+          this.$http.get('/art/').then((res) => {
+            if (res.data.username === this.operForm.username && res.data.password === this.operForm.password) {
+              alert('ok')
+            } else {
+              alert('error')
+            }
+          })
         } else {
           return false
         }

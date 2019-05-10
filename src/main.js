@@ -6,6 +6,7 @@ import lockr from 'lockr'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import './mock/login.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import { showLoading, hideLoading } from './loading'
 
@@ -18,7 +19,7 @@ Vue.prototype.$http = axios
 Vue.prototype.qs = qs
 Vue.prototype.lockr = lockr
 
-// =============== router control ====================
+// router control
 router.beforeEach((to, from, next) => {
   store.state.showRouterLink = to.meta.showRouterLink
   if (to.name === 'login') {
@@ -33,12 +34,12 @@ router.afterEach((to, from) => {
   hideLoading()
 })
 
-// =============== lockr control ====================
+// lockr control
 lockr.prefix = 'tfview'
 
-// =============== axios control ====================
+// axios control
 
-// axios.defaults.baseURL = (process.env.NODE_ENV === 'production' ? "http://192.168.64.88" : "http://192.168.64.88")
+// axios.defaults.baseURL = 'http://api.tfview.com'
 axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 
