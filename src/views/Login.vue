@@ -28,6 +28,7 @@
           round
           @click="submitForm('operForm')"
         >登录</el-button>
+        <div :class="tip">{{tipText}}</div>
       </el-form>
     </div>
   </div>
@@ -36,6 +37,8 @@
 export default {
   data () {
     return {
+      tip: 'tip',
+      tipText: '',
       operForm: {
         username: 'admin',
         password: 'admin'
@@ -52,9 +55,11 @@ export default {
         if (valid) {
           this.$http.get('/art/').then((res) => {
             if (res.data.username === this.operForm.username && res.data.password === this.operForm.password) {
-              alert('ok')
+              this.tipText = '登录成功'
+              this.tip = 'tip green'
             } else {
-              alert('error')
+              this.tipText = '用户名或者密码错误'
+              this.tip = 'tip red'
             }
           })
         } else {
@@ -90,6 +95,12 @@ export default {
 .el-form-item__error {
   margin-left: 20px;
   margin-top: 5px;
+}
+.tip {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  text-align: center;
 }
 @media screen and (max-width: 320px) {
   .panel {
