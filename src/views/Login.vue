@@ -53,7 +53,7 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.get('/check/').then((res) => {
+          this.$http.get('/Login/check').then((res) => {
             if (res.data.username === this.operForm.username && res.data.password === this.operForm.password) {
               this.tipText = '登录成功'
               this.tip = 'tip green'
