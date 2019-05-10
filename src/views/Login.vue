@@ -38,10 +38,6 @@ export default {
 }
 </script>
 <style scope>
-#app {
-  background: #c2cff0 url(/static/img/login/loginBg.gif) no-repeat;
-  background-size: cover;
-}
 .panel {
   width: 320px;
   height: 300px;

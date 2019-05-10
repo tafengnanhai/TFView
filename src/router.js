@@ -10,11 +10,17 @@ export default new Router({
     {
       path: '/Admin',
       name: 'admin',
+      meta: {
+        showRouterLink: false
+      },
       component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue')
     },
     {
       path: '/Login',
       name: 'login',
+      meta: {
+        showRouterLink: true
+      },
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
     }
   ]

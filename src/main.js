@@ -13,12 +13,14 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
+Vue.prototype.$store = store
 Vue.prototype.$http = axios
 Vue.prototype.qs = qs
 Vue.prototype.lockr = lockr
 
 // =============== router control ====================
 router.beforeEach((to, from, next) => {
+  store.state.showRouterLink = to.meta.showRouterLink
   if (to.name === 'login') {
     showLoading('body', true)
   } else {

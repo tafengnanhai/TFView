@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="f16">
+    <div id="nav" class="f16" v-show="$store.state.showRouterLink">
       <router-link to="/Admin" class="el-icon-s-grid">&nbsp;TFView管理面板</router-link>
       <router-link to="/Login" class="el-icon-s-custom">&nbsp;登录</router-link>
     </div>
@@ -9,6 +9,10 @@
 </template>
 
 <style>
+#app {
+  background: #c2cff0 url(/static/img/login/loginBg.gif) no-repeat;
+  background-size: cover;
+}
 #nav {
   width: 280px;
   margin: 0 auto;
