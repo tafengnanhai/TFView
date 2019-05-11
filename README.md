@@ -40,6 +40,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 | qs                          | pro      | 6.7.0       |
 | vue                         | pro      | 2.6.10      |
 | vue-router                  | pro      | 3.0.3       |
+| vue2-animate                | pro      | 2.1.0       |
 | vuex                        | pro      | 3.0.1       |
 | ------                      | ---      | ---         |
 | @vue/cli-plugin-babel       | dev      | 3.7.0       |
