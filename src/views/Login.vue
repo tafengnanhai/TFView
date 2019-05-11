@@ -53,7 +53,7 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.get(`/user/${this.operForm.username}`).then((res) => {
+          this.$http.get(`/login/${this.operForm.username}`).then((res) => {
             this.tipText = res.data.msg
             if (res.data.code === 0) {
               this.tip = 'tip green'

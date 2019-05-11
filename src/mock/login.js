@@ -10,4 +10,7 @@ let data = {
 }
 
 // 随机返回成功或者失败
-Mock.mock(/\/user\/\w+/, 'get', data)
+Mock.mock(/\/login\/\w+/, 'get', data)
+
+// 用户状态验证
+Mock.mock(/\/check\/\w+/, 'get', data)

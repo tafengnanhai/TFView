@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from './router'
 import lockr from 'lockr'
 
 Vue.use(Vuex)
@@ -22,11 +23,20 @@ export default new Vuex.Store({
       state.token = data.token
     },
     recoverAccount: (state) => {
-      state.username = lockr.get('username')
-      state.token = lockr.get('token')
+      state.username = lockr.get('username', '')
+      state.token = lockr.get('token', '')
+    },
+    checkLoginStatus: (state) => {
+      if (state.username === '' || state.token === '') {
+        setTimeout(function () {
+          router.push({ name: 'login' })
+        }, 1000)
+      }
     }
   },
   actions: {
-
+    checkLoginStatus: (context) => {
+      context.commit('checkLoginStatus')
+    }
   }
 })

@@ -8,7 +8,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/Admin',
+      path: '/',
       name: 'admin',
       meta: {
         showRouterLink: false
@@ -16,7 +16,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue')
     },
     {
-      path: '/Login',
+      path: '/login',
       name: 'login',
       meta: {
         showRouterLink: true
