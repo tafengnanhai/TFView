@@ -12,6 +12,9 @@ export default new Vuex.Store({
     testToken: 'this is test token which will be replaced by backend'
   },
   mutations: {
+    isShowRouterLink: (state, result) => {
+      state.showRouterLink = result
+    },
     initAccount: (state, data) => {
       lockr.set('username', data.username)
       lockr.set('token', data.token)

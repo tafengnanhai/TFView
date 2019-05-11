@@ -1,7 +1,13 @@
 import Mock from 'mockjs'
-// 定义请求链接，类型，还有返回数据
-Mock.mock(/\/Login\/check/, 'get', {
-  username: 'admin',
-  password: 'admin',
-  token: 'this is test token which will be replaced by backend'
-})
+import store from '@/store'
+
+let rnd = Math.round(Math.random())
+
+let data = {
+  code: rnd,
+  msg: rnd === 0 ? '登录成功' : '用户名或者密码错误',
+  extra: { token: store.state.testToken }
+}
+
+// 随机返回成功或者失败
+Mock.mock(/\/user\/\w+/, 'get', data)

@@ -24,7 +24,7 @@ store.commit('recoverAccount')
 
 // router control
 router.beforeEach((to, from, next) => {
-  store.state.showRouterLink = to.meta.showRouterLink
+  store.commit('isShowRouterLink', to.meta.showRouterLink)
   if (to.name === 'login') {
     showLoading('body', true)
   } else {
