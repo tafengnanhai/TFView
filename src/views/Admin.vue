@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <transition name="bounce" enter-active-class="bounceInLeft" leave-active-class="bounceOutLeft">
-      <el-aside width="240px" id="menu" v-show="showMenu">menu</el-aside>
+      <el-aside width="240px" v-show="showMenu">menu</el-aside>
     </transition>
 
     <el-container>
