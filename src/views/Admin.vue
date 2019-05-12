@@ -29,8 +29,8 @@ export default {
           document.querySelector('.el-aside').style.left = '-240px'
         }, 500)
       } else {
-        this.showMenu = true
         document.querySelector('.el-aside').style.left = '0px'
+        this.showMenu = true
       }
     }
   },
@@ -39,8 +39,6 @@ export default {
       if (document.body.clientWidth > 800) {
         document.querySelector('.el-aside').style.left = '0px'
         this.showMenu = true
-      } else {
-
       }
     }
   }
