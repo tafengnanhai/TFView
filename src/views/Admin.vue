@@ -2,6 +2,7 @@
   <el-container>
     <transition name="bounce" enter-active-class="bounceInLeft" leave-active-class="bounceOutLeft">
       <el-aside width="240px" v-show="showMenu">
+        <div class="site white f16 b white">TFView</div>
         <el-menu
           default-active="2"
           @open="handleOpen"
@@ -31,7 +32,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">导航二</span>
           </el-menu-item>
-          <el-menu-item index="3" disabled>
+          <el-menu-item index="3">
             <i class="el-icon-document"></i>
             <span slot="title">导航三</span>
           </el-menu-item>
@@ -91,6 +92,13 @@ export default {
 }
 </script>
 <style scoped>
+.site {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-bottom: 1px solid #2b313a;
+}
 .el-container {
   height: 100%;
   background: white;
@@ -100,9 +108,11 @@ export default {
 }
 .el-menu {
   width: 100%;
-  height: 100%;
   border: 0;
   overflow: hidden;
+}
+.el-menu-item.is-active {
+  background-color: #272c35 !important;
 }
 .el-main {
   background: blue;

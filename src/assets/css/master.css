@@ -14,6 +14,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: #73BD12;
+}
+
 img {
     border: 0;
 }
@@ -27,43 +31,15 @@ table, div {
     word-wrap: break-word;
 }
 
-.black, .black a {
-    color: black;
-}
-
-.white, .white a {
-    color: white;
-}
-
-.gray, .gray a {
-    color: #434343;
-}
-
-.red, .red a {
-    color: red;
-}
-
-.green, .green a {
-    color: #73BD12;
-}
-
-.blue, .blue a {
-    color: #006CFF;
-}
-
-.orange, .orange a {
-    color: orange;
-}
-
-a:hover {
-    color: #73BD12;
-}
-
 ul, li {
     list-style: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+.white, .white a {
+    color: white;
 }
 
 .b {
@@ -107,21 +83,21 @@ ul, li {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
     /*水平滚动条的样式*/
     width: 4px;
-    background-color: #CCC;
+    background-color: #ccc;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:vertical {
     /*垂直滚动条的样式*/
     height: 50px;
-    background-color: #999;
+    background-color: #4d545e;
     border-radius: 5px;
 }
 
