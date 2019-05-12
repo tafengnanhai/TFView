@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import router from './router'
 import lockr from 'lockr'
 
+Vue.use(Vuex)
+
 export default new Vuex.Store({
   state: {
     showRouterLink: false,

@@ -29,8 +29,8 @@ export default {
           document.querySelector('.el-aside').style.left = '-240px'
         }, 500)
       } else {
-        document.querySelector('.el-aside').style.left = '0px'
         this.showMenu = true
+        document.querySelector('.el-aside').style.left = '0px'
       }
     }
   },
