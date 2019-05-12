@@ -18,7 +18,6 @@ devDependencies:
   babel-loader: 8.0.5
   eslint: 5.16.0
   eslint-plugin-vue: 5.2.2
-  glob: 7.1.4
   lint-staged: 8.1.6
   vue-template-compiler: 2.6.10
 lockfileVersion: 5
@@ -1848,7 +1847,7 @@ packages:
     dev: false
     resolution:
       integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
-      tarball: /babel-runtime/download/babel-runtime-6.26.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-runtime%2Fdownload%2Fbabel-runtime-6.26.0.tgz
+      tarball: /babel-runtime/download/babel-runtime-6.26.0.tgz
   /balanced-match/1.0.0:
     dev: true
     resolution:
@@ -5978,7 +5977,7 @@ packages:
     dev: true
     resolution:
       integrity: sha1-s56mIp72B+zYniyN8SU2iRysm40=
-      tarball: /lodash/download/lodash-4.17.11.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.11.tgz
+      tarball: /lodash/download/lodash-4.17.11.tgz
   /log-symbols/1.0.2:
     dependencies:
       chalk: 1.1.3
@@ -8069,7 +8068,7 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha1-nC/KT301tZLv5Xx/ClXoEFIST+8=
-      tarball: /request/download/request-2.88.0.tgz
+      tarball: /request/download/request-2.88.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frequest%2Fdownload%2Frequest-2.88.0.tgz
   /require-directory/2.1.1:
     dev: true
     engines:
@@ -8190,7 +8189,7 @@ packages:
       tarball: /rgba-regex/download/rgba-regex-1.0.0.tgz
   /rimraf/2.6.3:
     dependencies:
-      glob: 7.1.3
+      glob: 7.1.4
     dev: true
     hasBin: true
     resolution:
@@ -10029,7 +10028,6 @@ specifiers:
   element-ui: ^2.8.2
   eslint: ^5.16.0
   eslint-plugin-vue: ^5.0.0
-  glob: ^7.1.4
   lint-staged: ^8.1.5
   lockr: ^0.8.5
   mockjs: ^1.0.1-beta3

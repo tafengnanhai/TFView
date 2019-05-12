@@ -10,7 +10,7 @@
 
 <style>
 #app {
-  background: #c2cff0 url(/static/img/login/loginBg.gif) no-repeat;
+  background: #c2cff0 url(./assets/img/login/loginBg.gif) no-repeat;
   background-size: cover;
 }
 #nav {

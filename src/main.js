@@ -7,9 +7,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './mock/login.js'
+import { showLoading, hideLoading } from './loading'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'vue2-animate/dist/vue2-animate.min.css'
-import { showLoading, hideLoading } from './loading'
+import '@/assets/css/master.css'
 
 Vue.use(ElementUI)
 

@@ -51,6 +51,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 | babel-loader                | dev      | 8.0.5       |
 | eslint                      | dev      | 5.16.0      |
 | eslint-plugin-vue           | dev      | 5.0.0       |
-| glob                        | dev      | 7.1.4       |
 | lint-staged                 | dev      | 8.1.5       |
 | vue-template-compiler       | dev      | 2.5.21      |
