@@ -2,35 +2,28 @@
   <el-container>
     <transition name="bounce" enter-active-class="bounceInLeft" leave-active-class="bounceOutLeft">
       <el-aside width="240px" v-show="showMenu">
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-          <el-radio-button :label="false">展开</el-radio-button>
-          <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group>
         <el-menu
-          default-active="1-4-1"
-          class="el-menu-vertical-demo"
+          default-active="2"
           @open="handleOpen"
           @close="handleClose"
-          :collapse="isCollapse"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
+          background-color="#2f353f"
+          text-color="#909399"
+          active-text-color="white"
         >
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span slot="title">导航一</span>
+              <span>导航一</span>
             </template>
             <el-menu-item-group>
-              <span slot="title">分组一</span>
               <el-menu-item index="1-1">选项1</el-menu-item>
               <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
+            <el-menu-item-group>
               <el-menu-item index="1-3">选项3</el-menu-item>
             </el-menu-item-group>
             <el-submenu index="1-4">
-              <span slot="title">选项4</span>
+              <template slot="title">选项4</template>
               <el-menu-item index="1-4-1">选项1</el-menu-item>
             </el-submenu>
           </el-submenu>
@@ -70,7 +63,7 @@ export default {
   },
   methods: {
     toggleMenu: function () {
-      if (document.querySelector('.el-aside').style.left === '0px') {
+      if (document.querySelector('.el-aside').style.left === '0px' || document.querySelector('.el-aside').style.left === '') {
         this.showMenu = false
         setTimeout(function () {
           document.querySelector('.el-aside').style.left = '-240px'
@@ -105,15 +98,11 @@ export default {
 .el-aside {
   background: #2f353f;
 }
-.el-scrollbar {
+.el-menu {
+  width: 100%;
   height: 100%;
-}
-.is-horizontal {
-  display: none;
-}
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+  border: 0;
+  overflow: hidden;
 }
 .el-main {
   background: blue;
@@ -130,8 +119,8 @@ export default {
 @media screen and (max-width: 800px) {
   .el-aside {
     position: fixed;
-    left: -240px;
     top: 0;
+    left: 0;
     height: 100%;
     z-index: 100;
   }
