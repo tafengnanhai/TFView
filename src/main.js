@@ -31,15 +31,15 @@ router.beforeEach((to, from, next) => {
   } else {
     showLoading()
   }
-  if (to.name === 'admin') {
-    // 检查登录状态
-    store.dispatch('checkLoginStatus')
-  }
   next()
 })
 
 router.afterEach((to, from) => {
   hideLoading()
+  if (to.name === 'admin') {
+    // 检查登录状态
+    store.dispatch('checkLoginStatus')
+  }
 })
 
 // axios control

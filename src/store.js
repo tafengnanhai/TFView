@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 import router from './router'
 import lockr from 'lockr'
 
-Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     showRouterLink: false,
@@ -28,9 +26,7 @@ export default new Vuex.Store({
     },
     checkLoginStatus: (state) => {
       if (state.username === '' || state.token === '') {
-        setTimeout(function () {
-          router.push({ name: 'login' })
-        }, 1000)
+        router.push({ name: 'login' })
       }
     }
   },
