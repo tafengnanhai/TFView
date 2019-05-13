@@ -52,13 +52,9 @@ export default {
         if (valid) {
           this.$http.get(`/login/${this.operForm.username}`).then((res) => {
             if (res.data.code === 0) {
-              this.$message({
-                showClose: true,
-                message: res.data.msg,
-                type: 'success'
-              })
+              this.$message.success(res.data.msg)
               this.$store.commit('initAccount', { username: this.operForm.username, token: res.data.extra.token })
-              this.$router.push({ name: 'admin' })
+              this.$router.push('/')
             } else {
               this.$message.error(res.data.msg)
             }

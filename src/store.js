@@ -29,11 +29,17 @@ export default new Vuex.Store({
     },
     checkLoginStatus: (state) => {
       if (state.username === '' || state.token === '') {
-        router.push({ name: 'login' })
+        router.push('login')
       }
     },
     toggleMenu: (state) => {
       state.showMenu = !state.showMenu
+    },
+    logout: (state) => {
+      lockr.rm('username')
+      lockr.rm('token')
+      state.username = ''
+      state.token = ''
     }
   },
   actions: {
@@ -42,6 +48,9 @@ export default new Vuex.Store({
     },
     toggleMenu: (context) => {
       context.commit('toggleMenu')
+    },
+    logout: (context) => {
+      context.commit('logout')
     }
   }
 })

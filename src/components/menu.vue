@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-popover placement="top-start" width="256" trigger="hover">
+    <el-popover placement="top-start" width="256" trigger="click">
       <div>
         <img src="@/assets/img/menu/logoBig.jpg">
       </div>
