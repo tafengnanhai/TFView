@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-aside width="240px" v-show="showMenu">
-      <div class="site white f18 b white">TFView Dashboard</div>
+      <div class="site white f18 b white">TFView</div>
       <el-menu
         default-active="2"
         @open="handleOpen"
@@ -78,11 +78,13 @@ export default {
 </script>
 <style scoped>
 .site {
-  width: 100%;
+  margin: 0 auto;
+  width: 150px;
   height: 60px;
   line-height: 60px;
   text-align: center;
   border-bottom: 1px solid #2b313a;
+  background: url(../assets/img/menu/logo.png) no-repeat left;
 }
 .el-container {
   height: 100%;
