@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="site white f18 b white">TFView</div>
+    <el-popover placement="top-start" width="256" trigger="hover">
+      <div>
+        <img src="@/assets/img/menu/logoBig.jpg">
+      </div>
+      <div class="site white f18 b white" slot="reference">TFView</div>
+    </el-popover>
     <el-menu
       default-active="2"
       @open="handleOpen"
@@ -73,7 +78,7 @@ export default {
 }
 .site {
   margin: 0 auto;
-  width: 150px;
+  width: 120px;
   height: 60px;
   line-height: 60px;
   text-align: center;
