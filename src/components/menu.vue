@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="site white f18 b white">TFView</div>
     <el-menu
       default-active="2"
       @open="handleOpen"
@@ -43,10 +44,10 @@
 
 <script>
 export default {
-  name: 'Menu',
+  name: 'TFMenu',
   data () {
     return {
-
+      showMenu: true
     }
   },
   methods: {
@@ -69,5 +70,14 @@ export default {
 }
 .el-menu-item.is-active {
   background-color: #272c35 !important;
+}
+.site {
+  margin: 0 auto;
+  width: 150px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-bottom: 1px solid #2b313a;
+  background: url(../assets/img/menu/logo.png) no-repeat left;
 }
 </style>

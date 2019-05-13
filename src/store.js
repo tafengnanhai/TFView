@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showRouterLink: false,
+    showMenu: true,
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend'
@@ -30,11 +31,17 @@ export default new Vuex.Store({
       if (state.username === '' || state.token === '') {
         router.push({ name: 'login' })
       }
+    },
+    toggleMenu: (state) => {
+      state.showMenu = !state.showMenu
     }
   },
   actions: {
     checkLoginStatus: (context) => {
       context.commit('checkLoginStatus')
+    },
+    toggleMenu: (context) => {
+      context.commit('toggleMenu')
     }
   }
 })
