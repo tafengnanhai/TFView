@@ -28,7 +28,6 @@
           round
           @click="submitForm('operForm')"
         >登录</el-button>
-        <div :class="tip">{{tipText}}</div>
       </el-form>
     </div>
   </div>
@@ -37,8 +36,6 @@
 export default {
   data () {
     return {
-      tip: 'tip',
-      tipText: '',
       operForm: {
         username: 'admin',
         password: 'admin'
@@ -54,12 +51,16 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$http.get(`/login/${this.operForm.username}`).then((res) => {
-            this.tipText = res.data.msg
             if (res.data.code === 0) {
-              this.tip = 'tip green'
+              this.$message({
+                showClose: true,
+                message: res.data.msg,
+                type: 'success'
+              })
               this.$store.commit('initAccount', { username: this.operForm.username, token: res.data.extra.token })
+              this.$router.push({ name: 'admin' })
             } else {
-              this.tip = 'tip red'
+              this.$message.error(res.data.msg)
             }
           })
         } else {
@@ -92,15 +93,8 @@ export default {
 .margin {
   margin-top: 15px;
 }
-.el-form-item__error {
-  margin-left: 20px;
-  margin-top: 5px;
-}
-.tip {
-  width: 100%;
-  height: 20px;
-  margin-top: 10px;
-  text-align: center;
+.el-form-item >>> .el-form-item__error {
+  padding: 10px 0 0 20px !important;
 }
 @media screen and (max-width: 320px) {
   .panel {
