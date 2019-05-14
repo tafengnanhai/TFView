@@ -46,6 +46,7 @@ export default new Vuex.Store({
       lockr.rm('token')
       state.username = ''
       state.token = ''
+      state.isCollapse = false
     }
   },
   actions: {

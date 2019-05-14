@@ -20,9 +20,9 @@
           <i class="el-icon-document"></i>
           <span>内容管理</span>
         </template>
-        <el-menu-item index="1-1">内容管理</el-menu-item>
-        <el-menu-item index="1-2">分类管理</el-menu-item>
-        <el-menu-item index="1-3">独立接口</el-menu-item>
+        <el-menu-item index="/article/index">内容管理</el-menu-item>
+        <el-menu-item index="/sort/index">分类管理</el-menu-item>
+        <el-menu-item index="/virtual/index">独立接口</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title">
@@ -74,7 +74,7 @@ export default {
     logout: function () {
       this.$store.commit('logout')
       this.$message.success('注销成功')
-      this.$router.replace('login')
+      this.$router.replace('/login')
     }
   }
 }

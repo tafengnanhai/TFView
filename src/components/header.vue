@@ -32,7 +32,7 @@ export default {
     logout: function () {
       this.$store.commit('logout')
       this.$message.success('注销成功')
-      this.$router.replace('login')
+      this.$router.replace('/login')
     },
     handleCommand: function (command) {
       this.$message('click on item ' + command)

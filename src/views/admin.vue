@@ -7,7 +7,9 @@
       <el-header height="40px">
         <TFHeader/>
       </el-header>
-      <el-main></el-main>
+      <el-main>
+        <router-view name="main"/>
+      </el-main>
     </el-container>
   </el-container>
 </template>

@@ -13,7 +13,14 @@ export default new Router({
       meta: {
         showRouterLink: false
       },
-      component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue')
+      component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
+      children: [{
+        path: '/article/index',
+        name: 'article_index',
+        components: {
+          main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
+        }
+      }]
     },
     {
       path: '/login',
@@ -21,7 +28,7 @@ export default new Router({
       meta: {
         showRouterLink: true
       },
-      component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
+      component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
     }
   ]
 })
