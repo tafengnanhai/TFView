@@ -60,7 +60,7 @@ export default {
   position: absolute;
   height: 20px;
   line-height: 20px;
-  left: 80px;
+  left: 60px;
   top: 10px;
 }
 .el-dropdown {
