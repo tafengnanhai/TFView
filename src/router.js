@@ -41,7 +41,7 @@ export default new Router({
     },
     {
       path: '*',
-      name: '404',
+      name: 'Four04',
       meta: {
         showRouterLink: false
       },
