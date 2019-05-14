@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
 import store from '@/store'
 
-let rnd = Math.round(Math.random())
+// let rnd = Math.round(Math.random())
+let rnd = 0
 
 let data = {
   code: rnd,

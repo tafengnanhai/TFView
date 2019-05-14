@@ -29,7 +29,6 @@ export default new Router({
             main: () => import(/* webpackChunkName: "sort_index" */ './views/sort/index.vue')
           }
         }
-
       ]
     },
     {
@@ -39,6 +38,14 @@ export default new Router({
         showRouterLink: true
       },
       component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
+    },
+    {
+      path: '*',
+      name: '404',
+      meta: {
+        showRouterLink: false
+      },
+      component: () => import(/* webpackChunkName: "404" */ './views/404/index.vue')
     }
   ]
 })
