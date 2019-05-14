@@ -16,7 +16,7 @@
       :collapse="this.$store.state.isCollapse"
       @select="selectMenu"
     >
-      <el-menu-item index="/" id="/">
+      <el-menu-item index="/index/main" id="/index/main">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页面板</span>
       </el-menu-item>

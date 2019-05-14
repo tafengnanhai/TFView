@@ -16,6 +16,13 @@ export default new Router({
       component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
       children: [
         {
+          path: '/index/main',
+          name: 'index_main',
+          components: {
+            main: () => import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
+          }
+        },
+        {
           path: '/article/index',
           name: 'article_index',
           components: {
