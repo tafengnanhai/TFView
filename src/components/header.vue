@@ -1,11 +1,9 @@
 <template>
   <div>
-    <transition name="bounce" enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
-      <i
-        :class="{ 'el-icon-s-fold f20 showMenu' : !this.$store.state.isCollapse, 'el-icon-s-unfold f20 showMenu': this.$store.state.isCollapse}"
-        @click="toggleMenu()"
-      />
-    </transition>
+    <i
+      :class="{ 'el-icon-s-fold f20 showMenu' : !this.$store.state.isCollapse, 'el-icon-s-unfold f20 showMenu': this.$store.state.isCollapse}"
+      @click="toggleMenu()"
+    />
     <el-dropdown @command="handleCommand">
       <i class="el-icon-user-solid f20"/>
       <el-dropdown-menu slot="dropdown">

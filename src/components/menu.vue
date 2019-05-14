@@ -8,9 +8,8 @@
     </el-popover>
     <el-menu
       id="menu"
-      default-active="1-1"
-      @open="handleOpen"
-      @close="handleClose"
+      router
+      :default-active="this.$route.path"
       background-color="#2f353f"
       text-color="#d9d9d9"
       active-text-color="white"
@@ -56,8 +55,8 @@
           <i class="el-icon-user-solid"></i>
           <span>用户设置</span>
         </template>
-        <el-menu-item index="5-1">修改密码</el-menu-item>
-        <el-menu-item index="5-2">注销退出</el-menu-item>
+        <el-menu-item>修改密码</el-menu-item>
+        <el-menu-item @click="logout()">注销退出</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -72,11 +71,10 @@ export default {
     }
   },
   methods: {
-    handleOpen: function (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose: function (key, keyPath) {
-      console.log(key, keyPath)
+    logout: function () {
+      this.$store.commit('logout')
+      this.$message.success('注销成功')
+      this.$router.replace('login')
     }
   }
 }
