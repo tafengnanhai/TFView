@@ -83,7 +83,7 @@ export default {
       this.$router.replace('/login')
     },
     selectMenu: function (index, indexPath) {
-      let breadCrumb = [document.getElementById(index).innerText]
+      let breadCrumb = index === '/' ? ['首页面板'] : [document.getElementById(index).innerText]
       this.$store.commit('setCurrentBreadCrumb', breadCrumb)
     }
   },
