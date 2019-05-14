@@ -62,7 +62,7 @@
           <span>用户设置</span>
         </template>
         <el-menu-item>修改密码</el-menu-item>
-        <el-menu-item @click="logout">注销退出</el-menu-item>
+        <el-menu-item @click="logout" index="/login" id="/login">注销退出</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -73,7 +73,7 @@ export default {
   name: 'TFMenu',
   data () {
     return {
-      isCollapse: false
+
     }
   },
   methods: {
@@ -83,12 +83,13 @@ export default {
       this.$router.replace('/login')
     },
     selectMenu: function (index, indexPath) {
+      // TODO: 解决折叠判断的问题
       let breadCrumb = []
       if (index === '/') {
         breadCrumb.push(document.getElementById(index).innerText)
       } else {
-        breadCrumb.push(document.getElementById(index).innerText)
         breadCrumb.push(document.getElementById(index).parentElement.parentElement.firstChild.innerText)
+        breadCrumb.push(document.getElementById(index).innerText)
       }
       this.$store.commit('setCurrentBreadCrumb', breadCrumb)
     }

@@ -14,13 +14,23 @@ export default new Router({
         showRouterLink: false
       },
       component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
-      children: [{
-        path: '/article/index',
-        name: 'article_index',
-        components: {
-          main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
+      children: [
+        {
+          path: '/article/index',
+          name: 'article_index',
+          components: {
+            main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
+          }
+        },
+        {
+          path: '/sort/index',
+          name: 'sort_index',
+          components: {
+            main: () => import(/* webpackChunkName: "sort_index" */ './views/sort/index.vue')
+          }
         }
-      }]
+
+      ]
     },
     {
       path: '/login',
