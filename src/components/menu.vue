@@ -15,6 +15,10 @@
       active-text-color="white"
       :collapse="this.$store.state.isCollapse"
     >
+      <el-menu-item index="/">
+        <i class="el-icon-s-home"></i>
+        <span slot="title">首页面板</span>
+      </el-menu-item>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-document"></i>
