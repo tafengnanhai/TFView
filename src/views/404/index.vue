@@ -18,13 +18,18 @@ export default {
 
 <style scoped>
 #content {
-  padding-top: 100px;
   width: 100%;
-  height: 100%;
+  padding-top: 100px;
   text-align: center;
-  background: #67ace7;
   color: transparent;
   -webkit-text-stroke: 2px gray;
   text-shadow: 6px 6px 2px gray;
+  transition: width 2s;
+  -moz-transition: width 2s;
+  -webkit-transition: width 2s;
+  -o-transition: width 2s;
+}
+#content:hover {
+  width: 50%;
 }
 </style>
