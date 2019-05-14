@@ -5,16 +5,6 @@
     <div style="font-size:100px">页面不存在</div>
   </div>
 </template>
-<script>
-export default {
-  name: 'Four04_index',
-  data () {
-    return {
-
-    }
-  }
-}
-</script>
 
 <style scoped>
 #content {
