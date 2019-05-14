@@ -14,8 +14,10 @@
       text-color="#d9d9d9"
       active-text-color="white"
       :collapse="this.$store.state.isCollapse"
+      @select="selectMenu"
+      unique-opened
     >
-      <el-menu-item index="/">
+      <el-menu-item index="/" id="/">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页面板</span>
       </el-menu-item>
@@ -24,9 +26,9 @@
           <i class="el-icon-document"></i>
           <span>内容管理</span>
         </template>
-        <el-menu-item index="/article/index">内容管理</el-menu-item>
-        <el-menu-item index="/sort/index">分类管理</el-menu-item>
-        <el-menu-item index="/virtual/index">独立接口</el-menu-item>
+        <el-menu-item index="/article/index" id="/article/index">文章管理</el-menu-item>
+        <el-menu-item index="/sort/index" id="/sort/index">分类管理</el-menu-item>
+        <el-menu-item index="/virtual/index" id="/virtual/index">独立接口</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title">
@@ -60,7 +62,7 @@
           <span>用户设置</span>
         </template>
         <el-menu-item>修改密码</el-menu-item>
-        <el-menu-item @click="logout()">注销退出</el-menu-item>
+        <el-menu-item @click="logout">注销退出</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -79,7 +81,23 @@ export default {
       this.$store.commit('logout')
       this.$message.success('注销成功')
       this.$router.replace('/login')
+    },
+    selectMenu: function (index, indexPath) {
+      let breadCrumb = []
+      if (index === '/') {
+        breadCrumb.push(document.getElementById(index).innerText)
+      } else {
+        breadCrumb.push(document.getElementById(index).innerText)
+        breadCrumb.push(document.getElementById(index).parentElement.parentElement.firstChild.innerText)
+      }
+      this.$store.commit('setCurrentBreadCrumb', breadCrumb)
     }
+  },
+  // 直接通过网址进入时同步更新breadcrumb
+  created: function () {
+    this.$nextTick(() => {
+      this.selectMenu(this.$route.path, this.$route.path)
+    })
   }
 }
 </script>
