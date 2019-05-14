@@ -8,43 +8,57 @@
     </el-popover>
     <el-menu
       id="menu"
-      default-active="2"
+      default-active="1-1"
       @open="handleOpen"
       @close="handleClose"
       background-color="#2f353f"
-      text-color="#909399"
+      text-color="#d9d9d9"
       active-text-color="white"
       :collapse="this.$store.state.isCollapse"
     >
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
+          <i class="el-icon-document"></i>
+          <span>内容管理</span>
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group>
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
+        <el-menu-item index="1-1">内容管理</el-menu-item>
+        <el-menu-item index="1-2">分类管理</el-menu-item>
+        <el-menu-item index="1-3">独立接口</el-menu-item>
       </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-pie-chart"></i>
+          <span>图表管理</span>
+        </template>
+        <el-menu-item index="2-1">注册图表</el-menu-item>
+        <el-menu-item index="2-2">城市图表</el-menu-item>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-set-up"></i>
+          <span>系统管理</span>
+        </template>
+        <el-menu-item index="3-1">系统用户</el-menu-item>
+        <el-menu-item index="3-2">权限管理</el-menu-item>
+        <el-menu-item index="3-3">菜单管理</el-menu-item>
+        <el-menu-item index="3-4">城市管理</el-menu-item>
+      </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-postcard"></i>
+          <span>日志管理</span>
+        </template>
+        <el-menu-item index="4-1">系统日志</el-menu-item>
+        <el-menu-item index="4-2">用户日志</el-menu-item>
+      </el-submenu>
+      <el-submenu index="5">
+        <template slot="title">
+          <i class="el-icon-user-solid"></i>
+          <span>用户设置</span>
+        </template>
+        <el-menu-item index="5-1">修改密码</el-menu-item>
+        <el-menu-item index="5-2">注销退出</el-menu-item>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
