@@ -29,8 +29,8 @@ export default new Vuex.Store({
       state.token = lockr.get('token', '')
     },
     checkLoginStatus: (state) => {
-      if (state.username === '' || state.token === '') {
-        router.push('login')
+      if (lockr.get('username') === undefined || lockr.get('token') === undefined || state.username === '' || state.token === '') {
+        router.push({ path: '/login', query: { from: 'timeout' } })
       }
     },
     toggleMenu: (state) => {

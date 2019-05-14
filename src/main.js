@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to, from) => {
   hideLoading()
-  if (to.name === 'admin') {
+  if (to.name !== 'login') {
     // 检查登录状态
     store.dispatch('checkLoginStatus')
   }

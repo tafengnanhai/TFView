@@ -8,7 +8,9 @@
         <TFHeader/>
       </el-header>
       <el-main>
-        <router-view name="main"/>
+        <keep-alive>
+          <router-view name="main"/>
+        </keep-alive>
       </el-main>
     </el-container>
   </el-container>

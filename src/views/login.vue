@@ -64,6 +64,11 @@ export default {
         }
       })
     }
+  },
+  created: function () {
+    if (this.$route.query.from === 'timeout') {
+      this.$message.error('未登陆或超时，请重新登陆')
+    }
   }
 }
 </script>

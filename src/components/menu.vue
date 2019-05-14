@@ -15,7 +15,6 @@
       active-text-color="white"
       :collapse="this.$store.state.isCollapse"
       @select="selectMenu"
-      unique-opened
     >
       <el-menu-item index="/" id="/">
         <i class="el-icon-s-home"></i>
