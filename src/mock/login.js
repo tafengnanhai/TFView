@@ -9,7 +9,7 @@ let data = {
   extra: { token: store.state.testToken }
 }
 
-// 随机返回成功或者失败
+// 和后端一致，随机返回成功或者失败，不建议直接返回用户名和密码的判断方式
 Mock.mock(/\/login\/\w+/, 'get', data)
 
 // 用户状态验证
