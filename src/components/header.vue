@@ -58,17 +58,23 @@ export default {
 <style scoped>
 .el-breadcrumb {
   position: absolute;
+  height: 20px;
+  line-height: 20px;
   left: 80px;
-  top: 13px;
+  top: 10px;
 }
 .el-dropdown {
   position: absolute;
+  height: 20px;
+  line-height: 20px;
   top: 10px;
   right: 20px;
   cursor: pointer;
 }
 .showMenu {
   position: absolute;
+  height: 20px;
+  line-height: 20px;
   top: 10px;
   left: 20px;
   cursor: pointer;
