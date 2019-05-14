@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="240px" v-show="this.$store.state.showMenu">
+    <el-aside id="aside" width="240px">
       <TFMenu/>
     </el-aside>
     <el-container>

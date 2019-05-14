@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showRouterLink: false,
-    showMenu: true,
+    isCollapse: false,
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend'
@@ -33,7 +33,13 @@ export default new Vuex.Store({
       }
     },
     toggleMenu: (state) => {
-      state.showMenu = !state.showMenu
+      state.isCollapse = !state.isCollapse
+      let asideWidth = state.isCollapse ? '64px' : '240px'
+      document.getElementById('aside').style.width = asideWidth
+      let showSitename = state.isCollapse ? '' : 'TFView'
+      document.getElementById('sitename').innerHTML = showSitename
+      let siteWidth = state.isCollapse ? '20px' : '120px'
+      document.getElementById('sitename').style.width = siteWidth
     },
     logout: (state) => {
       lockr.rm('username')

@@ -4,15 +4,17 @@
       <div>
         <img src="@/assets/img/menu/logoBig.jpg">
       </div>
-      <div class="site white f18 b white" slot="reference">TFView</div>
+      <div class="f18 b white" slot="reference" id="sitename">TFView</div>
     </el-popover>
     <el-menu
+      id="menu"
       default-active="2"
       @open="handleOpen"
       @close="handleClose"
       background-color="#2f353f"
       text-color="#909399"
       active-text-color="white"
+      :collapse="this.$store.state.isCollapse"
     >
       <el-submenu index="1">
         <template slot="title">
@@ -52,14 +54,14 @@ export default {
   name: 'TFMenu',
   data () {
     return {
-      showMenu: true
+      isCollapse: false
     }
   },
   methods: {
-    handleOpen (key, keyPath) {
+    handleOpen: function (key, keyPath) {
       console.log(key, keyPath)
     },
-    handleClose (key, keyPath) {
+    handleClose: function (key, keyPath) {
       console.log(key, keyPath)
     }
   }
@@ -68,7 +70,6 @@ export default {
 
 <style scoped>
 .el-menu {
-  width: 100%;
   border: 0;
   display: block;
   overflow: hidden;
@@ -76,7 +77,7 @@ export default {
 .el-menu-item.is-active {
   background-color: #272c35 !important;
 }
-.site {
+#sitename {
   margin: 0 auto;
   width: 120px;
   height: 60px;
