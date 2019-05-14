@@ -83,14 +83,7 @@ export default {
       this.$router.replace('/login')
     },
     selectMenu: function (index, indexPath) {
-      // TODO: 解决折叠判断的问题
-      let breadCrumb = []
-      if (index === '/') {
-        breadCrumb.push(document.getElementById(index).innerText)
-      } else {
-        breadCrumb.push(document.getElementById(index).parentElement.parentElement.firstChild.innerText)
-        breadCrumb.push(document.getElementById(index).innerText)
-      }
+      let breadCrumb = [document.getElementById(index).innerText]
       this.$store.commit('setCurrentBreadCrumb', breadCrumb)
     }
   },
