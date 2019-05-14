@@ -84,5 +84,6 @@ export default {
   text-align: center;
   border-bottom: 1px solid #2b313a;
   background: url(../assets/img/menu/logo.png) no-repeat left;
+  cursor: pointer;
 }
 </style>
