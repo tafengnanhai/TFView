@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
         <el-card class="statCard"></el-card>
       </el-col>
-      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
         <el-card class="statCard"></el-card>
       </el-col>
-      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
         <el-card class="statCard"></el-card>
       </el-col>
-      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
         <el-card class="statCard"></el-card>
       </el-col>
     </el-row>
