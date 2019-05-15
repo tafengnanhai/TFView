@@ -10,9 +10,9 @@
       <el-table-column prop="name" label="姓名" min-width="10%" align="center"></el-table-column>
       <el-table-column prop="province" label="省份" min-width="10%" align="center"></el-table-column>
       <el-table-column prop="city" label="市区" min-width="10%" align="center"></el-table-column>
-      <el-table-column prop="address" label="地址" min-width="30%" align="center"></el-table-column>
+      <el-table-column prop="address" label="地址" min-width="25%" align="center"></el-table-column>
       <el-table-column prop="zip" label="邮编" min-width="10%" align="center"></el-table-column>
-      <el-table-column label="操作" min-width="15%" align="center">
+      <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="small">编辑</el-button>
           <el-button @click="handleClick(scope.row)" type="danger" size="small">删除</el-button>&nbsp;&nbsp;

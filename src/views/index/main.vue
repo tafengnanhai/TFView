@@ -6,7 +6,7 @@
           <el-row>
             <el-col :span="8">
               <div class="cardIcon" style="background: #fbc677">
-                <i class="el-icon-s-custom f26 white"/>
+                <i class="el-icon-document-checked f26 white"/>
               </div>
             </el-col>
             <el-col :span="8" :offset="8" class="cardNum">
@@ -22,7 +22,7 @@
           <el-row>
             <el-col :span="8">
               <div class="cardIcon" style="background:#ea6967">
-                <i class="el-icon-s-custom f26 white"/>
+                <i class="el-icon-document-remove f26 white"/>
               </div>
             </el-col>
             <el-col :span="8" :offset="8" class="cardNum">
@@ -38,7 +38,7 @@
           <el-row>
             <el-col :span="8">
               <div class="cardIcon" style="background:#966ae2">
-                <i class="el-icon-s-custom f26 white"/>
+                <i class="el-icon-document f26 white"/>
               </div>
             </el-col>
             <el-col :span="8" :offset="8" class="cardNum">
@@ -54,7 +54,7 @@
           <el-row>
             <el-col :span="8">
               <div class="cardIcon" style="background:#67a7fb">
-                <i class="el-icon-s-custom f26 white"/>
+                <i class="el-icon-document-copy f26 white"/>
               </div>
             </el-col>
             <el-col :span="8" :offset="8" class="cardNum">
