@@ -74,6 +74,26 @@
         <el-card class="chartCard"></el-card>
       </el-col>
     </el-row>
+    <el-timeline>
+      <el-timeline-item timestamp="2019/5/15" placement="top">
+        <el-card class="updateCard">
+          <h4>功能更新3</h4>
+          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/15 21:17</p>
+        </el-card>
+      </el-timeline-item>
+      <el-timeline-item timestamp="2019/5/12" placement="top">
+        <el-card class="updateCard">
+          <h4>功能更新2</h4>
+          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/12 21:17</p>
+        </el-card>
+      </el-timeline-item>
+      <el-timeline-item timestamp="2019/5/11" placement="top">
+        <el-card class="updateCard">
+          <h4>功能更新1</h4>
+          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/11 21:17</p>
+        </el-card>
+      </el-timeline-item>
+    </el-timeline>
   </div>
 </template>
 
@@ -87,6 +107,12 @@ export default {
   }
 }
 </script>
+<style>
+.updateCard .el-card__body {
+  margin: 0 !important;
+  padding: 0 0 10px 10px !important;
+}
+</style>
 
 <style scoped>
 .statCard {
@@ -103,7 +129,7 @@ export default {
   border-radius: 30px;
 }
 .chartCard {
-  height: 500px;
+  height: 400px;
   margin-bottom: 20px;
 }
 </style>
