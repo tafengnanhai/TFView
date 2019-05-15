@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside id="aside" width="240px">
+    <el-aside id="aside" width="160px">
       <TFMenu/>
     </el-aside>
     <el-container>

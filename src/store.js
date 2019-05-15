@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
     toggleMenu: (state) => {
       state.isCollapse = !state.isCollapse
-      let asideWidth = state.isCollapse ? '64px' : '240px'
+      let asideWidth = state.isCollapse ? '64px' : '160px'
       document.getElementById('aside').style.width = asideWidth
       let showSitename = state.isCollapse ? '' : 'TFView'
       document.getElementById('sitename').innerHTML = showSitename
