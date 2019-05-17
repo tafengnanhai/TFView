@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
         <el-card class="statCard">
           <el-row>
             <el-col :span="8">
@@ -9,7 +9,7 @@
                 <i class="el-icon-document-checked f26 white"/>
               </div>
             </el-col>
-            <el-col :span="8" :offset="8" class="cardNum">
+            <el-col :span="16" class="cardNum">
               <span class="f20 b">7001</span>
               <br>
               <br>今日注册
@@ -17,7 +17,7 @@
           </el-row>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
         <el-card class="statCard">
           <el-row>
             <el-col :span="8">
@@ -25,7 +25,7 @@
                 <i class="el-icon-document-remove f26 white"/>
               </div>
             </el-col>
-            <el-col :span="8" :offset="8" class="cardNum">
+            <el-col :span="16" class="cardNum">
               <span class="f20 b">70010</span>
               <br>
               <br>本周注册
@@ -33,7 +33,7 @@
           </el-row>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
         <el-card class="statCard">
           <el-row>
             <el-col :span="8">
@@ -41,7 +41,7 @@
                 <i class="el-icon-document f26 white"/>
               </div>
             </el-col>
-            <el-col :span="8" :offset="8" class="cardNum">
+            <el-col :span="16" class="cardNum">
               <span class="f20 b">700100</span>
               <br>
               <br>本月注册
@@ -49,7 +49,7 @@
           </el-row>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
         <el-card class="statCard">
           <el-row>
             <el-col :span="8">
@@ -57,7 +57,7 @@
                 <i class="el-icon-document-copy f26 white"/>
               </div>
             </el-col>
-            <el-col :span="8" :offset="8" class="cardNum">
+            <el-col :span="16" class="cardNum">
               <span class="f20 b">7001001</span>
               <br>
               <br>累计注册
@@ -67,11 +67,10 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="24" :md="14" :lg="14" :xl="14">
-        <el-card class="chartCard"></el-card>
-      </el-col>
-      <el-col :xs="24" :sm="24" :md="10" :lg="10" :xl="10">
-        <el-card class="chartCard"></el-card>
+      <el-col :span="24">
+        <el-card class="chartCard">
+          <line-chart :chart-data="datacollection" :options="lineChartOption"></line-chart>
+        </el-card>
       </el-col>
     </el-row>
     <el-timeline>
@@ -98,15 +97,55 @@
 </template>
 
 <script>
+import LineChart from '../../plugin/LineChart.js'
+
 export default {
-  name: 'index_main',
+  components: {
+    LineChart
+  },
   data () {
     return {
-
+      lineChartOption: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            stacked: true
+          }],
+          xAxes: [{
+            stacked: true
+          }]
+        }
+      },
+      datacollection: null
+    }
+  },
+  mounted: function () {
+    this.datacollection = {
+      labels: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
+      datasets: [
+        {
+          label: '今日注册',
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: '#F56C6C',
+          data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
+        }, {
+          label: '昨日注册',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: '#409EFF',
+          data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
+        }
+      ]
+    }
+  },
+  methods: {
+    getRandomInt: function () {
+      return Math.floor(Math.random() * (20 - 5 + 1)) + 5
     }
   }
 }
 </script>
+
 <style>
 .updateCard .el-card__body {
   margin: 0 !important;
@@ -129,7 +168,7 @@ export default {
   border-radius: 30px;
 }
 .chartCard {
-  height: 400px;
+  min-height: 100px;
   margin-bottom: 20px;
 }
 </style>

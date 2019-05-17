@@ -9,12 +9,14 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
     "element-ui": "^2.8.2",
     "lockr": "^0.8.5",
     "mockjs": "^1.0.1-beta3",
     "qs": "^6.7.0",
     "vue": "^2.6.10",
+    "vue-chartjs": "^3.4.2",
     "vue-router": "^3.0.3",
     "vue2-animate": "^2.1.0",
     "vuex": "^3.0.1"
