@@ -33,7 +33,8 @@
   </div>
 </template>
 <script>
-import '@/mock/login.js'
+import { operData } from '@/plugin/http'
+import '@/mock/users'
 export default {
   data () {
     return {
@@ -51,13 +52,10 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.get(`/v1/login/${this.operForm.username}`).then((res) => {
-            if (res.data.code === 0) {
-              this.$message.success(res.data.msg)
-              this.$store.commit('initAccount', { username: this.operForm.username, token: res.data.extra.token })
+          operData({ sendType: 'post', url: `/v1/users/${this.operForm.username}`, showSuccessTip: true }).then((data) => {
+            if (data.code === 0) {
+              this.$store.commit('initAccount', { username: this.operForm.username, token: data.extra.token })
               this.$router.push('/')
-            } else {
-              this.$message.error(res.data.msg)
             }
           })
         } else {

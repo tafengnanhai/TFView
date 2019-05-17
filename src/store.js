@@ -12,7 +12,8 @@ export default new Vuex.Store({
     currentBreadCrumb: [],
     username: '',
     token: '',
-    testToken: 'this is test token which will be replaced by backend'
+    testToken: 'this is test token which will be replaced by backend',
+    timeoutMsg: '未登陆或超时，请重新登陆'
   },
   mutations: {
     isShowRouterLink: (state, result) => {

@@ -5,7 +5,7 @@
       <el-input placeholder="请输入关键词" v-model="keyword" class="keyword" size="medium"></el-input>&nbsp;&nbsp;
       <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
     </div>
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="listData" border style="width: 100%">
       <el-table-column prop="date" label="日期" min-width="15%" align="center"></el-table-column>
       <el-table-column prop="name" label="姓名" min-width="10%" align="center"></el-table-column>
       <el-table-column prop="province" label="省份" min-width="10%" align="center"></el-table-column>
@@ -24,7 +24,8 @@
   </div>
 </template>
 <script>
-import '@/mock/stat.js'
+import { operData } from '@/plugin/http'
+import '@/mock/articles'
 import ArticleAdd from '@/views/article/add.vue'
 export default {
   name: 'article_index',
@@ -34,35 +35,7 @@ export default {
   data () {
     return {
       keyword: '',
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1517 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1519 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1516 弄',
-        zip: 200333
-      }]
+      listData: null
     }
   },
   methods: {
@@ -72,6 +45,11 @@ export default {
     showDialog: function (flag) {
       this.$refs.article_add.toggleDialog(flag)
     }
+  },
+  created: function () {
+    operData({ sendType: 'get', url: '/v1/articles' }).then((data) => {
+      this.listData = data.extra
+    })
   }
 }
 </script>

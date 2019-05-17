@@ -42,48 +42,6 @@ router.afterEach((to, from) => {
   }
 })
 
-// axios control
-// axios.defaults.baseURL = 'http://api.tfview.com'
-axios.defaults.timeout = 10 * 1000
-axios.defaults.headers['Content-Type'] = 'application/json'
-
-axios.interceptors.request.use(
-  request => {
-    showLoading()
-    var token = lockr.get('token')
-    if (request.method === 'post') {
-      request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-      let data = qs.parse(request.data)
-
-      request.data = qs.stringify({
-        token: token,
-        ...data
-      })
-    } else if (request.method === 'get') {
-      request.params = {
-        token: token,
-        ...request.params
-      }
-    }
-    return request
-  },
-  error => {
-    hideLoading()
-    Promise.reject(error)
-  }
-)
-
-axios.interceptors.response.use(
-  response => {
-    hideLoading()
-    return response
-  },
-  error => {
-    hideLoading()
-    Promise.reject(error)
-  }
-)
-
 new Vue({
   router,
   store,
