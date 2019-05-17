@@ -6,16 +6,14 @@
       <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%">
-      <el-table-column prop="date" label="日期" min-width="15%" align="center"></el-table-column>
-      <el-table-column prop="name" label="姓名" min-width="10%" align="center"></el-table-column>
-      <el-table-column prop="province" label="省份" min-width="10%" align="center"></el-table-column>
-      <el-table-column prop="city" label="市区" min-width="10%" align="center"></el-table-column>
-      <el-table-column prop="address" label="地址" min-width="25%" align="center"></el-table-column>
-      <el-table-column prop="zip" label="邮编" min-width="10%" align="center"></el-table-column>
+      <el-table-column prop="art_id" label="编号" min-width="15%" align="center"></el-table-column>
+      <el-table-column prop="art_title" label="标题" min-width="30%" align="center"></el-table-column>
+      <el-table-column prop="artsort_name" label="分类" min-width="15%" align="center"></el-table-column>
+      <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="small">编辑</el-button>&nbsp;&nbsp;
-          <el-button @click="handleClick(scope.row)" type="danger" size="small">删除</el-button>
+          <el-button @click="delArt(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -39,7 +37,7 @@ export default {
     }
   },
   methods: {
-    handleClick: function (row) {
+    delArt: function (row) {
       console.log(row)
     },
     showDialog: function (flag) {
