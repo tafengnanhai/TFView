@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="panel">
-      <el-button type="primary" icon="el-icon-edit" size="medium">添加</el-button>&nbsp;&nbsp;
+      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添加</el-button>&nbsp;&nbsp;
       <el-input placeholder="请输入关键词" v-model="keyword" style="width:300px" size="medium"></el-input>&nbsp;&nbsp;
       <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
     </div>
@@ -14,17 +14,22 @@
       <el-table-column prop="zip" label="邮编" min-width="10%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="small">编辑</el-button>
-          <el-button @click="handleClick(scope.row)" type="danger" size="small">删除</el-button>&nbsp;&nbsp;
+          <el-button type="primary" size="small">编辑</el-button>&nbsp;&nbsp;
+          <el-button @click="handleClick(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-pagination background layout="prev, pager, next, jumper, ->, total" :total="100"></el-pagination>
+    <ArticleAdd ref="article_add"/>
   </div>
 </template>
 <script>
+import ArticleAdd from '@/views/article/add.vue'
 export default {
   name: 'article_index',
+  components: {
+    ArticleAdd
+  },
   data () {
     return {
       keyword: '',
@@ -60,8 +65,11 @@ export default {
     }
   },
   methods: {
-    handleClick (row) {
+    handleClick: function (row) {
       console.log(row)
+    },
+    showDialog: function (flag) {
+      this.$refs.article_add.toggleDialog(flag)
     }
   }
 }
