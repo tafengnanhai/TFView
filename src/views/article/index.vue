@@ -2,7 +2,7 @@
   <div>
     <div class="panel">
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添加</el-button>&nbsp;&nbsp;
-      <el-input placeholder="请输入关键词" v-model="keyword" style="width:300px" size="medium"></el-input>&nbsp;&nbsp;
+      <el-input placeholder="请输入关键词" v-model="keyword" class="keyword" size="medium"></el-input>&nbsp;&nbsp;
       <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%">
@@ -78,7 +78,20 @@ export default {
 <style scoped>
 .panel {
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   padding-bottom: 15px;
+}
+.keyword {
+  width: 300px;
+}
+@media screen and (max-width: 700px) {
+  .keyword {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .keyword {
+    width: 100px;
+  }
 }
 </style>
