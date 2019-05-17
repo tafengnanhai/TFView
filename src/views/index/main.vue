@@ -69,27 +69,20 @@
     <el-row :gutter="20">
       <el-col :span="24">
         <el-card class="chartCard">
-          <line-chart :chart-data="datacollection" :options="lineChartOption"></line-chart>
+          <line-chart :chart-data="statWeekDiffData" :options="lineChartOption"></line-chart>
         </el-card>
       </el-col>
     </el-row>
     <el-timeline>
-      <el-timeline-item timestamp="2019/5/15" placement="top">
+      <el-timeline-item
+        :timestamp="data.timestamp"
+        placement="top"
+        v-for="(data, index) in siteUpdateData"
+        :key="index"
+      >
         <el-card class="updateCard">
-          <h4>功能更新3</h4>
-          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/15 21:17</p>
-        </el-card>
-      </el-timeline-item>
-      <el-timeline-item timestamp="2019/5/12" placement="top">
-        <el-card class="updateCard">
-          <h4>功能更新2</h4>
-          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/12 21:17</p>
-        </el-card>
-      </el-timeline-item>
-      <el-timeline-item timestamp="2019/5/11" placement="top">
-        <el-card class="updateCard">
-          <h4>功能更新1</h4>
-          <p>更新了某某功能&nbsp;&nbsp;&nbsp;&nbsp;2019/5/11 21:17</p>
+          <h4>{{data.title}}</h4>
+          <p>{{data.content}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.detailTime}}</p>
         </el-card>
       </el-timeline-item>
     </el-timeline>
@@ -100,6 +93,7 @@
 import LineChart from '@/plugin/LineChart.js'
 import { operData } from '@/plugin/http'
 import '@/mock/users'
+import '@/mock/site'
 export default {
   components: {
     LineChart
@@ -107,7 +101,8 @@ export default {
   data () {
     return {
       statTotal: {},
-      statDayDiffData: {},
+      statWeekDiffData: {},
+      siteUpdateData: {},
       lineChartOption: {
         responsive: true,
         maintainAspectRatio: false,
@@ -127,27 +122,12 @@ export default {
     operData({ url: '/v1/users/stat' }).then((data) => {
       this.statTotal = data.extra
     })
-    this.datacollection = {
-      labels: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
-      datasets: [
-        {
-          label: '今日注册',
-          backgroundColor: 'rgba(255, 159, 64, 0.2)',
-          borderColor: '#F56C6C',
-          data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
-        }, {
-          label: '昨日注册',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: '#409EFF',
-          data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
-        }
-      ]
-    }
-  },
-  methods: {
-    getRandomInt: function () {
-      return Math.floor(Math.random() * (20 - 5 + 1)) + 5
-    }
+    operData({ url: '/v1/users/weekdiff' }).then((data) => {
+      this.statWeekDiffData = data.extra
+    })
+    operData({ url: '/v1/site/update' }).then((data) => {
+      this.siteUpdateData = data.extra
+    })
   }
 }
 </script>
