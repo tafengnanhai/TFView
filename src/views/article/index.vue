@@ -45,7 +45,7 @@ export default {
     }
   },
   mounted: function () {
-    operData({ url: '/v1/articles' }).then((data) => {
+    operData({ url: '/v1/articles', param: { params: { p: 1 } } }).then((data) => {
       this.listData = data.extra
     })
   }
