@@ -17,7 +17,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination background layout="prev, pager, next, jumper, ->, total" :total="100"></el-pagination>
+    <el-pagination
+      background
+      layout="prev, pager, next, jumper, ->, total"
+      :total="total"
+      :page-size="pageSize"
+      @current-change="pageClick"
+    ></el-pagination>
     <ArticleAdd ref="article_add"/>
   </div>
 </template>
@@ -33,7 +39,9 @@ export default {
   data () {
     return {
       keyword: '',
-      listData: null
+      listData: null,
+      total: 1,
+      pageSize: 10
     }
   },
   methods: {
@@ -42,12 +50,20 @@ export default {
     },
     showDialog: function (flag) {
       this.$refs.article_add.toggleDialog(flag)
+    },
+    pageClick: function (p) {
+      this.getData(p)
+    },
+    getData: function (p) {
+      operData({ url: '/v1/articles', param: { params: { p: p } } }).then((data) => {
+        this.listData = data.extra
+        this.total = data.total
+        this.pageSize = data.pageSize
+      })
     }
   },
   mounted: function () {
-    operData({ url: '/v1/articles', param: { params: { p: 1 } } }).then((data) => {
-      this.listData = data.extra
-    })
+    this.getData(1)
   }
 }
 </script>

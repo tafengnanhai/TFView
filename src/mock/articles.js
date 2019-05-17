@@ -1,5 +1,8 @@
 import Mock from 'mockjs'
+import store from '@/store'
 import Tools from '@/plugin/tools'
+
+let pageSize = store.state.pageSize
 let extraData = Mock.mock({
   'extra|98': [{
     art_id: '@increment',
@@ -11,12 +14,14 @@ let extraData = Mock.mock({
 let data =
   Mock.mock({
     code: 0,
-    msg: 'success'
+    msg: 'success',
+    pageSize: pageSize,
+    total: 98
   })
 
 Mock.mock(/\/v1\/articles/, 'get', function (req) {
   let p = decodeURI(Tools.getParam('p', req.url))
-  let pExtraData = extraData.extra.slice(p - 1, 10)
+  let pExtraData = extraData.extra.slice(pageSize * (p - 1), pageSize * p)
   data = { ...data, extra: pExtraData }
   return data
 })
