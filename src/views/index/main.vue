@@ -10,7 +10,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">7001</span>
+              <span class="f20 b">{{statTotal.today}}</span>
               <br>
               <br>今日注册
             </el-col>
@@ -26,7 +26,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">70010</span>
+              <span class="f20 b">{{statTotal.week}}</span>
               <br>
               <br>本周注册
             </el-col>
@@ -42,7 +42,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">700100</span>
+              <span class="f20 b">{{statTotal.month}}</span>
               <br>
               <br>本月注册
             </el-col>
@@ -58,7 +58,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">7001001</span>
+              <span class="f20 b">{{statTotal.all}}</span>
               <br>
               <br>累计注册
             </el-col>
@@ -97,14 +97,17 @@
 </template>
 
 <script>
-import LineChart from '../../plugin/LineChart.js'
-
+import LineChart from '@/plugin/LineChart.js'
+import { operData } from '@/plugin/http'
+import '@/mock/users'
 export default {
   components: {
     LineChart
   },
   data () {
     return {
+      statTotal: {},
+      statDayDiffData: {},
       lineChartOption: {
         responsive: true,
         maintainAspectRatio: false,
@@ -121,6 +124,9 @@ export default {
     }
   },
   mounted: function () {
+    operData({ url: '/v1/users/stat' }).then((data) => {
+      this.statTotal = data.extra
+    })
     this.datacollection = {
       labels: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
       datasets: [

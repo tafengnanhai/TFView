@@ -46,8 +46,8 @@ export default {
       this.$refs.article_add.toggleDialog(flag)
     }
   },
-  created: function () {
-    operData({ sendType: 'get', url: '/v1/articles' }).then((data) => {
+  mounted: function () {
+    operData({ url: '/v1/articles' }).then((data) => {
       this.listData = data.extra
     })
   }

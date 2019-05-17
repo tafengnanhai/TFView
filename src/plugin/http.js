@@ -16,6 +16,7 @@ axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 export const operData = (obj) => {
   return new Promise((resolve, reject) => {
+    obj.sendType = (obj.sendType === undefined ? 'get' : obj.sendType)
     obj.showSuccessTip = (obj.showSuccessTip === undefined ? false : obj.showSuccessTip)
     obj.showErrTip = (obj.showErrTip === undefined ? true : obj.showErrTip)
     obj.neeLogin = (obj.neeLogin === undefined ? true : obj.neeLogin)
