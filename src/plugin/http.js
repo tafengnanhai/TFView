@@ -38,18 +38,18 @@ export const operData = (obj) => {
 axios.interceptors.request.use(
   request => {
     showLoading()
-    var token = lockr.get('token')
+    let token = lockr.get('token')
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       let data = qs.parse(request.data)
 
       request.data = qs.stringify({
-        token: token,
+        token: escape(token),
         ...data
       })
     } else if (request.method === 'get') {
       request.params = {
-        token: token,
+        token: escape(token),
         ...request.params
       }
     }
