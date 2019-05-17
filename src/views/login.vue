@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+import '@/mock/login.js'
 export default {
   data () {
     return {
@@ -50,7 +51,7 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.get(`/login/${this.operForm.username}`).then((res) => {
+          this.$http.get(`/v1/login/${this.operForm.username}`).then((res) => {
             if (res.data.code === 0) {
               this.$message.success(res.data.msg)
               this.$store.commit('initAccount', { username: this.operForm.username, token: res.data.extra.token })

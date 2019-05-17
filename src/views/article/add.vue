@@ -6,6 +6,7 @@
       :show-close="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
+      :show-fullscreen="true"
     >
       <el-form :model="form">
         <el-form-item label="标题" :label-width="formLabelWidth">

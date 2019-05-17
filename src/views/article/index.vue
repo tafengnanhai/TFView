@@ -24,6 +24,7 @@
   </div>
 </template>
 <script>
+import '@/mock/stat.js'
 import ArticleAdd from '@/views/article/add.vue'
 export default {
   name: 'article_index',
