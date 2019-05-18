@@ -133,3 +133,7 @@ ul, li {
     font-size: 16px;
     font-weight: normal;
 }
+
+.cell .el-button {
+    margin: 5px 10px;
+}
