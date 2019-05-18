@@ -4,16 +4,15 @@ import qs from 'qs'
 import lockr from 'lockr'
 import router from '@/router'
 import ElementUI from 'element-ui'
-import { showLoading, hideLoading } from '@/plugin/loading'
 import 'element-ui/lib/theme-chalk/index.css'
 import { Promise } from 'core-js'
 
 Vue.use(ElementUI)
 
-// axios control
 // axios.defaults.baseURL = 'http://api.tfview.com'
 axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
+
 export const operData = (obj) => {
   return new Promise((resolve, reject) => {
     obj.sendType = (obj.sendType === undefined ? 'get' : obj.sendType)
@@ -37,7 +36,6 @@ export const operData = (obj) => {
 
 axios.interceptors.request.use(
   request => {
-    showLoading()
     let token = lockr.get('token')
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -56,18 +54,16 @@ axios.interceptors.request.use(
     return request
   },
   error => {
-    hideLoading()
     Promise.reject(error)
   }
 )
 
 axios.interceptors.response.use(
   response => {
-    hideLoading()
+    // hideLoading()
     return response
   },
   error => {
-    hideLoading()
     Promise.reject(error)
   }
 )
