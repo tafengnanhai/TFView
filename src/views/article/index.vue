@@ -12,7 +12,7 @@
       <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="small">编辑</el-button>&nbsp;&nbsp;
+          <el-button type="primary" size="small">编辑</el-button>
           <el-button @click="delArt(scope.row)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -82,6 +82,9 @@ export default {
 }
 .keyword {
   width: 300px;
+}
+.cell .el-button {
+  margin: 5px 10px;
 }
 @media screen and (max-width: 700px) {
   .keyword {
