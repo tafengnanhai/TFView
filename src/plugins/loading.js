@@ -7,7 +7,7 @@ const startLoading = (target, fullscreen, lock, text) => {
   loading = Loading.service({
     lock: lock,
     text: text,
-    background: 'rgba(0, 0, 0, 0.5)',
+    background: 'transparent'/* 'rgba(0, 0, 0, 0.5)' */,
     target: target,
     fullscreen: fullscreen
   })

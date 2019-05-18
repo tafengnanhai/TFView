@@ -4,8 +4,9 @@ import qs from 'qs'
 import lockr from 'lockr'
 import router from '@/router'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import { showLoading, hideLoading } from '@/plugins/loading'
 import { Promise } from 'core-js'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
 
@@ -36,6 +37,7 @@ export const operData = (obj) => {
 
 axios.interceptors.request.use(
   request => {
+    showLoading()
     let token = lockr.get('token')
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -54,16 +56,18 @@ axios.interceptors.request.use(
     return request
   },
   error => {
+    hideLoading()
     Promise.reject(error)
   }
 )
 
 axios.interceptors.response.use(
   response => {
-    // hideLoading()
+    hideLoading()
     return response
   },
   error => {
+    hideLoading()
     Promise.reject(error)
   }
 )
