@@ -32,6 +32,7 @@ let data2 = {
 }
 
 Mock.mock(/\/v1\/articles\/(\d+)/, 'delete', function (options) {
-  console.log(options)
+  let id = Tools.getSection(3, options.url)
+  console.log(id)
   return data2
 })

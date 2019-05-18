@@ -22,6 +22,7 @@
       layout="prev, pager, next, jumper, ->, total"
       :total="total"
       :page-size="pageSize"
+      :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
     <ArticleAdd ref="article_add"/>
@@ -41,13 +42,14 @@ export default {
       keyword: '',
       listData: null,
       total: 1,
-      pageSize: 10
+      pageSize: 10,
+      currentPage: 1
     }
   },
   methods: {
     delArt: function (row) {
       operData({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
-        console.log(data)
+        this.getData(this.currentPage)
       })
     },
     showDialog: function (flag) {
@@ -61,6 +63,7 @@ export default {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
+        this.currentPage = p
       })
     }
   },
