@@ -1,28 +1,6 @@
 import Mock from 'mockjs'
-import store from '@/store'
 
-let data = {
-  code: 0,
-  msg: '登录成功',
-  extra: { token: store.state.testToken }
-}
-
-// 和后端一致，不建议直接返回用户名和密码的判断方式
-Mock.mock(/\/v1\/users\/\w+/, 'post', data)
-
-data = {
-  code: -1,
-  msg: store.state.timeoutMsg
-}
-
-data = {
-  code: 0,
-  msg: 'success'
-}
-// 用户状态验证
-Mock.mock(/\/v1\/check\/\w+/, 'get', data)
-
-data = {
+let data1 = {
   code: 0,
   msg: 'success',
   extra: {
@@ -33,19 +11,19 @@ data = {
   }
 }
 // 模拟错误
-/* data = {
+/* data1 = {
   code: 1,
   msg: '获取综合统计失败，请稍后重试'
 } */
 
 // 模拟超时
-/* data = {
+/* data1 = {
   code: -1,
   msg: store.state.timeoutMsg
 } */
-Mock.mock(/\/v1\/users\/stat/, 'get', data)
+Mock.mock(/\/v1\/users\/stat/, 'get', data1)
 
-data = {
+let data2 = {
   code: 0,
   msg: 'success',
   extra: {
@@ -65,4 +43,4 @@ data = {
     ]
   }
 }
-Mock.mock(/\/v1\/users\/weekdiff/, 'get', data)
+Mock.mock(/\/v1\/users\/weekdiff/, 'get', data2)

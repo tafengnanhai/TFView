@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import { operData } from '@/plugin/http'
+import { operData } from '@/plugins/http'
 import '@/mock/articles'
 import ArticleAdd from '@/views/article/add.vue'
 export default {
@@ -46,7 +46,9 @@ export default {
   },
   methods: {
     delArt: function (row) {
-      console.log(row)
+      operData({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
+        console.log(data)
+      })
     },
     showDialog: function (flag) {
       this.$refs.article_add.toggleDialog(flag)

@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 import store from '@/store'
-import Tools from '@/plugin/tools'
+import Tools from '@/plugins/tools'
 
 let pageSize = store.state.pageSize
 let extraData = Mock.mock({
@@ -11,7 +11,7 @@ let extraData = Mock.mock({
     artsort_name: '@word(3, 5)'
   }]
 })
-let data =
+let data1 =
   Mock.mock({
     code: 0,
     msg: 'success',
@@ -19,9 +19,19 @@ let data =
     total: 98
   })
 
-Mock.mock(/\/v1\/articles/, 'get', function (req) {
-  let p = decodeURI(Tools.getParam('p', req.url))
+Mock.mock(/\/v1\/articles/, 'get', function (options) {
+  let p = decodeURI(Tools.getParam('p', options.url))
   let pExtraData = extraData.extra.slice(pageSize * (p - 1), pageSize * p)
-  data = { ...data, extra: pExtraData }
-  return data
+  data1 = { ...data1, extra: pExtraData }
+  return data1
+})
+
+let data2 = {
+  code: 0,
+  msg: 'success'
+}
+
+Mock.mock(/\/v1\/articles\/(\d+)/, 'delete', function (options) {
+  console.log(options)
+  return data2
 })

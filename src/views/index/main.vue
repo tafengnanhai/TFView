@@ -90,8 +90,8 @@
 </template>
 
 <script>
-import LineChart from '@/plugin/LineChart.js'
-import { operData } from '@/plugin/http'
+import LineChart from '@/plugins/LineChart.js'
+import { operData } from '@/plugins/http'
 import '@/mock/users'
 import '@/mock/site'
 export default {
