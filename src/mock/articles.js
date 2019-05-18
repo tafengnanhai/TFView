@@ -39,8 +39,8 @@ Mock.mock(/\/v1\/articles\/(\d+)/, 'delete', function (options) {
     if (parseInt(obj.art_id) !== id) {
       tempExtra.push(obj)
     }
-    // extraData.extra = tempExtra
   }
+  extraData.extra = tempExtra
   data1.total--
   return data2
 })

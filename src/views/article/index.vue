@@ -49,9 +49,7 @@ export default {
   methods: {
     delArt: function (row) {
       operData({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
-        setTimeout(() => {
-          this.getData(this.currentPage)
-        }, 2000)
+        this.getData(this.currentPage)
       })
 
     },
