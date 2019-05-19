@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="panel">
-      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添加</el-button>&nbsp;&nbsp;
+      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>&nbsp;&nbsp;
       <el-input placeholder="请输入关键词" v-model="keyword" class="keyword" size="medium"></el-input>&nbsp;&nbsp;
-      <el-button type="primary" icon="el-icon-search" size="medium">搜索</el-button>
+      <el-button type="primary" icon="el-icon-search" size="medium">搜 索</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%">
       <el-table-column prop="art_id" label="编号" min-width="15%" align="center"></el-table-column>
@@ -12,8 +12,8 @@
       <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="small">编辑</el-button>
-          <el-button @click="delArt(scope.row)" type="danger" size="small">删除</el-button>
+          <el-button type="primary" size="small">编 辑</el-button>
+          <el-button @click="delArt(scope.row)" type="danger" size="small">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
