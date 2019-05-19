@@ -114,8 +114,7 @@ export default {
             stacked: true
           }]
         }
-      },
-      datacollection: null
+      }
     }
   },
   mounted: function () {
