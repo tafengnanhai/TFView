@@ -13,7 +13,11 @@
     </div>
     <el-table :data="listData" border style="width: 100%">
       <el-table-column prop="art_id" label="编号" min-width="15%" align="center"></el-table-column>
-      <el-table-column prop="art_title" label="标题" min-width="30%" align="center"></el-table-column>
+      <el-table-column label="标题" min-width="30%" align="center">
+        <template slot-scope="scope">
+          <div v-html="formatter(scope.row.art_title)"></div>
+        </template>
+      </el-table-column>
       <el-table-column prop="artsort_name" label="分类" min-width="15%" align="center"></el-table-column>
       <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
@@ -76,6 +80,9 @@ export default {
     },
     search: function () {
       this.getData(1)
+    },
+    formatter: function (val) {
+      return this.keyword === '' ? val : val.replace(this.keyword, `<span class="red f16">${this.keyword}</span>`)
     }
   },
   mounted: function () {
