@@ -4,9 +4,9 @@
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>&nbsp;&nbsp;
       <el-input
         placeholder="请输入关键词"
-        v-model="keyword"
         class="keyword"
         size="medium"
+        v-model="inputKeyword"
         @keydown.enter.native="search()"
       ></el-input>&nbsp;&nbsp;
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
@@ -49,6 +49,7 @@ export default {
   },
   data () {
     return {
+      inputKeyword: '',
       keyword: '',
       listData: null,
       total: 1,
@@ -79,6 +80,7 @@ export default {
       })
     },
     search: function () {
+      this.keyword = this.inputKeyword // 不要直接修改keyword，防止输入但未搜索变更了关键词
       this.getData(1)
     },
     formatter: function (val) {

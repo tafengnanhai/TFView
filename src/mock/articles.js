@@ -23,6 +23,7 @@ Mock.mock(/\/v1\/articles/, 'get', function (options) {
   let p = Tools.getParam('p', options.url)
   let keyword = Tools.getParam('keyword', options.url)
   let tempExtra = extraData.extra
+  dataListAll.total = tempExtra.length
   if (keyword !== '' && extraData.extra.length > 0) {
     tempExtra = extraData.extra.filter((item) => {
       return item.art_title.indexOf(keyword) !== -1
