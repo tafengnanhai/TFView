@@ -2,8 +2,14 @@
   <div>
     <div class="panel">
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>&nbsp;&nbsp;
-      <el-input placeholder="请输入关键词" v-model="keyword" class="keyword" size="medium"></el-input>&nbsp;&nbsp;
-      <el-button type="primary" icon="el-icon-search" size="medium">搜 索</el-button>
+      <el-input
+        placeholder="请输入关键词"
+        v-model="keyword"
+        class="keyword"
+        size="medium"
+        @keydown.enter.native="search()"
+      ></el-input>&nbsp;&nbsp;
+      <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%">
       <el-table-column prop="art_id" label="编号" min-width="15%" align="center"></el-table-column>
@@ -61,12 +67,15 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      operData({ url: '/v1/articles', param: { params: { p: p } } }).then((data) => {
+      operData({ url: '/v1/articles', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
         this.currentPage = p
       })
+    },
+    search: function () {
+      this.getData(1)
     }
   },
   mounted: function () {

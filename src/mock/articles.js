@@ -20,8 +20,16 @@ let dataListAll =
   })
 
 Mock.mock(/\/v1\/articles/, 'get', function (options) {
-  let p = decodeURI(Tools.getParam('p', options.url))
-  let pExtraData = (extraData.extra.length > 0 ? extraData.extra.slice(pageSize * (p - 1), pageSize * p) : extraData.extra)
+  let p = Tools.getParam('p', options.url)
+  let keyword = Tools.getParam('keyword', options.url)
+  let tempExtra = extraData.extra
+  if (keyword !== '' && extraData.extra.length > 0) {
+    tempExtra = extraData.extra.filter((item) => {
+      return item.art_title.indexOf(keyword) !== -1
+    })
+    dataListAll.total = tempExtra.length
+  }
+  let pExtraData = (tempExtra.length > 0 ? tempExtra.slice(pageSize * (p - 1), pageSize * p) : tempExtra)
   dataListAll = { ...dataListAll, extra: pExtraData }
   return dataListAll
 })
