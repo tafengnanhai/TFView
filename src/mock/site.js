@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-let data = {
+let dataSite = {
   code: 0,
   msg: 'success',
   extra: [
@@ -23,4 +23,4 @@ let data = {
     }
   ]
 }
-Mock.mock(/\/v1\/site\/update/, 'get', data)
+Mock.mock(/\/v1\/site\/update/, 'get', dataSite)

@@ -13,13 +13,13 @@ let users = [
   }
 ]
 
-let data1Success = {
+let dataSessionSuccess = {
   code: 0,
   msg: '登录成功',
   extra: { token: store.state.testToken }
 }
 
-let data1Error = {
+let dataSessionError = {
   code: 1,
   msg: '用户名或密码错误'
 }
@@ -28,23 +28,11 @@ let data1Error = {
 Mock.mock(/\/v1\/sessions\/\w+/, 'post', function (options) {
   let username = Tools.getParam('username', options.body)
   let password = Tools.getParam('password', options.body)
-  let data = data1Error
+  let data = dataSessionError
   for (let key in users) {
     if (users[key].username === username && users[key].password === password) {
-      data = data1Success
+      data = dataSessionSuccess
     }
   }
   return data
 })
-
-let data2 = {
-  code: -1,
-  msg: store.state.timeoutMsg
-}
-
-data2 = {
-  code: 0,
-  msg: 'success'
-}
-// 用户状态验证
-Mock.mock(/\/v1\/sessions\/\w+/, 'get', data2)

@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-let data1 = {
+let dataUserStat = {
   code: 0,
   msg: 'success',
   extra: {
@@ -11,19 +11,19 @@ let data1 = {
   }
 }
 // 模拟错误
-/* data1 = {
+/* dataUserStat = {
   code: 1,
   msg: '获取综合统计失败，请稍后重试'
 } */
 
 // 模拟超时
-/* data1 = {
+/* dataUserStat = {
   code: -1,
   msg: store.state.timeoutMsg
 } */
-Mock.mock(/\/v1\/users\/stat/, 'get', data1)
+Mock.mock(/\/v1\/users\/stat/, 'get', dataUserStat)
 
-let data2 = {
+let dataUserWeekDiff = {
   code: 0,
   msg: 'success',
   extra: {
@@ -43,4 +43,4 @@ let data2 = {
     ]
   }
 }
-Mock.mock(/\/v1\/users\/weekdiff/, 'get', data2)
+Mock.mock(/\/v1\/users\/weekdiff/, 'get', dataUserWeekDiff)

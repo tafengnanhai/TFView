@@ -11,7 +11,7 @@ let extraData = Mock.mock({
     artsort_name: '@word(3, 5)'
   }]
 })
-let data1 =
+let dataListAll =
   Mock.mock({
     code: 0,
     msg: 'success',
@@ -22,11 +22,11 @@ let data1 =
 Mock.mock(/\/v1\/articles/, 'get', function (options) {
   let p = decodeURI(Tools.getParam('p', options.url))
   let pExtraData = (extraData.extra.length > 0 ? extraData.extra.slice(pageSize * (p - 1), pageSize * p) : extraData.extra)
-  data1 = { ...data1, extra: pExtraData }
-  return data1
+  dataListAll = { ...dataListAll, extra: pExtraData }
+  return dataListAll
 })
 
-let data2 = {
+let dataDelete = {
   code: 0,
   msg: 'success'
 }
@@ -41,6 +41,6 @@ Mock.mock(/\/v1\/articles\/(\d+)/, 'delete', function (options) {
     }
   }
   extraData.extra = tempExtra
-  data1.total--
-  return data2
+  dataListAll.total--
+  return dataDelete
 })

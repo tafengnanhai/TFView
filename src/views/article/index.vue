@@ -49,9 +49,10 @@ export default {
   methods: {
     delArt: function (row) {
       operData({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
+        let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+        this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
         this.getData(this.currentPage)
       })
-
     },
     showDialog: function (flag) {
       this.$refs.article_add.toggleDialog(flag)
@@ -82,9 +83,6 @@ export default {
 }
 .keyword {
   width: 300px;
-}
-.cell .el-button {
-  margin: 5px 10px;
 }
 @media screen and (max-width: 700px) {
   .keyword {
