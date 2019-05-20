@@ -4,12 +4,10 @@
       :class="{ 'el-icon-s-fold f20 showMenu' : !this.$store.state.isCollapse, 'el-icon-s-unfold f20 showMenu': this.$store.state.isCollapse}"
       @click="toggleMenu"
     />
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item
-        v-for="(item, itemIndex) in this.$store.state.currentBreadCrumb"
-        v-bind:key="itemIndex"
-      >当前栏目：{{item}}</el-breadcrumb-item>
-    </el-breadcrumb>
+    <div class="wel">
+      某某管理系统欢迎你：
+      <span class="red">{{this.$store.state.username}}</span>，不使用请及时注销
+    </div>
     <el-dropdown @command="handlePopMenu">
       <i class="el-icon-user-solid f20"/>
       <el-dropdown-menu slot="dropdown">
@@ -75,7 +73,7 @@ export default {
       }
     },
     clickTab: function (tab, event) {
-      this.$router.replace({ path: tab.name })
+      this.$router.push({ path: tab.name })
     },
     removeTab: function (targetName) {
       let tabs = this.tabs
@@ -111,12 +109,14 @@ export default {
 </style>
 
 <style scoped>
-.el-breadcrumb {
+.wel {
   position: absolute;
+  width: 65%;
   height: 20px;
   line-height: 20px;
   left: 60px;
   top: 10px;
+  overflow: hidden;
 }
 .el-dropdown {
   position: absolute;

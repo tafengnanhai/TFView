@@ -9,7 +9,6 @@ export default new Vuex.Store({
   state: {
     showRouterLink: false,
     isCollapse: false,
-    currentBreadCrumb: [],
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend',
@@ -50,9 +49,6 @@ export default new Vuex.Store({
       state.username = ''
       state.token = ''
       state.isCollapse = false
-    },
-    setCurrentBreadCrumb: (state, value) => {
-      state.currentBreadCrumb = value
     }
   },
   actions: {

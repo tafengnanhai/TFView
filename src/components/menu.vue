@@ -82,15 +82,8 @@ export default {
       this.$router.replace('/login')
     },
     selectMenu: function (index, indexPath) {
-      let breadCrumb = index === '/' ? ['首页面板'] : [document.getElementById(index).innerText]
-      this.$store.commit('setCurrentBreadCrumb', breadCrumb)
+
     }
-  },
-  // 直接通过网址进入时同步更新breadcrumb
-  created: function () {
-    this.$nextTick(() => {
-      this.selectMenu(this.$route.path, this.$route.path)
-    })
   }
 }
 </script>
