@@ -48,7 +48,6 @@ export default {
   background: white;
   padding: 0;
   position: relative;
-  overflow: hidden;
 }
 .el-main {
   background: #f5f5f5;

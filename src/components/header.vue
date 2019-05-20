@@ -19,7 +19,7 @@
     </el-dropdown>
     <el-tabs
       v-model="activeTabName"
-      type="card"
+      type="border-card"
       closable
       @tab-click="clickTab"
       @tab-remove="removeTab"
@@ -35,11 +35,19 @@ export default {
   data () {
     return {
       fullscreen: false,
-      activeTabName: 'index/main',
+      activeTabName: '/index/main',
       tabs: [
         {
           label: '首页面板',
-          name: 'index/main'
+          name: '/index/main'
+        },
+        {
+          label: '文章管理',
+          name: '/article/index'
+        },
+        {
+          label: '分类管理',
+          name: '/sort/index'
         }
       ]
     }
@@ -67,16 +75,7 @@ export default {
       }
     },
     clickTab: function (tab, event) {
-
-    },
-    addTab: function (targetName) {
-      let newTabName = ++this.tabIndex + ''
-      this.editableTabs.push({
-        title: 'New Tab',
-        name: newTabName,
-        content: 'New Tab content'
-      })
-      this.editableTabsValue = newTabName
+      this.$router.replace({ path: tab.name })
     },
     removeTab: function (targetName) {
       let tabs = this.tabs
@@ -98,8 +97,16 @@ export default {
 </script>
 
 <style>
+.el-tabs__nav .el-tabs__item span {
+  display: inline;
+}
 .el-tabs__nav .el-tabs__item:nth-child(1) span {
   display: none;
+}
+.el-tabs__nav-scroll {
+  border-top: 1px solid #dcdfe6;
+  border-left: 1px solid #dcdfe6;
+  border-right: 1px solid #dcdfe6;
 }
 </style>
 
@@ -128,10 +135,11 @@ export default {
   cursor: pointer;
 }
 .el-tabs {
-  width: 98%;
+  width: 97%;
+  height: 39px;
   overflow: hidden;
   padding-top: 35px;
-  padding: 35px 1% 0 1%;
+  padding: 35px 1.5% 0 1.5%;
   float: left;
 }
 </style>
