@@ -4,7 +4,7 @@
       <TFMenu/>
     </el-aside>
     <el-container>
-      <el-header height="40px">
+      <el-header height="76px">
         <TFHeader/>
       </el-header>
       <el-main>
@@ -48,6 +48,7 @@ export default {
   background: white;
   padding: 0;
   position: relative;
+  overflow: hidden;
 }
 .el-main {
   background: #f5f5f5;
