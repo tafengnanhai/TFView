@@ -16,7 +16,13 @@
         <el-dropdown-item icon="el-icon-lock" command="logout">&nbsp;注销退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <el-tabs v-model="activeTabName" type="border-card" closable @tab-remove="removeTab">
+    <el-tabs
+      v-model="activeTabName"
+      type="border-card"
+      closable
+      @tab-click="clickTab"
+      @tab-remove="removeTab"
+    >
       <el-tab-pane
         :label="item.label"
         :name="item.name"
@@ -33,7 +39,8 @@ export default {
   name: 'TFHeader',
   data () {
     return {
-      fullscreen: false
+      fullscreen: false,
+      activeTabName: '/index/main'
     }
   },
   methods: {
@@ -65,8 +72,11 @@ export default {
           name: this.$route.path
         }
         this.$store.commit('addTab', newTab)
-        this.$store.commit('changeActiveTabName', this.$route.path)
+        this.activeTabName = this.$route.path
       }
+    },
+    clickTab: function (tab, event) {
+      this.$store.commit('changeActiveTabName', this.activeTabName)
     },
     removeTab: function (targetName) {
       this.$store.dispatch('removeTab', targetName)
@@ -79,14 +89,6 @@ export default {
     }
   },
   computed: {
-    activeTabName: {
-      get: function () {
-        return this.$store.state.activeTabName
-      },
-      set: function (val) {
-        this.$store.commit('changeActiveTabName', val)
-      }
-    },
     routePath: function () {
       return this.$route.path
     }
