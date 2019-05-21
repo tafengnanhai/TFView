@@ -3,6 +3,7 @@ let count = 0
 let loading = null
 export default {
   open: (target = '#app', fullscreen = true, lock = true, text = '') => {
+    console.log('open+++++++')
     if (count === 0) {
       loading = Loading.service({
         lock: lock,
@@ -15,6 +16,7 @@ export default {
     count++
   },
   close: () => {
+    console.log('close--------')
     if (count > 0) {
       count--
       count <= 0 && loading.close()
