@@ -84,6 +84,11 @@ export default {
     selectMenu: function (index, indexPath) {
 
     }
+  },
+  mounted: function () {
+    if (this.$route.path === '/') {
+      this.$router.replace('/index/main')
+    }
   }
 }
 </script>

@@ -13,9 +13,16 @@ export default new Vuex.Store({
     token: '',
     testToken: 'this is test token which will be replaced by backend',
     timeoutMsg: '未登陆或超时，请重新登陆',
-    pageSize: 10
+    pageSize: 10,
+    activeTabName: '/index/main',
+    tabs: [
+      {
+        label: '首页面板',
+        name: '/index/main'
+      }
+    ]
   },
-  mutations: {
+  mutations: { // 需要同步的操作不要放到actions中
     isShowRouterLink: (state, result) => {
       state.showRouterLink = result
     },
@@ -43,6 +50,31 @@ export default new Vuex.Store({
       let siteWidth = state.isCollapse ? '20px' : '120px'
       document.getElementById('sitename').style.width = siteWidth
     },
+    addTab: (state, newTab) => {
+      let tabs = state.tabs
+      let isExists = tabs.some((tab, index) => {
+        return tab.label === newTab.label
+      })
+      !isExists && state.tabs.push(newTab)
+    },
+    removeTab: (state, targetName) => {
+      let tabs = state.tabs
+      if (state.activeTabName === targetName) {
+        tabs.forEach((tab, index) => {
+          if (tab.name === targetName) {
+            let nextTab = tabs[index + 1] || tabs[index - 1]
+            if (nextTab) {
+              state.activeTabName = nextTab.name
+            }
+          }
+        })
+      }
+      state.tabs = tabs.filter(tab => tab.name !== targetName)
+    },
+    changeActiveTabName: (state, val) => {
+      state.activeTabName = val
+      router.push({ path: val })
+    },
     logout: (state) => {
       lockr.rm('username')
       lockr.rm('token')
@@ -51,12 +83,15 @@ export default new Vuex.Store({
       state.isCollapse = false
     }
   },
-  actions: {
+  actions: { // 可以或者必须异步的操作放到actions中
     checkLoginStatus: (context) => {
       context.commit('checkLoginStatus')
     },
     toggleMenu: (context) => {
       context.commit('toggleMenu')
+    },
+    removeTab: (context, targetName) => {
+      context.commit('removeTab', targetName)
     },
     logout: (context) => {
       context.commit('logout')

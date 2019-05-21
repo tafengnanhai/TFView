@@ -15,14 +15,13 @@
         <el-dropdown-item icon="el-icon-lock" command="logout">&nbsp;注销退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <el-tabs
-      v-model="activeTabName"
-      type="border-card"
-      closable
-      @tab-click="clickTab"
-      @tab-remove="removeTab"
-    >
-      <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabs" :key="item.label"></el-tab-pane>
+    <el-tabs v-model="activeTabName" type="border-card" closable @tab-remove="removeTab">
+      <el-tab-pane
+        :label="item.label"
+        :name="item.name"
+        v-for="item in this.$store.state.tabs"
+        :key="item.label"
+      ></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -32,22 +31,7 @@ export default {
   name: 'TFHeader',
   data () {
     return {
-      fullscreen: false,
-      activeTabName: '/index/main',
-      tabs: [
-        {
-          label: '首页面板',
-          name: '/index/main'
-        },
-        {
-          label: '文章管理',
-          name: '/article/index'
-        },
-        {
-          label: '分类管理',
-          name: '/sort/index'
-        }
-      ]
+      fullscreen: false
     }
   },
   methods: {
@@ -72,23 +56,41 @@ export default {
           break
       }
     },
-    clickTab: function (tab, event) {
-      this.$router.push({ path: tab.name })
+    addTab: function () {
+      if (this.$route.path !== '/') {
+        let newTab = {
+          label: this.$route.meta.label,
+          name: this.$route.path
+        }
+        this.$store.commit('addTab', newTab)
+        this.$store.commit('changeActiveTabName', this.$route.path)
+      }
     },
     removeTab: function (targetName) {
-      let tabs = this.tabs
-      if (this.activeTabName === targetName) {
-        tabs.forEach((tab, index) => {
-          if (tab.name === targetName) {
-            let nextTab = tabs[index + 1] || tabs[index - 1]
-            if (nextTab) {
-              this.activeTabName = nextTab.name
-            }
-          }
-        })
+      this.$store.dispatch('removeTab', targetName)
+    }
+  },
+  computed: {
+    activeTabName: {
+      get: function () {
+        return this.$store.state.activeTabName
+      },
+      set: function (val) {
+        this.$store.commit('changeActiveTabName', val)
       }
-
-      this.tabs = tabs.filter(tab => tab.name !== targetName)
+    },
+    routePath: {
+      get: function () {
+        return this.$route.path
+      }
+    }
+  },
+  mounted: function () {
+    this.addTab()
+  },
+  watch: {
+    routePath: function (nVal, oVal) {
+      this.addTab()
     }
   }
 }

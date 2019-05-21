@@ -18,6 +18,9 @@ export default new Router({
         {
           path: '/index/main',
           name: 'index_main',
+          meta: {
+            label: '首页面板'
+          },
           components: {
             main: () => import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
           }
@@ -25,6 +28,9 @@ export default new Router({
         {
           path: '/article/index',
           name: 'article_index',
+          meta: {
+            label: '文章管理'
+          },
           components: {
             main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
           }
@@ -32,6 +38,9 @@ export default new Router({
         {
           path: '/sort/index',
           name: 'sort_index',
+          meta: {
+            label: '分类管理'
+          },
           components: {
             main: () => import(/* webpackChunkName: "sort_index" */ './views/sort/index.vue')
           }
