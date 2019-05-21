@@ -85,10 +85,23 @@ export default {
     },
     formatter: function (val) {
       return this.keyword === '' ? val : val.replace(this.keyword, `<span class="red f16">${this.keyword}</span>`)
+    },
+    loadMine: function () {
+      this.getData(1)
     }
   },
   mounted: function () {
-    this.getData(1)
+    this.loadMine()
+  },
+  computed: {
+    reloadPageTime: function () {
+      return this.$store.state.reloadPageTime
+    }
+  },
+  watch: {
+    reloadPageTime: function () {
+      this.loadMine()
+    }
   }
 }
 </script>

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     timeoutMsg: '未登陆或超时，请重新登陆',
     pageSize: 10,
     activeTabName: '/index/main',
+    reloadPageTime: new Date().getTime(),
     tabs: [
       {
         label: '首页面板',
@@ -75,6 +76,9 @@ export default new Vuex.Store({
       state.activeTabName = val
       router.push({ path: val })
     },
+    updateReloadPageTime: (state) => {
+      state.reloadPageTime = new Date().getTime()
+    },
     logout: (state) => {
       lockr.rm('username')
       lockr.rm('token')
@@ -92,6 +96,9 @@ export default new Vuex.Store({
     },
     removeTab: (context, targetName) => {
       context.commit('removeTab', targetName)
+    },
+    updateReloadPageTime: (context) => {
+      context.commit('updateReloadPageTime')
     },
     logout: (context) => {
       context.commit('logout')

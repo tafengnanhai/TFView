@@ -4,6 +4,7 @@
       :class="{ 'el-icon-s-fold f20 showMenu' : !this.$store.state.isCollapse, 'el-icon-s-unfold f20 showMenu': this.$store.state.isCollapse}"
       @click="toggleMenu"
     />
+    <i class="reloadPage el-icon-magic-stick f20 b" title="智能刷新页面" @click="reloadPage()"></i>
     <div class="wel">
       某某管理系统欢迎你：
       <span class="red">{{this.$store.state.username}}</span>，不使用请及时注销
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import { showLoading, hideLoading } from '@/plugins/loading'
 export default {
   name: 'TFHeader',
   data () {
@@ -68,6 +70,12 @@ export default {
     },
     removeTab: function (targetName) {
       this.$store.dispatch('removeTab', targetName)
+    },
+    reloadPage: function () {
+      showLoading()
+      this.$message.success('智能刷新页面完成，请查看')
+      this.$store.dispatch('updateReloadPageTime')
+      hideLoading()
     }
   },
   computed: {
@@ -79,10 +87,8 @@ export default {
         this.$store.commit('changeActiveTabName', val)
       }
     },
-    routePath: {
-      get: function () {
-        return this.$route.path
-      }
+    routePath: function () {
+      return this.$route.path
     }
   },
   mounted: function () {
@@ -113,7 +119,7 @@ export default {
 <style scoped>
 .wel {
   position: absolute;
-  width: 65%;
+  width: 55%;
   height: 20px;
   line-height: 20px;
   left: 60px;
@@ -134,6 +140,14 @@ export default {
   line-height: 20px;
   top: 10px;
   left: 20px;
+  cursor: pointer;
+}
+.reloadPage {
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  top: 10px;
+  right: 60px;
   cursor: pointer;
 }
 .el-tabs {

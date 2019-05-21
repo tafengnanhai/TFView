@@ -117,16 +117,31 @@ export default {
       }
     }
   },
+  methods: {
+    loadMine: function () {
+      operData({ url: '/v1/users/stat' }).then((data) => {
+        this.statTotal = data.extra
+      })
+      operData({ url: '/v1/users/weekdiff' }).then((data) => {
+        this.statWeekDiffData = data.extra
+      })
+      operData({ url: '/v1/site/update' }).then((data) => {
+        this.siteUpdateData = data.extra
+      })
+    }
+  },
   mounted: function () {
-    operData({ url: '/v1/users/stat' }).then((data) => {
-      this.statTotal = data.extra
-    })
-    operData({ url: '/v1/users/weekdiff' }).then((data) => {
-      this.statWeekDiffData = data.extra
-    })
-    operData({ url: '/v1/site/update' }).then((data) => {
-      this.siteUpdateData = data.extra
-    })
+    this.loadMine()
+  },
+  computed: {
+    reloadPageTime: function () {
+      return this.$store.state.reloadPageTime
+    }
+  },
+  watch: {
+    reloadPageTime: function () {
+      this.loadMine()
+    }
   }
 }
 </script>

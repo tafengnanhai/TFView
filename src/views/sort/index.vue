@@ -1,7 +1,8 @@
 <template>
   <div>
     sort/index
-    <el-input v-model="test"></el-input>
+    <el-input v-model="testVal"></el-input>
+    <el-button type="success" @click="test()">重新载入</el-button>
   </div>
 </template>
 <script>
@@ -9,7 +10,28 @@ export default {
   name: 'sort_index',
   data () {
     return {
-      test: ''
+      testVal: ''
+    }
+  },
+  methods: {
+    test: function () {
+      this.$store.dispatch('updateReloadPageTime')
+    },
+    loadMine: function () {
+      this.testVal = new Date().getTime()
+    }
+  },
+  mounted: function () {
+    this.loadMine()
+  },
+  computed: {
+    reloadPageTime: function () {
+      return this.$store.state.reloadPageTime
+    }
+  },
+  watch: {
+    reloadPageTime: function () {
+      this.loadMine()
     }
   }
 }
