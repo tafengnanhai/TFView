@@ -30,6 +30,7 @@
 
 <script>
 import Loading from '@/plugins/loading'
+import Message from '@/plugins/message'
 export default {
   name: 'TFHeader',
   data () {
@@ -49,11 +50,11 @@ export default {
       this.$store.commit('toggleMenu')
     },
     changePassword: function () {
-      this.$message.success('TODO:即将推出')
+      Message.success('TODO:即将推出')
     },
     logout: function () {
       this.$store.commit('logout')
-      this.$message.success('注销成功')
+      Message.success('注销成功')
       this.$router.replace('/login')
     },
     handlePopMenu: function (command) {
@@ -101,7 +102,7 @@ export default {
     },
     reloadPage: function () {
       Loading.open()
-      this.$message.success('智能刷新页面完成，请查看')
+      Message.success('智能刷新页面完成，请查看')
       this.$store.dispatch('updateReloadPageTime')
       Loading.close()
     }

@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import Message from '@/plugins/message'
 export default {
   name: 'TFMenu',
   data () {
@@ -78,7 +79,7 @@ export default {
   methods: {
     logout: function () {
       this.$store.commit('logout')
-      this.$message.success('注销成功')
+      Message.success('注销成功')
       this.$router.replace('/login')
     },
     selectMenu: function (index, indexPath) {

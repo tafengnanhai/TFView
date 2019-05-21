@@ -34,6 +34,7 @@
 </template>
 <script>
 import { operData } from '@/plugins/http'
+import Message from '@/plugins/message'
 import '@/mock/sessions'
 export default {
   data () {
@@ -66,7 +67,7 @@ export default {
   },
   created: function () {
     if (this.$route.query.from === 'timeout') {
-      this.$message.error('未登陆或超时，请重新登陆')
+      Message.error('未登陆或超时，请重新登陆')
     }
   }
 }

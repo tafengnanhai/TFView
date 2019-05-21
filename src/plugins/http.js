@@ -1,13 +1,10 @@
-import Vue from 'vue'
 import axios from 'axios'
 import qs from 'qs'
 import lockr from 'lockr'
 import router from '@/router'
-import ElementUI from 'element-ui'
 import NProgress from 'nprogress'
 import Loading from '@/plugins/loading'
-
-Vue.use(ElementUI)
+import Message from '@/plugins/message'
 
 // axios.defaults.baseURL = 'http://api.tfview.com'
 axios.defaults.timeout = 10 * 1000
@@ -21,9 +18,9 @@ export const operData = (obj) => {
     obj.neeLogin = (obj.neeLogin === undefined ? true : obj.neeLogin)
     axios[obj.sendType](obj.url, obj.param).then((res) => {
       if (res.data.code === 0) {
-        obj.showSuccessTip && Vue.prototype.$message.success(res.data.msg)
+        obj.showSuccessTip && Message.success(res.data.msg)
       } else if (res.data.code === 1) {
-        obj.showErrTip && Vue.prototype.$message.error(res.data.msg)
+        obj.showErrTip && Message.error(res.data.msg)
       } else if (res.data.code === -1) {
         obj.neeLogin && router.push({ path: '/login', query: { from: 'timeout' } })
       }
