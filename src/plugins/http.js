@@ -13,10 +13,10 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 export default {
   send: (obj) => {
     return new Promise((resolve, reject) => {
-      obj.sendType = (obj.sendType === undefined ? 'get' : obj.sendType)
-      obj.showSuccessTip = (obj.showSuccessTip === undefined ? false : obj.showSuccessTip)
-      obj.showErrTip = (obj.showErrTip === undefined ? true : obj.showErrTip)
-      obj.neeLogin = (obj.neeLogin === undefined ? true : obj.neeLogin)
+      obj.sendType = obj.sendType || 'get'
+      obj.showSuccessTip = obj.showSuccessTip || false
+      obj.showErrTip = obj.showErrTip || true
+      obj.neeLogin = obj.neeLogin || true
       axios[obj.sendType](obj.url, obj.param).then((res) => {
         if (res.data.code === 0) {
           obj.showSuccessTip && Message.success(res.data.msg)
