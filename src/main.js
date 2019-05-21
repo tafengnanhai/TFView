@@ -7,7 +7,7 @@ import lockr from 'lockr'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
-import { openLoading, closeLoading } from '@/plugins/loading'
+import Loading from '@/plugins/loading'
 import 'element-ui/lib/theme-chalk/index.css'
 // import 'vue2-animate/dist/vue2-animate.min.css'
 import '@/assets/css/master.css'
@@ -30,16 +30,16 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   store.commit('isShowRouterLink', to.meta.showRouterLink)
   if (to.name === 'login') {
-    openLoading('body', true)
+    Loading.open('body', true)
   } else {
-    openLoading()
+    Loading.open()
   }
   next()
 })
 
 router.afterEach((to, from) => {
   NProgress.done()
-  closeLoading()
+  Loading.close()
   if (to.name !== 'login') {
     store.dispatch('checkLoginStatus')
   }

@@ -5,9 +5,7 @@ import lockr from 'lockr'
 import router from '@/router'
 import ElementUI from 'element-ui'
 import NProgress from 'nprogress'
-import { openLoading, closeLoading } from '@/plugins/loading'
-import 'element-ui/lib/theme-chalk/index.css'
-import 'nprogress/nprogress.css'
+import Loading from '@/plugins/loading'
 
 Vue.use(ElementUI)
 
@@ -39,7 +37,7 @@ export const operData = (obj) => {
 axios.interceptors.request.use(
   request => {
     NProgress.start()
-    openLoading()
+    Loading.open()
     let token = lockr.get('token')
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -59,7 +57,7 @@ axios.interceptors.request.use(
   },
   error => {
     NProgress.done()
-    closeLoading()
+    Loading.close()
     Promise.reject(error)
   }
 )
@@ -67,12 +65,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     NProgress.done()
-    closeLoading()
+    Loading.close()
     return response
   },
   error => {
     NProgress.done()
-    closeLoading()
+    Loading.close()
     Promise.reject(error)
   }
 )

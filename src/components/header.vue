@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { openLoading, closeLoading } from '@/plugins/loading'
+import Loading from '@/plugins/loading'
 export default {
   name: 'TFHeader',
   data () {
@@ -100,10 +100,10 @@ export default {
       this.$router.push({ path: this.activeTabName })
     },
     reloadPage: function () {
-      openLoading()
+      Loading.open()
       this.$message.success('智能刷新页面完成，请查看')
       this.$store.dispatch('updateReloadPageTime')
-      closeLoading()
+      Loading.close()
     }
   },
   computed: {
