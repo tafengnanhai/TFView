@@ -23,7 +23,7 @@ export default new Vuex.Store({
       }
     ]
   },
-  mutations: { // 需要同步的操作不要放到actions中
+  mutations: { // 需要同步的操作不要放到actions中，放到mutations中
     isShowRouterLink: (state, result) => {
       state.showRouterLink = result
     },
