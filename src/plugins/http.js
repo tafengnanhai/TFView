@@ -5,7 +5,6 @@ import lockr from 'lockr'
 import router from '@/router'
 import ElementUI from 'element-ui'
 import { showLoading, hideLoading } from '@/plugins/loading'
-import { Promise } from 'core-js'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
