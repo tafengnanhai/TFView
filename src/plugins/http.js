@@ -10,25 +10,27 @@ import Message from '@/plugins/message'
 axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 
-export const operData = (obj) => {
-  return new Promise((resolve, reject) => {
-    obj.sendType = (obj.sendType === undefined ? 'get' : obj.sendType)
-    obj.showSuccessTip = (obj.showSuccessTip === undefined ? false : obj.showSuccessTip)
-    obj.showErrTip = (obj.showErrTip === undefined ? true : obj.showErrTip)
-    obj.neeLogin = (obj.neeLogin === undefined ? true : obj.neeLogin)
-    axios[obj.sendType](obj.url, obj.param).then((res) => {
-      if (res.data.code === 0) {
-        obj.showSuccessTip && Message.success(res.data.msg)
-      } else if (res.data.code === 1) {
-        obj.showErrTip && Message.error(res.data.msg)
-      } else if (res.data.code === -1) {
-        obj.neeLogin && router.push({ path: '/login', query: { from: 'timeout' } })
-      }
-      resolve(res.data)
-    }).catch((error) => {
-      reject(error.data)
+export default {
+  send: (obj) => {
+    return new Promise((resolve, reject) => {
+      obj.sendType = (obj.sendType === undefined ? 'get' : obj.sendType)
+      obj.showSuccessTip = (obj.showSuccessTip === undefined ? false : obj.showSuccessTip)
+      obj.showErrTip = (obj.showErrTip === undefined ? true : obj.showErrTip)
+      obj.neeLogin = (obj.neeLogin === undefined ? true : obj.neeLogin)
+      axios[obj.sendType](obj.url, obj.param).then((res) => {
+        if (res.data.code === 0) {
+          obj.showSuccessTip && Message.success(res.data.msg)
+        } else if (res.data.code === 1) {
+          obj.showErrTip && Message.error(res.data.msg)
+        } else if (res.data.code === -1) {
+          obj.neeLogin && router.push({ path: '/login', query: { from: 'timeout' } })
+        }
+        resolve(res.data)
+      }).catch((error) => {
+        reject(error.data)
+      })
     })
-  })
+  }
 }
 
 axios.interceptors.request.use(

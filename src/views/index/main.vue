@@ -91,7 +91,7 @@
 
 <script>
 import LineChart from '@/plugins/LineChart.js'
-import { operData } from '@/plugins/http'
+import http from '@/plugins/http'
 import '@/mock/users'
 import '@/mock/site'
 export default {
@@ -119,13 +119,13 @@ export default {
   },
   methods: {
     loadMine: function () {
-      operData({ url: '/v1/users/stat' }).then((data) => {
+      http.send({ url: '/v1/users/stat' }).then((data) => {
         this.statTotal = data.extra
       })
-      operData({ url: '/v1/users/weekdiff' }).then((data) => {
+      http.send({ url: '/v1/users/weekdiff' }).then((data) => {
         this.statWeekDiffData = data.extra
       })
-      operData({ url: '/v1/site/update' }).then((data) => {
+      http.send({ url: '/v1/site/update' }).then((data) => {
         this.siteUpdateData = data.extra
       })
     }

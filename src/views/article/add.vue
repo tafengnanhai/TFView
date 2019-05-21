@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { operData } from '@/plugins/http'
+import http from '@/plugins/http'
 import '@/mock/artsorts'
 export default {
   name: 'article_add',
@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted: function () {
-    operData({ url: '/v1/artsorts' }).then((data) => {
+    http.send({ url: '/v1/artsorts' }).then((data) => {
       this.operForm.artsort = data.extra
       this.operForm.artsort_id = data.extra[0].artsort_id
     })
