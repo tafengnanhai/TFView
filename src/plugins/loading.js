@@ -3,7 +3,7 @@ import { Loading } from 'element-ui'
 let count = 0
 let loading = null
 
-export const openLoading = (target = '.el-main', fullscreen = false, lock = false, text = '') => {
+export const openLoading = (target = '#app', fullscreen = true, lock = true, text = '') => {
   if (count === 0) {
     loading = Loading.service({
       lock: lock,
