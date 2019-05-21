@@ -1,10 +1,10 @@
 <template>
-  <div id="content" onclick="location.href='/'">
+  <div id="content" @click="goBack()">
     <div style="
   font-size: 100px">404</div>
     <div style="font-size:60px">
       页面不存在，
-      返回首页
+      返回
     </div>
   </div>
 </template>
@@ -27,3 +27,13 @@
   width: 80%;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    goBack: function () {
+      this.$router.go(-1)
+    }
+  }
+}
+</script>
