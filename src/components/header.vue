@@ -75,11 +75,13 @@ export default {
         this.activeTabName = this.$route.path
       }
     },
-    clickTab: function (tab, event) {
-      this.$store.commit('changeActiveTabName', this.activeTabName)
+    clickTab: function () {
+      this.$store.commit('updateActiveTabName', this.activeTabName)
     },
     removeTab: function (targetName) {
-      this.$store.dispatch('removeTab', targetName)
+      this.$store.commit('removeTab', targetName)
+      this.activeTabName = this.$store.state.tempActiveTabName
+      this.clickTab()
     },
     reloadPage: function () {
       openLoading()

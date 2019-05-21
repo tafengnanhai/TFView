@@ -14,7 +14,7 @@ export default new Vuex.Store({
     testToken: 'this is test token which will be replaced by backend',
     timeoutMsg: '未登陆或超时，请重新登陆',
     pageSize: 10,
-    activeTabName: '/index/main',
+    tempActiveTabName: '/index/main',
     reloadPageTime: new Date().getTime(),
     tabs: [
       {
@@ -52,6 +52,7 @@ export default new Vuex.Store({
       document.getElementById('sitename').style.width = siteWidth
     },
     addTab: (state, newTab) => {
+      state.tempActiveTabName = newTab.name
       let tabs = state.tabs
       let isExists = tabs.some((tab, index) => {
         return tab.label === newTab.label
@@ -60,20 +61,20 @@ export default new Vuex.Store({
     },
     removeTab: (state, targetName) => {
       let tabs = state.tabs
-      if (state.activeTabName === targetName) {
+      if (state.tempActiveTabName === targetName) {
         tabs.forEach((tab, index) => {
           if (tab.name === targetName) {
             let nextTab = tabs[index + 1] || tabs[index - 1]
             if (nextTab) {
-              state.activeTabName = nextTab.name
+              state.tempActiveTabName = nextTab.name
             }
           }
         })
       }
       state.tabs = tabs.filter(tab => tab.name !== targetName)
     },
-    changeActiveTabName: (state, val) => {
-      state.activeTabName = val
+    updateActiveTabName: (state, val) => {
+      state.tempActiveTabName = val
       router.push({ path: val })
     },
     updateReloadPageTime: (state) => {
