@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import LineChart from '@/plugins/LineChart.js'
+import LineChart from '@/plugins/linechart.js'
 import http from '@/plugins/http'
 import '@/mock/users'
 import '@/mock/site'
