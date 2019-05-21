@@ -25,11 +25,8 @@ export const showLoading = (target = '#app', fullscreen = false, lock = true, te
 }
 
 export const hideLoading = () => {
-  if (loadingCount <= 0) {
-    return
-  }
-  loadingCount -= 1
-  if (loadingCount === 0) {
-    endLoading()
+  if (loadingCount > 0) {
+    loadingCount -= 1
+    loadingCount === 0 && endLoading()
   }
 }
