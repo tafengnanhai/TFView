@@ -14,14 +14,7 @@ export default new Vuex.Store({
     testToken: 'this is test token which will be replaced by backend',
     timeoutMsg: '未登陆或超时，请重新登陆',
     pageSize: 10,
-    tempActiveTabName: '/index/main',
-    reloadPageTime: new Date().getTime(),
-    tabs: [
-      {
-        label: '首页面板',
-        name: '/index/main'
-      }
-    ]
+    reloadPageTime: new Date().getTime()
   },
   mutations: { // 需要同步的操作不要放到actions中，放到mutations中
     isShowRouterLink: (state, result) => {
@@ -51,32 +44,6 @@ export default new Vuex.Store({
       let siteWidth = state.isCollapse ? '20px' : '120px'
       document.getElementById('sitename').style.width = siteWidth
     },
-    addTab: (state, newTab) => {
-      state.tempActiveTabName = newTab.name
-      let tabs = state.tabs
-      let isExists = tabs.some((tab, index) => {
-        return tab.label === newTab.label
-      })
-      !isExists && state.tabs.push(newTab)
-    },
-    removeTab: (state, targetName) => {
-      let tabs = state.tabs
-      if (state.tempActiveTabName === targetName) {
-        tabs.forEach((tab, index) => {
-          if (tab.name === targetName) {
-            let nextTab = tabs[index + 1] || tabs[index - 1]
-            if (nextTab) {
-              state.tempActiveTabName = nextTab.name
-            }
-          }
-        })
-      }
-      state.tabs = tabs.filter(tab => tab.name !== targetName)
-    },
-    updateActiveTabName: (state, val) => {
-      state.tempActiveTabName = val
-      router.push({ path: val })
-    },
     updateReloadPageTime: (state) => {
       state.reloadPageTime = new Date().getTime()
     },
@@ -94,9 +61,6 @@ export default new Vuex.Store({
     },
     toggleMenu: (context) => {
       context.commit('toggleMenu')
-    },
-    removeTab: (context, targetName) => {
-      context.commit('removeTab', targetName)
     },
     updateReloadPageTime: (context) => {
       context.commit('updateReloadPageTime')

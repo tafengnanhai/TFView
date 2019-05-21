@@ -23,12 +23,7 @@
       @tab-click="clickTab"
       @tab-remove="removeTab"
     >
-      <el-tab-pane
-        :label="item.label"
-        :name="item.name"
-        v-for="item in this.$store.state.tabs"
-        :key="item.label"
-      ></el-tab-pane>
+      <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabs" :key="item.label"></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -40,7 +35,13 @@ export default {
   data () {
     return {
       fullscreen: false,
-      activeTabName: '/index/main'
+      activeTabName: '/index/main',
+      tabs: [
+        {
+          label: '首页面板',
+          name: '/index/main'
+        }
+      ]
     }
   },
   methods: {
@@ -71,17 +72,32 @@ export default {
           label: this.$route.meta.label,
           name: this.$route.path
         }
-        this.$store.commit('addTab', newTab)
+        let isExists = this.tabs.some((tab, index) => {
+          return tab.label === newTab.label
+        })
+        !isExists && this.tabs.push(newTab)
         this.activeTabName = this.$route.path
       }
     },
-    clickTab: function () {
-      this.$store.commit('updateActiveTabName', this.activeTabName)
+    clickTab: function (tab, event) {
+      // this.$store.commit('updateActiveTabName', this.activeTabName)
+      this.activeTabName = tab.name
+      this.$router.push({ path: tab.name })
     },
     removeTab: function (targetName) {
-      this.$store.commit('removeTab', targetName)
-      this.activeTabName = this.$store.state.tempActiveTabName
-      this.clickTab()
+      let tempTabs = this.tabs
+      if (this.activeTabName === targetName) {
+        tempTabs.forEach((tab, index) => {
+          if (tab.name === targetName) {
+            let nextTab = tempTabs[index + 1] || tempTabs[index - 1]
+            if (nextTab) {
+              this.activeTabName = nextTab.name
+            }
+          }
+        })
+      }
+      this.tabs = tempTabs.filter((tab) => tab.name !== targetName)
+      this.$router.push({ path: this.activeTabName })
     },
     reloadPage: function () {
       openLoading()
