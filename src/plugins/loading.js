@@ -1,32 +1,24 @@
 import { Loading } from 'element-ui'
 
-let loadingCount = 0
-let loading
+let count = 0
+let loading = null
 
-const startLoading = (target, fullscreen, lock, text) => {
-  loading = Loading.service({
-    lock: lock,
-    text: text,
-    background: 'transparent'/* 'rgba(0, 0, 0, 0.5)' */,
-    target: target,
-    fullscreen: fullscreen
-  })
-}
-
-const endLoading = () => {
-  loading.close()
-}
-
-export const showLoading = (target = '#app', fullscreen = false, lock = true, text = '') => {
-  if (loadingCount === 0) {
-    startLoading(target, fullscreen)
+export const openLoading = (target = '.el-main', fullscreen = false, lock = false, text = '') => {
+  if (count === 0) {
+    loading = Loading.service({
+      lock: lock,
+      text: text,
+      background: 'transparent', // 'rgba(0, 0, 0, 0.5)',
+      target: target,
+      fullscreen: fullscreen
+    })
   }
-  loadingCount += 1
+  count++
 }
 
-export const hideLoading = () => {
-  if (loadingCount > 0) {
-    loadingCount -= 1
-    loadingCount === 0 && endLoading()
+export const closeLoading = () => {
+  if (count > 0) {
+    count--
+    count <= 0 && loading.close()
   }
 }

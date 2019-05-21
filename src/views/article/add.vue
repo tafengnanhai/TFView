@@ -10,12 +10,16 @@
     >
       <el-form :model="operForm">
         <el-form-item label="标题" :label-width="formLabelWidth">
-          <el-input v-model="operForm.name" autocomplete="off"></el-input>
+          <el-input v-model="operForm.art_title" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="分类" :label-width="formLabelWidth">
-          <el-select v-model="operForm.region" placeholder="请选择分类">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
+          <el-select v-model="operForm.artsort_id" placeholder="请选择分类">
+            <el-option
+              :label="item.artsort_name"
+              :value="item.artsort_id"
+              :key="item.artsort_id"
+              v-for="item in operForm.artsort"
+            ></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -31,6 +35,8 @@
 </template>
 
 <script>
+import { operData } from '@/plugins/http'
+import '@/mock/artsorts'
 export default {
   name: 'article_add',
   data () {
@@ -38,16 +44,18 @@ export default {
       dialogFormVisible: false,
       fullscreen: false,
       operForm: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        artsort: [],
+        art_id: 0,
+        art_title: '',
+        art_source: '',
+        artsort_id: 0,
+        art_pubdate: '',
+        art_simg: '',
+        art_simg2: '',
+        art_simg3: '',
+        art_content: ''
       },
-      formLabelWidth: '80px'
+      formLabelWidth: '60px'
     }
   },
   methods: {
@@ -57,6 +65,12 @@ export default {
     toggleFullscreen: function () {
       this.fullscreen = !this.fullscreen
     }
+  },
+  mounted: function () {
+    operData({ url: '/v1/artsorts' }).then((data) => {
+      this.operForm.artsort = data.extra
+      this.operForm.artsort_id = data.extra[0].artsort_id
+    })
   }
 }
 </script>

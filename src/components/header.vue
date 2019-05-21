@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { showLoading, hideLoading } from '@/plugins/loading'
+import { openLoading, closeLoading } from '@/plugins/loading'
 export default {
   name: 'TFHeader',
   data () {
@@ -72,10 +72,10 @@ export default {
       this.$store.dispatch('removeTab', targetName)
     },
     reloadPage: function () {
-      showLoading()
+      openLoading()
       this.$message.success('智能刷新页面完成，请查看')
       this.$store.dispatch('updateReloadPageTime')
-      hideLoading()
+      closeLoading()
     }
   },
   computed: {

@@ -6,7 +6,7 @@ import lockr from 'lockr'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
-import { showLoading, hideLoading } from '@/plugins/loading'
+import { openLoading, closeLoading } from '@/plugins/loading'
 import 'element-ui/lib/theme-chalk/index.css'
 // import 'vue2-animate/dist/vue2-animate.min.css'
 import '@/assets/css/master.css'
@@ -27,17 +27,16 @@ store.commit('recoverAccount')
 router.beforeEach((to, from, next) => {
   store.commit('isShowRouterLink', to.meta.showRouterLink)
   if (to.name === 'login') {
-    showLoading('body', true)
+    openLoading('body', true)
   } else {
-    showLoading()
+    openLoading()
   }
   next()
 })
 
 router.afterEach((to, from) => {
-  hideLoading()
+  closeLoading()
   if (to.name !== 'login') {
-    // 检查登录状态
     store.dispatch('checkLoginStatus')
   }
 })
