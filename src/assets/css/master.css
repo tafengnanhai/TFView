@@ -137,3 +137,7 @@ ul, li {
 .cell .el-button {
     margin: 5px 10px;
 }
+
+#nprogress .spinner-icon {
+    display: none;
+}

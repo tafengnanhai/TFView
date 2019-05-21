@@ -5,6 +5,7 @@ dependencies:
   element-ui: 2.8.2
   lockr: 0.8.5
   mockjs: 1.0.1-beta3
+  nprogress: 0.2.0
   qs: 6.7.0
   vue: 2.6.10
   vue-chartjs: 3.4.2
@@ -6622,6 +6623,11 @@ packages:
     resolution:
       integrity: sha1-kiXybsOihcIJyuZ8OxGmtKtxQKo=
       tarball: /npm-which/download/npm-which-3.0.1.tgz
+  /nprogress/0.2.0:
+    dev: false
+    resolution:
+      integrity: sha1-y480xTIT2JVyP8urkH6UIq28r7E=
+      tarball: /nprogress/download/nprogress-0.2.0.tgz
   /nth-check/1.0.2:
     dependencies:
       boolbase: 1.0.0
@@ -10076,6 +10082,7 @@ specifiers:
   lint-staged: ^8.1.5
   lockr: ^0.8.5
   mockjs: ^1.0.1-beta3
+  nprogress: ^0.2.0
   qs: ^6.7.0
   vue: ^2.6.10
   vue-chartjs: ^3.4.2

@@ -14,6 +14,7 @@
     "element-ui": "^2.8.2",
     "lockr": "^0.8.5",
     "mockjs": "^1.0.1-beta3",
+    "nprogress": "^0.2.0",
     "qs": "^6.7.0",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",

@@ -4,8 +4,10 @@ import qs from 'qs'
 import lockr from 'lockr'
 import router from '@/router'
 import ElementUI from 'element-ui'
+import NProgress from 'nprogress'
 import { openLoading, closeLoading } from '@/plugins/loading'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'nprogress/nprogress.css'
 
 Vue.use(ElementUI)
 
@@ -36,6 +38,7 @@ export const operData = (obj) => {
 
 axios.interceptors.request.use(
   request => {
+    NProgress.start()
     openLoading()
     let token = lockr.get('token')
     if (request.method === 'post') {
@@ -55,6 +58,7 @@ axios.interceptors.request.use(
     return request
   },
   error => {
+    NProgress.done()
     closeLoading()
     Promise.reject(error)
   }
@@ -62,10 +66,12 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
+    NProgress.done()
     closeLoading()
     return response
   },
   error => {
+    NProgress.done()
     closeLoading()
     Promise.reject(error)
   }
