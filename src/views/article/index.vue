@@ -8,6 +8,7 @@
         size="medium"
         v-model="inputKeyword"
         @keydown.enter.native="search()"
+        clearable
       ></el-input>&nbsp;&nbsp;
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>

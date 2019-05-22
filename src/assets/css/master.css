@@ -47,15 +47,15 @@ ul, li {
 }
 
 .red, .red a {
-    color: red;
+    color: #f56c6c;
 }
 
 .green, .green a {
-    color: green;
+    color: #67c23a;
 }
 
 .blue, .blue a {
-    color: blue;
+    color: #409eff;
 }
 
 .b {
@@ -140,4 +140,8 @@ ul, li {
 
 #nprogress .spinner-icon {
     display: none;
+}
+
+.el-dialog__title {
+    color: #409eff;
 }

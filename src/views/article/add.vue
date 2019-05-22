@@ -21,7 +21,7 @@
               v-for="item in operForm.artsort"
             ></el-option>
           </el-select>&nbsp;&nbsp;
-          <el-button icon="el-icon-refresh" type="primary" circle></el-button>
+          <el-button icon="el-icon-refresh blue b" type="plain"></el-button>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
