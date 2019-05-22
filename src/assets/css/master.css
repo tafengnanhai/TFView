@@ -142,12 +142,12 @@ ul, li {
     display: none;
 }
 
-.el-dialog__title {
-    color: #409eff;
+.el-dialog {
+    min-width: 320px;
 }
 
 .el-message {
-    min-width: 100px;
+    min-width: 280px;
 }
 
 .el-message p {

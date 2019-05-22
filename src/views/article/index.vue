@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div id="articleIndex">
     <div class="panel">
-      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>&nbsp;&nbsp;
+      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>
+
       <el-input
         placeholder="请输入关键词"
         class="keyword"
@@ -10,7 +11,7 @@
         @keydown.enter.native="search()"
         @clear="search()"
         clearable
-      ></el-input>&nbsp;&nbsp;
+      ></el-input>
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%">
@@ -31,7 +32,7 @@
     </el-table>
     <el-pagination
       background
-      layout="prev, pager, next, jumper, ->, total"
+      layout="prev, pager, next, jumper, -> , total"
       :total="total"
       :page-size="pageSize"
       :current-page="currentPage"
@@ -109,22 +110,16 @@ export default {
 </script>
 
 <style scoped>
+#articleIndex {
+  min-width: 600px;
+}
 .panel {
   width: 100%;
   min-height: 40px;
   padding-bottom: 15px;
 }
 .keyword {
-  width: 300px;
-}
-@media screen and (max-width: 700px) {
-  .keyword {
-    width: 200px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .keyword {
-    width: 100px;
-  }
+  width: 200px;
+  padding: 0 10px;
 }
 </style>
