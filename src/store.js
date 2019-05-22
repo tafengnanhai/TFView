@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from './router'
 import lockr from 'lockr'
+import Message from '@/plugins/message'
 
 Vue.use(Vuex)
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     checkLoginStatus: (state) => {
       if (lockr.get('username') === undefined || lockr.get('token') === undefined || state.username === '' || state.token === '') {
         router.push({ path: '/login', query: { from: 'timeout' } })
+        Message.error(state.timeoutMsg)
       }
     },
     toggleMenu: (state) => {
