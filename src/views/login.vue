@@ -65,9 +65,9 @@ export default {
       })
     }
   },
-  created: function () {
+  mounted: function () {
     if (this.$route.query.from === 'timeout') {
-      Message.error('未登陆或超时，请重新登陆')
+      Message.error(this.$store.state.timeoutMsg)
     }
   }
 }
