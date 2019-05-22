@@ -145,3 +145,11 @@ ul, li {
 .el-dialog__title {
     color: #409eff;
 }
+
+.el-message {
+    min-width: 100px;
+}
+
+.el-message p {
+    text-indent: 0;
+}
