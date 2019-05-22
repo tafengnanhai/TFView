@@ -153,3 +153,7 @@ ul, li {
 .el-message p {
     text-indent: 0;
 }
+
+.el-message-box {
+    width: 320px;
+}

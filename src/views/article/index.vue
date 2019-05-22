@@ -74,7 +74,7 @@ export default {
           this.getData(this.currentPage)
           Message.success('删除成功!')
         })
-      })
+      }).catch(() => { })
     },
     showDialog: function (flag) {
       this.$refs.article_add.toggleDialog(flag)
