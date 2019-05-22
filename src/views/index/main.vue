@@ -10,7 +10,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">{{statTotal.today}}</span>
+              <span class="statNum b">{{statTotal.today}}</span>
               <br>
               <br>今日注册
             </el-col>
@@ -26,7 +26,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">{{statTotal.week}}</span>
+              <span class="statNum b">{{statTotal.week}}</span>
               <br>
               <br>本周注册
             </el-col>
@@ -42,7 +42,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">{{statTotal.month}}</span>
+              <span class="statNum b">{{statTotal.month}}</span>
               <br>
               <br>本月注册
             </el-col>
@@ -58,7 +58,7 @@
               </div>
             </el-col>
             <el-col :span="16" class="cardNum">
-              <span class="f20 b">{{statTotal.all}}</span>
+              <span class="statNum b">{{statTotal.all}}</span>
               <br>
               <br>累计注册
             </el-col>
@@ -161,6 +161,9 @@ export default {
   color: #797979;
   text-align: right;
 }
+.statNum {
+  font-size: 20px;
+}
 .cardIcon {
   width: 26px;
   height: 26px;
@@ -170,5 +173,10 @@ export default {
 .chartCard {
   min-height: 100px;
   margin-bottom: 20px;
+}
+@media screen and (max-width: 400px) {
+  .statNum {
+    font-size: 16px;
+  }
 }
 </style>
