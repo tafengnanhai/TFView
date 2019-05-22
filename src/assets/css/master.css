@@ -146,6 +146,10 @@ ul, li {
     min-width: 320px;
 }
 
+.el-dialog__title {
+    color: #409eff;
+}
+
 .el-message {
     min-width: 280px;
 }
