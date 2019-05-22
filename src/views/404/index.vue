@@ -1,5 +1,5 @@
 <template>
-  <div id="content" @click="goBack()">
+  <div id="content" @click="goHome()">
     <div style="
   font-size: 100px">404</div>
     <div style="font-size:60px">
@@ -31,8 +31,9 @@
 <script>
 export default {
   methods: {
-    goBack: function () {
-      this.$router.go(-1)
+    goHome: function () {
+      // 用router需要处理菜单折叠的问题，暂不用，也可以自行适配
+      location.href = '/'
     }
   }
 }
