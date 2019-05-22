@@ -79,7 +79,7 @@ export default {
   border-radius: 8px;
   background: white;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 80px;
   text-align: center;
 }
 .title {

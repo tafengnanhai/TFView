@@ -26,7 +26,7 @@
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="small">编 辑</el-button>
-          <el-button @click="delArt(scope.row)" type="danger" size="small">删 除</el-button>
+          <el-button @click="del(scope.row)" type="danger" size="small">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,6 +44,7 @@
 <script>
 import http from '@/plugins/http'
 import '@/mock/articles'
+import Message from '@/plugins/message'
 import ArticleAdd from '@/views/article/add.vue'
 export default {
   name: 'article_index',
@@ -61,11 +62,18 @@ export default {
     }
   },
   methods: {
-    delArt: function (row) {
-      http.send({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
-        let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
-        this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
-        this.getData(this.currentPage)
+    del: function (row) {
+      this.$confirm('确定删除吗，删除后不可恢复哦?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        http.send({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
+          let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+          this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+          this.getData(this.currentPage)
+          Message.success('删除成功!')
+        })
       })
     },
     showDialog: function (flag) {
