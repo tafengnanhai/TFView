@@ -16,8 +16,8 @@
   </el-container>
 </template>
 <script>
-import TFMenu from '@/components/menu.vue'
-import TFHeader from '@/components/header.vue'
+import TFMenu from '@/views/index/menu.vue'
+import TFHeader from '@/views/index/header.vue'
 export default {
   data () {
     return {

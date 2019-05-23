@@ -110,7 +110,7 @@ export default {
   line-height: 60px;
   text-align: center;
   border-bottom: 1px solid #2b313a;
-  background: url(../assets/img/menu/logo.png) no-repeat left;
+  background: url(../../assets/img/menu/logo.png) no-repeat left;
   cursor: pointer;
 }
 </style>

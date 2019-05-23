@@ -107,16 +107,12 @@ export default {
       Loading.close()
     }
   },
-  computed: {
-    routePath: function () {
-      return this.$route.path
-    }
-  },
   mounted: function () {
     this.addTab()
+    console.log('1')
   },
   watch: {
-    routePath: function (nVal, oVal) {
+    '$route': function (to, from) {
       this.addTab()
     }
   }
