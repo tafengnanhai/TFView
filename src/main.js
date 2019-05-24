@@ -29,12 +29,12 @@ store.commit('recoverAccount')
 router.beforeEach((to, from, next) => {
   NProgress.start()
   store.commit('isShowRouterLink', to.meta.showRouterLink)
+  to.name !== 'login' && store.dispatch('checkLoginStatus')
   next()
 })
 
 router.afterEach((to, from) => {
   NProgress.done()
-  to.name !== 'login' && store.dispatch('checkLoginStatus')
 })
 
 new Vue({
