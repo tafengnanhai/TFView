@@ -44,6 +44,7 @@
             list-type="picture-card"
             :on-preview="imgPreview"
             :before-upload="beforeUpload"
+            :before-remove="beforeRemove"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -87,6 +88,9 @@ export default {
       formLabelWidth: '60px',
       dialogImgUrl: '',
       dialogImgVisible: false,
+      permitTotal: 4,
+      permitSize: 1,
+      permitFormat: ['image/jpeg', 'image/gif', 'image/png'],
       pickerOptions: {
         shortcuts: [{
           text: '今天',
@@ -98,13 +102,6 @@ export default {
           onClick (picker) {
             const date = new Date()
             date.setTime(date.getTime() - 3600 * 1000 * 24)
-            picker.$emit('pick', date)
-          }
-        }, {
-          text: '一周前',
-          onClick (picker) {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
             picker.$emit('pick', date)
           }
         }]
@@ -124,15 +121,22 @@ export default {
         this.operForm.artsort_id = data.extra[0].artsort_id
       })
     },
+    beforeRemove (file, filelist) {
+      this.operForm.art_simg = this.operForm.art_simg.filter((item) => {
+        return item !== file.uid
+      })
+      this.operForm.art_simg.length !== this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+    },
     beforeUpload (file) {
-      const isPermitFormat = ['image/jpeg', 'image/gif', 'image/png'].some((item) => {
+      const isPermitFormat = this.permitFormat.some((item) => {
         return item === file.type
       })
-      const permitSize = 1
-      const isPermitSize = file.size / 1024 / 1024 < permitSize
+      const isPermitSize = file.size / 1024 / 1024 < this.permitSize
 
       !isPermitFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
-      isPermitFormat && !isPermitSize && Message.error(`上传图片大小不能超过${permitSize}MB!`)
+      isPermitFormat && !isPermitSize && Message.error(`上传图片大小不能超过${this.permitSize}MB!`)
+      isPermitFormat && isPermitSize && this.operForm.art_simg.push(file.uid)
+      this.operForm.art_simg.length === this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
 
       return isPermitFormat && isPermitSize
     },
@@ -147,7 +151,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped >
+.v-modal {
+  display: none;
+}
 .dialogFullscreen {
   position: absolute;
   right: 10px;
