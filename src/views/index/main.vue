@@ -133,13 +133,8 @@ export default {
   mounted: function () {
     this.loadMine()
   },
-  computed: {
-    reloadPageTime: function () {
-      return this.$store.state.reloadPageTime
-    }
-  },
   watch: {
-    reloadPageTime: function () {
+    '$store.state.reloadPageTime': function () {
       this.loadMine()
     }
   }
