@@ -109,7 +109,6 @@ export default {
   },
   mounted: function () {
     this.addTab()
-    console.log('1')
   },
   watch: {
     '$route': function (to, from) {
