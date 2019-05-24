@@ -36,7 +36,7 @@ axios.interceptors.request.use(
   request => {
     NProgress.start()
     Loading.open()
-    request.headers['Token'] = lockr.get('token') // use HTTP_TOKEN in php
+    request.headers['Token'] = lockr.get('token') // use $_SERVER['HTTP_TOKEN'] in php
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     }

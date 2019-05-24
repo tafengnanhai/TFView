@@ -1,6 +1,5 @@
 import Mock from 'mockjs'
 import store from '@/store'
-import Tools from '@/plugins/tools'
 
 let users = [
   {
@@ -25,12 +24,11 @@ let dataSessionError = {
 }
 
 // 和后端一致，不建议直接返回用户名和密码的判断方式
-Mock.mock(/\/v1\/sessions\/\w+/, 'post', function (options) {
-  let username = Tools.getParam('username', options.body)
-  let password = Tools.getParam('password', options.body)
+Mock.mock(/\/v1\/sessions/, 'post', function (options) {
+  let result = JSON.parse(options.body)
   let data = dataSessionError
   for (let key in users) {
-    if (users[key].username === username && users[key].password === password) {
+    if (users[key].username === result['username'] && users[key].password === result['password']) {
       data = dataSessionSuccess
     }
   }
