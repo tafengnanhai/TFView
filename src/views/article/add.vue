@@ -30,7 +30,7 @@
               v-for="item in operForm.artsort"
             ></el-option>
           </el-select>&nbsp;&nbsp;
-          <el-button icon="el-icon-refresh blue b" type="plain" @click="loadArtsort()"></el-button>
+          <el-button icon="el-icon-refresh blue b" type="plain" @click="updateArtsort()"></el-button>
         </el-form-item>
         <el-form-item label="来源" :label-width="formLabelWidth">
           <el-input v-model="operForm.art_source" maxlength="100" autocomplete="off"></el-input>
@@ -55,7 +55,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="toggleDialog(false)">关 闭</el-button>
-        <el-button type="primary" @click="toggleDialog(false)">确 定</el-button>
+        <el-button type="primary" @click="toggleDialog(false)">提交</el-button>
         <el-button type="text" @click="toggleFullscreen()">
           <i class="el-icon-full-screen dialogFullscreen"></i>
         </el-button>
@@ -121,6 +121,10 @@ export default {
         this.operForm.artsort_id = data.extra[0].artsort_id
       })
     },
+    updateArtsort: function () {
+      this.loadArtsort()
+      Message.success('已更新')
+    },
     beforeRemove (file, filelist) {
       this.operForm.art_simg = this.operForm.art_simg.filter((item) => {
         return item !== file.uid
@@ -152,9 +156,6 @@ export default {
 </script>
 
 <style scoped >
-.v-modal {
-  display: none;
-}
 .dialogFullscreen {
   position: absolute;
   right: 10px;
