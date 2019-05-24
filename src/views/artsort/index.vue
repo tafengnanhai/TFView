@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'sort_index',
+  name: 'artsort_index',
   data () {
     return {
       testVal: ''

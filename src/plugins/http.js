@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import lockr from 'lockr'
 import router from '@/router'
 import NProgress from 'nprogress'
@@ -37,20 +36,9 @@ axios.interceptors.request.use(
   request => {
     NProgress.start()
     Loading.open()
-    let token = lockr.get('token')
+    request.headers['Token'] = lockr.get('token') // use HTTP_TOKEN in php
     if (request.method === 'post') {
       request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-      let data = qs.parse(request.data)
-
-      request.data = qs.stringify({
-        token: escape(token),
-        ...data
-      })
-    } else if (request.method === 'get') {
-      request.params = {
-        token: escape(token),
-        ...request.params
-      }
     }
     return request
   },

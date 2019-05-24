@@ -26,7 +26,7 @@
           <span>内容管理</span>
         </template>
         <el-menu-item index="/article/index" id="/article/index">文章管理</el-menu-item>
-        <el-menu-item index="/sort/index" id="/sort/index">分类管理</el-menu-item>
+        <el-menu-item index="/artsort/index" id="/sort/index">分类管理</el-menu-item>
         <el-menu-item index="/virtual/index" id="/virtual/index">独立接口</el-menu-item>
       </el-submenu>
       <el-submenu index="2">

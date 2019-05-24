@@ -15,8 +15,8 @@
   padding-top: 100px;
   text-align: center;
   color: transparent;
-  -webkit-text-stroke: 2px gray;
-  text-shadow: 3px 3x 2px gray;
+  -webkit-text-stroke: 2px rgb(231, 226, 226);
+  text-shadow: 3px 3x 2px rgb(231, 226, 226);
   transition: width 2s;
   -moz-transition: width 2s;
   -webkit-transition: width 2s;

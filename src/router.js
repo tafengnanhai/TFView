@@ -36,13 +36,13 @@ export default new Router({
           }
         },
         {
-          path: '/sort/index',
-          name: 'sort_index',
+          path: '/artsort/index',
+          name: 'artsort_index',
           meta: {
             label: '分类管理'
           },
           components: {
-            main: () => import(/* webpackChunkName: "sort_index" */ './views/sort/index.vue')
+            main: () => import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
           }
         }
       ]
