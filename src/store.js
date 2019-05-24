@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from './router'
 import lockr from 'lockr'
-import Message from '@/plugins/message'
 
 Vue.use(Vuex)
 
