@@ -9,8 +9,9 @@
       </el-header>
       <el-main>
         <keep-alive>
-          <router-view name="main"/>
+          <router-view v-if="this.$route.meta.keepAlive" name="main"/>
         </keep-alive>
+        <router-view v-if="!this.$route.meta.keepAlive" name="main"/>
       </el-main>
     </el-container>
   </el-container>

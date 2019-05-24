@@ -19,7 +19,8 @@ export default new Router({
           path: '/index/main',
           name: 'index_main',
           meta: {
-            label: '首页面板'
+            label: '首页面板',
+            keepAlive: true
           },
           components: {
             main: () => import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
@@ -29,7 +30,8 @@ export default new Router({
           path: '/article/index',
           name: 'article_index',
           meta: {
-            label: '文章管理'
+            label: '文章管理',
+            keepAlive: true
           },
           components: {
             main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
@@ -39,7 +41,8 @@ export default new Router({
           path: '/artsort/index',
           name: 'artsort_index',
           meta: {
-            label: '分类管理'
+            label: '分类管理',
+            keepAlive: true
           },
           components: {
             main: () => import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
