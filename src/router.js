@@ -62,7 +62,8 @@ export default new Router({
       path: '*',
       name: 'Four04',
       meta: {
-        showRouterLink: false
+        showRouterLink: false,
+        keepAlive: true
       },
       component: () => import(/* webpackChunkName: "404" */ './views/404/index.vue')
     }
