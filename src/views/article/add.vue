@@ -89,7 +89,7 @@ export default {
       dialogImgUrl: '',
       dialogImgVisible: false,
       permitTotal: 4,
-      permitSize: 1,
+      permitSize: 256, // KB
       permitFormat: ['image/jpeg', 'image/gif', 'image/png'],
       pickerOptions: {
         shortcuts: [{
@@ -125,21 +125,39 @@ export default {
       this.loadArtsort()
       Message.success('已更新')
     },
-    beforeRemove (file, filelist) {
-      this.operForm.art_simg = this.operForm.art_simg.filter((item) => {
-        return item !== file.uid
+    beforeRemove (file, fileList) {
+      this.operForm.art_simg = []
+      fileList.map((f) => {
+        if (file.uid !== f.raw.uid) {
+          let reader = new FileReader()
+          reader.readAsDataURL(f.raw)
+          let self = this
+          reader.onload = function (e) {
+            self.operForm.art_simg.push(this.result)
+          }
+        }
       })
+      console.log(this.operForm.art_simg)
+      // 不使用内置的limit属性，自定义
       this.operForm.art_simg.length !== this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
     },
     beforeUpload (file) {
+      console.log(file)
       const isPermitFormat = this.permitFormat.some((item) => {
         return item === file.type
       })
-      const isPermitSize = file.size / 1024 / 1024 < this.permitSize
+      const isPermitSize = file.size / 1024 < this.permitSize
 
       !isPermitFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
-      isPermitFormat && !isPermitSize && Message.error(`上传图片大小不能超过${this.permitSize}MB!`)
-      isPermitFormat && isPermitSize && this.operForm.art_simg.push(file.uid)
+      isPermitFormat && !isPermitSize && Message.error(`上传图片大小不能超过${this.permitSize}KB!`)
+      if (isPermitFormat && isPermitSize) {
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        let self = this
+        reader.onload = function (e) {
+          self.operForm.art_simg.push(this.result)
+        }
+      }
       this.operForm.art_simg.length === this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
 
       return isPermitFormat && isPermitSize
