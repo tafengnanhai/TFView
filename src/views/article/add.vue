@@ -18,7 +18,6 @@
             type="datetime"
             placeholder="选择日期时间"
             align="right"
-            :picker-options="pickerOptions"
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="分类" :label-width="formLabelWidth">
@@ -81,7 +80,7 @@ export default {
   data () {
     return {
       dialogFormVisible: false,
-      fullscreen: true,
+      fullscreen: false,
       operForm: {
         artsort: [],
         art_id: 0,
@@ -98,21 +97,6 @@ export default {
       permitTotal: 4,
       permitSize: 256, // KB
       permitFormat: ['image/jpeg', 'image/gif', 'image/png'],
-      pickerOptions: {
-        shortcuts: [{
-          text: '今天',
-          onClick (picker) {
-            picker.$emit('pick', new Date())
-          }
-        }, {
-          text: '昨天',
-          onClick (picker) {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24)
-            picker.$emit('pick', date)
-          }
-        }]
-      },
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike', 'clean'],
         ['blockquote', 'code-block'],
