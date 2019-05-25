@@ -44,6 +44,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 | vue-chartjs                 | pro      | 3.4.2       |
 | vue-router                  | pro      | 3.0.3       |
 | vue2-animate                | pro      | 2.1.0       |
+| vue2-editor                 | pro      | 2.6.6       |
 | vuex                        | pro      | 3.0.1       |
 | ------                      | ---      | ---         |
 | @vue/cli-plugin-babel       | dev      | 3.7.0       |

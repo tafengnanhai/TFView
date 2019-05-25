@@ -103,26 +103,31 @@ ul, li {
     height: 6px;
 }
 
+/*水平滚动条*/
+
 ::-webkit-scrollbar-thumb:horizontal {
-    /*水平滚动条的样式*/
     width: 4px;
     background-color: #ccc;
     border-radius: 5px;
 }
 
+/*垂直滚动条*/
+
 ::-webkit-scrollbar-thumb:vertical {
-    /*垂直滚动条的样式*/
     height: 50px;
     background-color: #4d545e;
     border-radius: 5px;
 }
 
+/*滚动条的hover*/
+
 ::-webkit-scrollbar-thumb:hover {
-    /*滚动条的hover样式*/
     height: 50px;
     background-color: #9f9f9f;
     border-radius: 5px;
 }
+
+/*分页*/
 
 .el-pagination {
     width: 100%;
@@ -134,21 +139,30 @@ ul, li {
     font-weight: normal;
 }
 
+/*表格*/
+
 .cell .el-button {
     margin: 5px 10px;
 }
+
+/*进度条旋转*/
 
 #nprogress .spinner-icon {
     display: none;
 }
 
+/*dialog*/
+
 .el-dialog {
     min-width: 320px;
+    margin-top: 0 !important;
 }
 
 .el-dialog__title {
     color: #409eff;
 }
+
+/*message*/
 
 .el-message {
     min-width: 280px;
@@ -160,4 +174,10 @@ ul, li {
 
 .el-message-box {
     width: 320px;
+}
+
+/*vue2-editor*/
+
+.quillWrapper .el-form-item__content {
+    line-height: 1;
 }

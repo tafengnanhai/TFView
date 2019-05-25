@@ -11,6 +11,7 @@ dependencies:
   vue-chartjs: 3.4.2
   vue-router: 3.0.6
   vue2-animate: 2.1.0
+  vue2-editor: 2.6.6
   vuex: 3.1.0
 devDependencies:
   '@vue/cli-plugin-babel': 3.7.0
@@ -2481,6 +2482,13 @@ packages:
     resolution:
       integrity: sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
       tarball: /clone/download/clone-1.0.4.tgz
+  /clone/2.1.2:
+    dev: false
+    engines:
+      node: '>=0.8'
+    resolution:
+      integrity: sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
+      tarball: /clone/download/clone-2.1.2.tgz
   /co/4.6.0:
     dev: true
     engines:
@@ -3118,10 +3126,9 @@ packages:
       integrity: sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
       tarball: /dedent/download/dedent-0.7.0.tgz
   /deep-equal/1.0.1:
-    dev: true
     resolution:
       integrity: sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
-      tarball: /deep-equal/download/deep-equal-1.0.1.tgz
+      tarball: /deep-equal/download/deep-equal-1.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdeep-equal%2Fdownload%2Fdeep-equal-1.0.1.tgz
   /deep-is/0.1.3:
     dev: true
     resolution:
@@ -3927,6 +3934,11 @@ packages:
     resolution:
       integrity: sha1-9o2Ba8KfHsAsU53FjI3UDOcss24=
       tarball: /event-pubsub/download/event-pubsub-4.3.0.tgz
+  /eventemitter3/2.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-teEHm1n7XhuidxwKmTvgYKWMmbo=
+      tarball: /eventemitter3/download/eventemitter3-2.0.3.tgz
   /eventemitter3/3.1.2:
     dev: true
     resolution:
@@ -4059,7 +4071,6 @@ packages:
       integrity: sha1-Jqcarwc7OfshJxcnRhMcJwQCjbg=
       tarball: /extend-shallow/download/extend-shallow-3.0.2.tgz
   /extend/3.0.2:
-    dev: true
     resolution:
       integrity: sha1-+LETa0Bx+9jrFAr/hYsQGewpFfo=
       tarball: /extend/download/extend-3.0.2.tgz
@@ -4125,6 +4136,11 @@ packages:
     resolution:
       integrity: sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
       tarball: /fast-deep-equal/download/fast-deep-equal-2.0.1.tgz
+  /fast-diff/1.1.2:
+    dev: false
+    resolution:
+      integrity: sha1-S2LEK44D3j+EhGC2OQeZIGldAVQ=
+      tarball: /fast-diff/download/fast-diff-1.1.2.tgz
   /fast-glob/2.2.6:
     dependencies:
       '@mrmlnc/readdir-enhanced': 2.2.1
@@ -5993,6 +6009,11 @@ packages:
     resolution:
       integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
       tarball: /lodash.memoize/download/lodash.memoize-4.1.2.tgz
+  /lodash.merge/4.6.1:
+    dev: false
+    resolution:
+      integrity: sha1-rcJdnLmbk5HFliTzefu6YNcRHVQ=
+      tarball: /lodash.merge/download/lodash.merge-4.6.1.tgz
   /lodash.transform/4.6.0:
     dev: true
     resolution:
@@ -6952,6 +6973,11 @@ packages:
     resolution:
       integrity: sha1-35T9jPZTHs915r75oIWPvHK+Ikc=
       tarball: /param-case/download/param-case-2.1.1.tgz
+  /parchment/1.1.4:
+    dev: false
+    resolution:
+      integrity: sha1-rt7Xq5OP6SHUw0vDOc4RaLwv/eU=
+      tarball: /parchment/download/parchment-1.1.4.tgz
   /parent-module/1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -7806,6 +7832,29 @@ packages:
     resolution:
       integrity: sha1-YOWl/WSn+L+k0qsu1v30yFutFU4=
       tarball: /querystringify/download/querystringify-2.1.1.tgz
+  /quill-delta/3.6.3:
+    dependencies:
+      deep-equal: 1.0.1
+      extend: 3.0.2
+      fast-diff: 1.1.2
+    dev: false
+    engines:
+      node: '>=0.10'
+    resolution:
+      integrity: sha1-sZ/SuJQSMBxg4f8hPY2GDqwPEDI=
+      tarball: /quill-delta/download/quill-delta-3.6.3.tgz
+  /quill/1.3.6:
+    dependencies:
+      clone: 2.1.2
+      deep-equal: 1.0.1
+      eventemitter3: 2.0.3
+      extend: 3.0.2
+      parchment: 1.1.4
+      quill-delta: 3.6.3
+    dev: false
+    resolution:
+      integrity: sha1-mfTeH+6FkloNfUFjttgyjyMxek0=
+      tarball: /quill/download/quill-1.3.6.tgz
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.1.2
@@ -9690,6 +9739,14 @@ packages:
     resolution:
       integrity: sha1-k+7l84HY1kk7rgUHvK1rYV/ay38=
       tarball: /vue2-animate/download/vue2-animate-2.1.0.tgz
+  /vue2-editor/2.6.6:
+    dependencies:
+      lodash.merge: 4.6.1
+      quill: 1.3.6
+    dev: false
+    resolution:
+      integrity: sha1-Vn98KqvdENRldW2nrr9WjuNOu8U=
+      tarball: /vue2-editor/download/vue2-editor-2.6.6.tgz
   /vuex/3.1.0:
     dev: false
     resolution:
@@ -10089,4 +10146,5 @@ specifiers:
   vue-router: ^3.0.3
   vue-template-compiler: ^2.5.21
   vue2-animate: ^2.1.0
+  vue2-editor: ^2.6.6
   vuex: ^3.0.1

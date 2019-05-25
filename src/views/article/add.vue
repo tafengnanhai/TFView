@@ -52,6 +52,9 @@
             <img width="100%" :src="dialogImgUrl" alt>
           </el-dialog>
         </el-form-item>
+        <el-form-item label="内容" :label-width="formLabelWidth">
+          <vue-editor v-model="operForm.art_content" :editorToolbar="customToolbar"></vue-editor>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="toggleDialog(false)">关 闭</el-button>
@@ -69,12 +72,16 @@ import http from '@/plugins/http'
 import '@/mock/artsorts'
 import '@/mock/upload'
 import Message from '@/plugins/message'
+import { VueEditor } from 'vue2-editor'
 export default {
   name: 'article_add',
+  components: {
+    VueEditor
+  },
   data () {
     return {
       dialogFormVisible: false,
-      fullscreen: false,
+      fullscreen: true,
       operForm: {
         artsort: [],
         art_id: 0,
@@ -105,7 +112,16 @@ export default {
             picker.$emit('pick', date)
           }
         }]
-      }
+      },
+      customToolbar: [
+        ['bold', 'italic', 'underline', 'strike', 'clean'],
+        ['blockquote', 'code-block'],
+        ['link', 'image', 'video'],
+        [{ 'header': 1 }, { 'header': 2 }], [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
+        [{ 'color': [] }, { 'background': [] }]
+      ]
     }
   },
   methods: {
@@ -137,7 +153,6 @@ export default {
           }
         }
       })
-      console.log(this.operForm.art_simg)
       // 不使用内置的limit属性，自定义
       this.operForm.art_simg.length !== this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
     },
