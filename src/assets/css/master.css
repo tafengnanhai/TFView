@@ -178,6 +178,6 @@ ul, li {
 
 /*vue2-editor*/
 
-.quillWrapper .el-form-item__content {
+.quillWrapper {
     line-height: 1;
 }

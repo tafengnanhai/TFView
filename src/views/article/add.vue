@@ -5,8 +5,8 @@
       :fullscreen="fullscreen"
       :visible.sync="dialogFormVisible"
       :show-close="false"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
+      :close-on-click-modal="true"
+      :close-on-press-escape="true"
     >
       <el-form :model="operForm">
         <el-form-item label="标题" :label-width="formLabelWidth">
