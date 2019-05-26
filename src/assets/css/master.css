@@ -181,3 +181,9 @@ ul, li {
 .quillWrapper {
     line-height: 1;
 }
+
+.ql-editor {
+    font-size: 13px !important;
+    padding: 10px 6px !important;
+    line-height: 1.6 !important;
+}
