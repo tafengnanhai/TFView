@@ -53,7 +53,7 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/v1/sessions', param: { username: this.operForm.username, password: this.operForm.password }, showSuccessTip: true }).then((data) => {
+          http.send({ sendType: 'post', url: '/sessions', param: { username: this.operForm.username, password: this.operForm.password }, showSuccessTip: true }).then((data) => {
             if (data.code === 0) {
               this.$store.commit('initAccount', { username: this.operForm.username, token: data.extra.token })
               this.$router.push('/')

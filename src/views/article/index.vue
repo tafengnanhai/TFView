@@ -68,7 +68,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        http.send({ sendType: 'delete', url: `/v1/articles/${row.art_id}` }).then((data) => {
+        http.send({ sendType: 'delete', url: `/articles/${row.art_id}` }).then((data) => {
           let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
           this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
           this.getData(this.currentPage)
@@ -83,7 +83,7 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      http.send({ url: '/v1/articles', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
+      http.send({ url: '/articles', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize

@@ -24,7 +24,7 @@ let dataSessionError = {
 }
 
 // 和后端一致，不建议直接返回用户名和密码的判断方式
-Mock.mock(/\/v1\/sessions/, 'post', function (options) {
+Mock.mock(/\/sessions/, 'post', function (options) {
   let result = JSON.parse(options.body)
   let data = dataSessionError
   for (let key in users) {

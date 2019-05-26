@@ -39,7 +39,7 @@
         </el-form-item>
         <el-form-item label="图片" :label-width="formLabelWidth">
           <el-upload
-            action="/v1/upload"
+            action="/upload"
             list-type="picture-card"
             :on-preview="imgPreview"
             :before-upload="beforeUpload"
@@ -122,7 +122,7 @@ export default {
       this.fullscreen = !this.fullscreen
     },
     loadArtsort: function () {
-      http.send({ url: '/v1/artsorts' }).then((data) => {
+      http.send({ url: '/artsorts' }).then((data) => {
         this.operForm.artsort = data.extra
         this.operForm.artsort_id = data.extra[0].artsort_id
       })

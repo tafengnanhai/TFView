@@ -119,13 +119,13 @@ export default {
   },
   methods: {
     loadMine: function () {
-      http.send({ url: '/v1/users/stat' }).then((data) => {
+      http.send({ url: '/users/stat' }).then((data) => {
         this.statTotal = data.extra
       })
-      http.send({ url: '/v1/users/weekdiff' }).then((data) => {
+      http.send({ url: '/users/weekdiff' }).then((data) => {
         this.statWeekDiffData = data.extra
       })
-      http.send({ url: '/v1/site/update' }).then((data) => {
+      http.send({ url: '/site/update' }).then((data) => {
         this.siteUpdateData = data.extra
       })
     }

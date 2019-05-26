@@ -23,4 +23,4 @@ let dataSite = {
     }
   ]
 }
-Mock.mock(/\/v1\/site\/update/, 'get', dataSite)
+Mock.mock(/\/site\/update/, 'get', dataSite)
