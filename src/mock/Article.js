@@ -6,9 +6,9 @@ let pageSize = store.state.pageSize
 let extraData = Mock.mock({
   'extra|98': [{
     art_id: '@increment',
-    art_pubdate: '@date("yyyy-MM-dd")',
-    art_title: '@word(25, 50)',
-    artsort_name: '@word(3, 5)'
+    art_pubdate: '@now',
+    art_title: '@cword(10, 20)',
+    artsort_name: '@cword(3, 5)'
   }]
 })
 let dataListAll =
