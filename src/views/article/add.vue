@@ -13,12 +13,7 @@
           <el-input v-model="operForm.art_title" maxlength="50" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="时间" :label-width="formLabelWidth">
-          <el-date-picker
-            v-model="operForm.art_pubdate"
-            type="datetime"
-            placeholder="选择日期时间"
-            align="right"
-          ></el-date-picker>
+          <el-date-picker v-model="operForm.art_pubdate" type="datetime" align="right"></el-date-picker>
         </el-form-item>
         <el-form-item label="分类" :label-width="formLabelWidth">
           <el-select v-model="operForm.artsort_id" placeholder="请选择分类">
@@ -39,7 +34,7 @@
         </el-form-item>
         <el-form-item label="图片" :label-width="formLabelWidth">
           <el-upload
-            action="/upload"
+            action="/Upload/index"
             list-type="picture-card"
             :on-preview="imgPreview"
             :before-upload="beforeUpload"
@@ -73,8 +68,8 @@
 
 <script>
 import http from '@/plugins/http'
-import '@/mock/artsorts'
-import '@/mock/upload'
+import '@/mock/Artsort'
+import '@/mock/Upload'
 import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
 export default {
@@ -122,7 +117,7 @@ export default {
       this.fullscreen = !this.fullscreen
     },
     loadArtsort: function () {
-      http.send({ url: '/artsorts' }).then((data) => {
+      http.send({ url: '/Artsort/listAll' }).then((data) => {
         this.operForm.artsort = data.extra
         this.operForm.artsort_id = data.extra[0].artsort_id
       })

@@ -19,7 +19,7 @@ let dataListAll =
     total: 98
   })
 
-Mock.mock(/\/articles/, 'get', function (options) {
+Mock.mock(/\/Article\/listAll/, 'get', function (options) {
   let p = Tools.getParam('p', options.url)
   let keyword = Tools.getParam('keyword', options.url)
   let tempExtra = extraData.extra
@@ -40,8 +40,9 @@ let dataDelete = {
   msg: 'success'
 }
 
-Mock.mock(/\/articles\/(\d+)/, 'delete', function (options) {
-  let id = parseInt(Tools.getSection(3, options.url))
+Mock.mock(/\/Article\/del/, 'post', function (options) {
+  let result = JSON.parse(options.body)
+  let id = result.id
   let tempExtra = []
   for (let i = 0; i < extraData.extra.length; i++) {
     let obj = extraData.extra[i]

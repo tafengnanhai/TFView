@@ -11,4 +11,4 @@ let dataUpload = {
     }
   ]
 }
-Mock.mock(/\/upload/, 'post', dataUpload)
+Mock.mock(/\/Upload\/index/, 'post', dataUpload)

@@ -38,4 +38,4 @@ let dataListAll = Mock.mock({
   }] // this comment is used to forbid vscode problem
 })
 
-Mock.mock(/\/artsorts/, 'get', dataListAll)
+Mock.mock(/\/Artsort\/listAll/, 'get', dataListAll)

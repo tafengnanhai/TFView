@@ -92,8 +92,8 @@
 <script>
 import LineChart from '@/plugins/linechart.js'
 import http from '@/plugins/http'
-import '@/mock/users'
-import '@/mock/site'
+import '@/mock/User'
+import '@/mock/Site'
 export default {
   components: {
     LineChart
@@ -119,13 +119,13 @@ export default {
   },
   methods: {
     loadMine: function () {
-      http.send({ url: '/users/stat' }).then((data) => {
+      http.send({ url: '/User/getGeneralStat' }).then((data) => {
         this.statTotal = data.extra
       })
-      http.send({ url: '/users/weekdiff' }).then((data) => {
+      http.send({ url: '/User/getWeekDiffStat' }).then((data) => {
         this.statWeekDiffData = data.extra
       })
-      http.send({ url: '/site/update' }).then((data) => {
+      http.send({ url: '/Site/getUpdateRecords' }).then((data) => {
         this.siteUpdateData = data.extra
       })
     }

@@ -43,7 +43,7 @@
 </template>
 <script>
 import http from '@/plugins/http'
-import '@/mock/articles'
+import '@/mock/Article'
 import Message from '@/plugins/message'
 import ArticleAdd from '@/views/article/add.vue'
 export default {
@@ -68,7 +68,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        http.send({ sendType: 'delete', url: `/articles/${row.art_id}` }).then((data) => {
+        http.send({ sendType: 'post', url: `/Article/del`, param: { id: row.art_id } }).then((data) => {
           let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
           this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
           this.getData(this.currentPage)
@@ -83,7 +83,7 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      http.send({ url: '/articles', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
+      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
