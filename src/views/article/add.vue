@@ -8,14 +8,14 @@
       :close-on-click-modal="true"
       :close-on-press-escape="true"
     >
-      <el-form :model="operForm">
-        <el-form-item label="标题" :label-width="formLabelWidth">
+      <el-form :model="operForm" ref="operForm" :rules="rules" label-width="60px">
+        <el-form-item label="标题" prop="art_title">
           <el-input v-model="operForm.art_title" maxlength="50" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="时间" :label-width="formLabelWidth">
+        <el-form-item label="时间">
           <el-date-picker v-model="operForm.art_pubdate" type="datetime" align="right"></el-date-picker>
         </el-form-item>
-        <el-form-item label="分类" :label-width="formLabelWidth">
+        <el-form-item label="分类">
           <el-select v-model="operForm.artsort_id" placeholder="请选择分类">
             <el-option
               :label="item.artsort_name"
@@ -26,13 +26,13 @@
           </el-select>&nbsp;&nbsp;
           <el-button icon="el-icon-refresh blue b" type="plain" @click="updateArtsort()"></el-button>
         </el-form-item>
-        <el-form-item label="来源" :label-width="formLabelWidth">
+        <el-form-item label="来源">
           <el-input v-model="operForm.art_source" maxlength="100" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="跳转" :label-width="formLabelWidth">
+        <el-form-item label="跳转">
           <el-input v-model="operForm.art_gourl" maxlength="200" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="图片" :label-width="formLabelWidth">
+        <el-form-item label="图片">
           <el-upload
             action="/Upload/index"
             list-type="picture-card"
@@ -46,13 +46,14 @@
             <img width="100%" :src="dialogImgUrl" alt>
           </el-dialog>
         </el-form-item>
-        <el-form-item label="内容" :label-width="formLabelWidth">
+        <el-form-item label="内容" prop="art_content">
           <vue-editor
             v-model="operForm.art_content"
             :editorToolbar="customToolbar"
             useCustomImageHandler
             @imageAdded="handleImageAdded"
           ></vue-editor>
+          <el-input v-model="operForm.art_content" autocomplete="off" v-show="false"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -95,10 +96,9 @@ export default {
         art_simg: [],
         art_content: ''
       },
-      formLabelWidth: '60px',
       dialogImgUrl: '',
       dialogImgVisible: false,
-      permitEditorLength: 10000000,
+      permitEditorLength: 100000,
       permitImgTotal: 4,
       permitImgSmallSize: 256, // KB
       permitImgBigSize: 512, // KB
@@ -111,7 +111,11 @@ export default {
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
         [{ 'color': [] }, { 'background': [] }]
-      ]
+      ],
+      rules: {
+        art_title: [{ required: true, message: '请输入标题', trigger: 'change' }],
+        art_content: [{ required: true, message: '请输入内容', trigger: 'change' }]
+      }
     }
   },
   methods: {
@@ -208,7 +212,7 @@ export default {
   },
   watch: {
     'operForm.art_content': function (val) {
-      console.log(val.length)
+      val.length > this.permitEditorLength && this.$msgbox(`内容超过最大允许长度（图片会转成字符）\r，允许：${this.permitEditorLength}，实际：${val.length}，超过${val.length - this.permitEditorLength}`, '提示', { type: 'warning' })
     }
   }
 }
