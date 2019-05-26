@@ -7,7 +7,7 @@ let extraData = Mock.mock({
   'extra|98': [{
     art_id: '@increment',
     art_pubdate: '@now',
-    art_title: '@cword(10, 20)',
+    art_title: '@ctitle(10, 20)',
     artsort_name: '@cword(3, 5)'
   }]
 })
