@@ -61,6 +61,9 @@
         <el-button type="text" @click="toggleFullscreen()">
           <i class="el-icon-full-screen dialogFullscreen"></i>
         </el-button>
+        <el-button type="text" @click="toggleDialog(false)">
+          <i class="el-icon-circle-close dialogClose"></i>
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -195,6 +198,12 @@ export default {
 
 <style scoped >
 .dialogFullscreen {
+  position: absolute;
+  right: 60px;
+  top: 10px;
+  font-size: 40px;
+}
+.dialogClose {
   position: absolute;
   right: 10px;
   top: 10px;
