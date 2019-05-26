@@ -10,6 +10,7 @@
             prefix-icon="el-icon-user"
             class="input margin"
             autocomplete="off"
+            @keydown.enter.native="submitForm('operForm')"
           ></el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -18,7 +19,9 @@
             placeholder="请输入密码"
             prefix-icon="el-icon-lock"
             class="input margin"
+            autocomplete="off"
             show-password
+            @keydown.enter.native="submitForm('operForm')"
           ></el-input>
         </el-form-item>
         <el-button
@@ -44,8 +47,8 @@ export default {
         password: 'admin'
       },
       rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'change' }]
       }
     }
   },
