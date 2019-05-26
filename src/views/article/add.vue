@@ -70,6 +70,7 @@
 import http from '@/plugins/http'
 import '@/mock/Artsort'
 import '@/mock/Upload'
+import '@/mock/Site'
 import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
 export default {
@@ -87,7 +88,7 @@ export default {
         art_title: '',
         art_source: '本站',
         artsort_id: 0,
-        art_pubdate: new Date(),
+        art_pubdate: '', // new Date(), get from server
         art_simg: [],
         art_content: ''
       },
@@ -185,6 +186,9 @@ export default {
   },
   mounted: function () {
     this.loadArtsort()
+    http.send({ url: '/Site/getServerTime' }).then((data) => {
+      this.operForm.art_pubdate = data.extraData.time
+    })
   }
 }
 </script>

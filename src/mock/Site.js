@@ -26,6 +26,10 @@ let dataSiteUpdateRecords = {
 Mock.mock(/\/Site\/getUpdateRecords/, 'get', dataSiteUpdateRecords)
 
 let dataSizeTime = {
-  'time': Mock.mock('@now')
+  code: 0,
+  msg: 'success',
+  extraData: {
+    'time': Mock.mock('@now')
+  }
 }
 Mock.mock(/\/Site\/getServerTime/, 'get', dataSizeTime)
