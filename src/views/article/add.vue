@@ -98,10 +98,11 @@ export default {
       formLabelWidth: '60px',
       dialogImgUrl: '',
       dialogImgVisible: false,
-      permitTotal: 4,
-      permitSmallSize: 256, // KB
-      permitBigSize: 512, // KB
-      permitFormat: ['image/jpeg', 'image/gif', 'image/png'],
+      permitEditorLength: 10000000,
+      permitImgTotal: 4,
+      permitImgSmallSize: 256, // KB
+      permitImgBigSize: 512, // KB
+      permitImgFormat: ['image/jpeg', 'image/gif', 'image/png'],
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike', 'clean'],
         ['blockquote', 'code-block'],
@@ -152,45 +153,44 @@ export default {
           let self = this
           reader.onload = function (e) {
             self.operForm.art_simg.push(this.result)
+            // 不使用内置的limit属性，自定义
+            self.operForm.art_simg.length < self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
           }
         }
       })
-      // 不使用内置的limit属性，自定义
-      this.operForm.art_simg.length !== this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
     },
     beforeUpload: function (file) {
-      const isPermitFormat = this.permitFormat.some((item) => {
+      const isPermitImgFormat = this.permitImgFormat.some((item) => {
         return item === file.type
       })
-      const ispermitSmallSize = file.size / 1024 < this.permitSmallSize
+      const ispermitImgSmallSize = file.size / 1024 < this.permitImgSmallSize
 
-      !isPermitFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
-      isPermitFormat && !ispermitSmallSize && Message.error(`上传图片大小不能超过${this.permitSmallSize}KB!`)
-      if (isPermitFormat && ispermitSmallSize) {
+      !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
+      isPermitImgFormat && !ispermitImgSmallSize && Message.error(`上传图片大小不能超过${this.permitImgSmallSize}KB!`)
+      if (isPermitImgFormat && ispermitImgSmallSize) {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         let self = this
         reader.onload = function (e) {
           self.operForm.art_simg.push(this.result)
+          self.operForm.art_simg.length === self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
         }
       }
-      this.operForm.art_simg.length === this.permitTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
-
-      return isPermitFormat && ispermitSmallSize
+      return isPermitImgFormat && ispermitImgSmallSize
     },
     imgPreview: function (file) {
       this.dialogImgUrl = file.url
       this.dialogImgVisible = true
     },
     handleImageAdded: function (file, Editor, cursorLocation, resetUploader) {
-      const isPermitFormat = this.permitFormat.some((item) => {
+      const isPermitImgFormat = this.permitImgFormat.some((item) => {
         return item === file.type
       })
-      const ispermitBigSize = file.size / 1024 < this.permitBigSize
+      const ispermitImgBigSize = file.size / 1024 < this.permitImgBigSize
 
-      !isPermitFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
-      isPermitFormat && !ispermitBigSize && Message.error(`上传图片大小不能超过${this.permitBigSize}KB!`)
-      if (isPermitFormat && ispermitBigSize) {
+      !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
+      isPermitImgFormat && !ispermitImgBigSize && Message.error(`上传图片大小不能超过${this.permitImgBigSize}KB!`)
+      if (isPermitImgFormat && ispermitImgBigSize) {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = function (e) {
@@ -205,6 +205,11 @@ export default {
     http.send({ url: '/Site/getServerTime' }).then((data) => {
       this.operForm.art_pubdate = data.extra.time
     })
+  },
+  watch: {
+    'operForm.art_content': function (val) {
+      console.log(val.length)
+    }
   }
 }
 </script>
