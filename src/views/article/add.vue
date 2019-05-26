@@ -77,6 +77,7 @@ import '@/mock/Upload'
 import '@/mock/Site'
 import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
+let permitEditorLength = 500000 // for rules
 export default {
   name: 'article_add',
   components: {
@@ -98,7 +99,6 @@ export default {
       },
       dialogImgUrl: '',
       dialogImgVisible: false,
-      permitEditorLength: 100000,
       permitImgTotal: 4,
       permitImgSmallSize: 256, // KB
       permitImgBigSize: 512, // KB
@@ -114,7 +114,7 @@ export default {
       ],
       rules: {
         art_title: [{ required: true, message: '请输入标题', trigger: 'change' }],
-        art_content: [{ required: true, message: '请输入内容', trigger: 'change' }]
+        art_content: [{ min: 0, max: permitEditorLength, message: `内容超过最大允许长度${permitEditorLength}，（图片会转成字符）`, trigger: 'change' }]
       }
     }
   },
@@ -212,7 +212,7 @@ export default {
   },
   watch: {
     'operForm.art_content': function (val) {
-      val.length > this.permitEditorLength && this.$msgbox(`内容超过最大允许长度（图片会转成字符）\r，允许：${this.permitEditorLength}，实际：${val.length}，超过${val.length - this.permitEditorLength}`, '提示', { type: 'warning' })
+      val.length > permitEditorLength && this.$msgbox(`内容超过最大允许长度（图片会转成字符）\r，允许：${permitEditorLength}，实际：${val.length}，超过${val.length - permitEditorLength}`, '提示', { type: 'warning' })
     }
   }
 }
