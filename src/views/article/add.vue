@@ -120,9 +120,22 @@ export default {
     toggleFullscreen: function () {
       this.fullscreen = !this.fullscreen
     },
+    recursiveArtsort: function (item, level) {
+      let artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
+      this.operForm.artsort.push(artsort)
+      level++
+      if (item.children) {
+        item.children.forEach((itemChildren) => {
+          this.recursiveArtsort(itemChildren, level)
+        })
+      }
+    },
     loadArtsort: function () {
+      this.operForm.artsort = []
       http.send({ url: '/Artsort/listAll' }).then((data) => {
-        this.operForm.artsort = data.extra
+        data.extra.forEach((item) => {
+          this.recursiveArtsort(item, 0)
+        })
         this.operForm.artsort_id = data.extra[0].artsort_id
       })
     },
@@ -132,7 +145,7 @@ export default {
     },
     beforeRemove: function (file, fileList) {
       this.operForm.art_simg = []
-      fileList.map((f) => {
+      fileList.forEach((f) => {
         if (file.uid !== f.raw.uid) {
           let reader = new FileReader()
           reader.readAsDataURL(f.raw)
@@ -190,7 +203,7 @@ export default {
   mounted: function () {
     this.loadArtsort()
     http.send({ url: '/Site/getServerTime' }).then((data) => {
-      this.operForm.art_pubdate = data.extraData.time
+      this.operForm.art_pubdate = data.extra.time
     })
   }
 }

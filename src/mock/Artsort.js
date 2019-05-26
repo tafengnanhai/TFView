@@ -20,7 +20,6 @@ let dataListAll = Mock.mock({
             artsort_name: '@word(3, 5)'
           }
         ]
-
       },
       {
         artsort_id: 12,
@@ -35,7 +34,7 @@ let dataListAll = Mock.mock({
   {
     artsort_id: 3,
     artsort_name: '@word(3, 5)'
-  }] // this comment is used to forbid vscode problem
+  }]
 })
 
 Mock.mock(/\/Artsort\/listAll/, 'get', dataListAll)
