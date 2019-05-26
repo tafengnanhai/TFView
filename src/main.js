@@ -27,7 +27,6 @@ store.commit('recoverAccount')
 // router control
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  store.commit('isShowRouterLink', to.meta.showRouterLink)
   to.name !== 'login' && store.dispatch('checkLoginStatus')
   next()
 })

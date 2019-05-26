@@ -10,9 +10,6 @@ export default new Router({
     {
       path: '/',
       name: 'admin',
-      meta: {
-        showRouterLink: false
-      },
       component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
       children: [
         {
@@ -53,16 +50,12 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      meta: {
-        showRouterLink: true
-      },
       component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
     },
     {
       path: '*',
       name: 'Four04',
       meta: {
-        showRouterLink: false,
         keepAlive: true
       },
       component: () => import(/* webpackChunkName: "404" */ './views/404/index.vue')
