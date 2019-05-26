@@ -106,7 +106,7 @@ export default {
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike', 'clean'],
         ['blockquote', 'code-block'],
-        ['link', 'image', 'video'],
+        ['link', 'image'],
         [{ 'header': 1 }, { 'header': 2 }], [{ 'size': ['small', false, 'large', 'huge'] }],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
