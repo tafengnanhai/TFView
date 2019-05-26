@@ -213,9 +213,10 @@ export default {
   watch: {
     'operForm.art_content': function (val) {
       if (val.length > permitEditorLength) {
-        this.$confirm(`内容超过最大允许长度（图片会转成字符）\r，允许：${permitEditorLength}，实际：${val.length}，超过${val.length - permitEditorLength}`, '提示', {
+        this.$alert(`内容超过最大允许长度（图片会转成字符）\r，允许：${permitEditorLength}，实际：${val.length}，超过${val.length - permitEditorLength}`, '提示', {
           confirmButtonText: '确定',
-          type: 'warning'
+          type: 'warning',
+          callback: action => { }
         })
       }
     }
