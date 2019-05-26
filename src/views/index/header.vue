@@ -6,7 +6,7 @@
     />
     <i class="reloadPage el-icon-magic-stick f20 b" title="智能刷新页面" @click="reloadPage()"></i>
     <div class="wel">
-      某某管理系统欢迎你：
+      TFView欢迎你：
       <span class="red">{{this.$store.state.username}}</span>，不使用请及时注销，重载页面请使用右侧的魔法棒
     </div>
     <el-dropdown @command="handlePopMenu">
