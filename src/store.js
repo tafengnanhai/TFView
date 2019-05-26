@@ -7,7 +7,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    showRouterLink: false,
     isCollapse: false,
     username: '',
     token: '',
@@ -17,9 +16,6 @@ export default new Vuex.Store({
     reloadPageTime: new Date().getTime()
   },
   mutations: { // 需要同步的操作不要放到actions中，放到mutations中
-    isShowRouterLink: (state, result) => {
-      state.showRouterLink = result
-    },
     initAccount: (state, data) => {
       lockr.set('username', data.username)
       lockr.set('token', data.token)

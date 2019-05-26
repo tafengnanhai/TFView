@@ -3,7 +3,7 @@ import store from '@/store'
 
 let users = [
   {
-    username: 'willson',
+    username: 'other',
     password: '123456'
   },
   {

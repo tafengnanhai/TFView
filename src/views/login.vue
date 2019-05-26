@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="login">
     <div class="panel gray">
-      <div class="title f20">登录</div>
+      <div class="title f20">TFView 登陆</div>
       <el-form :model="operForm" :rules="rules" ref="operForm">
         <el-form-item prop="username">
           <el-input
@@ -73,13 +73,15 @@ export default {
 }
 </script>
 <style scoped>
+#login {
+  padding-top: 20vh;
+}
 .panel {
   width: 320px;
   height: 300px;
   border-radius: 8px;
   background: white;
   margin: 0 auto;
-  margin-top: 15vh;
   text-align: center;
 }
 .title {
