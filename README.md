@@ -1,35 +1,37 @@
 # TFView
 
 ## Project setup
+
 ```
-pnpm install
+pnpm/npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-pnpm run serve
+pnpm/npm run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
-pnpm run build
+pnpm/npm run build
 ```
 
 ### Run your tests
+
 ```
-pnpm run test
+pnpm/npm run test
 ```
 
 ### Lints and fixes files
-```
-pnpm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
+```
+pnpm/npm run lint
+```
 
 ### Plugins
+
 | 插件名称                    | 插件类型 | 插件版本    |
 | :-------------------------- | :------- | :---------- |
 | axios                       | pro      | 0.18.0      |
