@@ -86,7 +86,7 @@ export default {
   data () {
     return {
       dialogFormVisible: false,
-      fullscreen: true,
+      fullscreen: false,
       operForm: {
         artsort: [],
         art_id: 0,
