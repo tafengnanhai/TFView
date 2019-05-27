@@ -71,15 +71,15 @@ export default {
   },
   methods: {
     add: function () {
-      this.dialogEditTime = new Date().getTime()
       this.dialogFormTitle = '添加'
       this.dialogId = 0
+      this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
     edit: function (artId) {
-      this.dialogEditTime = new Date().getTime()
       this.dialogFormTitle = '编辑'
       this.dialogId = artId
+      this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
     del: function (artId) {

@@ -34,6 +34,7 @@
         </el-form-item>
         <el-form-item label="图片">
           <el-upload
+            ref="uploadSimg"
             action="/Upload/index"
             list-type="picture-card"
             :on-preview="imgPreview"
@@ -87,6 +88,7 @@ export default {
   data () {
     return {
       fullscreen: false,
+      dialogLastOperation: 'add',
       operForm: {
         artsort: [],
         art_id: 0,
@@ -162,7 +164,6 @@ export default {
         data.extra.forEach((item) => {
           this.recursiveArtsort(item, 0)
         })
-        // this.operForm.artsort_id = data.extra[0].artsort_id // 如果需要设置默认分类取消注释
       })
     },
     updateArtsort: function () {
@@ -237,10 +238,17 @@ export default {
   watch: {
     '$parent.dialogEditTime': function () {
       if (this.$parent.dialogId === 0) {
-        this.$nextTick(() => {
-          this.$refs.operForm.resetFields()
-        })
+        if (this.dialogLastOperation === 'edit') {
+          this.$nextTick(() => {
+            this.$refs.operForm.resetFields()
+            this.$refs.uploadSimg.clearFiles()
+            this.operForm.art_simg = []
+            document.querySelector('.el-upload--picture-card').style.display = ''
+          })
+          this.dialogLastOperation = 'add'
+        }
       } else {
+        this.dialogLastOperation = 'edit'
         http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then((data) => {
           Object.assign(this.operForm, data)
         })
