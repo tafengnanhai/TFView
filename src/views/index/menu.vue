@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     logout: function () {
-      this.$store.commit('logout')
+      this.$store.dispatch('logout')
       Message.success('注销成功')
       this.$router.replace('/login')
     },
