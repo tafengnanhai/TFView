@@ -12,10 +12,10 @@
         <el-form-item label="标题" prop="art_title">
           <el-input v-model="operForm.art_title" maxlength="50" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="时间">
+        <el-form-item label="时间" prop="art_pubdate">
           <el-date-picker v-model="operForm.art_pubdate" type="datetime" align="right"></el-date-picker>
         </el-form-item>
-        <el-form-item label="分类">
+        <el-form-item label="分类" prop="artsort_id">
           <el-select v-model="operForm.artsort_id" placeholder="请选择分类">
             <el-option
               :label="item.artsort_name"
@@ -26,10 +26,10 @@
           </el-select>&nbsp;&nbsp;
           <el-button icon="el-icon-refresh blue b" type="plain" @click="updateArtsort()"></el-button>
         </el-form-item>
-        <el-form-item label="来源">
+        <el-form-item label="来源" prop="art_source">
           <el-input v-model="operForm.art_source" maxlength="100" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="跳转">
+        <el-form-item label="跳转" prop="art_gourl">
           <el-input v-model="operForm.art_gourl" maxlength="200" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="图片">
@@ -92,7 +92,7 @@ export default {
         art_id: 0,
         art_title: '',
         art_source: '本站',
-        artsort_id: 0,
+        artsort_id: null,
         art_pubdate: '', // new Date(), get from server
         art_simg: [],
         art_content: ''
@@ -113,7 +113,11 @@ export default {
         [{ 'color': [] }, { 'background': [] }]
       ],
       rules: {
-        art_title: [{ required: true, message: '请输入标题', trigger: 'change' }],
+        art_title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
+        art_pubdate: [{ required: true, message: '请输入或者选择时间', trigger: 'blur' }],
+        artsort_id: [{ required: true, message: '请选择分类', trigger: 'change' }],
+        art_source: [{ required: true, message: '请输入来源，避免版权纠纷', trigger: 'blur' }],
+        art_gourl: [{ type: 'url', message: '跳转地址不合法', trigger: 'blur' }],
         art_content: [{ min: 0, max: permitEditorLength, message: `内容超过最大允许长度${permitEditorLength}，（图片会转成字符）`, trigger: 'change' }]
       }
     }
@@ -141,7 +145,7 @@ export default {
         data.extra.forEach((item) => {
           this.recursiveArtsort(item, 0)
         })
-        this.operForm.artsort_id = data.extra[0].artsort_id
+        // this.operForm.artsort_id = data.extra[0].artsort_id // 如果需要设置默认分类取消注释
       })
     },
     updateArtsort: function () {
