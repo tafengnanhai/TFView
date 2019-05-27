@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加"
+      :title="dialogFormTitle"
       :fullscreen="fullscreen"
       :visible.sync="dialogFormVisible"
       :show-close="false"
@@ -79,13 +79,13 @@ import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
 let permitEditorLength = 500000 // for rules
 export default {
-  name: 'article_add',
+  props: ['dialogFormTitle', 'dialogFormVisible', 'dialogId'],
+  name: 'article_edit',
   components: {
     VueEditor
   },
   data () {
     return {
-      dialogFormVisible: false,
       fullscreen: false,
       operForm: {
         artsort: [],
@@ -130,7 +130,7 @@ export default {
           http.send({ sendType: 'post', url: '/Article/add', param: this.operForm, showSuccessTip: true }).then((data) => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
-              self.dialogFormVisible = false
+              self.toggleDialog(false)
               this.$parent.loadMine()
             }
           })
@@ -141,7 +141,7 @@ export default {
       })
     },
     toggleDialog: function (flag) {
-      this.dialogFormVisible = flag
+      this.$parent.toggleDialog(flag)
     },
     toggleFullscreen: function () {
       this.fullscreen = !this.fullscreen
@@ -235,6 +235,17 @@ export default {
     this.loadMine()
   },
   watch: {
+    '$parent.dialogEditTime': function () {
+      if (this.$parent.dialogId === 0) {
+        this.$nextTick(() => {
+          this.$refs.operForm.resetFields()
+        })
+      } else {
+        http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then((data) => {
+          Object.assign(this.operForm, data)
+        })
+      }
+    },
     'operForm.art_content': function (val) {
       if (val.length > permitEditorLength) {
         this.$alert(`内容超过最大允许长度（图片会转成字符）\r，允许：${permitEditorLength}，实际：${val.length}，超过${val.length - permitEditorLength}`, '提示', {

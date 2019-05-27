@@ -1,7 +1,7 @@
 <template>
   <div id="articleIndex">
     <div class="panel">
-      <el-button type="primary" icon="el-icon-edit" size="medium" @click="showDialog(true)">添 加</el-button>
+      <el-button type="primary" icon="el-icon-edit" size="medium" @click="add()">添 加</el-button>
 
       <el-input
         placeholder="请输入关键词"
@@ -25,8 +25,8 @@
       <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="small">编 辑</el-button>
-          <el-button @click="del(scope.row)" type="danger" size="small">删 除</el-button>
+          <el-button type="primary" size="small" @click="edit(scope.row.art_id)">编 辑</el-button>
+          <el-button @click="del(scope.row.art_id)" type="danger" size="small">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -38,21 +38,29 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <ArticleAdd ref="article_add"/>
+    <ArticleEdit
+      ref="articleEdit"
+      :dialogFormTitle="dialogFormTitle"
+      :dialogFormVisible="dialogFormVisible"
+    />
   </div>
 </template>
 <script>
 import http from '@/plugins/http'
 import '@/mock/Article'
 import Message from '@/plugins/message'
-import ArticleAdd from '@/views/article/add.vue'
+import ArticleEdit from '@/views/article/edit.vue'
 export default {
   name: 'article_index',
   components: {
-    ArticleAdd
+    ArticleEdit
   },
   data () {
     return {
+      dialogFormVisible: false,
+      dialogFormTitle: '',
+      dialogId: 0,
+      dialogEditTime: 0,
       inputKeyword: '',
       keyword: '',
       listData: null,
@@ -62,13 +70,25 @@ export default {
     }
   },
   methods: {
-    del: function (row) {
+    add: function () {
+      this.dialogEditTime = new Date().getTime()
+      this.dialogFormTitle = '添加'
+      this.dialogId = 0
+      this.toggleDialog(true)
+    },
+    edit: function (artId) {
+      this.dialogEditTime = new Date().getTime()
+      this.dialogFormTitle = '编辑'
+      this.dialogId = artId
+      this.toggleDialog(true)
+    },
+    del: function (artId) {
       this.$confirm('确定删除吗，不可恢复哦?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        http.send({ sendType: 'post', url: `/Article/del`, param: { id: row.art_id } }).then((data) => {
+        http.send({ sendType: 'post', url: `/Article/del`, param: { id: artId } }).then((data) => {
           let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
           this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
           this.getData(this.currentPage)
@@ -76,8 +96,8 @@ export default {
         })
       }).catch(() => { })
     },
-    showDialog: function (flag) {
-      this.$refs.article_add.toggleDialog(flag)
+    toggleDialog: function (flag) {
+      this.dialogFormVisible = flag
     },
     pageClick: function (p) {
       this.getData(p)
