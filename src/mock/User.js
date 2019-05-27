@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 
 let dataUserStat = {
   code: 0,
-  msg: 'success',
+  msg: '操作成功',
   extra: {
     today: Mock.mock('@integer(1, 1000)'),
     week: Mock.mock('@integer(1000, 10000)'),
@@ -25,7 +25,7 @@ Mock.mock(/\/User\/getGeneralStat/, 'get', dataUserStat)
 
 let dataUserWeekDiff = {
   code: 0,
-  msg: 'success',
+  msg: '操作成功',
   extra: {
     labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     datasets: [

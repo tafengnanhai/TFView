@@ -43,7 +43,7 @@
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-dialog :visible.sync="dialogImgVisible">
-            <img width="100%" :src="dialogImgUrl" alt>
+            <img width="100%" :src="dialogImgUrl">
           </el-dialog>
         </el-form-item>
         <el-form-item label="内容" prop="art_content">
@@ -58,7 +58,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="toggleDialog(false)">关 闭</el-button>
-        <el-button type="primary" @click="toggleDialog(false)">提交</el-button>
+        <el-button type="primary" @click="submitForm('operForm')">提交</el-button>
         <el-button type="text" @click="toggleFullscreen()">
           <i class="el-icon-full-screen dialogFullscreen"></i>
         </el-button>
@@ -123,6 +123,23 @@ export default {
     }
   },
   methods: {
+    submitForm: function (formName) {
+      let self = this
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          http.send({ sendType: 'post', url: '/Article/add', param: this.operForm, showSuccessTip: true }).then((data) => {
+            if (data.code === 0) {
+              self.$refs[formName].resetFields()
+              self.dialogFormVisible = false
+              this.$parent.loadMine()
+            }
+          })
+        } else {
+          Message.error('请先查看并修正上面出现的错误')
+          return false
+        }
+      })
+    },
     toggleDialog: function (flag) {
       this.dialogFormVisible = flag
     },
@@ -206,13 +223,16 @@ export default {
           resetUploader()
         }
       }
+    },
+    loadMine: function () {
+      this.loadArtsort()
+      http.send({ url: '/Site/getServerTime' }).then((data) => {
+        this.operForm.art_pubdate = data.extra.time
+      })
     }
   },
   mounted: function () {
-    this.loadArtsort()
-    http.send({ url: '/Site/getServerTime' }).then((data) => {
-      this.operForm.art_pubdate = data.extra.time
-    })
+    this.loadMine()
   },
   watch: {
     'operForm.art_content': function (val) {

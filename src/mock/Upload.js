@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 let dataUpload = {
   code: 0,
-  msg: 'success',
+  msg: '操作成功',
   extra: [
     {
       url: 'xxx'

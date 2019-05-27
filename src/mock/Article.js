@@ -3,6 +3,7 @@ import store from '@/store'
 import Tools from '@/plugins/tools'
 
 let pageSize = store.state.pageSize
+let maxId = 98
 let extraData = Mock.mock({
   'extra|98': [{
     art_id: '@increment',
@@ -11,46 +12,52 @@ let extraData = Mock.mock({
     artsort_name: '@cword(3, 5)'
   }]
 })
+extraData.extra.reverse()
 let dataListAll =
   Mock.mock({
     code: 0,
-    msg: 'success',
+    msg: '操作成功',
     pageSize: pageSize,
     total: 98
   })
 
 Mock.mock(/\/Article\/listAll/, 'get', function (options) {
+  let tempDataListAll = dataListAll
   let p = Tools.getParam('p', options.url)
   let keyword = Tools.getParam('keyword', options.url)
   let tempExtra = extraData.extra
-  dataListAll.total = tempExtra.length
-  if (keyword !== '' && extraData.extra.length > 0) {
-    tempExtra = extraData.extra.filter((item) => {
+  tempDataListAll.total = tempExtra.length
+  if (keyword !== '' && tempExtra.length > 0) {
+    tempExtra = tempExtra.filter((item) => {
       return item.art_title.indexOf(keyword) !== -1
     })
-    dataListAll.total = tempExtra.length
+    tempDataListAll.total = tempExtra.length
   }
   let pExtraData = (tempExtra.length > 0 ? tempExtra.slice(pageSize * (p - 1), pageSize * p) : tempExtra)
-  dataListAll = { ...dataListAll, extra: pExtraData }
-  return dataListAll
+  tempDataListAll = { ...tempDataListAll, extra: pExtraData }
+  return tempDataListAll
 })
 
-let dataDelete = {
+let dataSuccess = {
   code: 0,
-  msg: 'success'
+  msg: '操作成功'
 }
 
 Mock.mock(/\/Article\/del/, 'post', function (options) {
   let result = JSON.parse(options.body)
   let id = result.id
-  let tempExtra = []
-  for (let i = 0; i < extraData.extra.length; i++) {
-    let obj = extraData.extra[i]
-    if (parseInt(obj.art_id) !== id) {
-      tempExtra.push(obj)
-    }
-  }
-  extraData.extra = tempExtra
+  extraData.extra = extraData.extra.filter((item) => {
+    return item.art_id !== id
+  })
   dataListAll.total--
-  return dataDelete
+  return dataSuccess
+})
+
+Mock.mock(/\/Article\/add/, 'post', function (options) {
+  let result = JSON.parse(options.body)
+  result.art_id = ++maxId
+  result.artsort_name = Mock.mock('@cword(3,5)') // 实际开发中会从Artsort处获取
+  extraData.extra.unshift(result)
+  dataListAll.total++
+  return dataSuccess
 })

@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 
 let dataListAll = Mock.mock({
   code: 0,
-  msg: 'success',
+  msg: '操作成功',
   extra: [{
     artsort_id: 1,
     artsort_name: '@cword(3, 5)',
