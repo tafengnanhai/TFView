@@ -14,7 +14,7 @@
           :label="item.artsort_name"
           :value="item.artsort_id"
           :key="item.artsort_id"
-          v-for="item in artsort"
+          v-for="item in artsorts"
         ></el-option>
       </el-select>
       <el-input
@@ -73,7 +73,7 @@ export default {
       dialogEditTime: 0,
       inputKeyword: '',
       keyword: '',
-      artsort: [],
+      artsorts: [],
       artsortId: 0,
       listData: null,
       total: 1,
@@ -138,7 +138,7 @@ export default {
     },
     recursiveArtsort: function (item, level) {
       let artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
-      this.artsort.push(artsort)
+      this.artsorts.push(artsort)
       level++
       if (item.children) {
         item.children.forEach((itemChildren) => {
@@ -147,7 +147,7 @@ export default {
       }
     },
     loadArtsort: function () {
-      this.artsort = []
+      this.artsorts = []
       http.send({ url: '/Artsort/listAll' }).then((data) => {
         data.extra.forEach((item) => {
           this.recursiveArtsort(item, 0)
@@ -155,8 +155,9 @@ export default {
       })
     },
     loadMine: function () {
-      this.getData(1)
       this.loadArtsort()
+      this.artsortId = 0
+      this.getData(1)
     }
   },
   mounted: function () {
