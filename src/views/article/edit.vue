@@ -134,7 +134,7 @@ export default {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
-              this.$parent.loadMine()
+              self.$parent.getData(self.$parent.dialogId === 0 ? 1 : self.$parent.currentPage)
             }
           })
         } else {
@@ -234,11 +234,14 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
+      this.$nextTick(() => {
+        // 避免添加打开窗体后触发了表单验证在编辑的时候未消失
+        this.$refs.operForm.resetFields()
+      })
       this.operForm.art_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {
-            this.$refs.operForm.resetFields()
             this.$refs.uploadSimg.clearFiles()
             this.operForm.art_simg = []
             document.querySelector('.el-upload--picture-card').style.display = ''

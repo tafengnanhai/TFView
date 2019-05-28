@@ -11,15 +11,22 @@ let extraData = Mock.mock({
       art_pubdate: '@now',
       art_title: '@ctitle(10, 20)',
       artsort_id: '@int(1,7)',
-      artsort_name: '@cword(3, 5)',
+      artsort_name: '',
       art_source: '@cword(3, 10)',
       art_gourl: 'http://@domain',
       art_simg: [],
-      art_content: ''
+      art_content: '@cparagraph'
     }
   ]
 })
+
+extraData.extra = extraData.extra.map(item => {
+  item.artsort_name = `分类${item.artsort_id}`
+  return item
+})
+
 extraData.extra.reverse()
+
 let dataListAll = Mock.mock({
   code: 0,
   msg: '操作成功',
@@ -49,10 +56,7 @@ Mock.mock(/\/Article\/listAll/, 'get', function (options) {
 
 let dataSuccess = {
   code: 0,
-  msg: '操作成功',
-  extra: {
-    type: ''
-  }
+  msg: '操作成功'
 }
 
 let dataError = {
@@ -63,22 +67,27 @@ let dataError = {
 Mock.mock(/\/Article\/del/, 'post', function (options) {
   let result = JSON.parse(options.body)
   let id = result.id
+  let isExists = false
   extraData.extra = extraData.extra.filter(item => {
+    if (item.art_id === id) {
+      isExists = true
+    }
     return item.art_id !== id
   })
+  if (!isExists) {
+    return dataError
+  }
   dataListAll.total--
   return dataSuccess
 })
 
 Mock.mock(/\/Article\/edit/, 'post', function (options) {
   let result = JSON.parse(options.body)
-  result.artsort_name = Mock.mock('@cword(3,5)') // 实际开发中会从Artsort处获取
   if (result.art_id === 0) {
     // add
     result.art_id = ++maxId
     extraData.extra.unshift(result)
     dataListAll.total++
-    dataSuccess.extra.type = 'add'
   } else {
     // edit
     let isExists = false
@@ -92,7 +101,6 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
     if (!isExists) {
       return dataError
     }
-    dataSuccess.extra.type = 'edit'
   }
 
   return dataSuccess

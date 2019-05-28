@@ -89,10 +89,14 @@ export default {
         type: 'warning'
       }).then(() => {
         http.send({ sendType: 'post', url: `/Article/del`, param: { id: artId } }).then((data) => {
-          let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
-          this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
-          this.getData(this.currentPage)
-          Message.success('删除成功!')
+          if (data.code === 0) {
+            let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+            this.getData(this.currentPage)
+            Message.success(data.msg)
+          } else {
+            Message.error(data.msg)
+          }
         })
       }).catch(() => { })
     },
