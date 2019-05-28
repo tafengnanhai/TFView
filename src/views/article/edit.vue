@@ -13,7 +13,12 @@
           <el-input v-model="operForm.art_title" maxlength="50" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="时间" prop="art_pubdate">
-          <el-date-picker v-model="operForm.art_pubdate" type="datetime" align="right"></el-date-picker>
+          <el-date-picker
+            v-model="operForm.art_pubdate"
+            type="datetime"
+            align="right"
+            value-format="yyyy-MM-dd HH:mm:ss"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item label="分类" prop="artsort_id">
           <el-select v-model="operForm.artsort_id" placeholder="请选择分类">
@@ -95,7 +100,7 @@ export default {
         art_title: '',
         art_source: '本站',
         artsort_id: null,
-        art_pubdate: '', // new Date(), get from server
+        art_pubdate: '',
         art_simg: [],
         art_gourl: '',
         art_content: ''
