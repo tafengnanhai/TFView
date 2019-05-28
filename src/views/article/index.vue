@@ -2,7 +2,21 @@
   <div id="articleIndex">
     <div class="panel">
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="add()">添 加</el-button>
-
+      <el-select
+        v-model="artsortId"
+        placeholder="请选择分类"
+        class="artsort"
+        size="medium"
+        @change="changeArtsort"
+      >
+        <el-option label="所有分类" :value="0"></el-option>
+        <el-option
+          :label="item.artsort_name"
+          :value="item.artsort_id"
+          :key="item.artsort_id"
+          v-for="item in artsort"
+        ></el-option>
+      </el-select>
       <el-input
         placeholder="请输入关键词"
         class="keyword"
@@ -59,6 +73,8 @@ export default {
       dialogEditTime: 0,
       inputKeyword: '',
       keyword: '',
+      artsort: [],
+      artsortId: 0,
       listData: null,
       total: 1,
       pageSize: 10,
@@ -103,7 +119,7 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword) } } }).then((data) => {
+      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId } } }).then((data) => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
@@ -117,8 +133,30 @@ export default {
     formatter: function (val) {
       return this.keyword === '' ? val : val.replace(this.keyword, `<span class="red f16">${this.keyword}</span>`)
     },
+    changeArtsort: function (val) {
+      this.getData(1)
+    },
+    recursiveArtsort: function (item, level) {
+      let artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
+      this.artsort.push(artsort)
+      level++
+      if (item.children) {
+        item.children.forEach((itemChildren) => {
+          this.recursiveArtsort(itemChildren, level)
+        })
+      }
+    },
+    loadArtsort: function () {
+      this.artsort = []
+      http.send({ url: '/Artsort/listAll' }).then((data) => {
+        data.extra.forEach((item) => {
+          this.recursiveArtsort(item, 0)
+        })
+      })
+    },
     loadMine: function () {
       this.getData(1)
+      this.loadArtsort()
     }
   },
   mounted: function () {
@@ -142,7 +180,10 @@ export default {
   padding-bottom: 15px;
 }
 .keyword {
-  width: 200px;
+  width: 160px;
   padding: 0 10px;
+}
+.artsort {
+  padding-left: 10px;
 }
 </style>

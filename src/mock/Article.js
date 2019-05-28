@@ -43,8 +43,15 @@ Mock.mock(/\/Article\/listAll/, 'get', function (options) {
   let tempDataListAll = dataListAll
   let p = Tools.getParam('p', options.url)
   let keyword = Tools.getParam('keyword', options.url)
+  let artsortId = parseInt(Tools.getParam('artsort_id', options.url))
   let tempExtra = extraData.extra
   tempDataListAll.total = tempExtra.length
+  if (artsortId !== 0 && tempExtra.length > 0) {
+    tempExtra = tempExtra.filter(item => {
+      return item.artsort_id === artsortId
+    })
+    tempDataListAll.total = tempExtra.length
+  }
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
       return item.art_title.indexOf(keyword) !== -1
