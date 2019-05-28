@@ -191,3 +191,10 @@ thead .cell {
     padding: 10px 6px !important;
     line-height: 1.6 !important;
 }
+
+/* tree */
+
+.el-tree-node__content {
+    height: 40px;
+    border-bottom: 1px solid #f2f6fc;
+}

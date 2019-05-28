@@ -7,23 +7,18 @@
     <el-tree
       ref="artsortTree"
       class="filter-tree"
-      :data="data"
+      :data="artsorts"
       :props="defaultProps"
       :filter-node-method="filterNode"
-      @node-drag-start="handleDragStart"
-      @node-drag-enter="handleDragEnter"
-      @node-drag-leave="handleDragLeave"
-      @node-drag-over="handleDragOver"
       @node-drag-end="handleDragEnd"
-      @node-drop="handleDrop"
       default-expand-all
       draggable
     >
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>
-          <el-button type="text" size="meidum" @click="() => append(data)">编辑</el-button>
-          <el-button type="text" size="meidum" @click="() => remove(node, data)">删除</el-button>
+          <el-button type="text" size="meidum" @click="append(data)">编辑</el-button>
+          <el-button type="text" size="meidum" @click="remove(node, data)">删除</el-button>
         </span>
       </span>
     </el-tree>
@@ -34,82 +29,57 @@
   </div>
 </template>
 <script>
+import http from '@/plugins/http'
+import '@/mock/Artsort'
+import Message from '@/plugins/message'
 export default {
   name: 'artsort_index',
   data () {
     return {
       keyword: '',
-      data: [{
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
+      artsorts: [],
       defaultProps: {
         children: 'children',
-        label: 'label'
+        label: 'artsort_name'
       }
     }
   },
   methods: {
-    handleDragStart: function (node, ev) {
-      console.log('drag start', node)
-    },
-    handleDragEnter: function (draggingNode, dropNode, ev) {
-      console.log('tree drag enter: ', dropNode.label)
-    },
-    handleDragLeave: function (draggingNode, dropNode, ev) {
-      console.log('tree drag leave: ', dropNode.label)
-    },
-    handleDragOver: function (draggingNode, dropNode, ev) {
-      console.log('tree drag over: ', dropNode.label)
+    filterNode (value, data) {
+      return !value || data.artsort_name.indexOf(value) !== -1
     },
     handleDragEnd: function (draggingNode, dropNode, dropType, ev) {
-      console.log('tree drag end: ', dropNode && dropNode.label, dropType)
+      this.updateAllArtsort()
     },
-    handleDrop: function (draggingNode, dropNode, dropType, ev) {
-      console.log('tree drop: ', dropNode.label, dropType)
-    },
-    filterNode (value, data) {
-      return !value || data.label.indexOf(value) !== -1
-    },
-    remove (node, data) {
+    remove: function (node, data) {
       const parent = node.parent
       const children = parent.data.children || parent.data
-      const index = children.findIndex(d => d.id === data.id)
+      const index = children.findIndex(d => d.artsort_id === data.artsort_id)
       children.splice(index, 1)
+      this.updateAllArtsort()
+    },
+    updateAllArtsort: function () {
+      let order = 1
+      this.artsorts = this.artsorts.map((item) => {
+        item.artsort_order = order++
+        return item
+      })
+      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts }).then((data) => {
+        if (data.code === 0) {
+          Message.success(data.msg)
+        } else {
+          Message.error(data.msg)
+        }
+      })
+    },
+    loadArtsort: function () {
+      this.artsorts = []
+      http.send({ url: '/Artsort/listAll' }).then((data) => {
+        this.artsorts = data.extra
+      })
     },
     loadMine: function () {
-
+      this.loadArtsort()
     }
   },
   mounted: function () {
