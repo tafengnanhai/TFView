@@ -38,11 +38,7 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <ArticleEdit
-      ref="articleEdit"
-      :dialogFormTitle="dialogFormTitle"
-      :dialogFormVisible="dialogFormVisible"
-    />
+    <ArticleEdit :dialogFormTitle="dialogFormTitle" ref="articleEdit"/>
   </div>
 </template>
 <script>
@@ -101,7 +97,7 @@ export default {
       }).catch(() => { })
     },
     toggleDialog: function (flag) {
-      this.dialogFormVisible = flag
+      this.$refs.articleEdit.toggleDialog(flag)
     },
     pageClick: function (p) {
       this.getData(p)

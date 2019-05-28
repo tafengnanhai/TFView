@@ -39,13 +39,12 @@
         </el-form-item>
         <el-form-item label="图片">
           <el-upload
-            ref="uploadSimg"
-            action
+            action="/Upload/index"
             list-type="picture-card"
             :on-preview="imgPreview"
             :before-upload="beforeUpload"
             :before-remove="beforeRemove"
-            :auto-upload="false"
+            :file-list="simgFileList"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -81,11 +80,12 @@
 import http from '@/plugins/http'
 import '@/mock/Artsort'
 import '@/mock/Site'
+import '@/mock/Upload'
 import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
 let permitEditorLength = 500000 // for rules
 export default {
-  props: ['dialogFormTitle', 'dialogFormVisible', 'dialogId'],
+  props: ['dialogFormTitle', 'dialogId'],
   name: 'article_edit',
   components: {
     VueEditor
@@ -93,6 +93,7 @@ export default {
   data () {
     return {
       fullscreen: false,
+      dialogFormVisible: false,
       dialogLastOperation: 'add',
       operForm: {
         artsort: [],
@@ -105,6 +106,7 @@ export default {
         art_gourl: '',
         art_content: ''
       },
+      simgFileList: [],
       dialogImgUrl: '',
       dialogImgVisible: false,
       permitImgTotal: 4,
@@ -149,7 +151,7 @@ export default {
       })
     },
     toggleDialog: function (flag) {
-      this.$parent.toggleDialog(flag)
+      this.dialogFormVisible = flag
     },
     toggleFullscreen: function () {
       this.fullscreen = !this.fullscreen
@@ -179,14 +181,21 @@ export default {
     beforeRemove: function (file, fileList) {
       this.operForm.art_simg = []
       fileList.forEach((f) => {
-        if (file.uid !== f.raw.uid) {
-          let reader = new FileReader()
-          reader.readAsDataURL(f.raw)
-          let self = this
-          reader.onload = function (e) {
-            self.operForm.art_simg.push(this.result)
-            // 不使用内置的limit属性，自定义
-            self.operForm.art_simg.length < self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+        if (!f.raw) {
+          // 后端传过来的图片
+          this.operForm.art_simg.push(f.url)
+          // 不使用内置的limit属性，自定义
+          this.operForm.art_simg.length < this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+        } else {
+          // 前端选择的图片
+          if (file.uid !== f.raw.uid) {
+            let reader = new FileReader()
+            reader.readAsDataURL(f.raw)
+            let self = this
+            reader.onload = function (e) {
+              self.operForm.art_simg.push(this.result)
+              self.operForm.art_simg.length < self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+            }
           }
         }
       })
@@ -256,7 +265,12 @@ export default {
       } else {
         this.dialogLastOperation = 'edit'
         http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then((data) => {
-          Object.assign(this.operForm, data)
+          this.simgFileList = data.extra.art_simg
+          data.extra.art_simg.forEach((f) => {
+            this.operForm.art_simg.push(f.url)
+          })
+          this.operForm.art_simg.length >= this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
+          Object.assign(this.operForm, data.extra)
         })
       }
     },
