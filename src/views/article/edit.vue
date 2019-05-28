@@ -40,11 +40,12 @@
         <el-form-item label="图片">
           <el-upload
             ref="uploadSimg"
-            action="/Upload/index"
+            action
             list-type="picture-card"
             :on-preview="imgPreview"
             :before-upload="beforeUpload"
             :before-remove="beforeRemove"
+            :auto-upload="false"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -79,7 +80,6 @@
 <script>
 import http from '@/plugins/http'
 import '@/mock/Artsort'
-import '@/mock/Upload'
 import '@/mock/Site'
 import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
