@@ -184,9 +184,11 @@ export default {
       fileList.forEach((f) => {
         if (!f.raw) {
           // 后端传过来的图片
-          this.operForm.art_simg.push(f.url)
-          // 不使用内置的limit属性，自定义
-          this.operForm.art_simg.length < this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+          if (f.uid !== file.uid) {
+            this.operForm.art_simg.push(f)
+            // 不使用内置的limit属性，自定义
+            this.operForm.art_simg.length < this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
+          }
         } else {
           // 前端选择的图片
           if (file.uid !== f.raw.uid) {
