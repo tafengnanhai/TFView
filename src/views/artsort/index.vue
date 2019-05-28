@@ -16,8 +16,6 @@
       @node-drag-over="handleDragOver"
       @node-drag-end="handleDragEnd"
       @node-drop="handleDrop"
-      :allow-drop="allowDrop"
-      :allow-drag="allowDrag"
       default-expand-all
       draggable
     >
@@ -30,7 +28,8 @@
       </span>
     </el-tree>
     <div class="tip">
-      <span class="red">说明</span>：请不要多人同时编辑，尤其是拖拽调整分类功能建议获取最新信息后由一人进行管理
+      <span class="red">说明</span>：请不要多人同时编辑，尤其是
+      <span class="red">[拖拽调整分类]</span>功能建议获取最新信息后由一人进行管理
     </div>
   </div>
 </template>
@@ -100,18 +99,14 @@ export default {
     handleDrop: function (draggingNode, dropNode, dropType, ev) {
       console.log('tree drop: ', dropNode.label, dropType)
     },
-    allowDrop: function (draggingNode, dropNode, type) {
-      if (dropNode.data.label === '二级 3-1') {
-        return type !== 'inner'
-      } else {
-        return true
-      }
-    },
-    allowDrag (draggingNode) {
-      return draggingNode.data.label.indexOf('三级 3-2-2') === -1
-    },
     filterNode (value, data) {
       return !value || data.label.indexOf(value) !== -1
+    },
+    remove (node, data) {
+      const parent = node.parent
+      const children = parent.data.children || parent.data
+      const index = children.findIndex(d => d.id === data.id)
+      children.splice(index, 1)
     },
     loadMine: function () {
 
