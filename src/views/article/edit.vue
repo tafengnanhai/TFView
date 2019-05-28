@@ -97,6 +97,7 @@ export default {
         artsort_id: null,
         art_pubdate: '', // new Date(), get from server
         art_simg: [],
+        art_gourl: '',
         art_content: ''
       },
       dialogImgUrl: '',
@@ -129,7 +130,7 @@ export default {
       let self = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Article/add', param: this.operForm, showSuccessTip: true }).then((data) => {
+          http.send({ sendType: 'post', url: '/Article/edit', param: this.operForm, showSuccessTip: true }).then((data) => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
@@ -186,9 +187,7 @@ export default {
       })
     },
     beforeUpload: function (file) {
-      const isPermitImgFormat = this.permitImgFormat.some((item) => {
-        return item === file.type
-      })
+      const isPermitImgFormat = this.permitImgFormat.includes(file.type)
       const ispermitImgSmallSize = file.size / 1024 < this.permitImgSmallSize
 
       !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
@@ -209,9 +208,7 @@ export default {
       this.dialogImgVisible = true
     },
     handleImageAdded: function (file, Editor, cursorLocation, resetUploader) {
-      const isPermitImgFormat = this.permitImgFormat.some((item) => {
-        return item === file.type
-      })
+      const isPermitImgFormat = this.permitImgFormat.includes(file.type)
       const ispermitImgBigSize = file.size / 1024 < this.permitImgBigSize
 
       !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
@@ -237,6 +234,7 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
+      this.operForm.art_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {
