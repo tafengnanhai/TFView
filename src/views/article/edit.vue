@@ -45,6 +45,7 @@
             :before-upload="beforeUpload"
             :before-remove="beforeRemove"
             :file-list="simgFileList"
+            ref="uploadSimg"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -193,7 +194,7 @@ export default {
             reader.readAsDataURL(f.raw)
             let self = this
             reader.onload = function (e) {
-              self.operForm.art_simg.push(this.result)
+              self.operForm.art_simg.push(({ name: f.name, url: this.result }))
               self.operForm.art_simg.length < self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
             }
           }
@@ -211,7 +212,7 @@ export default {
         reader.readAsDataURL(file)
         let self = this
         reader.onload = function (e) {
-          self.operForm.art_simg.push(this.result)
+          self.operForm.art_simg.push({ name: file.name, url: this.result })
           self.operForm.art_simg.length === self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
         }
       }
@@ -248,16 +249,13 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
-      this.$nextTick(() => {
-        // 避免添加打开窗体后触发了表单验证在编辑的时候未消失
-        this.$refs.operForm.resetFields()
-      })
       this.operForm.art_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {
             this.$refs.uploadSimg.clearFiles()
             this.operForm.art_simg = []
+            this.$refs.operForm.resetFields()
             document.querySelector('.el-upload--picture-card').style.display = ''
           })
           this.dialogLastOperation = 'add'
@@ -265,11 +263,14 @@ export default {
       } else {
         this.dialogLastOperation = 'edit'
         http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then((data) => {
-          this.simgFileList = data.extra.art_simg
-          data.extra.art_simg.forEach((f) => {
-            this.operForm.art_simg.push(f.url)
-          })
-          this.operForm.art_simg.length >= this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
+          this.operForm.art_simg = []
+          if (data.extra.art_simg.length > 0) {
+            this.simgFileList = data.extra.art_simg
+            data.extra.art_simg.forEach((f) => {
+              this.operForm.art_simg.push(f)
+            })
+            this.operForm.art_simg.length >= this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
+          }
           Object.assign(this.operForm, data.extra)
         })
       }
