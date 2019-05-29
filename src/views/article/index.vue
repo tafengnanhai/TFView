@@ -123,15 +123,17 @@ export default {
       this.selections.forEach(item => {
         ids.push(item.art_id)
       })
-      http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') } }).then(data => {
-        if (data.code === 0) {
-          let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
-          this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
-          this.getData(this.currentPage)
-          Message.success(data.msg)
-        } else {
-          Message.error(data.msg)
-        }
+      Confirm.show('确定删除吗，不可恢复哦?').then(() => {
+        http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') } }).then(data => {
+          if (data.code === 0) {
+            let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+            this.getData(this.currentPage)
+            Message.success(data.msg)
+          } else {
+            Message.error(data.msg)
+          }
+        })
       })
     },
     handleSelectionChange: function (arts) {
