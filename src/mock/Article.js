@@ -131,3 +131,15 @@ Mock.mock(/\/Article\/detail/, 'get', function (options) {
   })
   return tempData || dataError
 })
+
+let dataArtsortError = {
+  code: 1,
+  msg: '分类下有文章，请先删除文章'
+}
+
+// 为了检测方便，模拟环境下将分类下文章检测放到Article中，实际开发中建议放到Artsort中
+Mock.mock(/\/Article\/checkArtsort/, 'get', function (options) {
+  let id = parseInt(Tools.getParam('id', options.url))
+  let isExists = extraData.extra.some(item => item.artsort_id === id)
+  return isExists ? dataArtsortError : dataSuccess
+})

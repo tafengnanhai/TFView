@@ -17,8 +17,8 @@
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>
-          <el-button type="text" size="meidum" @click="append(data)">编辑</el-button>
-          <el-button type="text" size="meidum" @click="remove(node, data)">删除</el-button>
+          <el-button type="text" @click.stop="append(data)">编辑</el-button>
+          <el-button type="text" @click.stop="remove(node, data)">删除</el-button>
         </span>
       </span>
     </el-tree>
@@ -30,8 +30,10 @@
 </template>
 <script>
 import http from '@/plugins/http'
+import '@/mock/Article'
 import '@/mock/Artsort'
 import Message from '@/plugins/message'
+import Confirm from '@/plugins/confirm'
 export default {
   name: 'artsort_index',
   data () {
@@ -52,11 +54,23 @@ export default {
       this.updateAllArtsort()
     },
     remove: function (node, data) {
-      const parent = node.parent
-      const children = parent.data.children || parent.data
-      const index = children.findIndex(d => d.artsort_id === data.artsort_id)
-      children.splice(index, 1)
-      this.updateAllArtsort()
+      Confirm.show('确定删除吗，不可恢复哦?').then(() => {
+        if (node.data.children) {
+          Message.error('请先删除子类')
+          return
+        }
+        http.send({ url: '/Article/checkArtsort', param: { params: { id: data.artsort_id } } }).then((data) => {
+          if (data.code === 0) {
+            const parent = node.parent
+            const children = parent.data.children || parent.data
+            const index = children.findIndex(d => d.artsort_id === data.artsort_id)
+            children.splice(index, 1)
+            this.updateAllArtsort()
+          } else {
+            Message.error(data.msg)
+          }
+        })
+      })
     },
     updateAllArtsort: function () {
       let order = 1
@@ -82,7 +96,7 @@ export default {
       this.loadArtsort()
     }
   },
-  mounted: function () {
+  activated: function () {
     this.loadMine()
   },
   watch: {

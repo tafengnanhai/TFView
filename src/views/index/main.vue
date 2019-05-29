@@ -130,7 +130,7 @@ export default {
       })
     }
   },
-  mounted: function () {
+  mounted: function () { // 数据资源占用较多的页面不放到activated中，可以选择手动刷新
     this.loadMine()
   },
   watch: {

@@ -68,6 +68,7 @@ let dataSuccess = {
 }
 
 Mock.mock(/\/Artsort\/editAll/, 'post', function (options) {
+  // 实际开发中这里应该增加服务器端的有效性校验（如父类不存在，分类下有文章，分类下有子类等）
   dataListAll.extra = JSON.parse(options.body)
   return dataSuccess
 })

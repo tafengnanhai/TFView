@@ -39,8 +39,8 @@
       <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
       <el-table-column label="操作" min-width="20%" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="edit(scope.row.art_id)">编 辑</el-button>
-          <el-button @click="del(scope.row.art_id)" type="danger" size="small">删 除</el-button>
+          <el-button type="text" @click="edit(scope.row.art_id)">编 辑</el-button>
+          <el-button @click="del(scope.row.art_id)" type="text">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
