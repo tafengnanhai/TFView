@@ -76,6 +76,24 @@ let dataError = {
   msg: '文章不存在或者已删除'
 }
 
+Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
+  let result = JSON.parse(options.body)
+  let ids = result.ids.split(',')
+  let isExists = false
+  extraData.extra = extraData.extra.filter(item => {
+    if (ids.includes(item.art_id.toString())) {
+      dataListAll.total--
+      isExists = true
+      return false
+    }
+    return true
+  })
+  if (!isExists) {
+    return dataError
+  }
+  return dataSuccess
+})
+
 Mock.mock(/\/Article\/del/, 'post', function (options) {
   let result = JSON.parse(options.body)
   let id = result.id

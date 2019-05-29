@@ -1,6 +1,13 @@
 <template>
   <div id="articleIndex">
     <div class="panel">
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        size="medium"
+        @click="delSelection()"
+        :disabled="this.selections.length === 0"
+      >删 除 选 中</el-button>
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="add()">添 加</el-button>
       <el-select
         v-model="artsortId"
@@ -28,16 +35,17 @@
       ></el-input>
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>
-    <el-table :data="listData" border style="width: 100%">
-      <el-table-column prop="art_id" label="编号" min-width="15%" align="center"></el-table-column>
-      <el-table-column label="标题" min-width="30%" align="center">
+    <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="50" align="center"></el-table-column>
+      <el-table-column prop="art_id" label="编号" width="80" align="center"></el-table-column>
+      <el-table-column label="标题" min-width="300" align="center">
         <template slot-scope="scope">
           <div v-html="formatter(scope.row.art_title)"></div>
         </template>
       </el-table-column>
-      <el-table-column prop="artsort_name" label="分类" min-width="15%" align="center"></el-table-column>
-      <el-table-column prop="art_pubdate" label="日期" min-width="25%" align="center"></el-table-column>
-      <el-table-column label="操作" min-width="20%" align="center">
+      <el-table-column prop="artsort_name" label="分类" min-width="120" align="center"></el-table-column>
+      <el-table-column prop="art_pubdate" label="日期" width="180" align="center"></el-table-column>
+      <el-table-column label="操作" width="160" align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="edit(scope.row.art_id)">编 辑</el-button>
           <el-button @click="del(scope.row.art_id)" type="text">删 除</el-button>
@@ -59,6 +67,7 @@
 import http from '@/plugins/http'
 import '@/mock/Article'
 import Message from '@/plugins/message'
+import Confirm from '@/plugins/confirm'
 import ArticleEdit from '@/views/article/edit.vue'
 export default {
   name: 'article_index',
@@ -78,7 +87,8 @@ export default {
       listData: null,
       total: 1,
       pageSize: 10,
-      currentPage: 1
+      currentPage: 1,
+      selections: []
     }
   },
   methods: {
@@ -95,12 +105,8 @@ export default {
       this.toggleDialog(true)
     },
     del: function (artId) {
-      this.$confirm('确定删除吗，不可恢复哦?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        http.send({ sendType: 'post', url: `/Article/del`, param: { id: artId } }).then(data => {
+      Confirm.show('确定删除吗，不可恢复哦?').then(() => {
+        http.send({ url: '/Article/del', sendType: 'post', param: { id: artId } }).then(data => {
           if (data.code === 0) {
             let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
@@ -110,7 +116,26 @@ export default {
             Message.error(data.msg)
           }
         })
-      }).catch(() => { })
+      })
+    },
+    delSelection: function () {
+      let ids = []
+      this.selections.forEach(item => {
+        ids.push(item.art_id)
+      })
+      http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') } }).then(data => {
+        if (data.code === 0) {
+          let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+          this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+          this.getData(this.currentPage)
+          Message.success(data.msg)
+        } else {
+          Message.error(data.msg)
+        }
+      })
+    },
+    handleSelectionChange: function (arts) {
+      this.selections = arts
     },
     toggleDialog: function (flag) {
       this.$refs.articleEdit.toggleDialog(flag)
