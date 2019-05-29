@@ -246,7 +246,7 @@ export default {
       })
     }
   },
-  mounted: function () {
+  activated: function () { // 和article/index.vue共用生命周期，不是显示的时候触发
     this.loadMine()
   },
   watch: {

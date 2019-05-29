@@ -157,10 +157,10 @@ export default {
     loadMine: function () {
       this.loadArtsort()
       this.artsortId = 0
-      this.getData(1)
+      this.getData(this.currentPage)
     }
   },
-  mounted: function () {
+  activated: function () {
     this.loadMine()
   },
   watch: {
