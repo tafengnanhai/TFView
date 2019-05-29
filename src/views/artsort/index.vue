@@ -59,15 +59,15 @@ export default {
           Message.error('请先删除子类')
           return
         }
-        http.send({ url: '/Article/checkArtsort', param: { params: { id: data.artsort_id } } }).then(data => {
-          if (data.code === 0) {
+        http.send({ url: '/Article/checkArtsort', param: { params: { id: data.artsort_id } } }).then(result => {
+          if (result.code === 0) {
             const parent = node.parent
             const children = parent.data.children || parent.data
             const index = children.findIndex(d => d.artsort_id === data.artsort_id)
             children.splice(index, 1)
             this.updateAllArtsort()
           } else {
-            Message.error(data.msg)
+            Message.error(result.msg)
           }
         })
       })
