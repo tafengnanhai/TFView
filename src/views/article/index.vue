@@ -200,7 +200,7 @@ export default {
 
 <style scoped>
 #articleIndex {
-  min-width: 800px;
+  min-width: 900px;
 }
 .panel {
   width: 100%;
