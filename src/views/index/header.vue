@@ -97,7 +97,7 @@ export default {
           }
         })
       }
-      this.tabs = tempTabs.filter((tab) => tab.name !== targetName)
+      this.tabs = tempTabs.filter(tab => tab.name !== targetName)
       this.$router.push({ path: this.activeTabName })
     },
     reloadPage: function () {

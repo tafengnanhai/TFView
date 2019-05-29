@@ -100,7 +100,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        http.send({ sendType: 'post', url: `/Article/del`, param: { id: artId } }).then((data) => {
+        http.send({ sendType: 'post', url: `/Article/del`, param: { id: artId } }).then(data => {
           if (data.code === 0) {
             let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
@@ -119,7 +119,7 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId } } }).then((data) => {
+      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId } } }).then(data => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
@@ -141,15 +141,15 @@ export default {
       this.artsorts.push(artsort)
       level++
       if (item.children) {
-        item.children.forEach((itemChildren) => {
+        item.children.forEach(itemChildren => {
           this.recursiveArtsort(itemChildren, level)
         })
       }
     },
     loadArtsort: function () {
       this.artsorts = []
-      http.send({ url: '/Artsort/listAll' }).then((data) => {
-        data.extra.forEach((item) => {
+      http.send({ url: '/Artsort/listAll' }).then(data => {
+        data.extra.forEach(item => {
           this.recursiveArtsort(item, 0)
         })
       })

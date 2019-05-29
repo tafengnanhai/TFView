@@ -136,9 +136,9 @@ export default {
   methods: {
     submitForm: function (formName) {
       let self = this
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Article/edit', param: this.operForm, showSuccessTip: true }).then((data) => {
+          http.send({ sendType: 'post', url: '/Article/edit', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
@@ -162,15 +162,15 @@ export default {
       this.operForm.artsort.push(artsort)
       level++
       if (item.children) {
-        item.children.forEach((itemChildren) => {
+        item.children.forEach(itemChildren => {
           this.recursiveArtsort(itemChildren, level)
         })
       }
     },
     loadArtsort: function () {
       this.operForm.artsort = []
-      http.send({ url: '/Artsort/listAll' }).then((data) => {
-        data.extra.forEach((item) => {
+      http.send({ url: '/Artsort/listAll' }).then(data => {
+        data.extra.forEach(item => {
           this.recursiveArtsort(item, 0)
         })
       })
@@ -181,7 +181,7 @@ export default {
     },
     beforeRemove: function (file, fileList) {
       this.operForm.art_simg = []
-      fileList.forEach((f) => {
+      fileList.forEach(f => {
         if (!f.raw) {
           // 后端传过来的图片
           if (f.uid !== file.uid) {
@@ -241,7 +241,7 @@ export default {
     },
     loadMine: function () {
       this.loadArtsort()
-      http.send({ url: '/Site/getServerTime' }).then((data) => {
+      http.send({ url: '/Site/getServerTime' }).then(data => {
         this.operForm.art_pubdate = data.extra.time
       })
     }
@@ -264,11 +264,11 @@ export default {
         }
       } else {
         this.dialogLastOperation = 'edit'
-        http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then((data) => {
+        http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
           this.operForm.art_simg = []
           if (data.extra.art_simg.length > 0) {
             this.simgFileList = data.extra.art_simg
-            data.extra.art_simg.forEach((f) => {
+            data.extra.art_simg.forEach(f => {
               this.operForm.art_simg.push(f)
             })
             this.operForm.art_simg.length >= this.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')

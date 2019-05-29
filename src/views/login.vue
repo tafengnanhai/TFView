@@ -54,9 +54,9 @@ export default {
   },
   methods: {
     submitForm: function (formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Login/check', param: this.operForm, showSuccessTip: true }).then((data) => {
+          http.send({ sendType: 'post', url: '/Login/check', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               this.$store.commit('initAccount', { username: this.operForm.username, token: data.extra.token })
               this.$router.push('/')

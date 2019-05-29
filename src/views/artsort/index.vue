@@ -59,7 +59,7 @@ export default {
           Message.error('请先删除子类')
           return
         }
-        http.send({ url: '/Article/checkArtsort', param: { params: { id: data.artsort_id } } }).then((data) => {
+        http.send({ url: '/Article/checkArtsort', param: { params: { id: data.artsort_id } } }).then(data => {
           if (data.code === 0) {
             const parent = node.parent
             const children = parent.data.children || parent.data
@@ -74,11 +74,11 @@ export default {
     },
     updateAllArtsort: function () {
       let order = 1
-      this.artsorts = this.artsorts.map((item) => {
+      this.artsorts = this.artsorts.map(item => {
         item.artsort_order = order++
         return item
       })
-      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts }).then((data) => {
+      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts }).then(data => {
         if (data.code === 0) {
           Message.success(data.msg)
         } else {
@@ -88,7 +88,7 @@ export default {
     },
     loadArtsort: function () {
       this.artsorts = []
-      http.send({ url: '/Artsort/listAll' }).then((data) => {
+      http.send({ url: '/Artsort/listAll' }).then(data => {
         this.artsorts = data.extra
       })
     },

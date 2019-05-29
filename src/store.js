@@ -15,23 +15,29 @@ export default new Vuex.Store({
     pageSize: 10,
     reloadPageTime: new Date().getTime()
   },
-  mutations: { // 需要同步的操作不要放到actions中，放到mutations中
+  mutations: {
+    // 需要同步的操作不要放到actions中，放到mutations中
     initAccount: (state, data) => {
       lockr.set('username', data.username)
       lockr.set('token', data.token)
       state.username = data.username
       state.token = data.token
     },
-    recoverAccount: (state) => {
+    recoverAccount: state => {
       state.username = lockr.get('username', '')
       state.token = lockr.get('token', '')
     },
-    checkLoginStatus: (state) => {
-      if (lockr.get('username') === undefined || lockr.get('token') === undefined || state.username === '' || state.token === '') {
+    checkLoginStatus: state => {
+      if (
+        lockr.get('username') === undefined ||
+        lockr.get('token') === undefined ||
+        state.username === '' ||
+        state.token === ''
+      ) {
         router.push({ path: '/login', query: { from: 'timeout' } })
       }
     },
-    toggleMenu: (state) => {
+    toggleMenu: state => {
       state.isCollapse = !state.isCollapse
       let asideWidth = state.isCollapse ? '64px' : '160px'
       document.getElementById('aside').style.width = asideWidth
@@ -40,10 +46,10 @@ export default new Vuex.Store({
       let siteWidth = state.isCollapse ? '20px' : '120px'
       document.getElementById('sitename').style.width = siteWidth
     },
-    updateReloadPageTime: (state) => {
+    updateReloadPageTime: state => {
       state.reloadPageTime = new Date().getTime()
     },
-    logout: (state) => {
+    logout: state => {
       lockr.rm('username')
       lockr.rm('token')
       state.username = ''
@@ -51,17 +57,18 @@ export default new Vuex.Store({
       state.isCollapse = false
     }
   },
-  actions: { // 可以或者必须异步的操作放到actions中
-    checkLoginStatus: (context) => {
+  actions: {
+    // 可以或者必须异步的操作放到actions中
+    checkLoginStatus: context => {
       context.commit('checkLoginStatus')
     },
-    toggleMenu: (context) => {
+    toggleMenu: context => {
       context.commit('toggleMenu')
     },
-    updateReloadPageTime: (context) => {
+    updateReloadPageTime: context => {
       context.commit('updateReloadPageTime')
     },
-    logout: (context) => {
+    logout: context => {
       context.commit('logout')
     }
   }
