@@ -55,7 +55,7 @@ export default {
     },
     remove: function (node, data) {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
-        if (node.data.children) {
+        if (node.data.children && node.data.children.length > 0) {
           Message.error('请先删除子类')
           return
         }
