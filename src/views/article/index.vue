@@ -179,12 +179,12 @@ export default {
         data.extra.forEach(item => {
           this.recursiveArtsort(item, 0)
         })
+        this.artsorts.some(item => item.artsort_id === this.artsortId) || (this.artsortId = 0)
+        this.getData(this.currentPage)
       })
     },
     loadMine: function () {
       this.loadArtsort()
-      this.artsortId = 0
-      this.getData(this.currentPage)
     }
   },
   activated: function () {
