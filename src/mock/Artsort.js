@@ -6,29 +6,21 @@ let dataListAll = Mock.mock({
   extra: [
     {
       artsort_id: 1,
-      artsort_order: 1,
-      artsort_parentid: 0,
       artsort_name: '分类1',
       artsort_type: '',
       children: [
         {
           artsort_id: 2,
-          artsort_order: 2,
-          artsort_parentid: 1,
           artsort_name: '分类2',
           artsort_type: '',
           children: [
             {
               artsort_id: 3,
-              artsort_order: 3,
-              artsort_parentid: 2,
               artsort_name: '分类3',
               artsort_type: ''
             },
             {
               artsort_id: 4,
-              artsort_order: 4,
-              artsort_parentid: 2,
               artsort_name: '分类4',
               artsort_type: ''
             }
@@ -36,8 +28,6 @@ let dataListAll = Mock.mock({
         },
         {
           artsort_id: 5,
-          artsort_order: 5,
-          artsort_parentid: 1,
           artsort_name: '分类5',
           artsort_type: ''
         }
@@ -45,15 +35,11 @@ let dataListAll = Mock.mock({
     },
     {
       artsort_id: 6,
-      artsort_order: 6,
-      artsort_parentid: 0,
       artsort_name: '分类6',
       artsort_type: ''
     },
     {
       artsort_id: 7,
-      artsort_order: 7,
-      artsort_parentid: 0,
       artsort_name: '分类7',
       artsort_type: ''
     }

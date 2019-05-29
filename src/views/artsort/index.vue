@@ -72,33 +72,8 @@ export default {
         })
       })
     },
-    recursiveUpdateAllArtsort: function (item, tempArts, order) {
-      item.artsort_order = order
-      tempArts.push(item)
-      if (item.children) {
-        item.children.forEach(itemChildren => {
-          this.recursiveUpdateAllArtsort(itemChildren, order++)
-        })
-      }
-    },
     updateAllArtsort: function () {
-      console.log(this.artsorts)
-      let tempArts = []
-      this.recursiveUpdateAllArtsort(this.artsorts, tempArts, 1)
-      console.log(this.artsorts)
-      console.log(this.artsorts.length)
-      /* let order = 1
-      this.artsorts = this.artsorts.map(item => {
-        item.artsort_order = order++
-        return item
-      }) */
-      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts }).then(data => {
-        if (data.code === 0) {
-          Message.success(data.msg)
-        } else {
-          Message.error(data.msg)
-        }
-      })
+      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts, showSuccessTip: true, showErrTip: true })
     },
     loadArtsort: function () {
       this.artsorts = []
