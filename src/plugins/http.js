@@ -10,26 +10,53 @@ axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 
 export default {
-  send: (obj) => {
-    return new Promise((resolve, reject) => {
-      obj.sendType = obj.sendType || 'get'
-      obj.showSuccessTip = obj.showSuccessTip || false
-      obj.showErrTip = obj.showErrTip || true
-      obj.neeLogin = obj.neeLogin || true
-      axios[obj.sendType](obj.url, obj.param).then((res) => {
-        if (res.data.code === 0) {
-          obj.showSuccessTip && Message.success(res.data.msg)
-        } else if (res.data.code === 1) {
-          obj.showErrTip && Message.error(res.data.msg)
-        } else if (res.data.code === -1) {
-          obj.neeLogin && router.push({ path: '/login', query: { from: 'timeout' } })
-        }
-        resolve(res.data)
-      }).catch((error) => {
-        reject(error.data)
-      })
+  send: obj => {
+    obj.sendType = obj.sendType || 'get'
+    obj.showSuccessTip = obj.showSuccessTip || false
+    obj.showErrTip = obj.showErrTip || true
+    obj.neeLogin = obj.neeLogin || true
+    return new Promise(resolve => {
+      axios[obj.sendType](obj.url, obj.param)
+        .then(res => {
+          if (res.data.code === 0) {
+            obj.showSuccessTip && Message.success(res.data.msg)
+          } else if (res.data.code === 1) {
+            obj.showErrTip && Message.error(res.data.msg)
+          } else if (res.data.code === -1) {
+            obj.neeLogin &&
+              router.push({ path: '/login', query: { from: 'timeout' } })
+          }
+          resolve(res.data)
+        })
+        .catch(() => {})
     })
   }
+  // 如果显式处理异常更换为以下代码
+  /*
+  send: obj => {
+    obj.sendType = obj.sendType || 'get'
+    obj.showSuccessTip = obj.showSuccessTip || false
+    obj.showErrTip = obj.showErrTip || true
+    obj.neeLogin = obj.neeLogin || true
+    return new Promise((resolve, reject) => {
+      axios[obj.sendType](obj.url, obj.param)
+        .then(res => {
+          if (res.data.code === 0) {
+            obj.showSuccessTip && Message.success(res.data.msg)
+          } else if (res.data.code === 1) {
+            obj.showErrTip && Message.error(res.data.msg)
+          } else if (res.data.code === -1) {
+            obj.neeLogin &&
+              router.push({ path: '/login', query: { from: 'timeout' } })
+          }
+          resolve(res.data)
+        })
+        .catch(error => {
+          reject(error.data)
+        })
+    })
+  }
+  */
 }
 
 axios.interceptors.request.use(
