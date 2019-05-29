@@ -73,9 +73,7 @@ export default {
           label: this.$route.meta.label,
           name: this.$route.path
         }
-        let isExists = this.tabs.some((tab, index) => {
-          return tab.label === newTab.label
-        })
+        let isExists = this.tabs.some((tab, index) => tab.label === newTab.label)
         !isExists && this.tabs.push(newTab)
         this.activeTabName = this.$route.path
       }
