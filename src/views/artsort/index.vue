@@ -83,6 +83,7 @@ export default {
     },
     loadMine: function () {
       this.loadArtsort()
+      this.keyword = ''
     }
   },
   activated: function () {
