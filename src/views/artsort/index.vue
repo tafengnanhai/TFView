@@ -97,7 +97,7 @@ export default {
       })
     },
     updateAllArtsort: function () {
-      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts, showSuccessTip: true, showErrTip: true })
+      http.send({ url: '/Artsort/editAll', sendType: 'post', param: this.artsorts, showSuccessTip: true })
     },
     loadArtsort: function () {
       this.artsorts = []

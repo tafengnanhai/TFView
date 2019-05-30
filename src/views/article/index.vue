@@ -105,14 +105,12 @@ export default {
     },
     del: function (artId) {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
-        http.send({ url: '/Article/del', sendType: 'post', param: { id: artId } }).then(data => {
+        http.send({ url: '/Article/del', sendType: 'post', param: { id: artId }, showSuccessTip: true }).then(data => {
           if (data.code === 0) {
-            const computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            this.total = data.total
+            const computedCurrentPage = Math.ceil(this.total / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
             this.getData(this.currentPage)
-            Message.success(data.msg)
-          } else {
-            Message.error(data.msg)
           }
         })
       })
@@ -123,14 +121,12 @@ export default {
         ids.push(item.art_id)
       })
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
-        http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') } }).then(data => {
+        http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') }, showSuccessTip: true }).then(data => {
           if (data.code === 0) {
-            const computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            this.total = data.total
+            const computedCurrentPage = Math.ceil(this.total / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
             this.getData(this.currentPage)
-            Message.success(data.msg)
-          } else {
-            Message.error(data.msg)
           }
         })
       })

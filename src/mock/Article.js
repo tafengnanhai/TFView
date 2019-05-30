@@ -66,28 +66,24 @@ const dataSuccess = {
   msg: '操作成功'
 }
 
-const dataError = {
-  code: 1,
-  msg: '文章不存在或者已删除'
-}
-
 Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
   const result = JSON.parse(options.body)
   const ids = result.ids.valueOf()
-  let isExists = false
   extraData.extra = extraData.extra.filter(item => {
     if (ids.includes(item.art_id.toString())) {
       dataListAll.total--
-      isExists = true
       return false
     }
     return true
   })
-  if (!isExists) {
-    return dataError
-  }
+  dataSuccess.total = dataListAll.total
   return dataSuccess
 })
+
+const dataError = {
+  code: 1,
+  msg: '文章不存在或者已删除'
+}
 
 Mock.mock(/\/Article\/del/, 'post', function (options) {
   const result = JSON.parse(options.body)
@@ -103,6 +99,7 @@ Mock.mock(/\/Article\/del/, 'post', function (options) {
     return dataError
   }
   dataListAll.total--
+  dataSuccess.total = dataListAll.total
   return dataSuccess
 })
 
