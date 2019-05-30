@@ -17,7 +17,7 @@
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>
-          <el-button type="text" @click.stop="append(data)">编辑</el-button>
+          <el-button type="text" @click.stop="edit(data.artsort_id)">编辑</el-button>
           <el-button type="text" @click.stop="remove(node, data)">删除</el-button>
         </span>
       </span>
@@ -26,6 +26,7 @@
       <span class="red">说明</span>：请不要多人同时编辑，尤其是
       <span class="red">[拖拽调整分类]</span>功能建议获取最新信息后由一人进行管理
     </div>
+    <ArtsortEdit :dialogFormTitle="dialogFormTitle" ref="artsortEdit"/>
   </div>
 </template>
 <script>
@@ -34,10 +35,18 @@ import '@/mock/Article'
 import '@/mock/Artsort'
 import Message from '@/plugins/message'
 import Confirm from '@/plugins/confirm'
+import ArtsortEdit from '@/views/artsort/edit.vue'
 export default {
   name: 'artsort_index',
+  components: {
+    ArtsortEdit
+  },
   data () {
     return {
+      dialogFormVisible: false,
+      dialogFormTitle: '',
+      dialogId: 0,
+      dialogEditTime: 0,
       keyword: '',
       artsorts: [],
       defaultProps: {
@@ -47,6 +56,21 @@ export default {
     }
   },
   methods: {
+    add: function () {
+      this.dialogFormTitle = '添加'
+      this.dialogId = 0
+      this.dialogEditTime = new Date().getTime()
+      this.toggleDialog(true)
+    },
+    edit: function (artsortId) {
+      this.dialogFormTitle = '编辑'
+      this.dialogId = artsortId
+      this.dialogEditTime = new Date().getTime()
+      this.toggleDialog(true)
+    },
+    toggleDialog: function (flag) {
+      this.$refs.artsortEdit.toggleDialog(flag)
+    },
     filterNode (value, data) {
       return !value || data.artsort_name.indexOf(value) !== -1
     },

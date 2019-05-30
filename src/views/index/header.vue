@@ -86,13 +86,15 @@ export default {
     removeTab: function (targetName) {
       let tempTabs = this.tabs
       if (this.activeTabName === targetName) {
-        tempTabs.forEach((tab, index) => {
+        tempTabs.every((tab, index) => {
           if (tab.name === targetName) {
             let nextTab = tempTabs[index + 1] || tempTabs[index - 1]
             if (nextTab) {
               this.activeTabName = nextTab.name
             }
+            return false
           }
+          return true
         })
       }
       this.tabs = tempTabs.filter(tab => tab.name !== targetName)

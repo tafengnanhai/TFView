@@ -163,7 +163,20 @@ thead .cell {
 
 .el-dialog {
     min-width: 320px;
-    margin-top: 0 !important;
+}
+
+.dialogFullscreen {
+    position: absolute;
+    right: 60px;
+    top: 10px;
+    font-size: 40px;
+}
+
+.dialogClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 40px;
 }
 
 /*message*/

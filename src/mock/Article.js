@@ -139,13 +139,15 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
 Mock.mock(/\/Article\/detail/, 'get', function (options) {
   let id = parseInt(Tools.getParam('id', options.url))
   let tempData
-  extraData.extra.forEach(item => {
+  extraData.extra.every(item => {
     if (item.art_id === id) {
       tempData = {}
       tempData.code = 0
       tempData.msg = '操作成功'
       tempData.extra = item
+      return false
     }
+    return true
   })
   return tempData || dataError
 })

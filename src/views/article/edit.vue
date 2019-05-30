@@ -291,16 +291,7 @@ export default {
 </script>
 
 <style scoped >
-.dialogFullscreen {
-  position: absolute;
-  right: 60px;
-  top: 10px;
-  font-size: 40px;
-}
-.dialogClose {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 40px;
+.el-dialog {
+  margin-top: 0 !important;
 }
 </style>
