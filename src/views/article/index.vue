@@ -37,15 +37,17 @@
     </div>
     <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center"></el-table-column>
-      <el-table-column prop="art_id" label="编号" width="80" align="center"></el-table-column>
-      <el-table-column label="标题" min-width="300" align="center">
+      <el-table-column prop="art_id" label="编号" width="60" align="center"></el-table-column>
+      <el-table-column label="标题" min-width="160" align="center">
         <template slot-scope="scope">
           <div v-html="formatter(scope.row.art_title)"></div>
         </template>
       </el-table-column>
-      <el-table-column prop="artsort_name" label="分类" min-width="120" align="center"></el-table-column>
-      <el-table-column prop="art_pubdate" label="日期" width="180" align="center"></el-table-column>
-      <el-table-column label="操作" width="160" align="center">
+      <el-table-column prop="artsort_name" label="分类" min-width="60" align="center"></el-table-column>
+      <el-table-column label="日期" min-width="100" align="center">
+        <template slot-scope="scope">{{scope.row.art_pubdate.substring(0,10)}}</template>
+      </el-table-column>
+      <el-table-column label="操作" width="140" align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="edit(scope.row.art_id)">编 辑</el-button>
           <el-button @click="del(scope.row.art_id)" type="text">删 除</el-button>
@@ -213,7 +215,7 @@ export default {
 
 <style scoped>
 #articleIndex {
-  min-width: 900px;
+  min-width: 800px;
 }
 .panel {
   width: 100%;
