@@ -38,8 +38,6 @@
 <script>
 import http from '@/plugins/http'
 import '@/mock/Artsort'
-import '@/mock/Site'
-import '@/mock/Upload'
 export default {
   props: ['dialogFormTitle', 'dialogId'],
   name: 'artsort_edit',
@@ -50,6 +48,7 @@ export default {
       dialogLastOperation: 'add',
       operForm: {
         artsort_id: 0,
+        artsort_parentid: 0,
         artsort_name: '',
         artsort_type: ''
       },

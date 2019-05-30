@@ -26,7 +26,7 @@
               :label="item.artsort_name"
               :value="item.artsort_id"
               :key="item.artsort_id"
-              v-for="item in operForm.artsort"
+              v-for="item in artsorts"
             ></el-option>
           </el-select>&nbsp;&nbsp;
           <el-button icon="el-icon-refresh blue b" type="plain" @click="updateArtsort()"></el-button>
@@ -96,8 +96,8 @@ export default {
       fullscreen: false,
       dialogFormVisible: false,
       dialogLastOperation: 'add',
+      artsorts: [],
       operForm: {
-        artsort: [],
         art_id: 0,
         art_title: '',
         art_source: '本站',
@@ -159,7 +159,7 @@ export default {
     },
     recursiveArtsort: function (item, level) {
       const artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
-      this.operForm.artsort.push(artsort)
+      this.artsorts.push(artsort)
       level++
       if (item.children) {
         item.children.forEach(itemChildren => {
@@ -168,7 +168,7 @@ export default {
       }
     },
     loadArtsort: function () {
-      this.operForm.artsort = []
+      this.artsorts = []
       http.send({ url: '/Artsort/listAll' }).then(data => {
         data.extra.forEach(item => {
           this.recursiveArtsort(item, 0)

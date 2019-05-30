@@ -60,11 +60,6 @@ const dataError = {
   msg: '分类不存在或者已删除'
 }
 
-const dataExistsError = {
-  code: 1,
-  msg: '相同级别下已经存在同名的分类'
-}
-
 Mock.mock(/\/Artsort\/editAll/, 'post', function (options) {
   // 实际开发中这里应该增加服务器端的有效性校验（如父类不存在，分类下有文章，分类下有子类等）
   dataListAll.extra = JSON.parse(options.body)
@@ -72,21 +67,12 @@ Mock.mock(/\/Artsort\/editAll/, 'post', function (options) {
 })
 
 Mock.mock(/\/Artsort\/edit/, 'post', function (options) {
-  let result = JSON.parse(options.body)
+  const result = JSON.parse(options.body)
   if (result.artsort_id === 0) {
     // add
-    let isExists = false
-    dataListAll.extra.every(item => {
-      isExists = item.artsort_name === result.artsort_name
-      return !isExists
-    })
-    if (isExists) {
-      return dataExistsError
-    } else {
-      result.artsort_id = ++maxId
-      dataListAll.extra.unshift(result)
-      dataListAll.total++
-    }
+    result.artsort_id = ++maxId
+    dataListAll.extra.unshift(result)
+    dataListAll.total++
   } else {
     // edit
     let isExists = false

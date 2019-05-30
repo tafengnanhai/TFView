@@ -24,7 +24,7 @@
     </el-tree>
     <div class="tip">
       <span class="red">说明</span>：请不要多人同时编辑，尤其是
-      <span class="red">[拖拽调整分类]</span>功能建议获取最新信息后由一人进行管理
+      <span class="red">[拖拽调整分类]</span>功能建议获取最新信息后由一人进行管理，通过拖拽调整层级和顺序
     </div>
     <ArtsortEdit :dialogFormTitle="dialogFormTitle" ref="artsortEdit"/>
   </div>
@@ -117,7 +117,7 @@ export default {
     '$store.state.reloadPageTime': function () {
       this.loadMine()
     },
-    'keyword': function (val) {
+    keyword: function (val) {
       this.$refs.artsortTree.filter(val)
     }
   }
