@@ -1,12 +1,12 @@
 export default {
   getParam: (name, url) => {
-    let paramUrl = url.substr(url.indexOf('?') + 1)
-    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
-    let result = paramUrl.match(reg)
+    const paramUrl = url.substr(url.indexOf('?') + 1)
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+    const result = paramUrl.match(reg)
     return result === null ? null : unescape(decodeURI(result[2]))
   },
   getSection: (loc, url) => {
-    let result = url.split('/')
+    const result = url.split('/')
     return result.length > loc ? result[loc] : null
   }
 }

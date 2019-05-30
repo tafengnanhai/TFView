@@ -69,11 +69,11 @@ export default {
     },
     addTab: function () {
       if (this.$route.path !== '/') {
-        let newTab = {
+        const newTab = {
           label: this.$route.meta.label,
           name: this.$route.path
         }
-        let isExists = this.tabs.some((tab, index) => tab.label === newTab.label)
+        const isExists = this.tabs.some((tab, index) => tab.label === newTab.label)
         !isExists && this.tabs.push(newTab)
         this.activeTabName = this.$route.path
       }
@@ -84,11 +84,11 @@ export default {
       this.$router.push({ path: tab.name })
     },
     removeTab: function (targetName) {
-      let tempTabs = this.tabs
+      const tempTabs = this.tabs
       if (this.activeTabName === targetName) {
         tempTabs.every((tab, index) => {
           if (tab.name === targetName) {
-            let nextTab = tempTabs[index + 1] || tempTabs[index - 1]
+            const nextTab = tempTabs[index + 1] || tempTabs[index - 1]
             if (nextTab) {
               this.activeTabName = nextTab.name
             }

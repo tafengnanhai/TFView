@@ -50,12 +50,12 @@ let dataListAll = Mock.mock({
 
 Mock.mock(/\/Artsort\/listAll/, 'get', dataListAll)
 
-let dataSuccess = {
+const dataSuccess = {
   code: 0,
   msg: '操作成功'
 }
 
-let dataError = {
+const dataError = {
   code: 1,
   msg: '分类不存在或者已删除'
 }
@@ -99,7 +99,6 @@ Mock.mock(/\/Artsort\/detail/, 'get', function (options) {
       tempData.code = 0
       tempData.msg = '操作成功'
       tempData.extra = item
-      console.log(tempData)
       return false
     }
     return true

@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     submitForm: function (formName) {
-      let self = this
+      const self = this
       this.$refs[formName].validate(valid => {
         if (valid) {
           http.send({ sendType: 'post', url: '/Article/edit', param: this.operForm, showSuccessTip: true }).then(data => {
@@ -158,7 +158,7 @@ export default {
       this.fullscreen = !this.fullscreen
     },
     recursiveArtsort: function (item, level) {
-      let artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
+      const artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
       this.operForm.artsort.push(artsort)
       level++
       if (item.children) {
@@ -192,9 +192,9 @@ export default {
         } else {
           // 前端选择的图片
           if (file.uid !== f.raw.uid) {
-            let reader = new FileReader()
+            const reader = new FileReader()
             reader.readAsDataURL(f.raw)
-            let self = this
+            const self = this
             reader.onload = function (e) {
               self.operForm.art_simg.push(({ name: f.name, url: this.result }))
               self.operForm.art_simg.length < self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = '')
@@ -210,9 +210,9 @@ export default {
       !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
       isPermitImgFormat && !ispermitImgSmallSize && Message.error(`上传图片大小不能超过${this.permitImgSmallSize}KB!`)
       if (isPermitImgFormat && ispermitImgSmallSize) {
-        let reader = new FileReader()
+        const reader = new FileReader()
         reader.readAsDataURL(file)
-        let self = this
+        const self = this
         reader.onload = function (e) {
           self.operForm.art_simg.push({ name: file.name, url: this.result })
           self.operForm.art_simg.length === self.permitImgTotal && (document.querySelector('.el-upload--picture-card').style.display = 'none')
@@ -231,7 +231,7 @@ export default {
       !isPermitImgFormat && Message.error('上传图片只能是 jpg/gif/png 格式!')
       isPermitImgFormat && !ispermitImgBigSize && Message.error(`上传图片大小不能超过${this.permitImgBigSize}KB!`)
       if (isPermitImgFormat && ispermitImgBigSize) {
-        let reader = new FileReader()
+        const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = function (e) {
           Editor.insertEmbed(cursorLocation, 'image', this.result)

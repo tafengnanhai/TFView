@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-let dataUserStat = {
+const dataUserStat = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -23,7 +23,7 @@ let dataUserStat = {
 } */
 Mock.mock(/\/User\/getGeneralStat/, 'get', dataUserStat)
 
-let dataUserWeekDiff = {
+const dataUserWeekDiff = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -33,12 +33,29 @@ let dataUserWeekDiff = {
         label: '本周注册',
         backgroundColor: 'rgba(255, 159, 64, 0.2)',
         borderColor: '#F56C6C',
-        data: [Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)')]
-      }, {
+        data: [
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)')
+        ]
+      },
+      {
         label: '上周注册',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: '#409EFF',
-        data: [Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)'), Mock.mock('@integer(1, 1000)')]
+        data: [
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)'),
+          Mock.mock('@integer(1, 1000)')
+        ]
       }
     ]
   }

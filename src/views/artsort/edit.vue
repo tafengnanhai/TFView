@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     submitForm: function (formName) {
-      let self = this
+      const self = this
       this.$refs[formName].validate(valid => {
         if (valid) {
           http.send({ sendType: 'post', url: '/Artsort/edit', param: this.operForm, showSuccessTip: true }).then(data => {

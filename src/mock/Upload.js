@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-let dataUpload = {
+const dataUpload = {
   code: 0,
   msg: 'success',
   extra: [

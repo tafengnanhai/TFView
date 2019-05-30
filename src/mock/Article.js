@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import store from '@/store'
 import Tools from '@/plugins/tools'
 
-let pageSize = store.state.pageSize
+const pageSize = store.state.pageSize
 let maxId = 98
 let extraData = Mock.mock({
   'extra|98': [
@@ -41,9 +41,9 @@ Mock.mock(/\/Article\/listAll/, 'get', function (options) {
     return item
   })
   let tempDataListAll = dataListAll
-  let p = Tools.getParam('p', options.url)
-  let keyword = Tools.getParam('keyword', options.url)
-  let artsortId = parseInt(Tools.getParam('artsort_id', options.url))
+  const p = Tools.getParam('p', options.url)
+  const keyword = Tools.getParam('keyword', options.url)
+  const artsortId = parseInt(Tools.getParam('artsort_id', options.url))
   let tempExtra = extraData.extra
   tempDataListAll.total = tempExtra.length
   if (artsortId !== 0 && tempExtra.length > 0) {
@@ -66,19 +66,19 @@ Mock.mock(/\/Article\/listAll/, 'get', function (options) {
   return tempDataListAll
 })
 
-let dataSuccess = {
+const dataSuccess = {
   code: 0,
   msg: '操作成功'
 }
 
-let dataError = {
+const dataError = {
   code: 1,
   msg: '文章不存在或者已删除'
 }
 
 Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
-  let result = JSON.parse(options.body)
-  let ids = result.ids.split(',')
+  const result = JSON.parse(options.body)
+  const ids = result.ids.split(',')
   let isExists = false
   extraData.extra = extraData.extra.filter(item => {
     if (ids.includes(item.art_id.toString())) {
@@ -95,8 +95,8 @@ Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
 })
 
 Mock.mock(/\/Article\/del/, 'post', function (options) {
-  let result = JSON.parse(options.body)
-  let id = result.id
+  const result = JSON.parse(options.body)
+  const id = result.id
   let isExists = false
   extraData.extra = extraData.extra.filter(item => {
     if (item.art_id === id) {
@@ -112,7 +112,7 @@ Mock.mock(/\/Article\/del/, 'post', function (options) {
 })
 
 Mock.mock(/\/Article\/edit/, 'post', function (options) {
-  let result = JSON.parse(options.body)
+  const result = JSON.parse(options.body)
   if (result.art_id === 0) {
     // add
     result.art_id = ++maxId
@@ -137,7 +137,7 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
 })
 
 Mock.mock(/\/Article\/detail/, 'get', function (options) {
-  let id = parseInt(Tools.getParam('id', options.url))
+  const id = parseInt(Tools.getParam('id', options.url))
   let tempData
   extraData.extra.every(item => {
     if (item.art_id === id) {
@@ -152,14 +152,14 @@ Mock.mock(/\/Article\/detail/, 'get', function (options) {
   return tempData || dataError
 })
 
-let dataArtsortError = {
+const dataArtsortError = {
   code: 1,
   msg: '分类下有文章，请先删除文章'
 }
 
 // 为了检测方便，模拟环境下将分类下文章检测放到Article中，实际开发中建议放到Artsort中
 Mock.mock(/\/Article\/checkArtsort/, 'get', function (options) {
-  let id = parseInt(Tools.getParam('id', options.url))
+  const id = parseInt(Tools.getParam('id', options.url))
   let isExists = extraData.extra.some(item => item.artsort_id === id)
   return isExists ? dataArtsortError : dataSuccess
 })

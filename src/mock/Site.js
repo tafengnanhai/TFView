@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-let dataSiteUpdateRecords = {
+const dataSiteUpdateRecords = {
   code: 0,
   msg: '操作成功',
   extra: [
@@ -25,11 +25,11 @@ let dataSiteUpdateRecords = {
 }
 Mock.mock(/\/Site\/getUpdateRecords/, 'get', dataSiteUpdateRecords)
 
-let dataSizeTime = {
+const dataSizeTime = {
   code: 0,
   msg: 'success',
   extra: {
-    'time': Mock.mock('@now')
+    time: Mock.mock('@now')
   }
 }
 Mock.mock(/\/Site\/getServerTime/, 'get', dataSizeTime)

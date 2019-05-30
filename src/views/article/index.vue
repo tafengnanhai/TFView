@@ -108,7 +108,7 @@ export default {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
         http.send({ url: '/Article/del', sendType: 'post', param: { id: artId } }).then(data => {
           if (data.code === 0) {
-            let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            const computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
             this.getData(this.currentPage)
             Message.success(data.msg)
@@ -126,7 +126,7 @@ export default {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
         http.send({ url: '/Article/delSelection', sendType: 'post', param: { ids: ids.join(',') } }).then(data => {
           if (data.code === 0) {
-            let computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
+            const computedCurrentPage = Math.ceil((this.total - 1) / this.pageSize)
             this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
             this.getData(this.currentPage)
             Message.success(data.msg)
@@ -164,7 +164,7 @@ export default {
       this.getData(1)
     },
     recursiveArtsort: function (item, level) {
-      let artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
+      const artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
       this.artsorts.push(artsort)
       level++
       if (item.children) {
