@@ -124,7 +124,7 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
     extraData.extra = extraData.extra.map(item => {
       if (item.art_id === result.art_id) {
         isExists = true
-        return Object.assign(item, result)
+        Object.assign(item, result)
       }
       return item
     })

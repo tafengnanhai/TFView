@@ -15,7 +15,7 @@
       draggable
     >
       <span class="custom-tree-node" slot-scope="{ node, data }">
-        <span>{{ node.label }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>{{ data.artsort_id }}、{{ data.artsort_name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>
           <el-button type="text" @click.stop="edit(data.artsort_id)">编辑</el-button>
           <el-button type="text" @click.stop="remove(node, data)">删除</el-button>

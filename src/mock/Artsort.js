@@ -66,8 +66,23 @@ Mock.mock(/\/Artsort\/editAll/, 'post', function (options) {
   return dataSuccess
 })
 
+const recursiveEdit = function (extraData, result, tempData) {
+  extraData.forEach(item => {
+    if (item.artsort_id === result.artsort_id) {
+      result.isExists = true
+      Object.assign(item, result)
+    }
+    tempData.push(item)
+    if (item.children) {
+      tempData[item.length - 1] = {}
+      tempData[item.length - 1].children = []
+      recursiveEdit(item.children, result, tempData[item.length - 1].children)
+    }
+  })
+}
+
 Mock.mock(/\/Artsort\/edit/, 'post', function (options) {
-  const result = JSON.parse(options.body)
+  let result = JSON.parse(options.body)
   if (result.artsort_id === 0) {
     // add
     result.artsort_id = ++maxId
@@ -75,23 +90,19 @@ Mock.mock(/\/Artsort\/edit/, 'post', function (options) {
     dataListAll.total++
   } else {
     // edit
-    let isExists = false
-    dataListAll.extra = dataListAll.extra.map(item => {
-      if (item.artsort_id === result.artsort_id) {
-        isExists = true
-        return Object.assign(item, result)
-      }
-      return item
-    })
-    if (!isExists) {
+    let tempData = []
+    result.isExists = false
+    recursiveEdit(dataListAll.extra, result, tempData)
+    dataListAll.extra = tempData
+    if (!result.isExists) {
       return dataError
     }
   }
   return dataSuccess
 })
 
-const getDetail = function (data, id, tempData) {
-  data.every(item => {
+const recursiveGetDetail = function (extraData, id, tempData) {
+  extraData.every(item => {
     if (item.artsort_id === id) {
       tempData.code = 0
       tempData.msg = '操作成功'
@@ -99,7 +110,7 @@ const getDetail = function (data, id, tempData) {
       return false
     }
     if (item.children) {
-      getDetail(item.children, id, tempData)
+      recursiveGetDetail(item.children, id, tempData)
     }
     return true
   })
@@ -108,6 +119,6 @@ const getDetail = function (data, id, tempData) {
 Mock.mock(/\/Artsort\/detail/, 'get', function (options) {
   let id = parseInt(Tools.getParam('id', options.url))
   let tempData = {}
-  getDetail(dataListAll.extra, id, tempData)
+  recursiveGetDetail(dataListAll.extra, id, tempData)
   return tempData || dataError
 })
