@@ -94,6 +94,9 @@ export default {
     add: function () {
       this.dialogFormTitle = '添加'
       this.dialogId = 0
+      this.keyword = ''
+      this.artsortId = 0
+      this.getData(1)
       this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
