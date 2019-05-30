@@ -92,7 +92,7 @@
 <script>
 import LineChart from '@/plugins/linechart.js'
 import http from '@/plugins/http'
-import '@/mock/User'
+import '@/mock/Member'
 import '@/mock/Site'
 export default {
   components: {
@@ -119,10 +119,10 @@ export default {
   },
   methods: {
     loadMine: function () {
-      http.send({ url: '/User/getGeneralStat' }).then(data => {
+      http.send({ url: '/Member/getGeneralStat' }).then(data => {
         this.statTotal = data.extra
       })
-      http.send({ url: '/User/getWeekDiffStat' }).then(data => {
+      http.send({ url: '/Member/getWeekDiffStat' }).then(data => {
         this.statWeekDiffData = data.extra
       })
       http.send({ url: '/Site/getUpdateRecords' }).then(data => {

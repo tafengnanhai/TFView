@@ -21,7 +21,7 @@ const dataUserStat = {
   code: -1,
   msg: store.state.timeoutMsg
 } */
-Mock.mock(/\/User\/getGeneralStat/, 'get', dataUserStat)
+Mock.mock(/\/Member\/getGeneralStat/, 'get', dataUserStat)
 
 const dataUserWeekDiff = {
   code: 0,
@@ -60,4 +60,4 @@ const dataUserWeekDiff = {
     ]
   }
 }
-Mock.mock(/\/User\/getWeekDiffStat/, 'get', dataUserWeekDiff)
+Mock.mock(/\/Member\/getWeekDiffStat/, 'get', dataUserWeekDiff)
