@@ -41,7 +41,6 @@ pnpm/npm run lint
 | lockr                       | pro      | 0.8.5       |
 | mockjs                      | pro      | 1.0.1-beta3 |
 | nprogress                   | pro      | 0.2.0       |
-| qs                          | pro      | 6.7.0       |
 | vue                         | pro      | 2.6.10      |
 | vue-chartjs                 | pro      | 3.4.2       |
 | vue-router                  | pro      | 3.0.3       |

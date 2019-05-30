@@ -31,10 +31,19 @@
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-pie-chart"></i>
-          <span>图表管理</span>
+          <span>注册统计</span>
         </template>
-        <el-menu-item index="2-1">注册图表</el-menu-item>
-        <el-menu-item index="2-2">城市图表</el-menu-item>
+        <el-menu-item index="2-1">对比统计</el-menu-item>
+        <el-menu-item index="2-2">城市统计</el-menu-item>
+        <el-menu-item index="2-3">实时注册</el-menu-item>
+      </el-submenu>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-s-custom"></i>
+          <span>会员管理</span>
+        </template>
+        <el-menu-item index="2-1">会员信息</el-menu-item>
+        <el-menu-item index="2-2">今日活跃</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
@@ -44,7 +53,6 @@
         <el-menu-item index="3-1">系统用户</el-menu-item>
         <el-menu-item index="3-2">权限管理</el-menu-item>
         <el-menu-item index="3-3">菜单管理</el-menu-item>
-        <el-menu-item index="3-4">城市管理</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
@@ -54,6 +62,10 @@
         <el-menu-item index="4-1">系统日志</el-menu-item>
         <el-menu-item index="4-2">用户日志</el-menu-item>
       </el-submenu>
+      <el-menu-item index="/index/main">
+        <i class="el-icon-chat-line-round"></i>
+        <span slot="title">消息提醒</span>
+      </el-menu-item>
       <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-user-solid"></i>

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import NProgress from 'nprogress'
-import qs from 'qs'
 import lockr from 'lockr'
 import App from '@/App.vue'
 import router from '@/router'
@@ -18,7 +17,6 @@ Vue.config.productionTip = false
 
 Vue.prototype.$store = store
 Vue.prototype.$http = axios
-Vue.prototype.qs = qs
 Vue.prototype.lockr = lockr
 
 // recover account

@@ -6,7 +6,6 @@ dependencies:
   lockr: 0.8.5
   mockjs: 1.0.1-beta3
   nprogress: 0.2.0
-  qs: 6.7.0
   vue: 2.6.10
   vue-chartjs: 3.4.2
   vue-router: 3.0.6
@@ -7795,13 +7794,6 @@ packages:
     resolution:
       integrity: sha1-yzroBuh0BERYTvFUzo7pjUA/PjY=
       tarball: /qs/download/qs-6.5.2.tgz
-  /qs/6.7.0:
-    dev: false
-    engines:
-      node: '>=0.6'
-    resolution:
-      integrity: sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
-      tarball: /qs/download/qs-6.7.0.tgz
   /query-string/5.1.1:
     dependencies:
       decode-uri-component: 0.2.0
@@ -10140,7 +10132,6 @@ specifiers:
   lockr: ^0.8.5
   mockjs: ^1.0.1-beta3
   nprogress: ^0.2.0
-  qs: ^6.7.0
   vue: ^2.6.10
   vue-chartjs: ^3.4.2
   vue-router: ^3.0.3
