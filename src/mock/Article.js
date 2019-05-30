@@ -78,7 +78,7 @@ const dataError = {
 
 Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
   const result = JSON.parse(options.body)
-  const ids = result.ids.split(',')
+  const ids = result.ids.valueOf()
   let isExists = false
   extraData.extra = extraData.extra.filter(item => {
     if (ids.includes(item.art_id.toString())) {

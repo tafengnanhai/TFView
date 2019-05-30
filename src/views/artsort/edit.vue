@@ -67,7 +67,7 @@ export default {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
-              self.$parent.getData(self.$parent.dialogId === 0 ? 1 : self.$parent.currentPage)
+              self.$parent.loadMine()
             }
           })
         }
@@ -92,6 +92,9 @@ export default {
         }
       } else {
         this.dialogLastOperation = 'edit'
+        this.$nextTick(() => {
+          this.$refs.operForm.resetFields()
+        })
         http.send({ url: '/Artsort/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
           this.operForm = data.extra
         })

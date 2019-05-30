@@ -264,6 +264,9 @@ export default {
         }
       } else {
         this.dialogLastOperation = 'edit'
+        this.$nextTick(() => {
+          this.$refs.operForm.resetFields()
+        })
         http.send({ url: '/Article/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
           this.operForm.art_simg = []
           if (data.extra.art_simg.length > 0) {
