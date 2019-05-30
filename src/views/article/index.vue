@@ -213,6 +213,12 @@ export default {
 }
 </script>
 
+<style>
+#articleIndex .el-dialog {
+  margin-top: 0 !important;
+}
+</style>
+
 <style scoped>
 #articleIndex {
   min-width: 800px;

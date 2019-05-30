@@ -145,8 +145,13 @@ ul, li {
     background: #e4e7ed;
 }
 
+.cell {
+    height: 25px;
+    line-height: 25px !important;
+}
+
 .cell .el-button {
-    margin: 5px 10px;
+    padding: 0px 5px !important;
 }
 
 thead .cell {
