@@ -11,7 +11,6 @@ let extraData = Mock.mock({
       art_pubdate: '@now',
       art_title: '@ctitle(10, 20)',
       artsort_id: '@int(1,7)',
-      artsort_name: '',
       art_source: '@cword(3, 10)',
       art_gourl: 'http://@domain',
       art_simg: [
@@ -36,10 +35,6 @@ let dataListAll = Mock.mock({
 })
 
 Mock.mock(/\/Article\/listAll/, 'get', function (options) {
-  extraData.extra = extraData.extra.map(item => {
-    item.artsort_name = `分类${item.artsort_id}`
-    return item
-  })
   let tempDataListAll = dataListAll
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)

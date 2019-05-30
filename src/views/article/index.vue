@@ -83,6 +83,7 @@ export default {
       inputKeyword: '',
       keyword: '',
       artsorts: [],
+      initArtsorts: [],
       artsortId: 0,
       listData: null,
       total: 1,
@@ -148,6 +149,16 @@ export default {
     getData: function (p) {
       http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId } } }).then(data => {
         this.listData = data.extra
+        this.listData = this.listData.map(art => {
+          this.initArtsorts.every(item => {
+            if (item.artsort_id === art.artsort_id) {
+              art.artsort_name = item.artsort_name
+              return false
+            }
+            return true
+          })
+          return art
+        })
         this.total = data.total
         this.pageSize = data.pageSize
         this.currentPage = p
@@ -165,6 +176,7 @@ export default {
     },
     recursiveArtsort: function (item, level) {
       const artsort = JSON.parse(`{ "artsort_id" : ${item.artsort_id} , "artsort_name" : "${'　'.repeat(level)} |-- ${item.artsort_name}" }`)
+      this.initArtsorts.push(item)
       this.artsorts.push(artsort)
       level++
       if (item.children) {
@@ -174,6 +186,7 @@ export default {
       }
     },
     loadArtsort: function () {
+      this.initArtsorts = []
       this.artsorts = []
       http.send({ url: '/Artsort/listAll' }).then(data => {
         data.extra.forEach(item => {
