@@ -138,7 +138,8 @@ export default {
       const self = this
       this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Article/edit', param: this.operForm, showSuccessTip: true }).then(data => {
+          const url = self.$parent.dialogId === 0 ? '/Article/add' : '/Article/edit'
+          http.send({ sendType: 'post', url: url, param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)

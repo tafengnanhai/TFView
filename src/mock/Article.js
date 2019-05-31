@@ -27,12 +27,12 @@ let extraData = Mock.mock({
 
 extraData.extra.reverse()
 
-let dataListAll = Mock.mock({
+let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
-  total: 98
-})
+  total: maxId
+}
 
 Mock.mock(/\/Article\/listAll/, 'get', function (options) {
   let tempDataListAll = dataListAll
@@ -103,28 +103,27 @@ Mock.mock(/\/Article\/del/, 'post', function (options) {
   return dataSuccess
 })
 
+Mock.mock(/\/Article\/add/, 'post', function (options) {
+  const result = JSON.parse(options.body)
+  result.art_id = ++maxId
+  extraData.extra.unshift(result)
+  dataListAll.total++
+  return dataSuccess
+})
+
 Mock.mock(/\/Article\/edit/, 'post', function (options) {
   const result = JSON.parse(options.body)
-  if (result.art_id === 0) {
-    // add
-    result.art_id = ++maxId
-    extraData.extra.unshift(result)
-    dataListAll.total++
-  } else {
-    // edit
-    let isExists = false
-    extraData.extra = extraData.extra.map(item => {
-      if (item.art_id === result.art_id) {
-        isExists = true
-        Object.assign(item, result)
-      }
-      return item
-    })
-    if (!isExists) {
-      return dataError
+  let isExists = false
+  extraData.extra = extraData.extra.map(item => {
+    if (item.art_id === result.art_id) {
+      isExists = true
+      Object.assign(item, result)
     }
+    return item
+  })
+  if (!isExists) {
+    return dataError
   }
-
   return dataSuccess
 })
 
