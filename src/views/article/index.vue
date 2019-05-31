@@ -64,7 +64,6 @@
 <script>
 import http from '@/plugins/http'
 import '@/mock/Article'
-import Message from '@/plugins/message'
 import Confirm from '@/plugins/confirm'
 import ArticleEdit from '@/views/article/edit.vue'
 export default {
