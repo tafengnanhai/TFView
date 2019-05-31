@@ -5,7 +5,7 @@
     </el-aside>
     <el-container>
       <el-header height="76px">
-        <TFHeader/>
+        <TFHeader ref="tfHeader"/>
       </el-header>
       <el-main>
         <keep-alive>

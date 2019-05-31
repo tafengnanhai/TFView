@@ -8,7 +8,7 @@
       :close-on-click-modal="true"
       :close-on-press-escape="true"
     >
-      <el-form :model="operForm" ref="operForm" :rules="rules" label-width="60px">
+      <el-form :model="operForm" ref="operForm" :rules="rules" label-width="80px">
         <el-form-item label="用户名" prop="admin_username">
           <el-input v-model="operForm.admin_username" maxlength="20" autocomplete="off"></el-input>
         </el-form-item>
@@ -56,7 +56,8 @@ export default {
       },
       rules: {
         admin_username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        admin_password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        admin_password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        admin_password2: [{ required: true, message: '请输入确认密码', trigger: 'blur' }]
       }
     }
   },

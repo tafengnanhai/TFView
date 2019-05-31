@@ -72,8 +72,8 @@
           <i class="el-icon-user-solid"></i>
           <span>用户设置</span>
         </template>
-        <el-menu-item index="/admin/edit" id="/admin/edit">修改密码</el-menu-item>
-        <el-menu-item @click="logout" index="/login" id="/login">注销退出</el-menu-item>
+        <el-menu-item @click="changePassword()">修改密码</el-menu-item>
+        <el-menu-item @click="logout()">注销退出</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -93,6 +93,9 @@ export default {
       this.$store.dispatch('logout')
       Message.success('注销成功')
       this.$router.replace('/login')
+    },
+    changePassword: function () {
+      this.$parent.$parent.$parent.$refs.tfHeader.$refs.adminEdit.toggleDialog(true)
     },
     selectMenu: function (index, indexPath) {
 

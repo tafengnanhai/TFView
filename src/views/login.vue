@@ -71,7 +71,7 @@ export default {
   mounted: function () {
     this.$store.dispatch('logout') // for electron version
     if (this.$route.query.from === 'timeout') {
-      Message.error(this.$store.state.timeoutMsg)
+      Message.error('未登陆或超时，请重新登陆')
     }
   }
 }

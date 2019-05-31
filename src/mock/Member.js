@@ -19,7 +19,7 @@ const dataUserStat = {
 // 模拟超时
 /* dataUserStat = {
   code: -1,
-  msg: store.state.timeoutMsg
+  msg: '未登陆或超时，请重新登陆'
 } */
 Mock.mock(/\/Member\/getGeneralStat/, 'get', dataUserStat)
 

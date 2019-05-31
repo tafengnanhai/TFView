@@ -11,7 +11,6 @@ export default new Vuex.Store({
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend',
-    timeoutMsg: '未登陆或超时，请重新登陆',
     pageSize: 10,
     reloadPageTime: new Date().getTime()
   },

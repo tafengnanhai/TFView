@@ -25,16 +25,24 @@
     >
       <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabs" :key="item.label"></el-tab-pane>
     </el-tabs>
+    <AdminEdit dialogFormTitle="修改密码" ref="adminEdit"/>
   </div>
 </template>
 
 <script>
 import Loading from '@/plugins/loading'
 import Message from '@/plugins/message'
+import AdminEdit from '@/views/admin/edit.vue'
+
 export default {
   name: 'TFHeader',
+  components: {
+    AdminEdit
+  },
   data () {
     return {
+      dialogFormVisible: false,
+      dialogId: 0,
       fullscreen: false,
       activeTabName: '/index/main',
       tabs: [
@@ -49,8 +57,8 @@ export default {
     toggleMenu: function () {
       this.$store.commit('toggleMenu')
     },
-    changePassword: function () {
-      Message.success('TODO:即将推出')
+    toggleDialog: function (flag) {
+      this.$refs.adminEdit.toggleDialog(flag)
     },
     logout: function () {
       this.$store.commit('logout')
@@ -60,7 +68,7 @@ export default {
     handlePopMenu: function (command) {
       switch (command) {
         case 'changePassword':
-          this.changePassword()
+          this.toggleDialog(true)
           break
         case 'logout':
           this.logout()
