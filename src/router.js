@@ -9,8 +9,9 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'admin',
-      component: () => import(/* webpackChunkName: "admin" */ './views/admin.vue'),
+      name: 'index',
+      component: () =>
+        import(/* webpackChunkName: "index" */ './views/index.vue'),
       children: [
         {
           path: '/index/main',
@@ -20,7 +21,8 @@ export default new Router({
             keepAlive: true
           },
           components: {
-            main: () => import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
+            main: () =>
+              import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
           }
         },
         {
@@ -31,7 +33,8 @@ export default new Router({
             keepAlive: true
           },
           components: {
-            main: () => import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
+            main: () =>
+              import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
           }
         },
         {
@@ -42,7 +45,8 @@ export default new Router({
             keepAlive: true
           },
           components: {
-            main: () => import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
+            main: () =>
+              import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
           }
         }
       ]
@@ -50,7 +54,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "login" */ './views/login.vue')
+      component: () =>
+        import(/* webpackChunkName: "login" */ './views/login.vue')
     },
     {
       path: '*',
@@ -58,7 +63,8 @@ export default new Router({
       meta: {
         keepAlive: true
       },
-      component: () => import(/* webpackChunkName: "404" */ './views/404/index.vue')
+      component: () =>
+        import(/* webpackChunkName: "404" */ './views/404/index.vue')
     }
   ]
 })

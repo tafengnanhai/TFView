@@ -79,7 +79,6 @@ export default {
       }
     },
     clickTab: function (tab, event) {
-      // this.$store.commit('updateActiveTabName', this.activeTabName)
       this.activeTabName = tab.name
       this.$router.push({ path: tab.name })
     },

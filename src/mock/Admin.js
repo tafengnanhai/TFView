@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import store from '@/store'
 import Tools from '@/plugins/tools'
 
-const pageSize = store.state.pageSize
+/* const pageSize = store.state.pageSize */
 let maxId = 2
 
 const extraData = [
@@ -18,12 +18,12 @@ const extraData = [
   }
 ]
 
-let dataListAll = {
+/* let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
   total: maxId
-}
+} */
 
 const dataLoginSuccess = {
   code: 0,
