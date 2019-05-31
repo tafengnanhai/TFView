@@ -38,7 +38,7 @@
 <script>
 import http from '@/plugins/http'
 import Message from '@/plugins/message'
-import '@/mock/Login'
+import '@/mock/Admin'
 export default {
   data () {
     return {
@@ -56,7 +56,7 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Login/check', param: this.operForm, showSuccessTip: true }).then(data => {
+          http.send({ sendType: 'post', url: '/Admin/check', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               this.$store.commit('initAccount', { username: this.operForm.username, token: data.extra.token })
               this.$router.push('/')
