@@ -108,7 +108,7 @@ export default {
           if (data.code === 0) {
             this.total = data.total
             const computedCurrentPage = Math.ceil(this.total / this.pageSize)
-            this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+            this.currentPage = (this.currentPage > 1 && this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
             this.getData(this.currentPage)
           }
         })
@@ -124,7 +124,8 @@ export default {
           if (data.code === 0) {
             this.total = data.total
             const computedCurrentPage = Math.ceil(this.total / this.pageSize)
-            this.currentPage = (this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+            this.currentPage = (this.currentPage > 1 && this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
+            console.log(this.currentPage)
             this.getData(this.currentPage)
           }
         })
