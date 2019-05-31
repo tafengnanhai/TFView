@@ -81,22 +81,22 @@ const recursiveEdit = function (extraData, result, tempData) {
   })
 }
 
+Mock.mock(/\/Artsort\/add/, 'post', function (options) {
+  let result = JSON.parse(options.body)
+  result.artsort_id = ++maxId
+  dataListAll.extra.unshift(result)
+  dataListAll.total++
+  return dataSuccess
+})
+
 Mock.mock(/\/Artsort\/edit/, 'post', function (options) {
   let result = JSON.parse(options.body)
-  if (result.artsort_id === 0) {
-    // add
-    result.artsort_id = ++maxId
-    dataListAll.extra.unshift(result)
-    dataListAll.total++
-  } else {
-    // edit
-    let tempData = []
-    result.isExists = false
-    recursiveEdit(dataListAll.extra, result, tempData)
-    dataListAll.extra = tempData
-    if (!result.isExists) {
-      return dataError
-    }
+  let tempData = []
+  result.isExists = false
+  recursiveEdit(dataListAll.extra, result, tempData)
+  dataListAll.extra = tempData
+  if (!result.isExists) {
+    return dataError
   }
   return dataSuccess
 })
