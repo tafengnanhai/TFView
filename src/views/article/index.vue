@@ -125,7 +125,6 @@ export default {
             this.total = data.total
             const computedCurrentPage = Math.ceil(this.total / this.pageSize)
             this.currentPage = (this.currentPage > 1 && this.currentPage > computedCurrentPage ? computedCurrentPage : this.currentPage)
-            console.log(this.currentPage)
             this.getData(this.currentPage)
           }
         })
