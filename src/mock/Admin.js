@@ -72,6 +72,7 @@ Mock.mock(/\/Admin\/add/, 'post', function (options) {
 })
 
 Mock.mock(/\/Admin\/edit/, 'post', function (options) {
+  // 为了避免前端直接修改localStorage，服务器端会对userid, username和token进行校验，任何一个修改都会校验失败，重新登陆
   const result = JSON.parse(options.body)
   let isExists = false
   extraData.extra = extraData.extra.map(item => {
