@@ -10,18 +10,28 @@
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="80px">
         <el-form-item label="用户名" prop="admin_username">
-          <el-input v-model="operForm.admin_username" maxlength="20" autocomplete="off"></el-input>
+          <el-input
+            v-model="operForm.admin_username"
+            maxlength="20"
+            autocomplete="off"
+            :disabled="this.$parent.dialogId !== 0"
+          ></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="admin_password">
           <el-input
+            type="password"
             v-model="operForm.admin_password"
             maxlength="20"
             autocomplete="off"
-            show-password
           ></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="admin_password2">
-          <el-input maxlength="20" autocomplete="off" show-password></el-input>
+          <el-input
+            type="password"
+            maxlength="20"
+            autocomplete="off"
+            v-model="operForm.admin_password2"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -40,24 +50,47 @@
 
 <script>
 import http from '@/plugins/http'
-import '@/mock/Artsort'
+import '@/mock/Admin'
 export default {
   props: ['dialogFormTitle', 'dialogId'],
   name: 'admin_edit',
   data () {
+    let validatePassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else if (value.length < 6) {
+        callback(new Error('密码长度不能低于6位'))
+      } else {
+        if (this.operForm.checkPass !== '') {
+          this.$refs.operForm.validateField('admin_password2')
+        }
+        callback()
+      }
+    }
+    let validatePassword2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入确认密码'))
+      } else if (value.length < 6) {
+        callback(new Error('确认密码长度不能低于6位'))
+      } else if (value !== this.operForm.admin_password) {
+        callback(new Error('确认密码和上面的密码不相同!'))
+      } else {
+        callback()
+      }
+    }
     return {
       fullscreen: false,
       dialogFormVisible: false,
       dialogLastOperation: 'add',
       operForm: {
-        admin_id: 0,
-        admin_username: '',
-        admin_password: ''
+        admin_username: this.$store.state.username,
+        admin_password: '',
+        admin_password2: ''
       },
       rules: {
         admin_username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        admin_password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        admin_password2: [{ required: true, message: '请输入确认密码', trigger: 'blur' }]
+        admin_password: [{ validator: validatePassword, trigger: 'blur' }],
+        admin_password2: [{ validator: validatePassword2, trigger: 'blur' }]
       }
     }
   },

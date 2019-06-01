@@ -2,28 +2,30 @@ import Mock from 'mockjs'
 import store from '@/store'
 import Tools from '@/plugins/tools'
 
-/* const pageSize = store.state.pageSize */
+const pageSize = store.state.pageSize
 let maxId = 2
 
-const extraData = [
-  {
-    admin_id: 1,
-    admin_username: 'other',
-    admin_password: '123456'
-  },
-  {
-    admin_id: 2,
-    admin_username: 'admin',
-    admin_password: 'admin'
-  }
-]
+const extraData = {
+  extra: [
+    {
+      admin_id: 1,
+      admin_username: 'other',
+      admin_password: '123456'
+    },
+    {
+      admin_id: 2,
+      admin_username: 'admin',
+      admin_password: 'admin'
+    }
+  ]
+}
 
-/* let dataListAll = {
+let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
   total: maxId
-} */
+}
 
 const dataLoginSuccess = {
   code: 0,
@@ -40,10 +42,11 @@ const dataLoginError = {
 Mock.mock(/\/Admin\/check/, 'post', function (options) {
   const result = JSON.parse(options.body)
   if (
-    extraData.some(
+    extraData.extra.some(
       item =>
         item.admin_username === result.username &&
-        item.admin_password === result.password
+        item.admin_password === result.password &&
+        (dataLoginSuccess.extra.userid = item.admin_id)
     )
   ) {
     return dataLoginSuccess
@@ -60,15 +63,15 @@ const dataEditError = {
   code: 1,
   msg: '用户名不存在或者已删除'
 }
-Mock.mock(/\/Article\/add/, 'post', function (options) {
+Mock.mock(/\/Admin\/add/, 'post', function (options) {
   const result = JSON.parse(options.body)
   result.admin_id = ++maxId
   extraData.extra.push(result)
-  extraData.total++
+  dataListAll.total++
   return dataEditSuccess
 })
 
-Mock.mock(/\/Article\/edit/, 'post', function (options) {
+Mock.mock(/\/Admin\/edit/, 'post', function (options) {
   const result = JSON.parse(options.body)
   let isExists = false
   extraData.extra = extraData.extra.map(item => {
@@ -84,7 +87,7 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
   return dataEditSuccess
 })
 
-Mock.mock(/\/Article\/detail/, 'get', function (options) {
+Mock.mock(/\/Admin\/detail/, 'get', function (options) {
   const id = parseInt(Tools.getParam('id', options.url))
   let tempData
   extraData.extra.every(item => {
