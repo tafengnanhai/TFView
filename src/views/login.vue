@@ -15,6 +15,7 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
+            type="password"
             v-model="operForm.password"
             placeholder="请输入密码"
             prefix-icon="el-icon-lock"
@@ -58,7 +59,7 @@ export default {
         if (valid) {
           http.send({ sendType: 'post', url: '/Admin/check', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
-              this.$store.commit('initAccount', { username: this.operForm.username, token: data.extra.token })
+              this.$store.commit('initAccount', { userid: data.extra.userid, username: this.operForm.username, token: data.extra.token })
               this.$router.push('/')
             }
           })
