@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isCollapse: false,
+    userid: 0,
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend',
@@ -17,19 +18,24 @@ export default new Vuex.Store({
   mutations: {
     // 需要同步的操作不要放到actions中，放到mutations中
     initAccount: (state, data) => {
+      lockr.set('userid', data.userid)
       lockr.set('username', data.username)
       lockr.set('token', data.token)
+      state.userid = data.userid
       state.username = data.username
       state.token = data.token
     },
     recoverAccount: state => {
+      state.userid = lockr.get('userid', '')
       state.username = lockr.get('username', '')
       state.token = lockr.get('token', '')
     },
     checkLoginStatus: state => {
       if (
+        lockr.get('userid') === undefined ||
         lockr.get('username') === undefined ||
         lockr.get('token') === undefined ||
+        state.userid === '' ||
         state.username === '' ||
         state.token === ''
       ) {
@@ -49,8 +55,10 @@ export default new Vuex.Store({
       state.reloadPageTime = new Date().getTime()
     },
     logout: state => {
+      lockr.rm('userid')
       lockr.rm('username')
       lockr.rm('token')
+      state.userid = ''
       state.username = ''
       state.token = ''
       state.isCollapse = false
