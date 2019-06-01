@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       dialogFormVisible: false,
-      dialogId: 0,
+      dialogId: this.$store.state.userid,
       fullscreen: false,
       activeTabName: '/index/main',
       tabs: [
@@ -112,6 +112,9 @@ export default {
       Message.success('智能刷新页面完成，请查看')
       this.$store.dispatch('updateReloadPageTime')
       Loading.close()
+    },
+    loadMine () {
+      // empty for change password call
     }
   },
   mounted: function () {
