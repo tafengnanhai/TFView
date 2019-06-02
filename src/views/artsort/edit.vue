@@ -22,7 +22,6 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="toggleDialog(false)">关 闭</el-button>
         <el-button type="primary" @click="submitForm('operForm')">提交</el-button>
         <el-button type="text" @click="toggleFullscreen()">
           <i class="el-icon-full-screen dialogFullscreen"></i>
