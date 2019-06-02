@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+
 const dataSiteUpdateRecords = {
   code: 0,
   msg: '操作成功',

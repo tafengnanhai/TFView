@@ -34,7 +34,7 @@ let dataListAll = {
   total: maxId
 }
 
-Mock.mock(/\/Article\/listAll/, 'get', function (options) {
+Mock.mock(/\/Article\/listAll/, 'get', options => {
   let tempDataListAll = dataListAll
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
@@ -66,7 +66,7 @@ const dataSuccess = {
   msg: '操作成功'
 }
 
-Mock.mock(/\/Article\/delSelection/, 'post', function (options) {
+Mock.mock(/\/Article\/delSelection/, 'post', options => {
   const result = JSON.parse(options.body)
   const ids = result.ids.valueOf()
   extraData.extra = extraData.extra.filter(item => {
@@ -85,7 +85,7 @@ const dataError = {
   msg: '文章不存在或者已删除'
 }
 
-Mock.mock(/\/Article\/del/, 'post', function (options) {
+Mock.mock(/\/Article\/del/, 'post', options => {
   const result = JSON.parse(options.body)
   const id = result.id
   let isExists = false
@@ -103,7 +103,7 @@ Mock.mock(/\/Article\/del/, 'post', function (options) {
   return dataSuccess
 })
 
-Mock.mock(/\/Article\/add/, 'post', function (options) {
+Mock.mock(/\/Article\/add/, 'post', options => {
   const result = JSON.parse(options.body)
   result.art_id = ++maxId
   extraData.extra.unshift(result)
@@ -111,7 +111,7 @@ Mock.mock(/\/Article\/add/, 'post', function (options) {
   return dataSuccess
 })
 
-Mock.mock(/\/Article\/edit/, 'post', function (options) {
+Mock.mock(/\/Article\/edit/, 'post', options => {
   const result = JSON.parse(options.body)
   let isExists = false
   extraData.extra = extraData.extra.map(item => {
@@ -127,7 +127,7 @@ Mock.mock(/\/Article\/edit/, 'post', function (options) {
   return dataSuccess
 })
 
-Mock.mock(/\/Article\/detail/, 'get', function (options) {
+Mock.mock(/\/Article\/detail/, 'get', options => {
   const id = parseInt(Tools.getParam('id', options.url))
   let tempData
   extraData.extra.every(item => {
@@ -149,7 +149,7 @@ const dataArtsortError = {
 }
 
 // 为了检测方便，模拟环境下将分类下文章检测放到Article中，实际开发中建议放到Artsort中
-Mock.mock(/\/Article\/checkArtsort/, 'get', function (options) {
+Mock.mock(/\/Article\/checkArtsort/, 'get', options => {
   const id = parseInt(Tools.getParam('id', options.url))
   let isExists = extraData.extra.some(item => item.artsort_id === id)
   return isExists ? dataArtsortError : dataSuccess

@@ -60,7 +60,7 @@ const dataError = {
   msg: '分类不存在或者已删除'
 }
 
-Mock.mock(/\/Artsort\/editAll/, 'post', function (options) {
+Mock.mock(/\/Artsort\/editAll/, 'post', options => {
   // 实际开发中这里应该增加服务器端的有效性校验（如父类不存在，分类下有文章，分类下有子类等）
   dataListAll.extra = JSON.parse(options.body)
   return dataSuccess
@@ -81,7 +81,7 @@ const recursiveEdit = function (extraData, result, tempData) {
   })
 }
 
-Mock.mock(/\/Artsort\/add/, 'post', function (options) {
+Mock.mock(/\/Artsort\/add/, 'post', options => {
   let result = JSON.parse(options.body)
   result.artsort_id = ++maxId
   dataListAll.extra.unshift(result)
@@ -89,7 +89,7 @@ Mock.mock(/\/Artsort\/add/, 'post', function (options) {
   return dataSuccess
 })
 
-Mock.mock(/\/Artsort\/edit/, 'post', function (options) {
+Mock.mock(/\/Artsort\/edit/, 'post', options => {
   let result = JSON.parse(options.body)
   let tempData = []
   result.isExists = false
@@ -116,7 +116,7 @@ const recursiveGetDetail = function (extraData, id, tempData) {
   })
 }
 
-Mock.mock(/\/Artsort\/detail/, 'get', function (options) {
+Mock.mock(/\/Artsort\/detail/, 'get', options => {
   let id = parseInt(Tools.getParam('id', options.url))
   let tempData = {}
   recursiveGetDetail(dataListAll.extra, id, tempData)

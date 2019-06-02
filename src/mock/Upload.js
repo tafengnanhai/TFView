@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+
 const dataUpload = {
   code: 0,
   msg: 'success',

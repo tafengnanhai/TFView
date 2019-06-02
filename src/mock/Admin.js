@@ -39,7 +39,7 @@ const dataLoginError = {
 }
 
 // 和后端一致，不建议直接返回用户名和密码的判断方式
-Mock.mock(/\/Admin\/check/, 'post', function (options) {
+Mock.mock(/\/Admin\/check/, 'post', options => {
   const result = JSON.parse(options.body)
   if (
     extraData.extra.some(
@@ -63,7 +63,7 @@ const dataEditError = {
   code: 1,
   msg: '用户名不存在或者已删除'
 }
-Mock.mock(/\/Admin\/add/, 'post', function (options) {
+Mock.mock(/\/Admin\/add/, 'post', options => {
   const result = JSON.parse(options.body)
   result.admin_id = ++maxId
   extraData.extra.push(result)
@@ -71,7 +71,7 @@ Mock.mock(/\/Admin\/add/, 'post', function (options) {
   return dataEditSuccess
 })
 
-Mock.mock(/\/Admin\/edit/, 'post', function (options) {
+Mock.mock(/\/Admin\/edit/, 'post', options => {
   // 为了避免前端直接修改localStorage，服务器端会对userid, username和token进行校验，任何一个修改都会校验失败，重新登陆
   const result = JSON.parse(options.body)
   let isExists = false
@@ -88,7 +88,7 @@ Mock.mock(/\/Admin\/edit/, 'post', function (options) {
   return dataEditSuccess
 })
 
-Mock.mock(/\/Admin\/detail/, 'get', function (options) {
+Mock.mock(/\/Admin\/detail/, 'get', options => {
   const id = parseInt(Tools.getParam('id', options.url))
   let tempData
   extraData.extra.every(item => {
