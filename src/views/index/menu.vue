@@ -13,6 +13,8 @@
       background-color="#2f353f"
       text-color="#d9d9d9"
       active-text-color="white"
+      :collapse-transition="false"
+      :unique-opened="true"
       :collapse="this.$store.state.isCollapse"
       @select="selectMenu"
     >
