@@ -65,7 +65,7 @@
         <el-menu-item index="/log/sys" id="/log/sys">系统日志</el-menu-item>
         <el-menu-item index="/log/member" id="/log/member">用户日志</el-menu-item>
       </el-submenu>
-      <el-menu-item index="/message/index" id="/message/index">
+      <el-menu-item index="/message/edit" id="/message/edit">
         <i class="el-icon-chat-line-round"></i>
         <span slot="title">消息提醒</span>
       </el-menu-item>
@@ -101,11 +101,6 @@ export default {
     },
     selectMenu: function (index, indexPath) {
 
-    }
-  },
-  mounted: function () {
-    if (this.$route.path === '/') {
-      this.$router.replace('/index/main')
     }
   }
 }

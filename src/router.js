@@ -10,6 +10,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
+      redirect: '/index/main',
       component: () =>
         import(/* webpackChunkName: "index" */ './views/index.vue'),
       children: [
@@ -47,6 +48,18 @@ export default new Router({
           components: {
             main: () =>
               import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
+          }
+        },
+        {
+          path: '/message/edit',
+          name: 'message_edit',
+          meta: {
+            label: '消息提醒',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "message_edit" */ './views/message/edit.vue')
           }
         }
       ]
