@@ -61,7 +61,7 @@ export default {
 
 axios.interceptors.request.use(
   request => {
-    if (request.url !== '/Member/checkMsg') {
+    if (!request.url.endsWith('backend')) {
       NProgress.start()
       Loading.open()
     }
