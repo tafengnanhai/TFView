@@ -6,7 +6,12 @@
           <el-switch v-model="operForm.reg_new"></el-switch>
         </el-form-item>
         <el-form-item label="至少新增数" prop="reg_total">
-          <el-input v-model.number="operForm.reg_total" maxlength="4" autocomplete="off"></el-input>
+          <el-input-number
+            v-model.number="operForm.reg_total"
+            :min="1"
+            :max="9999"
+            autocomplete="off"
+          ></el-input-number>
         </el-form-item>
         <el-form-item label="说明">不同的系统用户独立设置，最多保留新的三次提醒（测试的单独计数，不与真实的合并）</el-form-item>
         <el-form-item>

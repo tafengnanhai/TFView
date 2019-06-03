@@ -1,27 +1,30 @@
 import Mock from 'mockjs'
 
-const dataMemberStat = {
+const dataMemberGeneralStat = {
   code: 0,
   msg: '操作成功',
   extra: {
     today: Mock.mock('@integer(1, 1000)'),
+    yesterday: Mock.mock('@integer(1, 1000)'),
     week: Mock.mock('@integer(1000, 10000)'),
+    lastWeek: Mock.mock('@integer(1000, 10000)'),
     month: Mock.mock('@integer(10000, 100000)'),
+    lastMonth: Mock.mock('@integer(10000, 100000)'),
     all: Mock.mock('@integer(1000000, 10000000)')
   }
 }
 // 模拟错误
-/* dataMemberStat = {
+/* dataMemberGeneralStat = {
   code: 1,
   msg: '获取综合统计失败，请稍后重试'
 } */
 
 // 模拟超时
-/* dataMemberStat = {
+/* dataMemberGeneralStat = {
   code: -1,
   msg: '未登陆或超时，请重新登陆'
 } */
-Mock.mock(/\/Member\/getGeneralStat/, 'get', dataMemberStat)
+Mock.mock(/\/Member\/getGeneralStat/, 'get', dataMemberGeneralStat)
 
 const dataMemberWeekDiff = {
   code: 0,
