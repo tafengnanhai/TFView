@@ -26,6 +26,7 @@ export default new Router({
               import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
           }
         },
+        /* 内容管理 */
         {
           path: '/article/index',
           name: 'article_index',
@@ -50,6 +51,20 @@ export default new Router({
               import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
           }
         },
+        /* 注册统计 */
+        {
+          path: '/member/stat_diff',
+          name: 'member_stat_diff',
+          meta: {
+            label: '对比统计',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "member_stat_diff" */ './views/member/stat_diff.vue')
+          }
+        },
+        /* 消息提醒 */
         {
           path: '/message/edit',
           name: 'message_edit',

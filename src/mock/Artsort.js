@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import Tools from '@/plugins/tools'
 
 let maxId = 7
-let dataListAll = Mock.mock({
+const dataListAll = Mock.mock({
   code: 0,
   msg: '操作成功',
   extra: [

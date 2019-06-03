@@ -35,7 +35,6 @@
           <i class="el-icon-pie-chart"></i>
           <span>注册统计</span>
         </template>
-        <el-menu-item index="/member/stat_general" id="/member/stat_general">综合数据</el-menu-item>
         <el-menu-item index="/member/stat_diff" id="/member/stat_diff">对比统计</el-menu-item>
         <el-menu-item index="/member/stat_city" id="/member/stat_city">城市统计</el-menu-item>
         <el-menu-item index="/member/stat_now" id="/member/stat_now">实时注册</el-menu-item>

@@ -20,7 +20,7 @@ const extraData = {
   ]
 }
 
-let dataListAll = {
+const dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,

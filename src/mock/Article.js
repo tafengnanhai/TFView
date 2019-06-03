@@ -4,8 +4,8 @@ import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
 let maxId = 98
-let extraData = Mock.mock({
-  'extra|98': [
+const extraData = Mock.mock({
+  [`extra|${maxId}`]: [
     {
       art_id: '@increment',
       art_pubdate: '@now',
@@ -27,7 +27,7 @@ let extraData = Mock.mock({
 
 extraData.extra.reverse()
 
-let dataListAll = {
+const dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
