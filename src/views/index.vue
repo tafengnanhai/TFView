@@ -79,6 +79,10 @@ export default {
       this.$store.dispatch('updateRegNewMsg', data.extra)
     })
   },
+  destroyed: function () {
+    Notification.closeAll()
+    try { clearInterval(this.msg.timer) } catch (error) { }
+  },
   watch: {
     '$store.state.regNew': function (val) {
       if (val) {

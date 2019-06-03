@@ -34,7 +34,7 @@ Mock.mock(/\/Message\/edit/, options => {
   return dataSuccess
 })
 
-let data = {
+const data = {
   code: 0,
   msg: '操作成功',
   extra: {
