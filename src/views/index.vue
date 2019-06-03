@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       msg: {
-        interval: 1000,
+        interval: 10000,
         timer: null,
         lastId: new Date().getTime() - 88
       }
