@@ -49,7 +49,7 @@ export default {
       try { clearInterval(this.msg.timer) } catch (error) { }
       this.msg.timer = setInterval(() => {
         http.send({ url: '/Member/checkMsg' }).then(data => {
-          if (data.code === 0 && data.extra.max_id > this.msg.lastId) {
+          if (data.code === 0 && data.extra.max_id - this.msg.lastId >= this.$store.state.regTotal) {
             this.showMsg(data.extra.max_id - this.msg.lastId)
             this.msg.lastId = data.extra.max_id
           }

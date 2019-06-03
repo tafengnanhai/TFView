@@ -55,7 +55,7 @@ export default new Vuex.Store({
     },
     updateRegNewMsg: (state, reg) => {
       state.regNew = reg.reg_new
-      state.regTotal = reg.reg_Total
+      state.regTotal = reg.reg_total
     },
     updateReloadPageTime: state => {
       state.reloadPageTime = new Date().getTime()
