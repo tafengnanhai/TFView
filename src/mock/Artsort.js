@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import Tools from '@/plugins/tools'
 
 let maxId = 7
-const dataListAll = Mock.mock({
+const dataListAll = {
   code: 0,
   msg: '操作成功',
   extra: [
@@ -46,7 +46,7 @@ const dataListAll = Mock.mock({
       artsort_type: ''
     }
   ]
-})
+}
 
 Mock.mock(/\/Artsort\/listAll/, 'get', dataListAll)
 

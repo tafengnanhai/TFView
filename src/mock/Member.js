@@ -4,10 +4,10 @@ const dataMemberGeneralStat = {
   code: 0,
   msg: '操作成功',
   extra: {
-    today: Mock.mock('@integer(1, 1000)'),
-    week: Mock.mock('@integer(1000, 10000)'),
-    month: Mock.mock('@integer(10000, 100000)'),
-    all: Mock.mock('@integer(1000000, 10000000)')
+    today: '@integer(1, 1000)',
+    week: '@integer(1000, 10000)',
+    month: '@integer(10000, 100000)',
+    all: '@integer(1000000, 10000000)'
   }
 }
 // 模拟错误
@@ -23,7 +23,7 @@ const dataMemberGeneralStat = {
 } */
 Mock.mock(/\/Member\/getGeneralStat/, 'get', dataMemberGeneralStat)
 
-const dataMemberDayDiff = Mock.mock({
+const dataMemberDayDiff = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -43,7 +43,7 @@ const dataMemberDayDiff = Mock.mock({
       }
     ]
   }
-})
+}
 
 Mock.mock(/\/Member\/getDayDiffStat/, 'get', dataMemberDayDiff)
 
@@ -81,7 +81,7 @@ const thisMonthDay = d.getDate()
 const diffMonthDay =
   (lastMonthDay > thisMonthDay ? lastMonthDay : thisMonthDay) + 1
 
-const dataMemberMonthDiff = Mock.mock({
+const dataMemberMonthDiff = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -101,7 +101,7 @@ const dataMemberMonthDiff = Mock.mock({
       }
     ]
   }
-})
+}
 
 Mock.mock(/\/Member\/getMonthDiffStat/, 'get', dataMemberMonthDiff)
 

@@ -4,7 +4,7 @@ import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
 let maxId = 98
-const extraData = Mock.mock({
+const extraData = {
   [`extra|${maxId}`]: [
     {
       art_id: '@increment',
@@ -23,7 +23,7 @@ const extraData = Mock.mock({
       art_content: '@cparagraph'
     }
   ]
-})
+}
 
 extraData.extra.reverse()
 
