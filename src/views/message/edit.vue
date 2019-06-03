@@ -53,6 +53,7 @@ export default {
         if (valid) {
           http.send({ sendType: 'post', url: '/Message/edit', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
+              this.$store.dispatch('updateRegNewMsg', this.operForm)
               self.loadMine()
             }
           })
@@ -62,13 +63,13 @@ export default {
     demo: function () {
       notice[notice.next] && notice[notice.next].close()
       notice[notice.next] = Notification.success({
-        title: '消息提醒',
-        message: '相比上次增加了256名注册会员',
+        title: '消息提醒[测试]',
+        message: '相比上次约增加了256名注册会员',
         duration: 0,
         showClose: false,
         position: 'bottom-right',
         onClick: () => {
-          this.close()
+          Notification.closeAll()
           // TODO:打开会员信息界面
           this.$router.push('/index/main')
           this.$store.dispatch('updateReloadPageTime')
@@ -82,6 +83,7 @@ export default {
     loadMine: function () {
       http.send({ url: '/Message/detail' }).then((data) => {
         this.operForm = data.extra
+        this.$store.dispatch('updateRegNewMsg', this.operForm)
       })
     }
   },

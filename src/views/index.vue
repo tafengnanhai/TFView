@@ -19,15 +19,74 @@
 <script>
 import TFMenu from '@/views/index/menu.vue'
 import TFHeader from '@/views/index/header.vue'
+import http from '@/plugins/http'
+import '@/mock/Message'
+import '@/mock/Member'
+import { Notification } from 'element-ui'
+const notice = {
+  0: null,
+  1: null,
+  2: null,
+  next: 0,
+  length: 3
+}
 export default {
   data () {
     return {
-
+      msg: {
+        interval: 1000,
+        timer: null,
+        lastId: new Date().getTime() - 88
+      }
     }
   },
   components: {
     TFMenu,
     TFHeader
+  },
+  methods: {
+    checkMsg: function () {
+      try { clearInterval(this.msg.timer) } catch (error) { }
+      this.msg.timer = setInterval(() => {
+        http.send({ url: '/Member/checkMsg' }).then(data => {
+          if (data.code === 0 && data.extra.max_id > this.msg.lastId) {
+            this.showMsg(data.extra.max_id - this.msg.lastId)
+            this.msg.lastId = data.extra.max_id
+          }
+        })
+      }, this.msg.interval)
+    },
+    showMsg: function (diff) {
+      notice[notice.next] && notice[notice.next].close()
+      notice[notice.next] = Notification.success({
+        title: '消息提醒',
+        message: `相比上次约增加了${diff}名注册会员`,
+        duration: 0,
+        showClose: false,
+        position: 'bottom-right',
+        onClick: () => {
+          Notification.closeAll()
+          // TODO:打开会员信息界面
+          this.$router.push('/index/main')
+          this.$store.dispatch('updateReloadPageTime')
+        }
+      })
+      notice.next = ++notice.next % notice.length
+    }
+  },
+  mounted: function () {
+    http.send({ url: '/Message/detail' }).then((data) => {
+      this.$store.dispatch('updateRegNewMsg', data.extra)
+    })
+  },
+  watch: {
+    '$store.state.regNew': function (val) {
+      if (val) {
+        this.checkMsg()
+      } else {
+        try { clearInterval(this.msg.timer) } catch (error) { }
+      }
+    }
   }
 }
 </script>

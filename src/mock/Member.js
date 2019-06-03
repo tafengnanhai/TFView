@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-const dataUserStat = {
+const dataMemberStat = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -11,19 +11,19 @@ const dataUserStat = {
   }
 }
 // 模拟错误
-/* dataUserStat = {
+/* dataMemberStat = {
   code: 1,
   msg: '获取综合统计失败，请稍后重试'
 } */
 
 // 模拟超时
-/* dataUserStat = {
+/* dataMemberStat = {
   code: -1,
   msg: '未登陆或超时，请重新登陆'
 } */
-Mock.mock(/\/Member\/getGeneralStat/, 'get', dataUserStat)
+Mock.mock(/\/Member\/getGeneralStat/, 'get', dataMemberStat)
 
-const dataUserWeekDiff = {
+const dataMemberWeekDiff = {
   code: 0,
   msg: '操作成功',
   extra: {
@@ -60,4 +60,17 @@ const dataUserWeekDiff = {
     ]
   }
 }
-Mock.mock(/\/Member\/getWeekDiffStat/, 'get', dataUserWeekDiff)
+Mock.mock(/\/Member\/getWeekDiffStat/, 'get', dataMemberWeekDiff)
+
+let dataMsg = {
+  code: 0,
+  msg: '操作成功',
+  extra: {
+    max_id: new Date().getTime()
+  }
+}
+
+Mock.mock(/\/Member\/checkMsg/, 'get', function (options) {
+  dataMsg.extra.max_id = new Date().getTime()
+  return dataMsg
+})

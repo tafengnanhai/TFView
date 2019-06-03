@@ -12,6 +12,8 @@ export default new Vuex.Store({
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend',
+    regNew: false,
+    regTotal: 1,
     pageSize: 10,
     reloadPageTime: new Date().getTime()
   },
@@ -51,6 +53,10 @@ export default new Vuex.Store({
       const siteWidth = state.isCollapse ? '20px' : '120px'
       document.getElementById('sitename').style.width = siteWidth
     },
+    updateRegNewMsg: (state, reg) => {
+      state.regNew = reg.reg_new
+      state.regTotal = reg.reg_Total
+    },
     updateReloadPageTime: state => {
       state.reloadPageTime = new Date().getTime()
     },
@@ -71,6 +77,9 @@ export default new Vuex.Store({
     },
     toggleMenu: context => {
       context.commit('toggleMenu')
+    },
+    updateRegNewMsg: (context, reg) => {
+      context.commit('updateRegNewMsg', reg)
     },
     updateReloadPageTime: context => {
       context.commit('updateReloadPageTime')

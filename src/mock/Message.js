@@ -4,8 +4,8 @@ const data = {
   code: 0,
   msg: '操作成功',
   extra: {
-    reg_new: false,
-    reg_total: 100
+    reg_new: true,
+    reg_total: 1
   }
 }
 

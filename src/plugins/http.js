@@ -61,7 +61,7 @@ export default {
 
 axios.interceptors.request.use(
   request => {
-    NProgress.start()
+    request.url !== '/Member/checkMsg' && NProgress.start()
     Loading.open()
     request.headers['Token'] = lockr.get('token') // use $_SERVER['HTTP_TOKEN'] in php
     if (request.method === 'post') {
