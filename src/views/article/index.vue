@@ -58,7 +58,7 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <ArticleEdit :dialogFormTitle="dialogFormTitle" ref="articleEdit"/>
+    <article-edit :dialogFormTitle="dialogFormTitle" ref="articleEdit"></article-edit>
   </div>
 </template>
 <script>

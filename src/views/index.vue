@@ -1,11 +1,11 @@
 <template>
   <el-container>
     <el-aside id="aside" width="160px">
-      <TFMenu/>
+      <tf-menu></tf-menu>
     </el-aside>
     <el-container>
       <el-header height="76px">
-        <TFHeader ref="tfHeader"/>
+        <tf-header ref="tfHeader"></tf-header>
       </el-header>
       <el-main>
         <keep-alive>
@@ -17,8 +17,8 @@
   </el-container>
 </template>
 <script>
-import TFMenu from '@/views/index/menu.vue'
-import TFHeader from '@/views/index/header.vue'
+import TfMenu from '@/views/index/menu.vue'
+import TfHeader from '@/views/index/header.vue'
 import http from '@/plugins/http'
 import '@/mock/Message'
 import '@/mock/Member'
@@ -41,8 +41,8 @@ export default {
     }
   },
   components: {
-    TFMenu,
-    TFHeader
+    TfMenu,
+    TfHeader
   },
   methods: {
     checkMsg: function () {

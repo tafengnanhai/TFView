@@ -35,9 +35,9 @@
           <i class="el-icon-pie-chart"></i>
           <span>注册统计</span>
         </template>
-        <el-menu-item index="/member/stat_diff" id="/member/stat_diff">对比统计</el-menu-item>
-        <el-menu-item index="/member/stat_city" id="/member/stat_city">城市统计</el-menu-item>
-        <el-menu-item index="/member/stat_now" id="/member/stat_now">实时注册</el-menu-item>
+        <el-menu-item index="/member/stat-diff" id="/member/stat-diff">对比统计</el-menu-item>
+        <el-menu-item index="/member/stat-city" id="/member/stat-city">城市统计</el-menu-item>
+        <el-menu-item index="/member/stat-now" id="/member/stat-now">实时注册</el-menu-item>
       </el-submenu>
       <el-submenu index="/member">
         <template slot="title">
@@ -83,7 +83,7 @@
 <script>
 import Message from '@/plugins/message'
 export default {
-  name: 'TFMenu',
+  name: 'tf-menu',
   data () {
     return {
 

@@ -16,65 +16,65 @@ export default new Router({
       children: [
         {
           path: '/index/main',
-          name: 'index_main',
+          name: 'index-main',
           meta: {
             label: '首页面板',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "index_main" */ './views/index/main.vue')
+              import(/* webpackChunkName: "index-main" */ './views/index/main.vue')
           }
         },
         /* 内容管理 */
         {
           path: '/article/index',
-          name: 'article_index',
+          name: 'article-index',
           meta: {
             label: '文章管理',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "article_index" */ './views/article/index.vue')
+              import(/* webpackChunkName: "article-index" */ './views/article/index.vue')
           }
         },
         {
           path: '/artsort/index',
-          name: 'artsort_index',
+          name: 'artsort-index',
           meta: {
             label: '分类管理',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "artsort_index" */ './views/artsort/index.vue')
+              import(/* webpackChunkName: "artsort-index" */ './views/artsort/index.vue')
           }
         },
         /* 注册统计 */
         {
-          path: '/member/stat_diff',
-          name: 'member_stat_diff',
+          path: '/member/stat-diff',
+          name: 'member-stat-diff',
           meta: {
             label: '对比统计',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "member_stat_diff" */ './views/member/stat_diff.vue')
+              import(/* webpackChunkName: "member-stat-diff" */ './views/member/stat-diff.vue')
           }
         },
         /* 消息提醒 */
         {
           path: '/message/edit',
-          name: 'message_edit',
+          name: 'message-edit',
           meta: {
             label: '消息提醒',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "message_edit" */ './views/message/edit.vue')
+              import(/* webpackChunkName: "message-edit" */ './views/message/edit.vue')
           }
         }
       ]

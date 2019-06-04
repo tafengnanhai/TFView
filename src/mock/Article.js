@@ -4,7 +4,9 @@ import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
 let maxId = 98
-const extraData = {
+
+const extraData = Mock.mock({
+  // 这里必须提前加入Mock.mock解析，不然下面的extraData.extra.reverse()会无效
   [`extra|${maxId}`]: [
     {
       art_id: '@increment',
@@ -23,7 +25,7 @@ const extraData = {
       art_content: '@cparagraph'
     }
   ]
-}
+})
 
 extraData.extra.reverse()
 

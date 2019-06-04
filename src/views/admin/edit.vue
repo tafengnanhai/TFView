@@ -52,7 +52,7 @@ import http from '@/plugins/http'
 import '@/mock/Admin'
 export default {
   props: ['dialogFormTitle', 'dialogId'],
-  name: 'admin_edit',
+  name: 'admin-edit',
   data () {
     let validatePassword = (rule, value, callback) => {
       if (value === '') {

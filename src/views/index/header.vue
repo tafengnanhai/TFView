@@ -25,7 +25,7 @@
     >
       <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabs" :key="item.label"></el-tab-pane>
     </el-tabs>
-    <AdminEdit dialogFormTitle="修改密码" ref="adminEdit"/>
+    <admin-edit dialogFormTitle="修改密码" ref="adminEdit"></admin-edit>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ import Message from '@/plugins/message'
 import AdminEdit from '@/views/admin/edit.vue'
 
 export default {
-  name: 'TFHeader',
+  name: 'tf-header',
   components: {
     AdminEdit
   },
