@@ -130,7 +130,7 @@ export default {
           },
           itemStyle: {
             normal: {
-              color: 'yellow'
+              color: '#ffd079'
             }
           }
         },
