@@ -36,7 +36,10 @@ const notice = {
   length: 3
 }
 export default {
-  props: ['dialogFormTitle', 'dialogId'],
+  props: {
+    dialogFormTitle: String,
+    dialogId: Number
+  },
   name: 'admin-edit',
   data () {
     return {

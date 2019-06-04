@@ -38,7 +38,10 @@
 import http from '@/plugins/http'
 import '@/mock/Artsort'
 export default {
-  props: ['dialogFormTitle', 'dialogId'],
+  props: {
+    dialogFormTitle: String,
+    dialogId: Number
+  },
   name: 'artsort-edit',
   data () {
     return {

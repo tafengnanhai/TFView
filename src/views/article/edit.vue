@@ -85,7 +85,10 @@ import Message from '@/plugins/message'
 import { VueEditor } from 'vue2-editor'
 let permitEditorLength = 500000 // for rules
 export default {
-  props: ['dialogFormTitle', 'dialogId'],
+  props: {
+    dialogFormTitle: String,
+    dialogId: Number
+  },
   name: 'article-edit',
   components: {
     VueEditor

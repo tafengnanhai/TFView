@@ -51,7 +51,10 @@
 import http from '@/plugins/http'
 import '@/mock/Admin'
 export default {
-  props: ['dialogFormTitle', 'dialogId'],
+  props: {
+    dialogFormTitle: String,
+    dialogId: Number
+  },
   name: 'admin-edit',
   data () {
     let validatePassword = (rule, value, callback) => {
