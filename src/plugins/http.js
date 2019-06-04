@@ -10,20 +10,23 @@ axios.defaults.timeout = 10 * 1000
 axios.defaults.headers['Content-Type'] = 'application/json'
 
 export default {
-  send: obj => {
-    obj.sendType = obj.sendType || 'get'
-    obj.showSuccessTip = obj.showSuccessTip || false
-    obj.showErrTip = obj.showErrTip || true
-    obj.neeLogin = obj.neeLogin || true
+  send: ({
+    url,
+    param,
+    sendType = 'get',
+    showSuccessTip = false,
+    showErrTip = true,
+    needLogin = true
+  } = {}) => {
     return new Promise(resolve => {
-      axios[obj.sendType](obj.url, obj.param)
+      axios[sendType](url, param)
         .then(res => {
           if (res.data.code === 0) {
-            obj.showSuccessTip && Message.success(res.data.msg)
+            showSuccessTip && Message.success(res.data.msg)
           } else if (res.data.code === 1) {
-            obj.showErrTip && Message.error(res.data.msg)
+            showErrTip && Message.error(res.data.msg)
           } else if (res.data.code === -1) {
-            obj.neeLogin &&
+            needLogin &&
               router.push({ path: '/login', query: { from: 'timeout' } })
           }
           resolve(res.data)
@@ -33,20 +36,27 @@ export default {
   }
   // 如果显式处理异常更换为以下代码
   /*
-  send: obj => {
-    obj.sendType = obj.sendType || 'get'
-    obj.showSuccessTip = obj.showSuccessTip || false
-    obj.showErrTip = obj.showErrTip || true
-    obj.neeLogin = obj.neeLogin || true
+  send: ({
+    url,
+    param,
+    sendType = 'get',
+    showSuccessTip = false,
+    showErrTip = true,
+    needLogin = true
+  } = {}) => {
+    sendType = sendType || 'get'
+    showSuccessTip = showSuccessTip || false
+    showErrTip = showErrTip || true
+    neeLogin = neeLogin || true
     return new Promise((resolve, reject) => {
-      axios[obj.sendType](obj.url, obj.param)
+      axios[sendType](url, param)
         .then(res => {
           if (res.data.code === 0) {
-            obj.showSuccessTip && Message.success(res.data.msg)
+            showSuccessTip && Message.success(res.data.msg)
           } else if (res.data.code === 1) {
-            obj.showErrTip && Message.error(res.data.msg)
+            showErrTip && Message.error(res.data.msg)
           } else if (res.data.code === -1) {
-            obj.neeLogin &&
+            needLogin &&
               router.push({ path: '/login', query: { from: 'timeout' } })
           }
           resolve(res.data)
