@@ -35,6 +35,7 @@ export default {
     }
   },
   mounted: function () {
+    this.jsonData.scatter['省外'] = [121.5, 35.7]
     this.loadMine()
   },
   watch: {

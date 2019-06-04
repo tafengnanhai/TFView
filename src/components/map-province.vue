@@ -128,7 +128,7 @@ export default {
           },
           itemStyle: {
             normal: {
-              color: '#f4e925'
+              color: '#ffb324'
             }
           }
         },
@@ -193,9 +193,9 @@ export default {
           },
           itemStyle: {
             normal: {
-              color: '#f4e925',
+              color: 'orange',
               shadowBlur: 10,
-              shadowColor: '#05c3f9'
+              shadowColor: '#ccc'
             }
           },
           zlevel: 1

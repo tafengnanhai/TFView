@@ -124,7 +124,8 @@ const dataMemberCity = Mock.mock({
     { name: '德州市', value: '@int(100,10000)' },
     { name: '聊城市', value: '@int(100,10000)' },
     { name: '滨州市', value: '@int(100,10000)' },
-    { name: '菏泽市', value: '@int(100,10000)' }
+    { name: '菏泽市', value: '@int(100,10000)' },
+    { name: '省外', value: '@int(100,10000)' }
   ]
 })
 
