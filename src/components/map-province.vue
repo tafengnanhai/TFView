@@ -16,7 +16,8 @@ export default {
     jsonData: Object,
     geoCoordMap: Object,
     cityData: Array,
-    effectScatterTotal: Number
+    effectScatterTotal: Number,
+    permitResize: Boolean
   },
   name: 'map-province',
   mounted: function () {
@@ -31,6 +32,7 @@ export default {
     const maxPinSize = 20
     const minPinSize = 2
     const effectScatterTotal = this.effectScatterTotal
+    const permitResize = this.permitResize
 
     // 为了避免传过来的数据本身没有排序，这里重新计算一次
     let maxValue = 1
@@ -90,7 +92,7 @@ export default {
             show: false
           }
         },
-        roam: true,
+        roam: permitResize,
         itemStyle: {
           normal: {
             areaColor: '#5bb7d9',
@@ -128,7 +130,7 @@ export default {
           },
           itemStyle: {
             normal: {
-              color: '#ffb324'
+              color: 'yellow'
             }
           }
         },
@@ -149,7 +151,7 @@ export default {
               }
             }
           },
-          roam: true,
+          roam: false,
           itemStyle: {
             normal: {
               areaColor: '#031525',
@@ -193,7 +195,7 @@ export default {
           },
           itemStyle: {
             normal: {
-              color: 'orange',
+              color: '#ffd079',
               shadowBlur: 10,
               shadowColor: '#ccc'
             }
@@ -210,8 +212,8 @@ export default {
 <style scoped>
 #main {
   width: 100%;
-  min-width: 800px;
-  height: 600px;
+  min-width: 600px;
+  height: 300px;
   float: left;
 }
 </style>

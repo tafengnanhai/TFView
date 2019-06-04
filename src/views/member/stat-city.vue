@@ -5,8 +5,17 @@
         :jsonData="jsonData"
         :cityData="cityData"
         :effectScatterTotal="3"
+        :permitResize="false"
         v-if="cityData.length > 0"
       ></map-province>
+    </el-card>
+    <el-card class="chartCard">
+      <ul>
+        <li v-for="(item, index) in filterCityData" :key="item.name">
+          <span v-if="index<9">[0{{index+1}}] {{item.name}}：{{item.value}}</span>
+          <span v-if="index>=9">[{{index+1}}] {{item.name}}：{{item.value}}</span>
+        </li>
+      </ul>
     </el-card>
   </div>
 </template>
@@ -38,6 +47,13 @@ export default {
     this.jsonData.scatter['省外'] = [121.5, 35.7]
     this.loadMine()
   },
+  computed: {
+    filterCityData: function () {
+      return this.cityData.filter(item => {
+        return item.name !== '省外'
+      })
+    }
+  },
   watch: {
     '$store.state.reloadPageTime': function () {
       this.loadMine()
@@ -48,9 +64,16 @@ export default {
 
 <style scoped>
 #memberStatCity {
-  min-width: 900px;
+  min-width: 600px;
 }
 .chartCard {
   margin-bottom: 20px;
+}
+
+.chartCard li {
+  width: 150px;
+  height: 20px;
+  line-height: 20px;
+  float: left;
 }
 </style>
