@@ -14,6 +14,7 @@ const extraData = Mock.mock({
       art_title: '@ctitle(10, 20)',
       artsort_id: '@int(1,7)',
       art_source: '@cword(3, 10)',
+      art_order: '@int(0,1000)',
       art_gourl: 'http://@domain',
       art_simg: [
         {

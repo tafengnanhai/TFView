@@ -34,6 +34,9 @@
         <el-form-item label="来源" prop="art_source">
           <el-input v-model="operForm.art_source" maxlength="100" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="排序" prop="art_order">
+          <el-input-number v-model="operForm.art_order" :min="0" :max="1000000" autocomplete="off"></el-input-number>（不影响后台顺序，只影响前台）
+        </el-form-item>
         <el-form-item label="跳转" prop="art_gourl">
           <el-input v-model="operForm.art_gourl" maxlength="200" autocomplete="off"></el-input>
         </el-form-item>
@@ -106,6 +109,7 @@ export default {
         artsort_id: null,
         art_pubdate: '',
         art_simg: [],
+        art_order: 0,
         art_gourl: '',
         art_content: ''
       },
@@ -130,6 +134,7 @@ export default {
         art_pubdate: [{ required: true, message: '请输入或者选择时间', trigger: 'blur' }],
         artsort_id: [{ required: true, message: '请选择分类', trigger: 'change' }],
         art_source: [{ required: true, message: '请输入来源，避免版权纠纷', trigger: 'blur' }],
+        art_order: [{ required: true, message: '排序不能为空，可以为0', trigger: 'change' }],
         art_gourl: [{ type: 'url', message: '跳转地址不合法', trigger: 'blur' }],
         art_content: [{ min: 0, max: permitEditorLength, message: `内容超过最大允许长度${permitEditorLength}，（图片会转成字符）`, trigger: 'change' }]
       }

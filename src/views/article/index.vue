@@ -40,6 +40,7 @@
       <el-table-column prop="art_id" label="编号" width="60" align="center"></el-table-column>
       <el-table-column prop="art_title" label="标题" min-width="160" align="center"></el-table-column>
       <el-table-column prop="artsort_name" label="分类" min-width="60" align="center"></el-table-column>
+      <el-table-column prop="art_order" label="排序" width="80" align="center"></el-table-column>
       <el-table-column label="日期" min-width="100" align="center">
         <template slot-scope="scope">{{scope.row.art_pubdate.substring(0,10)}}</template>
       </el-table-column>
