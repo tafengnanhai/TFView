@@ -105,6 +105,41 @@ const dataMemberMonthDiff = {
 
 Mock.mock(/\/Member\/getMonthDiffStat/, 'get', dataMemberMonthDiff)
 
+const dataMemberCity = Mock.mock({
+  code: 0,
+  msg: '操作成功',
+  extra: [
+    { name: '济南市', value: '@int(100,10000)' },
+    { name: '青岛市', value: '@int(100,10000)' },
+    { name: '淄博市', value: '@int(100,10000)' },
+    { name: '枣庄市', value: '@int(100,10000)' },
+    { name: '东营市', value: '@int(100,10000)' },
+    { name: '烟台市', value: '@int(100,10000)' },
+    { name: '潍坊市', value: '@int(100,10000)' },
+    { name: '济宁市', value: '@int(100,10000)' },
+    { name: '泰安市', value: '@int(100,10000)' },
+    { name: '威海市', value: '@int(100,10000)' },
+    { name: '日照市', value: '@int(100,10000)' },
+    { name: '临沂市', value: '@int(100,10000)' },
+    { name: '德州市', value: '@int(100,10000)' },
+    { name: '聊城市', value: '@int(100,10000)' },
+    { name: '滨州市', value: '@int(100,10000)' },
+    { name: '菏泽市', value: '@int(100,10000)' }
+  ]
+})
+
+Mock.mock(/\/Member\/getCityStat/, 'get', function (options) {
+  dataMemberCity.extra.sort((m, n) => {
+    if (m.value < n.value) {
+      return 1
+    } else if (m.value > n.value) {
+      return -1
+    }
+    return 0
+  })
+  return dataMemberCity
+})
+
 const dataMsg = {
   code: 0,
   msg: '操作成功',

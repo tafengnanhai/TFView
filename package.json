@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
+    "echarts": "^4.2.1",
     "element-ui": "^2.8.2",
     "lockr": "^0.8.5",
     "mockjs": "^1.0.1-beta3",

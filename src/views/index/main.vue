@@ -66,13 +66,9 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row :gutter="20">
-      <el-col :span="24">
-        <el-card class="chartCard">
-          <line-chart :chart-data="statWeekDiffData" :options="lineChartOption"></line-chart>
-        </el-card>
-      </el-col>
-    </el-row>
+    <el-card class="chartCard">
+      <line-chart :chart-data="statWeekDiffData" :options="lineChartOption"></line-chart>
+    </el-card>
     <el-timeline>
       <el-timeline-item
         :timestamp="data.timestamp"

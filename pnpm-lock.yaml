@@ -2,6 +2,7 @@ dependencies:
   axios: 0.18.0
   chart.js: 2.8.0
   core-js: 2.6.5
+  echarts: 4.2.1
   element-ui: 2.8.2
   lockr: 0.8.5
   mockjs: 1.0.1-beta3
@@ -3422,6 +3423,13 @@ packages:
     resolution:
       integrity: sha1-OoOpBOVDUyh4dMVkt1SThoSamMk=
       tarball: /ecc-jsbn/download/ecc-jsbn-0.1.2.tgz
+  /echarts/4.2.1:
+    dependencies:
+      zrender: 4.0.7
+    dev: false
+    resolution:
+      integrity: sha1-mo6jsDNU+G+CTZdiXDNM8Wll7wM=
+      tarball: /echarts/download/echarts-4.2.1.tgz
   /ee-first/1.1.1:
     dev: true
     resolution:
@@ -10115,6 +10123,11 @@ packages:
     resolution:
       integrity: sha1-+MsZjI590hJL7dwkV1cTKQlrBuc=
       tarball: /yup/download/yup-0.27.0.tgz
+  /zrender/4.0.7:
+    dev: false
+    resolution:
+      integrity: sha1-Fa6WCCL17+1BCZXTflEH/j3hDm0=
+      tarball: /zrender/download/zrender-4.0.7.tgz
 specifiers:
   '@vue/cli-plugin-babel': ^3.7.0
   '@vue/cli-plugin-eslint': ^3.7.0
@@ -10125,6 +10138,7 @@ specifiers:
   babel-loader: ^8.0.5
   chart.js: ^2.8.0
   core-js: ^2.6.5
+  echarts: ^4.2.1
   element-ui: ^2.8.2
   eslint: ^5.16.0
   eslint-plugin-vue: ^5.0.0

@@ -37,6 +37,7 @@ pnpm/npm run lint
 | axios                       | pro      | 0.18.0      |
 | chart.js                    | pro      | 2.8.0       |
 | core-js                     | pro      | 2.6.5       |
+| echarts                     | pro      | 4.2.1       |
 | element-ui                  | pro      | 2.8.2       |
 | lockr                       | pro      | 0.8.5       |
 | mockjs                      | pro      | 1.0.1-beta3 |

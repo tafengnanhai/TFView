@@ -64,6 +64,18 @@ export default new Router({
               import(/* webpackChunkName: "member-stat-diff" */ './views/member/stat-diff.vue')
           }
         },
+        {
+          path: '/member/stat-city',
+          name: 'member-stat-city',
+          meta: {
+            label: '城市统计',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "member-stat-city" */ './views/member/stat-city.vue')
+          }
+        },
         /* 消息提醒 */
         {
           path: '/message/edit',
