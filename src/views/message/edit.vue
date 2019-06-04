@@ -37,7 +37,7 @@ const notice = {
 }
 export default {
   props: ['dialogFormTitle', 'dialogId'],
-  name: 'admin_edit',
+  name: 'admin-edit',
   data () {
     return {
       fullscreen: false,

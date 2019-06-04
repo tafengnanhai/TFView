@@ -39,7 +39,7 @@ import http from '@/plugins/http'
 import '@/mock/Artsort'
 export default {
   props: ['dialogFormTitle', 'dialogId'],
-  name: 'artsort_edit',
+  name: 'artsort-edit',
   data () {
     return {
       fullscreen: false,

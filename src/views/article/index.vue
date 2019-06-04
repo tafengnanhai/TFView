@@ -58,7 +58,7 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <article-edit :dialogFormTitle="dialogFormTitle" ref="articleEdit"></article-edit>
+    <article-edit :dialog-form-title="dialogFormTitle" ref="articleEdit"></article-edit>
   </div>
 </template>
 <script>
@@ -67,7 +67,7 @@ import '@/mock/Article'
 import Confirm from '@/plugins/confirm'
 import ArticleEdit from '@/views/article/edit.vue'
 export default {
-  name: 'article_index',
+  name: 'article-index',
   components: {
     ArticleEdit
   },

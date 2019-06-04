@@ -25,7 +25,7 @@
     >
       <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabs" :key="item.label"></el-tab-pane>
     </el-tabs>
-    <admin-edit dialogFormTitle="修改密码" ref="adminEdit"></admin-edit>
+    <admin-edit dialog-form-title="修改密码" ref="adminEdit"></admin-edit>
   </div>
 </template>
 

@@ -86,7 +86,7 @@ import { VueEditor } from 'vue2-editor'
 let permitEditorLength = 500000 // for rules
 export default {
   props: ['dialogFormTitle', 'dialogId'],
-  name: 'article_edit',
+  name: 'article-edit',
   components: {
     VueEditor
   },
