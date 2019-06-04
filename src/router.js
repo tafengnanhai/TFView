@@ -87,7 +87,7 @@ export default new Router({
     },
     {
       path: '*',
-      name: 'Four04',
+      name: 'four04',
       meta: {
         keepAlive: true
       },

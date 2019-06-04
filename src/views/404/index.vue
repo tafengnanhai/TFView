@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'four04',
   methods: {
     goHome: function () {
       // 用router需要处理菜单折叠的问题，暂不用，也可以自行适配

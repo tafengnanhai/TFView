@@ -41,6 +41,7 @@ import http from '@/plugins/http'
 import Message from '@/plugins/message'
 import '@/mock/Admin'
 export default {
+  name: 'login',
   data () {
     return {
       operForm: {

@@ -95,6 +95,7 @@ import http from '@/plugins/http'
 import '@/mock/Member'
 import '@/mock/Site'
 export default {
+  name: 'index-main',
   components: {
     LineChart
   },

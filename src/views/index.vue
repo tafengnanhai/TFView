@@ -31,6 +31,11 @@ const notice = {
   length: 3
 }
 export default {
+  name: 'index',
+  components: {
+    TfMenu,
+    TfHeader
+  },
   data () {
     return {
       msg: {
@@ -39,10 +44,6 @@ export default {
         lastId: new Date().getTime() - 88
       }
     }
-  },
-  components: {
-    TfMenu,
-    TfHeader
   },
   methods: {
     checkMsg: function () {
