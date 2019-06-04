@@ -12,7 +12,7 @@ const dataListAll = {
     },
     {
       user_id: 2,
-      reg_new: true,
+      reg_new: false,
       reg_total: 1
     }
   ]

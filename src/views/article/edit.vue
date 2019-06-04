@@ -35,7 +35,7 @@
           <el-input v-model="operForm.art_source" maxlength="100" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="排序" prop="art_order">
-          <el-input-number v-model="operForm.art_order" :min="0" :max="1000000" autocomplete="off"></el-input-number>（不影响后台顺序，只影响前台）
+          <el-input-number v-model="operForm.art_order" :min="0" :max="1000000" autocomplete="off"></el-input-number>
         </el-form-item>
         <el-form-item label="跳转" prop="art_gourl">
           <el-input v-model="operForm.art_gourl" maxlength="200" autocomplete="off"></el-input>

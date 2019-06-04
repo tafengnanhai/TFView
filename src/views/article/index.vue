@@ -34,6 +34,12 @@
         clearable
       ></el-input>
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-s-order"
+        size="medium"
+        @click="changeOrder()"
+      >{{orderTip}}</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center"></el-table-column>
@@ -80,6 +86,8 @@ export default {
       dialogEditTime: 0,
       inputKeyword: '',
       keyword: '',
+      orderTip: '自 然 排 序',
+      orderType: 'pubdate',
       artsorts: [],
       initArtsorts: [],
       artsortId: 0,
@@ -140,8 +148,18 @@ export default {
     pageClick: function (p) {
       this.getData(p)
     },
+    changeOrder: function () {
+      if (this.orderType === 'pubdate') {
+        this.orderTip = '设 置 排 序'
+        this.orderType = 'setorder'
+      } else {
+        this.orderTip = '自 然 排 序'
+        this.orderType = 'pubdate'
+      }
+      this.getData(this.currentPage)
+    },
     getData: function (p) {
-      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId } } }).then(data => {
+      http.send({ url: '/Article/listAll', param: { params: { p: p, keyword: escape(this.keyword), artsort_id: this.artsortId, orderType: this.orderType } } }).then(data => {
         this.listData = data.extra
         this.listData = this.listData.map(art => {
           this.initArtsorts.every(item => {
@@ -210,7 +228,7 @@ export default {
 
 <style scoped>
 #articleIndex {
-  min-width: 800px;
+  min-width: 900px;
 }
 .panel {
   width: 100%;

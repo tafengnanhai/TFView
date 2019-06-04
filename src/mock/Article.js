@@ -42,7 +42,22 @@ Mock.mock(/\/Article\/listAll/, 'get', options => {
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
   const artsortId = parseInt(Tools.getParam('artsort_id', options.url))
+  const orderType = Tools.getParam('orderType', options.url)
   let tempExtra = extraData.extra
+  if (orderType === 'setorder') {
+    tempExtra.sort((m, n) => {
+      if (m.art_order < n.art_order) {
+        return 1
+      } else if (m.art_order === n.art_order) {
+        return m.art_id < n.art_id ? 1 : -1
+      }
+      return -1
+    })
+  } else {
+    tempExtra.sort((m, n) => {
+      return m.art_id < n.art_id ? 1 : -1
+    })
+  }
   tempDataListAll.total = tempExtra.length
   if (artsortId !== 0 && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
