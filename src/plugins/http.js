@@ -44,10 +44,6 @@ export default {
     showErrTip = true,
     needLogin = true
   } = {}) => {
-    sendType = sendType || 'get'
-    showSuccessTip = showSuccessTip || false
-    showErrTip = showErrTip || true
-    neeLogin = neeLogin || true
     return new Promise((resolve, reject) => {
       axios[sendType](url, param)
         .then(res => {
