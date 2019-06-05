@@ -5,7 +5,7 @@
         :jsonData="jsonData"
         :cityData="cityData"
         :effectScatterTotal="17"
-        :permitResize="false"
+        :permitResize="true"
       ></map-province>
     </el-card>
   </div>

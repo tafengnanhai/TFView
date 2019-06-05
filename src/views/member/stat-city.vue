@@ -5,7 +5,7 @@
         :jsonData="jsonData"
         :cityData="cityData"
         :effectScatterTotal="3"
-        :permitResize="false"
+        :permitResize="true"
         v-if="showMap"
       ></map-province>
     </el-card>
