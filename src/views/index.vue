@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     checkMsg: function () {
-      try { clearInterval(this.msg.timer) } catch (error) { }
+      try { this.msg.timer && clearInterval(this.msg.timer) } catch (error) { }
       this.msg.timer = setInterval(() => {
         http.send({ url: '/Member/checkMsg/backend' }).then(data => {
           if (data.code === 0 && data.extra.max_id - this.msg.lastId >= this.$store.state.regTotal) {
@@ -82,7 +82,7 @@ export default {
   },
   destroyed: function () {
     Notification.closeAll()
-    try { clearInterval(this.msg.timer) } catch (error) { }
+    try { this.msg.timer && clearInterval(this.msg.timer) } catch (error) { }
   },
   watch: {
     '$store.state.regNew': function (val) {

@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     loadMine: function () {
-      try { clearInterval(this.timer) } catch (error) { }
+      try { this.timer && clearInterval(this.timer) } catch (error) { }
       this.timer = setInterval(() => {
         http.send({ url: '/Member/getCityNow/backend' }).then((data) => {
           data.extra.length > 0 && (this.cityData = data.extra)
@@ -44,7 +44,7 @@ export default {
     this.loadMine()
   },
   deactivated: function () {
-    try { clearInterval(this.timer) } catch (error) { }
+    try { this.timer && clearInterval(this.timer) } catch (error) { }
   },
   watch: {
     '$store.state.reloadPageTime': function () {
