@@ -71,7 +71,6 @@ export default {
 .chartCard {
   margin-bottom: 20px;
 }
-
 .chartCard li {
   width: 150px;
   height: 20px;
