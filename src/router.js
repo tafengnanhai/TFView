@@ -101,6 +101,18 @@ export default new Router({
               import(/* webpackChunkName: "log" */ './views/logsys/index.vue')
           }
         },
+        {
+          path: '/logmember/index',
+          name: 'logmember-index',
+          meta: {
+            label: '用户日志',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "log" */ './views/logmember/index.vue')
+          }
+        },
         /* 消息提醒 */
         {
           path: '/message/edit',
