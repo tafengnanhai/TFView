@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+const Random = Mock.Random
 
 const dataMemberGeneralStat = {
   code: 0,
@@ -139,6 +140,39 @@ Mock.mock(/\/Member\/getCityStat/, 'get', function (options) {
     return 0
   })
   return dataMemberCity
+})
+
+const dataMemberNow = {
+  code: 0,
+  msg: '操作成功'
+}
+
+const dataMemberNowExtraData = Mock.mock([
+  { name: '济南市', value: '@int(1,100)' },
+  { name: '青岛市', value: '@int(1,100)' },
+  { name: '淄博市', value: '@int(1,100)' },
+  { name: '枣庄市', value: '@int(1,100)' },
+  { name: '东营市', value: '@int(1,100)' },
+  { name: '烟台市', value: '@int(1,100)' },
+  { name: '潍坊市', value: '@int(1,100)' },
+  { name: '济宁市', value: '@int(1,100)' },
+  { name: '泰安市', value: '@int(1,100)' },
+  { name: '威海市', value: '@int(1,100)' },
+  { name: '日照市', value: '@int(1,100)' },
+  { name: '临沂市', value: '@int(1,100)' },
+  { name: '德州市', value: '@int(1,100)' },
+  { name: '聊城市', value: '@int(1,100)' },
+  { name: '滨州市', value: '@int(1,100)' },
+  { name: '菏泽市', value: '@int(1,100)' },
+  { name: '省外', value: '@int(1,100)' }
+])
+
+Mock.mock(/\/Member\/getCityNow/, 'get', function (options) {
+  const tempExtra = dataMemberNowExtraData
+  dataMemberNow.extra = tempExtra.filter(() => {
+    return Random.integer(1, 10) === 5
+  })
+  return dataMemberNow
 })
 
 const dataMsg = {

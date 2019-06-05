@@ -23,7 +23,7 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "index-main" */ './views/index/main.vue')
+              import(/* webpackChunkName: "index" */ './views/index/main.vue')
           }
         },
         /* 内容管理 */
@@ -36,7 +36,7 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "article-index" */ './views/article/index.vue')
+              import(/* webpackChunkName: "article" */ './views/article/index.vue')
           }
         },
         {
@@ -48,20 +48,20 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "artsort-index" */ './views/artsort/index.vue')
+              import(/* webpackChunkName: "artsort" */ './views/artsort/index.vue')
           }
         },
-        /* 注册统计 */
+        /* 监控统计 */
         {
           path: '/member/stat-diff',
           name: 'member-stat-diff',
           meta: {
-            label: '对比统计',
+            label: '注册对比',
             keepAlive: true
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "member-stat-diff" */ './views/member/stat-diff.vue')
+              import(/* webpackChunkName: "member" */ './views/member/stat-diff.vue')
           }
         },
         {
@@ -73,7 +73,19 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "member-stat-city" */ './views/member/stat-city.vue')
+              import(/* webpackChunkName: "member" */ './views/member/stat-city.vue')
+          }
+        },
+        {
+          path: '/member/stat-now',
+          name: 'member-stat-now',
+          meta: {
+            label: '实时活跃',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "member" */ './views/member/stat-now.vue')
           }
         },
         /* 消息提醒 */
@@ -86,7 +98,7 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "message-edit" */ './views/message/edit.vue')
+              import(/* webpackChunkName: "message" */ './views/message/edit.vue')
           }
         }
       ]
