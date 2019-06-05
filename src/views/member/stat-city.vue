@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 #memberStatCity {
-  min-width: 600px;
+  min-width: 800px;
 }
 .chartCard {
   margin-bottom: 20px;

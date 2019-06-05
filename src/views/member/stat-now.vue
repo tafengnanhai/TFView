@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 #memberStatNow {
-  min-width: 600px;
+  min-width: 800px;
 }
 .chartCard {
   margin-bottom: 20px;

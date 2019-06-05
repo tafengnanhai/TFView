@@ -216,6 +216,7 @@ export default {
   mounted: function () {
     this.initChart()
     this.loadMine()
+    window.onresize = this.chart.resize
   },
   watch: {
     cityData: function (val) {
