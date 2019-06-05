@@ -105,10 +105,10 @@ export default {
         maintainAspectRatio: false,
         scales: {
           yAxes: [{
-            stacked: true
+            stacked: false
           }],
           xAxes: [{
-            stacked: true
+            stacked: false
           }]
         }
       }
