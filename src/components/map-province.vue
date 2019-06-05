@@ -216,7 +216,10 @@ export default {
   mounted: function () {
     this.initChart()
     this.loadMine()
-    window.onresize = this.chart.resize
+    window.onresize = () => {
+      document.getElementById('main').style.height = `${document.body.clientWidth * 0.35}px`
+      this.chart.resize()
+    }
   },
   watch: {
     cityData: function (val) {
@@ -229,7 +232,6 @@ export default {
 <style scoped>
 #main {
   width: 100%;
-  min-width: 600px;
   min-height: 300px;
   float: left;
 }

@@ -5,7 +5,7 @@
         :jsonData="jsonData"
         :cityData="cityData"
         :effectScatterTotal="3"
-        :permitResize="true"
+        :permitResize="false"
         v-if="showMap"
       ></map-province>
     </el-card>
@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 #memberStatCity {
-  min-width: 800px;
+  min-width: 660px;
 }
 .chartCard {
   margin-bottom: 20px;
