@@ -14,7 +14,7 @@ export default new Vuex.Store({
     testToken: 'this is test token which will be replaced by backend',
     regNew: false,
     regTotal: 1,
-    pageSize: 10,
+    pageSize: 8,
     reloadPageTime: new Date().getTime()
   },
   mutations: {

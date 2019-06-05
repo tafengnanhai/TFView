@@ -88,6 +88,19 @@ export default new Router({
               import(/* webpackChunkName: "member" */ './views/member/stat-now.vue')
           }
         },
+        /* 日志管理 */
+        {
+          path: '/logsys/index',
+          name: 'logsys-index',
+          meta: {
+            label: '系统日志',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "log" */ './views/logsys/index.vue')
+          }
+        },
         /* 消息提醒 */
         {
           path: '/message/edit',

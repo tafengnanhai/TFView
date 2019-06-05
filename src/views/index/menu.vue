@@ -53,8 +53,8 @@
           <i class="el-icon-postcard"></i>
           <span>日志管理</span>
         </template>
-        <el-menu-item index="/log/sys">系统日志</el-menu-item>
-        <el-menu-item index="/log/member">用户日志</el-menu-item>
+        <el-menu-item index="/logsys/index">系统日志</el-menu-item>
+        <el-menu-item index="/logmember/index">用户日志</el-menu-item>
       </el-submenu>
       <el-menu-item index="/message/edit">
         <i class="el-icon-chat-line-round"></i>
