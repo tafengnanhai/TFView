@@ -35,7 +35,7 @@
           <i class="el-icon-pie-chart"></i>
           <span>监控统计</span>
         </template>
-        <el-menu-item index="/member/stat-diff" id="/member/stat-diff">注册统计</el-menu-item>
+        <el-menu-item index="/member/stat-diff" id="/member/stat-diff">注册对比</el-menu-item>
         <el-menu-item index="/member/stat-city" id="/member/stat-city">城市统计</el-menu-item>
         <el-menu-item index="/member/stat-now" id="/member/stat-now">实时活跃</el-menu-item>
       </el-submenu>
