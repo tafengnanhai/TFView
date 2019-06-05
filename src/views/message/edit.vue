@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="messageEdit">
     <el-card class="statCard">
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="100px">
         <el-form-item label="是否提醒" prop="reg_new">
@@ -105,3 +105,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#messageEdit {
+  min-width: 500px;
+}
+</style>
