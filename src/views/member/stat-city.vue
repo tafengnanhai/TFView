@@ -6,7 +6,7 @@
         :cityData="cityData"
         :effectScatterTotal="3"
         :permitResize="false"
-        v-if="cityData.length > 0"
+        v-if="showMap"
       ></map-province>
     </el-card>
     <el-card class="chartCard">
@@ -33,13 +33,15 @@ export default {
   data () {
     return {
       jsonData: jsonData,
-      cityData: []
+      cityData: [],
+      showMap: false
     }
   },
   methods: {
     loadMine: function () {
       http.send({ url: '/Member/getCityStat' }).then((data) => {
         this.cityData = data.extra
+        this.showMap = true
       })
     }
   },
@@ -49,7 +51,7 @@ export default {
   },
   computed: {
     filterCityData: function () {
-      return this.cityData.filter(item => {
+      return this.cityData.length > 0 && this.cityData.filter(item => {
         return item.name !== '省外'
       })
     }
