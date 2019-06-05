@@ -34,7 +34,7 @@ export default {
       try { clearInterval(this.timer) } catch (error) { }
       this.timer = setInterval(() => {
         http.send({ url: '/Member/getCityNow/backend' }).then((data) => {
-          this.cityData = data.extra
+          data.extra.length > 0 && (this.cityData = data.extra)
         })
       }, this.interval)
     }
