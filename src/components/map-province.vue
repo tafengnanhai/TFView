@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     initChart: function () {
-      document.getElementById('main').style.height = `${document.body.clientHeight - 200}px`
+      document.getElementById('main').style.height = `${document.body.clientWidth * 0.35}px`
       this.chart = echarts.init(document.getElementById('main'))
       this.chart.showLoading()
       echarts.registerMap('province', this.jsonData)
@@ -90,6 +90,8 @@ export default {
           }
         },
         geo: {
+          top: 0,
+          bottom: '20px',
           show: true,
           map: 'province',
           label: {
@@ -146,7 +148,7 @@ export default {
             type: 'map',
             map: 'province',
             geoIndex: 0,
-            aspectScale: 0.5,
+            aspectScale: 0.75,
             showLegendSymbol: false,
             label: {
               normal: {
@@ -227,7 +229,7 @@ export default {
 #main {
   width: 100%;
   min-width: 600px;
-  height: 300px;
+  min-height: 300px;
   float: left;
 }
 </style>
