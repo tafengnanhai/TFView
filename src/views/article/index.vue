@@ -209,7 +209,7 @@ export default {
       this.loadArtsort()
     }
   },
-  activated: function () {
+  mounted: function () {
     this.loadMine()
   },
   watch: {
