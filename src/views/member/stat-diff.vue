@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 #memberStatDiff {
-  min-width: 260px;
+  min-width: 250px;
   position: relative;
 }
 .panel {
