@@ -47,12 +47,16 @@ export default {
         this.chartCardClass = 'normal'
       }
     },
+    getData: function () {
+      http.send({ url: '/Member/getCityNow/backend' }).then((data) => {
+        data.extra.length > 0 && (this.cityData = data.extra)
+      })
+    },
     loadMine: function () {
+      this.getData()
       try { this.timer && clearInterval(this.timer) } catch (error) { }
       this.timer = setInterval(() => {
-        http.send({ url: '/Member/getCityNow/backend' }).then((data) => {
-          data.extra.length > 0 && (this.cityData = data.extra)
-        })
+        this.getData()
       }, this.interval)
     }
   },
