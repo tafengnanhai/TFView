@@ -83,9 +83,10 @@ export default {
           trigger: 'item',
           formatter: function (params) {
             if (typeof params.value[2] === 'undefined') {
-              return params.name + ' : ' + params.value
+              const notExist = '暂无'
+              return `${params.name} : ${params.value || notExist}`
             } else {
-              return params.name + ' : ' + params.value[2]
+              return `${params.name} : ${params.value[2]}`
             }
           }
         },
