@@ -41,7 +41,6 @@ const dataLoginError = {
 // 和后端一致，不建议直接返回用户名和密码的判断方式
 Mock.mock(/\/Admin\/check/, 'post', options => {
   const result = JSON.parse(options.body)
-  console.log(extraData.extra)
   if (
     extraData.extra.some(
       item =>

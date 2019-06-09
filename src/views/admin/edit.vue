@@ -64,7 +64,7 @@ export default {
       } else if (value && value.length < 6) {
         callback(new Error('密码长度不能低于6位'))
       } else {
-        if (this.operForm.admin_password2 !== '') {
+        if (this.checkForm.admin_password2 !== '') {
           this.$refs.operForm.validateField('admin_password2')
         }
         callback()
@@ -85,11 +85,13 @@ export default {
       fullscreen: false,
       dialogFormVisible: false,
       dialogLastOperation: 'add',
+      checkForm: {
+        admin_password2: ''
+      },
       operForm: {
         admin_id: 0,
         admin_username: '',
-        admin_password: '',
-        admin_password2: ''
+        admin_password: ''
       },
       rules: {
         admin_username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -138,7 +140,7 @@ export default {
         http.send({ url: '/Admin/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
           Object.assign(this.operForm, data.extra)
           this.operForm.admin_password = ''
-          this.operForm.admin_password2 = ''
+          this.checkForm.admin_password2 = ''
         })
       }
     }
