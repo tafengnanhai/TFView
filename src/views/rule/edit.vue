@@ -116,9 +116,7 @@ export default {
           this.$refs.operForm.resetFields()
         })
         http.send({ url: '/Rule/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
-          Object.assign(this.operForm, data.extra)
-          this.operForm.admin_password = ''
-          this.operForm.admin_password2 = ''
+          this.operForm = data.extra
         })
       }
     }
