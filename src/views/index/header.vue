@@ -43,6 +43,7 @@ export default {
     return {
       dialogFormVisible: false,
       dialogId: this.$store.state.userid,
+      dialogEditTime: 0,
       fullscreen: false,
       activeTabName: '/index/main',
       tabs: [
@@ -58,6 +59,7 @@ export default {
       this.$store.commit('toggleMenu')
     },
     toggleDialog: function (flag) {
+      flag && (this.dialogEditTime = new Date().getTime())
       this.$refs.adminEdit.toggleDialog(flag)
     },
     logout: function () {

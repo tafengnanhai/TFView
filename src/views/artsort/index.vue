@@ -62,9 +62,9 @@ export default {
       this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
-    edit: function (artsortId) {
+    edit: function (id) {
       this.dialogFormTitle = '编辑'
-      this.dialogId = artsortId
+      this.dialogId = id
       this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },

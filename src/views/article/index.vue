@@ -105,15 +105,15 @@ export default {
       this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
-    edit: function (artId) {
+    edit: function (id) {
       this.dialogFormTitle = '编辑'
-      this.dialogId = artId
+      this.dialogId = id
       this.dialogEditTime = new Date().getTime()
       this.toggleDialog(true)
     },
-    del: function (artId) {
+    del: function (id) {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
-        http.send({ url: '/Article/del', sendType: 'post', param: { id: artId }, showSuccessTip: true }).then(data => {
+        http.send({ url: '/Article/del', sendType: 'post', param: { id: id }, showSuccessTip: true }).then(data => {
           if (data.code === 0) {
             this.total = data.total
             const computedCurrentPage = Math.ceil(this.total / this.pageSize)
@@ -139,8 +139,8 @@ export default {
         })
       })
     },
-    handleSelectionChange: function (arts) {
-      this.selections = arts
+    handleSelectionChange: function (data) {
+      this.selections = data
     },
     toggleDialog: function (flag) {
       this.$refs.articleEdit.toggleDialog(flag)

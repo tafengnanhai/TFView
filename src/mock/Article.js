@@ -67,7 +67,7 @@ Mock.mock(/\/Article\/listAll/, 'get', options => {
   }
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
-      return item.art_title.indexOf(keyword) !== -1
+      return item.art_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
     })
     tempDataListAll.total = tempExtra.length
   }

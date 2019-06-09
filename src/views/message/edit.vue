@@ -1,7 +1,13 @@
 <template>
   <div id="messageEdit">
     <el-card class="statCard">
-      <el-form :model="operForm" ref="operForm" :rules="rules" label-width="100px">
+      <el-form
+        :model="operForm"
+        ref="operForm"
+        :rules="rules"
+        label-width="100px"
+        @submit.native.prevent
+      >
         <el-form-item label="是否提醒" prop="reg_new">
           <el-switch v-model="operForm.reg_new"></el-switch>
         </el-form-item>

@@ -5,7 +5,7 @@
       :fullscreen="fullscreen"
       :visible.sync="dialogFormVisible"
       :show-close="false"
-      :close-on-click-modal="true"
+      :close-on-click-modal="false"
       :close-on-press-escape="true"
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="60px">
@@ -18,6 +18,7 @@
             maxlength="20"
             autocomplete="off"
             placeholder="可选，用于编程中的特殊处理"
+            @keydown.enter.native="submitForm('operForm')"
           ></el-input>
         </el-form-item>
       </el-form>
@@ -84,7 +85,6 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
-      this.operForm.artsort_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {

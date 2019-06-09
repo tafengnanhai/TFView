@@ -5,7 +5,7 @@
       :fullscreen="fullscreen"
       :visible.sync="dialogFormVisible"
       :show-close="false"
-      :close-on-click-modal="true"
+      :close-on-click-modal="false"
       :close-on-press-escape="true"
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="60px">
@@ -259,7 +259,6 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
-      this.operForm.art_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {
