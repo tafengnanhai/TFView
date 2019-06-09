@@ -5,13 +5,13 @@
       :fullscreen="fullscreen"
       :visible.sync="dialogFormVisible"
       :show-close="false"
-      :close-on-click-modal="true"
+      :close-on-click-modal="false"
       :close-on-press-escape="true"
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="80px">
         <el-form-item label="用户名" prop="admin_username">
           <el-input
-            v-model="operForm.admin_username"
+            v-model.trim="operForm.admin_username"
             maxlength="20"
             autocomplete="off"
             :disabled="this.$parent.dialogId !== 0"
@@ -31,6 +31,7 @@
             maxlength="20"
             autocomplete="off"
             v-model="operForm.admin_password2"
+            @keydown.enter.native="submitForm('operForm')"
           ></el-input>
         </el-form-item>
       </el-form>
@@ -60,10 +61,10 @@ export default {
     let validatePassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
-      } else if (value.length < 6) {
+      } else if (value && value.length < 6) {
         callback(new Error('密码长度不能低于6位'))
       } else {
-        if (this.operForm.checkPass !== '') {
+        if (this.operForm.admin_password2 !== '') {
           this.$refs.operForm.validateField('admin_password2')
         }
         callback()
@@ -72,7 +73,7 @@ export default {
     let validatePassword2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入确认密码'))
-      } else if (value.length < 6) {
+      } else if (value && value.length < 6) {
         callback(new Error('确认密码长度不能低于6位'))
       } else if (value !== this.operForm.admin_password) {
         callback(new Error('确认密码和上面的密码不相同!'))
@@ -85,7 +86,8 @@ export default {
       dialogFormVisible: false,
       dialogLastOperation: 'add',
       operForm: {
-        admin_username: this.$store.state.username,
+        admin_id: 0,
+        admin_username: '',
         admin_password: '',
         admin_password2: ''
       },
@@ -121,7 +123,6 @@ export default {
   },
   watch: {
     '$parent.dialogEditTime': function () {
-      this.operForm.artsort_id = this.$parent.dialogId
       if (this.$parent.dialogId === 0) {
         if (this.dialogLastOperation === 'edit') {
           this.$nextTick(() => {
@@ -135,7 +136,9 @@ export default {
           this.$refs.operForm.resetFields()
         })
         http.send({ url: '/Admin/detail', param: { params: { id: this.$parent.dialogId } } }).then(data => {
-          this.operForm = data.extra
+          Object.assign(this.operForm, data.extra)
+          this.operForm.admin_password = ''
+          this.operForm.admin_password2 = ''
         })
       }
     }

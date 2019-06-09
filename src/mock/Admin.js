@@ -9,13 +9,13 @@ const extraData = {
   extra: [
     {
       admin_id: 1,
-      admin_username: 'other',
-      admin_password: '123456'
+      admin_username: 'admin',
+      admin_password: 'admin'
     },
     {
       admin_id: 2,
-      admin_username: 'admin',
-      admin_password: 'admin'
+      admin_username: 'other',
+      admin_password: '123456'
     }
   ]
 }
@@ -54,6 +54,31 @@ Mock.mock(/\/Admin\/check/, 'post', options => {
   return dataLoginError
 })
 
+Mock.mock(/\/Admin\/listAll/, 'get', options => {
+  let tempDataListAll = dataListAll
+  const p = Tools.getParam('p', options.url)
+  const keyword = Tools.getParam('keyword', options.url)
+  let tempExtra = extraData.extra.map(item => {
+    item.admin_password = ''
+    return item
+  })
+  tempDataListAll.total = tempExtra.length
+  if (keyword !== '' && tempExtra.length > 0) {
+    tempExtra = tempExtra.filter(item => {
+      return (
+        item.admin_username.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+      )
+    })
+    tempDataListAll.total = tempExtra.length
+  }
+  let pExtraData =
+    tempExtra.length > 0
+      ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
+      : tempExtra
+  tempDataListAll = { ...tempDataListAll, extra: pExtraData }
+  return tempDataListAll
+})
+
 const dataEditSuccess = {
   code: 0,
   msg: '操作成功'
@@ -63,8 +88,27 @@ const dataEditError = {
   code: 1,
   msg: '用户名不存在或者已删除'
 }
+
+const dataExistsError = {
+  code: 1,
+  msg: '用户名已经存在'
+}
+
+const dataSuperError = {
+  code: 1,
+  msg: '被操作用户是超级用户，操作已取消'
+}
+
 Mock.mock(/\/Admin\/add/, 'post', options => {
   const result = JSON.parse(options.body)
+  const isExists = extraData.extra.some(item => {
+    return (
+      item.admin_username.toLowerCase() === result.admin_username.toLowerCase()
+    )
+  })
+  if (isExists) {
+    return dataExistsError
+  }
   result.admin_id = ++maxId
   extraData.extra.push(result)
   dataListAll.total++
@@ -74,6 +118,9 @@ Mock.mock(/\/Admin\/add/, 'post', options => {
 Mock.mock(/\/Admin\/edit/, 'post', options => {
   // 为了避免前端直接修改localStorage，服务器端会对userid, username和token进行校验，任何一个修改都会校验失败，重新登陆
   const result = JSON.parse(options.body)
+  if (result.admin_id === 1 && store.state.userid !== 1) {
+    return dataSuperError
+  }
   let isExists = false
   extraData.extra = extraData.extra.map(item => {
     if (item.admin_username === result.admin_username) {
@@ -102,4 +149,27 @@ Mock.mock(/\/Admin\/detail/, 'get', options => {
     return true
   })
   return tempData || dataEditError
+})
+
+Mock.mock(/\/Admin\/del/, 'post', options => {
+  const result = JSON.parse(options.body)
+  const id = result.id
+
+  if (id === 1) {
+    return dataSuperError
+  }
+
+  let isExists = false
+  extraData.extra = extraData.extra.filter(item => {
+    if (item.admin_id === id) {
+      isExists = true
+    }
+    return item.admin_id !== id
+  })
+  if (!isExists) {
+    return dataEditError
+  }
+  dataListAll.total--
+  dataEditSuccess.total = dataListAll.total
+  return dataEditSuccess
 })

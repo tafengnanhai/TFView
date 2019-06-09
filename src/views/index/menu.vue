@@ -47,7 +47,6 @@
         <el-menu-item index="/admin/index">系统用户</el-menu-item>
         <el-menu-item index="/group/index">分组管理</el-menu-item>
         <el-menu-item index="/auth/index">权限管理</el-menu-item>
-        <el-menu-item index="/menu/index">菜单管理</el-menu-item>
       </el-submenu>
       <el-submenu index="log">
         <template slot="title">

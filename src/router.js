@@ -88,6 +88,18 @@ export default new Router({
               import(/* webpackChunkName: "member" */ './views/member/stat-now.vue')
           }
         },
+        /* 系统管理 */ {
+          path: '/admin/index',
+          name: 'admin-index',
+          meta: {
+            label: '系统用户',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "admin" */ './views/admin/index.vue')
+          }
+        },
         /* 日志管理 */
         {
           path: '/logsys/index',
