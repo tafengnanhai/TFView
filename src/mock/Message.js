@@ -6,8 +6,6 @@ let dataListAll = {
   msg: '操作成功'
 }
 
-let maxId = 2
-
 const extraData = {
   extra: [
     {
@@ -57,7 +55,7 @@ Mock.mock(/\/Message\/detail/, 'get', function (options) {
   })
   if (!isExists) {
     data.extra = {
-      admin_id: ++maxId,
+      admin_id: store.state.userid,
       reg_new: false,
       reg_total: 1
     }
