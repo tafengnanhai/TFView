@@ -10,12 +10,15 @@
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="80px">
         <el-form-item label="名称" prop="rule_name">
-          <el-input v-model.trim="operForm.rule_name" maxlength="80" autocomplete="off"></el-input>
+          <el-button type="primary" size="small" @click="handleAction()">操作</el-button>
+          <el-button type="primary" size="small" @click="handleMenu()">菜单</el-button>
+          <el-button type="primary" size="small" @click="handleElement()">元素</el-button>
+          <el-input v-model.trim="operForm.rule_name" maxlength="80" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item label="规则" prop="rule_title">
-          <el-input v-model="operForm.rule_title" maxlength="50" autocomplete="off"></el-input>
+          <el-input v-model="operForm.rule_title" maxlength="50" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="条件" prop="rule_condition">
+        <el-form-item label="条件" prop="rule_condition" clearable>
           <el-input
             maxlength="100"
             autocomplete="off"
@@ -84,6 +87,18 @@ export default {
     },
     toggleFullscreen: function () {
       this.fullscreen = !this.fullscreen
+    },
+    handleAction: function () {
+      this.operForm.rule_name = '【操作】XXX==XXX'
+      this.operForm.rule_title = 'Action-XXX-XXX'
+    },
+    handleMenu: function () {
+      this.operForm.rule_name = '【菜单】XXX==XXX'
+      this.operForm.rule_title = 'Menu-XXX-XXX'
+    },
+    handleElement: function () {
+      this.operForm.rule_name = '【元素】XXX==XXX'
+      this.operForm.rule_title = 'Element-XXX-XXX'
     }
   },
   watch: {

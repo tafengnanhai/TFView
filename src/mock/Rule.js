@@ -83,15 +83,25 @@ Mock.mock(/\/Rule\/add/, 'post', options => {
 Mock.mock(/\/Rule\/edit/, 'post', options => {
   const result = JSON.parse(options.body)
   let isExists = false
+  let equalOthers = false
   extraData.extra = extraData.extra.map(item => {
     if (item.rule_id === result.rule_id) {
       isExists = true
       Object.assign(item, result)
     }
+    if (
+      item.rule_id !== result.rule_id &&
+      item.rule_name === result.rule_name
+    ) {
+      equalOthers = true
+    }
     return item
   })
   if (!isExists) {
     return dataEditError
+  }
+  if (equalOthers) {
+    return dataExistsError
   }
   return dataEditSuccess
 })
