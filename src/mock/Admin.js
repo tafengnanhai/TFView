@@ -20,7 +20,7 @@ const extraData = {
   ]
 }
 
-const dataListAll = {
+let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
@@ -41,6 +41,7 @@ const dataLoginError = {
 // 和后端一致，不建议直接返回用户名和密码的判断方式
 Mock.mock(/\/Admin\/check/, 'post', options => {
   const result = JSON.parse(options.body)
+  console.log(extraData.extra)
   if (
     extraData.extra.some(
       item =>
@@ -55,28 +56,24 @@ Mock.mock(/\/Admin\/check/, 'post', options => {
 })
 
 Mock.mock(/\/Admin\/listAll/, 'get', options => {
-  let tempDataListAll = dataListAll
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
-  let tempExtra = extraData.extra.map(item => {
-    item.admin_password = ''
-    return item
-  })
-  tempDataListAll.total = tempExtra.length
+  let tempExtra = extraData.extra // 实际开发中后端会设置返回的字段，不会返回密码等敏感信息
+  dataListAll.total = tempExtra.length
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
       return (
         item.admin_username.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
       )
     })
-    tempDataListAll.total = tempExtra.length
+    dataListAll.total = tempExtra.length
   }
   let pExtraData =
     tempExtra.length > 0
       ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
       : tempExtra
-  tempDataListAll = { ...tempDataListAll, extra: pExtraData }
-  return tempDataListAll
+  dataListAll = { ...dataListAll, extra: pExtraData }
+  return dataListAll
 })
 
 const dataEditSuccess = {

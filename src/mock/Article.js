@@ -30,7 +30,7 @@ const extraData = Mock.mock({
 
 extraData.extra.reverse()
 
-const dataListAll = {
+let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
@@ -38,7 +38,6 @@ const dataListAll = {
 }
 
 Mock.mock(/\/Article\/listAll/, 'get', options => {
-  let tempDataListAll = dataListAll
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
   const artsortId = parseInt(Tools.getParam('artsort_id', options.url))
@@ -58,25 +57,25 @@ Mock.mock(/\/Article\/listAll/, 'get', options => {
       return m.art_id < n.art_id ? 1 : -1
     })
   }
-  tempDataListAll.total = tempExtra.length
+  dataListAll.total = tempExtra.length
   if (artsortId !== 0 && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
       return item.artsort_id === artsortId
     })
-    tempDataListAll.total = tempExtra.length
+    dataListAll.total = tempExtra.length
   }
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
       return item.art_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
     })
-    tempDataListAll.total = tempExtra.length
+    dataListAll.total = tempExtra.length
   }
   let pExtraData =
     tempExtra.length > 0
       ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
       : tempExtra
-  tempDataListAll = { ...tempDataListAll, extra: pExtraData }
-  return tempDataListAll
+  dataListAll = { ...dataListAll, extra: pExtraData }
+  return dataListAll
 })
 
 const dataSuccess = {

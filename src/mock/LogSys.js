@@ -3,7 +3,7 @@ import store from '@/store'
 import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
-let maxId = 1000
+let maxId = 100
 
 const extraData = Mock.mock({
   [`extra|${maxId}`]: [
@@ -19,7 +19,7 @@ const extraData = Mock.mock({
 
 extraData.extra.reverse()
 
-const dataListAll = {
+let dataListAll = {
   code: 0,
   msg: '操作成功',
   pageSize: pageSize,
@@ -27,22 +27,21 @@ const dataListAll = {
 }
 
 Mock.mock(/\/LogSys\/listAll/, 'get', options => {
-  let tempDataListAll = dataListAll
   const p = Tools.getParam('p', options.url)
   let userid = Tools.getParam('keyword', options.url)
   userid = userid === '' ? 0 : parseInt(userid)
   let tempExtra = extraData.extra
-  tempDataListAll.total = tempExtra.length
+  dataListAll.total = tempExtra.length
   if (userid !== 0 && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
       return item.log_userid === userid
     })
-    tempDataListAll.total = tempExtra.length
+    dataListAll.total = tempExtra.length
   }
   let pExtraData =
     tempExtra.length > 0
       ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
       : tempExtra
-  tempDataListAll = { ...tempDataListAll, extra: pExtraData }
-  return tempDataListAll
+  dataListAll = { ...dataListAll, extra: pExtraData }
+  return dataListAll
 })
