@@ -42,7 +42,7 @@ export default {
       keyword: '',
       listData: null,
       total: 1,
-      pageSize: 10,
+      pageSize: 0,
       currentPage: 1
     }
   },

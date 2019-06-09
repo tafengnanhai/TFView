@@ -14,7 +14,7 @@
       ></el-input>
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>
-    <el-table :data="listData" border style="width: 100%">
+    <el-table :data="listData" border style="width: 100%" stripe>
       <el-table-column prop="log_id" label="日志编号" width="80" align="center"></el-table-column>
       <el-table-column prop="log_userid" label="用户编号" width="80" align="center"></el-table-column>
       <el-table-column prop="log_content" label="操作内容" min-width="200" align="center"></el-table-column>
@@ -42,7 +42,7 @@ export default {
       keyword: '',
       listData: null,
       total: 1,
-      pageSize: 10,
+      pageSize: 0,
       currentPage: 1
     }
   },

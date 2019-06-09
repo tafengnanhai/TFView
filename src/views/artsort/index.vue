@@ -26,7 +26,7 @@
       <span class="red">说明</span>：请不要多人同时编辑，尤其是
       <span class="red">[拖拽调整分类]</span>功能建议获取最新信息后由一人进行管理，通过拖拽调整层级和顺序
     </div>
-    <ArtsortEdit :dialog-form-title="dialogFormTitle" ref="artsortEdit"/>
+    <ArtsortEdit :dialog-form-title="dialogFormTitle" ref="edit"/>
   </div>
 </template>
 <script>
@@ -69,7 +69,7 @@ export default {
       this.toggleDialog(true)
     },
     toggleDialog: function (flag) {
-      this.$refs.artsortEdit.toggleDialog(flag)
+      this.$refs.edit.toggleDialog(flag)
     },
     filterNode (value, data) {
       return !value || data.artsort_name.indexOf(value) !== -1

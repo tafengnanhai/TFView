@@ -41,7 +41,13 @@
         @click="changeOrder()"
       >{{orderTip}}</el-button>
     </div>
-    <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table
+      :data="listData"
+      border
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+      stripe
+    >
       <el-table-column type="selection" width="50" align="center"></el-table-column>
       <el-table-column prop="art_id" label="编号" width="60" align="center"></el-table-column>
       <el-table-column prop="art_title" label="标题" min-width="160" align="center"></el-table-column>
@@ -65,7 +71,7 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <article-edit :dialog-form-title="dialogFormTitle" ref="articleEdit"></article-edit>
+    <article-edit :dialog-form-title="dialogFormTitle" ref="edit"></article-edit>
   </div>
 </template>
 <script>
@@ -143,7 +149,7 @@ export default {
       this.selections = data
     },
     toggleDialog: function (flag) {
-      this.$refs.articleEdit.toggleDialog(flag)
+      this.$refs.edit.toggleDialog(flag)
     },
     pageClick: function (p) {
       this.getData(p)

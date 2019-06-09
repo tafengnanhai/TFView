@@ -1,9 +1,9 @@
 <template>
-  <div id="adminIndex">
+  <div id="ruleIndex">
     <div class="panel">
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="add()">添 加</el-button>
       <el-input
-        placeholder="请输入关键词"
+        placeholder="按名称或规则关键字搜索"
         class="keyword"
         size="medium"
         v-model="inputKeyword"
@@ -14,12 +14,13 @@
       <el-button type="primary" icon="el-icon-search" size="medium" @click="search()">搜 索</el-button>
     </div>
     <el-table :data="listData" border style="width: 100%" stripe>
-      <el-table-column prop="admin_id" label="编号" min-width="60" align="center"></el-table-column>
-      <el-table-column prop="admin_username" label="用户名" min-width="140" align="center"></el-table-column>
-      <el-table-column label="操作" min-width="150" align="center">
+      <el-table-column prop="rule_id" label="编号" min-width="60" align="center"></el-table-column>
+      <el-table-column prop="rule_name" label="名称" min-width="150"></el-table-column>
+      <el-table-column prop="rule_title" label="规则" min-width="150"></el-table-column>
+      <el-table-column label="操作" min-width="100" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="edit(scope.row.admin_id)">编 辑</el-button>
-          <el-button @click="del(scope.row.admin_id)" type="text">删 除</el-button>
+          <el-button type="text" @click="edit(scope.row.rule_id)">编 辑</el-button>
+          <el-button @click="del(scope.row.rule_id)" type="text">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -31,18 +32,18 @@
       :current-page="currentPage"
       @current-change="pageClick"
     ></el-pagination>
-    <admin-edit :dialog-form-title="dialogFormTitle" ref="edit"></admin-edit>
+    <rule-edit :dialog-form-title="dialogFormTitle" ref="edit"></rule-edit>
   </div>
 </template>
 <script>
 import http from '@/plugins/http'
-import '@/mock/Admin'
+import '@/mock/Rule'
 import Confirm from '@/plugins/confirm'
-import AdminEdit from '@/views/admin/edit.vue'
+import RuleEdit from '@/views/rule/edit.vue'
 export default {
-  name: 'admin-index',
+  name: 'rule-index',
   components: {
-    AdminEdit
+    RuleEdit
   },
   data () {
     return {
@@ -73,7 +74,7 @@ export default {
     },
     del: function (id) {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
-        http.send({ url: '/Admin/del', sendType: 'post', param: { id: id }, showSuccessTip: true }).then(data => {
+        http.send({ url: '/Rule/del', sendType: 'post', param: { id: id }, showSuccessTip: true }).then(data => {
           if (data.code === 0) {
             this.total = data.total
             const computedCurrentPage = Math.ceil(this.total / this.pageSize)
@@ -90,7 +91,7 @@ export default {
       this.getData(p)
     },
     getData: function (p) {
-      http.send({ url: '/Admin/listAll', param: { params: { p: p, keyword: escape(this.keyword) } } }).then(data => {
+      http.send({ url: '/Rule/listAll', param: { params: { p: p, keyword: escape(this.keyword) } } }).then(data => {
         this.listData = data.extra
         this.total = data.total
         this.pageSize = data.pageSize
@@ -117,7 +118,7 @@ export default {
 </script>
 
 <style scoped>
-#adminIndex {
+#ruleIndex {
   min-width: 600px;
 }
 .panel {
