@@ -59,15 +59,13 @@ Mock.mock(/\/Article\/listAll/, 'get', options => {
   }
   dataListAll.total = tempExtra.length
   if (artsortId !== 0 && tempExtra.length > 0) {
-    tempExtra = tempExtra.filter(item => {
-      return item.artsort_id === artsortId
-    })
+    tempExtra = tempExtra.filter(item => item.artsort_id === artsortId)
     dataListAll.total = tempExtra.length
   }
   if (keyword !== '' && tempExtra.length > 0) {
-    tempExtra = tempExtra.filter(item => {
-      return item.art_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-    })
+    tempExtra = tempExtra.filter(
+      item => item.art_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+    )
     dataListAll.total = tempExtra.length
   }
   let pExtraData =

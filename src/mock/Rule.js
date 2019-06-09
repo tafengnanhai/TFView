@@ -40,12 +40,11 @@ Mock.mock(/\/Rule\/listAll/, 'get', options => {
   })
   dataListAll.total = tempExtra.length
   if (keyword !== '' && tempExtra.length > 0) {
-    tempExtra = tempExtra.filter(item => {
-      return (
+    tempExtra = tempExtra.filter(
+      item =>
         item.rule_name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
         item.rule_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      )
-    })
+    )
     dataListAll.total = tempExtra.length
   }
   let pExtraData =

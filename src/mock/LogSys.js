@@ -33,9 +33,7 @@ Mock.mock(/\/LogSys\/listAll/, 'get', options => {
   let tempExtra = extraData.extra
   dataListAll.total = tempExtra.length
   if (userid !== 0 && tempExtra.length > 0) {
-    tempExtra = tempExtra.filter(item => {
-      return item.log_userid === userid
-    })
+    tempExtra = tempExtra.filter(item => item.log_userid === userid)
     dataListAll.total = tempExtra.length
   }
   let pExtraData =

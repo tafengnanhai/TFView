@@ -60,11 +60,10 @@ Mock.mock(/\/Admin\/listAll/, 'get', options => {
   let tempExtra = extraData.extra // 实际开发中后端会设置返回的字段，不会返回密码等敏感信息
   dataListAll.total = tempExtra.length
   if (keyword !== '' && tempExtra.length > 0) {
-    tempExtra = tempExtra.filter(item => {
-      return (
+    tempExtra = tempExtra.filter(
+      item =>
         item.admin_username.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      )
-    })
+    )
     dataListAll.total = tempExtra.length
   }
   let pExtraData =
