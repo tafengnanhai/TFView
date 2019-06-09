@@ -32,7 +32,12 @@ let dataListAll = {
 Mock.mock(/\/Rule\/listAll/, 'get', options => {
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
-  let tempExtra = extraData.extra
+  let tempExtra = extraData.extra.sort((m, n) => {
+    if (m.rule_name === n.rule_name) {
+      return 0
+    }
+    return m.rule_name > n.rule_name ? -1 : 1
+  })
   dataListAll.total = tempExtra.length
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(item => {
