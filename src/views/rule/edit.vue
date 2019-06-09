@@ -61,8 +61,8 @@ export default {
         rule_condition: ''
       },
       rules: {
-        rule_name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
-        rule_title: [{ required: true, message: '请输入规则', trigger: 'blur' }]
+        rule_name: [{ required: true, message: '请输入名称', trigger: 'change' }],
+        rule_title: [{ required: true, message: '请输入规则', trigger: 'change' }]
       }
     }
   },

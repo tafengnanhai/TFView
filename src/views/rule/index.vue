@@ -3,7 +3,7 @@
     <div class="panel">
       <el-button type="primary" icon="el-icon-edit" size="medium" @click="add()">添 加</el-button>
       <el-input
-        placeholder="按名称或规则关键字搜索"
+        placeholder="按名称或规则关键词搜索"
         class="keyword"
         size="medium"
         v-model="inputKeyword"
