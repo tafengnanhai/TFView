@@ -15,8 +15,8 @@
     </div>
     <el-table :data="listData" border style="width: 100%" stripe>
       <el-table-column prop="rule_id" label="编号" min-width="60" align="center"></el-table-column>
-      <el-table-column prop="rule_name" label="名称" min-width="150"></el-table-column>
-      <el-table-column prop="rule_title" label="规则" min-width="150"></el-table-column>
+      <el-table-column prop="rule_name" label="名称" min-width="150" header-align="center"></el-table-column>
+      <el-table-column prop="rule_title" label="规则" min-width="150" header-align="center"></el-table-column>
       <el-table-column label="操作" min-width="100" align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="edit(scope.row.rule_id)">编 辑</el-button>
@@ -129,5 +129,8 @@ export default {
 .keyword {
   width: 200px;
   padding: 0 10px;
+}
+.headerCell {
+  text-align: center;
 }
 </style>
