@@ -84,7 +84,7 @@ Mock.mock(/\/Rule\/edit/, 'post', options => {
   const result = JSON.parse(options.body)
   let isExists = false
   extraData.extra = extraData.extra.map(item => {
-    if (item.rule_name === result.rule_name) {
+    if (item.rule_id === result.rule_id) {
       isExists = true
       Object.assign(item, result)
     }
