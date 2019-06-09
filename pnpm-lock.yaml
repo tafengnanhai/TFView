@@ -3,7 +3,7 @@ dependencies:
   chart.js: 2.8.0
   core-js: 2.6.5
   echarts: 4.2.1
-  element-ui: 2.8.2
+  element-ui: 2.9.1
   lockr: 0.8.5
   mockjs: 1.0.1-beta3
   nprogress: 0.2.0
@@ -1846,7 +1846,7 @@ packages:
       tarball: /babel-plugin-module-resolver/download/babel-plugin-module-resolver-3.2.0.tgz
   /babel-runtime/6.26.0:
     dependencies:
-      core-js: 2.6.5
+      core-js: 2.6.9
       regenerator-runtime: 0.11.1
     dev: false
     resolution:
@@ -2743,6 +2743,11 @@ packages:
     resolution:
       integrity: sha1-RLyNJJ5/sv9dAOA0Gn/7lPv2eJU=
       tarball: /core-js/download/core-js-2.6.5.tgz
+  /core-js/2.6.9:
+    dev: false
+    resolution:
+      integrity: sha1-a0shRiDINBUuF5Mjcn/Bl0GwhPI=
+      tarball: /core-js/download/core-js-2.6.9.tgz
   /core-util-is/1.0.2:
     dev: true
     resolution:
@@ -3454,7 +3459,7 @@ packages:
     resolution:
       integrity: sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
       tarball: /elegant-spinner/download/elegant-spinner-1.0.1.tgz
-  /element-ui/2.8.2:
+  /element-ui/2.9.1:
     dependencies:
       async-validator: 1.8.5
       babel-helper-vue-jsx-merge-props: 2.0.3
@@ -3464,10 +3469,10 @@ packages:
       throttle-debounce: 1.1.0
     dev: false
     peerDependencies:
-      vue: ^2.5.16
+      vue: ^2.5.17
     resolution:
-      integrity: sha1-Iaeky5Jhaw+LddTU5jfToc2MCd4=
-      tarball: /element-ui/download/element-ui-2.8.2.tgz
+      integrity: sha1-oF8udgI9Upug36LQOuFuUTSyDE4=
+      tarball: /element-ui/download/element-ui-2.9.1.tgz
   /elliptic/6.4.1:
     dependencies:
       bn.js: 4.11.8
@@ -10139,7 +10144,7 @@ specifiers:
   chart.js: ^2.8.0
   core-js: ^2.6.5
   echarts: ^4.2.1
-  element-ui: ^2.8.2
+  element-ui: ^2.9.1
   eslint: ^5.16.0
   eslint-plugin-vue: ^5.0.0
   lint-staged: ^8.1.5
