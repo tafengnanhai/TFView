@@ -88,7 +88,8 @@ export default new Router({
               import(/* webpackChunkName: "member" */ './views/member/stat-now.vue')
           }
         },
-        /* 系统管理 */ {
+        /* 系统管理 */
+        {
           path: '/admin/index',
           name: 'admin-index',
           meta: {
@@ -97,7 +98,19 @@ export default new Router({
           },
           components: {
             main: () =>
-              import(/* webpackChunkName: "admin" */ './views/admin/index.vue')
+              import(/* webpackChunkName: "system" */ './views/admin/index.vue')
+          }
+        },
+        {
+          path: '/rule/index',
+          name: 'rule-index',
+          meta: {
+            label: '权限管理',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "system" */ './views/rule/index.vue')
           }
         },
         /* 日志管理 */
