@@ -43,6 +43,7 @@
       @current-change="pageClick"
     ></el-pagination>
     <group-edit :dialog-form-title="dialogFormTitle" ref="edit"></group-edit>
+    <group-access :dialog-form-title="dialogFormTitleAccess" ref="access"></group-access>
   </div>
 </template>
 <script>
@@ -50,17 +51,21 @@ import http from '@/plugins/http'
 import '@/mock/Group'
 import Confirm from '@/plugins/confirm'
 import GroupEdit from '@/views/group/edit.vue'
+import GroupAccess from '@/views/group/access.vue'
 export default {
   name: 'group-index',
   components: {
-    GroupEdit
+    GroupEdit,
+    GroupAccess
   },
   data () {
     return {
       dialogFormVisible: false,
       dialogFormTitle: '',
+      dialogFormTitleAccess: '授权',
       dialogId: 0,
       dialogEditTime: 0,
+      dialogAccessTime: 0,
       inputKeyword: '',
       keyword: '',
       listData: null,
@@ -74,13 +79,13 @@ export default {
       this.dialogFormTitle = '添加'
       this.dialogId = 0
       this.dialogEditTime = new Date().getTime()
-      this.toggleDialog(true)
+      this.toggleEditDialog(true)
     },
     edit: function (id) {
       this.dialogFormTitle = '编辑'
       this.dialogId = id
       this.dialogEditTime = new Date().getTime()
-      this.toggleDialog(true)
+      this.toggleEditDialog(true)
     },
     del: function (id) {
       Confirm.show('确定删除吗，不可恢复哦?').then(() => {
@@ -105,7 +110,15 @@ export default {
         }
       })
     },
-    toggleDialog: function (flag) {
+    groupAccess: function (id) {
+      this.dialogId = id
+      this.dialogAccessTime = new Date().getTime()
+      this.toggleAccessDialog(true)
+    },
+    toggleAccessDialog: function (flag) {
+      this.$refs.access.toggleDialog(flag)
+    },
+    toggleEditDialog: function (flag) {
       this.$refs.edit.toggleDialog(flag)
     },
     pageClick: function (p) {
