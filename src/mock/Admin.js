@@ -29,6 +29,11 @@ let dataListAll = {
   total: maxId
 }
 
+let dataListForGroup = {
+  code: 0,
+  msg: '操作成功'
+}
+
 const dataLoginSuccess = {
   code: 0,
   msg: '登录成功',
@@ -81,6 +86,11 @@ Mock.mock(/\/Admin\/listAll/, 'get', options => {
       : tempExtra
   dataListAll.extra = pExtraData
   return dataListAll
+})
+
+Mock.mock(/\/Admin\/listForGroup/, 'get', options => {
+  dataListForGroup.extra = extraData.extra
+  return dataListForGroup
 })
 
 const dataEditSuccess = {

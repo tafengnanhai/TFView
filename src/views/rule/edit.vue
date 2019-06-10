@@ -72,7 +72,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           const url = self.$parent.dialogId === 0 ? '/Rule/add' : '/Rule/edit'
-          http.send({ sendType: 'post', url: url, param: this.operForm, showSuccessTip: true }).then(data => {
+          http.send({ url: url, sendType: 'post', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
