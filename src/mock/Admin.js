@@ -79,7 +79,7 @@ Mock.mock(/\/Admin\/listAll/, 'get', options => {
     tempExtra.length > 0
       ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
       : tempExtra
-  dataListAll = { ...dataListAll, extra: pExtraData }
+  dataListAll.extra = pExtraData
   return dataListAll
 })
 

@@ -56,7 +56,7 @@ Mock.mock(/\/Rule\/listAll/, 'get', options => {
     tempExtra.length > 0
       ? tempExtra.slice(pageSize * (p - 1), pageSize * p)
       : tempExtra
-  dataListAll = { ...dataListAll, extra: pExtraData }
+  dataListAll.extra = pExtraData
   return dataListAll
 })
 
@@ -67,7 +67,7 @@ Mock.mock(/\/Rule\/listForGroup/, 'get', options => {
     }
     return m.rule_name > n.rule_name ? -1 : 1
   })
-  dataListForGroup = { ...dataListForGroup, extra: tempExtra }
+  dataListForGroup.extra = tempExtra
   return dataListForGroup
 })
 
