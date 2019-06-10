@@ -48,7 +48,7 @@ export default {
       }
     },
     getData: function () {
-      http.send({ url: '/Member/getCityNow/backend' }).then((data) => {
+      http.send({ url: '/Member/getCityNow/backend' }).then(data => {
         data.extra.length > 0 && (this.cityData = data.extra)
       })
     },

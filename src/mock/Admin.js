@@ -10,12 +10,14 @@ const extraData = {
     {
       admin_id: 1,
       admin_username: 'admin',
-      admin_password: 'admin'
+      admin_password: 'admin',
+      admin_status: '1'
     },
     {
       admin_id: 2,
       admin_username: 'other',
-      admin_password: '123456'
+      admin_password: '123456',
+      admin_status: '0'
     }
   ]
 }
@@ -38,18 +40,25 @@ const dataLoginError = {
   msg: '用户名或密码错误'
 }
 
+const dataStatusError = {
+  code: 1,
+  msg: '用户已被禁用，请联系管理员'
+}
+
 // 和后端一致，不建议直接返回用户名和密码的判断方式
 Mock.mock(/\/Admin\/check/, 'post', options => {
   const result = JSON.parse(options.body)
+  let status = '1'
   if (
     extraData.extra.some(
       item =>
         item.admin_username === result.username &&
         item.admin_password === result.password &&
-        (dataLoginSuccess.extra.userid = item.admin_id)
+        (dataLoginSuccess.extra.userid = item.admin_id) &&
+        (status = item.admin_status)
     )
   ) {
-    return dataLoginSuccess
+    return status === '1' ? dataLoginSuccess : dataStatusError
   }
   return dataLoginError
 })
@@ -94,6 +103,11 @@ const dataSuperError = {
   msg: '被操作用户是超级用户，操作已取消'
 }
 
+const dataSelfError = {
+  code: 1,
+  msg: '不能对自己执行该操作哦'
+}
+
 Mock.mock(/\/Admin\/add/, 'post', options => {
   const result = JSON.parse(options.body)
   const isExists = extraData.extra.some(item => {
@@ -105,6 +119,7 @@ Mock.mock(/\/Admin\/add/, 'post', options => {
     return dataExistsError
   }
   result.admin_id = ++maxId
+  result.admin_status = '1'
   extraData.extra.push(result)
   dataListAll.total++
   return dataEditSuccess
@@ -146,14 +161,37 @@ Mock.mock(/\/Admin\/detail/, 'get', options => {
   return tempData || dataEditError
 })
 
+Mock.mock(/\/Admin\/changeStatus/, 'post', options => {
+  const result = JSON.parse(options.body)
+  if (result.admin_id === 1) {
+    return dataSuperError
+  }
+  if (result.admin_id === store.state.userid) {
+    return dataSelfError
+  }
+  let isExists = false
+  extraData.extra = extraData.extra.map(item => {
+    if (item.admin_id === result.admin_id) {
+      isExists = true
+      Object.assign(item, result)
+    }
+    return item
+  })
+  if (!isExists) {
+    return dataEditError
+  }
+  return dataEditSuccess
+})
+
 Mock.mock(/\/Admin\/del/, 'post', options => {
   const result = JSON.parse(options.body)
   const id = result.id
-
   if (id === 1) {
     return dataSuperError
   }
-
+  if (id === store.state.userid) {
+    return dataSelfError
+  }
   let isExists = false
   extraData.extra = extraData.extra.filter(item => {
     if (item.admin_id === id) {

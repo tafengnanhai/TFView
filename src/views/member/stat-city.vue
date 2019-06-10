@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     loadMine: function () {
-      http.send({ url: '/Member/getCityStat' }).then((data) => {
+      http.send({ url: '/Member/getCityStat' }).then(data => {
         this.cityData = data.extra
         this.showMap = true
       })
@@ -51,9 +51,9 @@ export default {
   },
   computed: {
     filterCityData: function () {
-      return this.cityData.length > 0 && this.cityData.filter(item => {
-        return item.name !== '省外'
-      })
+      return this.cityData.length > 0 && this.cityData.filter(item =>
+        item.name !== '省外'
+      )
     }
   },
   watch: {

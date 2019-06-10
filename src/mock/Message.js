@@ -42,7 +42,7 @@ const data = {
   msg: '操作成功'
 }
 
-Mock.mock(/\/Message\/detail/, 'get', function (options) {
+Mock.mock(/\/Message\/detail/, 'get', options => {
   // 如果用户信息未设置则进行首次默认设置
   let isExists = false
   extraData.extra.every(item => {

@@ -76,7 +76,7 @@ export default {
     }
   },
   mounted: function () {
-    http.send({ url: '/Message/detail' }).then((data) => {
+    http.send({ url: '/Message/detail' }).then(data => {
       this.$store.dispatch('updateRegNewMsg', data.extra)
     })
   },

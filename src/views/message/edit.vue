@@ -95,7 +95,7 @@ export default {
       Notification.closeAll()
     },
     loadMine: function () {
-      http.send({ url: '/Message/detail' }).then((data) => {
+      http.send({ url: '/Message/detail' }).then(data => {
         this.operForm = data.extra
         this.$store.dispatch('updateRegNewMsg', this.operForm)
       })

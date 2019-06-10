@@ -16,10 +16,32 @@
     <el-table :data="listData" border style="width: 100%" stripe>
       <el-table-column prop="admin_id" label="编号" min-width="60" align="center"></el-table-column>
       <el-table-column prop="admin_username" label="用户名" min-width="140" align="center"></el-table-column>
+      <el-table-column label="状态" min-width="60" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.admin_status === '1'">正常</span>
+          <span class="red" v-else>禁用</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" min-width="150" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="edit(scope.row.admin_id)">编 辑</el-button>
-          <el-button @click="del(scope.row.admin_id)" type="text">删 除</el-button>
+          <el-button
+            type="text"
+            @click="edit(scope.row.admin_id)"
+            :disabled="$store.state.userid !== 1 && scope.row.admin_id === 1"
+          >编 辑</el-button>
+          <el-button
+            type="text"
+            @click="changeStatus(scope.row)"
+            :disabled="scope.row.admin_id === 1 || scope.row.admin_id === $store.state.userid"
+          >
+            <span v-if="scope.row.admin_status === '1'">禁用</span>
+            <span v-else>启用</span>
+          </el-button>
+          <el-button
+            @click="del(scope.row.admin_id)"
+            type="text"
+            :disabled="scope.row.admin_id === 1 || scope.row.admin_id === $store.state.userid"
+          >删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -81,6 +103,17 @@ export default {
             this.getData(this.currentPage)
           }
         })
+      })
+    },
+    changeStatus: function (row) {
+      const postData = {
+        admin_id: row.admin_id,
+        admin_status: row.admin_status === '1' ? '0' : '1'
+      }
+      http.send({ url: '/Admin/changeStatus', sendType: 'post', param: postData, showSuccessTip: true }).then(data => {
+        if (data.code === 0) {
+          this.getData(this.currentPage)
+        }
       })
     },
     toggleDialog: function (flag) {
