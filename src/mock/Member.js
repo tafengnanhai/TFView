@@ -130,7 +130,7 @@ const dataMemberCity = Mock.mock({
   ]
 })
 
-Mock.mock(/\/Member\/getCityStat/, 'get', function (options) {
+Mock.mock(/\/Member\/getCityStat/, 'get', options => {
   dataMemberCity.extra.sort((m, n) => {
     if (m.value < n.value) {
       return 1
@@ -167,7 +167,7 @@ const dataMemberNowExtraData = Mock.mock([
   { name: '省外', value: '@int(1,100)' }
 ])
 
-Mock.mock(/\/Member\/getCityNow/, 'get', function (options) {
+Mock.mock(/\/Member\/getCityNow/, 'get', options => {
   const tempExtra = dataMemberNowExtraData
   dataMemberNow.extra = tempExtra.filter(() => {
     return Random.integer(1, 10) === 5
@@ -183,7 +183,7 @@ const dataMsg = {
   }
 }
 
-Mock.mock(/\/Member\/checkMsg/, 'get', function (options) {
+Mock.mock(/\/Member\/checkMsg/, 'get', options => {
   dataMsg.extra.max_id = new Date().getTime()
   return dataMsg
 })
