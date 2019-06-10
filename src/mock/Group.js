@@ -8,16 +8,16 @@ let maxId = 2
 const extraData = {
   extra: [
     {
-      rule_id: 1,
-      rule_name: '【操作】首页面板==汇总统计',
-      rule_title: 'Action-Member-getGeneralStat',
-      rule_condition: ''
+      group_id: 1,
+      group_title: '系统用户组',
+      group_rules: '1,2',
+      group_status: '1'
     },
     {
-      rule_id: 2,
-      rule_name: '【操作】首页面板==更新日志',
-      rule_title: 'Action-Site-getUpdateRecords',
-      rule_condition: ''
+      group_id: 2,
+      group_title: '测试用户组',
+      group_rules: '1',
+      group_status: '0'
     }
   ]
 }
@@ -29,27 +29,22 @@ let dataListAll = {
   total: maxId
 }
 
-let dataListForGroup = {
-  code: 0,
-  msg: '操作成功'
-}
-
-Mock.mock(/\/Rule\/listAll/, 'get', options => {
+Mock.mock(/\/Group\/listAll/, 'get', options => {
   const p = Tools.getParam('p', options.url)
   const keyword = Tools.getParam('keyword', options.url)
   let tempExtra = extraData.extra.sort((m, n) => {
-    if (m.rule_name === n.rule_name) {
+    if (m.group_title === n.group_title) {
       return 0
     }
-    return m.rule_name > n.rule_name ? -1 : 1
+    return m.group_title > n.group_title ? -1 : 1
   })
   dataListAll.total = tempExtra.length
   if (keyword !== '' && tempExtra.length > 0) {
     tempExtra = tempExtra.filter(
       item =>
-        item.rule_name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
-        item.rule_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+        item.group_title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
     )
+
     dataListAll.total = tempExtra.length
   }
   let pExtraData =
@@ -60,17 +55,6 @@ Mock.mock(/\/Rule\/listAll/, 'get', options => {
   return dataListAll
 })
 
-Mock.mock(/\/Rule\/listForGroup/, 'get', options => {
-  let tempExtra = extraData.extra.sort((m, n) => {
-    if (m.rule_name === n.rule_name) {
-      return 0
-    }
-    return m.rule_name > n.rule_name ? -1 : 1
-  })
-  dataListForGroup = { ...dataListForGroup, extra: tempExtra }
-  return dataListForGroup
-})
-
 const dataEditSuccess = {
   code: 0,
   msg: '操作成功'
@@ -78,48 +62,44 @@ const dataEditSuccess = {
 
 const dataEditError = {
   code: 1,
-  msg: '规则不存在或者已删除'
+  msg: '分组不存在或者已删除'
 }
 
 const dataExistsError = {
   code: 1,
-  msg: '规则名称已存在'
+  msg: '分组已存在'
 }
 
-Mock.mock(/\/Rule\/add/, 'post', options => {
+Mock.mock(/\/Group\/add/, 'post', options => {
   const result = JSON.parse(options.body)
   const isExists = extraData.extra.some(
-    item => item.rule_name.toLowerCase() === result.rule_name.toLowerCase()
+    item => item.group_title.toLowerCase() === result.group_title.toLowerCase()
   )
   if (isExists) {
     return dataExistsError
   }
-  result.rule_id = ++maxId
+  result.group_id = ++maxId
+  result.group_status = '1'
   extraData.extra.push(result)
   dataListAll.total++
   return dataEditSuccess
 })
 
-Mock.mock(/\/Rule\/edit/, 'post', options => {
+Mock.mock(/\/Group\/edit/, 'post', options => {
   const result = JSON.parse(options.body)
-  let isExists = false
   let equalOthers = extraData.extra.some(
     item =>
-      item.rule_id !== result.rule_id && item.rule_name === result.rule_name
+      item.group_id !== result.group_id &&
+      item.group_title === result.group_title
   )
   if (equalOthers) {
     return dataExistsError
   }
+  let isExists = false
   extraData.extra = extraData.extra.map(item => {
-    if (item.rule_id === result.rule_id) {
+    if (item.group_id === result.group_id) {
       isExists = true
       Object.assign(item, result)
-    }
-    if (
-      item.rule_id !== result.rule_id &&
-      item.rule_name === result.rule_name
-    ) {
-      equalOthers = true
     }
     return item
   })
@@ -129,11 +109,11 @@ Mock.mock(/\/Rule\/edit/, 'post', options => {
   return dataEditSuccess
 })
 
-Mock.mock(/\/Rule\/detail/, 'get', options => {
+Mock.mock(/\/Group\/detail/, 'get', options => {
   const id = parseInt(Tools.getParam('id', options.url))
   let tempData
   extraData.extra.every(item => {
-    if (item.rule_id === id) {
+    if (item.group_id === id) {
       tempData = {}
       tempData.code = 0
       tempData.msg = '操作成功'
@@ -145,15 +125,31 @@ Mock.mock(/\/Rule\/detail/, 'get', options => {
   return tempData || dataEditError
 })
 
-Mock.mock(/\/Rule\/del/, 'post', options => {
+Mock.mock(/\/Group\/changeStatus/, 'post', options => {
+  const result = JSON.parse(options.body)
+  let isExists = false
+  extraData.extra = extraData.extra.map(item => {
+    if (item.group_id === result.group_id) {
+      isExists = true
+      Object.assign(item, result)
+    }
+    return item
+  })
+  if (!isExists) {
+    return dataEditError
+  }
+  return dataEditSuccess
+})
+
+Mock.mock(/\/Group\/del/, 'post', options => {
   const result = JSON.parse(options.body)
   const id = result.id
   let isExists = false
   extraData.extra = extraData.extra.filter(item => {
-    if (item.rule_id === id) {
+    if (item.group_id === id) {
       isExists = true
     }
-    return item.rule_id !== id
+    return item.group_id !== id
   })
   if (!isExists) {
     return dataEditError

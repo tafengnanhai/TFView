@@ -110,11 +110,10 @@ const dataSelfError = {
 
 Mock.mock(/\/Admin\/add/, 'post', options => {
   const result = JSON.parse(options.body)
-  const isExists = extraData.extra.some(item => {
-    return (
+  const isExists = extraData.extra.some(
+    item =>
       item.admin_username.toLowerCase() === result.admin_username.toLowerCase()
-    )
-  })
+  )
   if (isExists) {
     return dataExistsError
   }

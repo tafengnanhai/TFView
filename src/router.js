@@ -113,6 +113,18 @@ export default new Router({
               import(/* webpackChunkName: "system" */ './views/rule/index.vue')
           }
         },
+        {
+          path: '/group/index',
+          name: 'group-index',
+          meta: {
+            label: '分组管理',
+            keepAlive: true
+          },
+          components: {
+            main: () =>
+              import(/* webpackChunkName: "system" */ './views/group/index.vue')
+          }
+        },
         /* 日志管理 */
         {
           path: '/logsys/index',
