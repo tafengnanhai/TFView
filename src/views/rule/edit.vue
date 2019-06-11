@@ -72,7 +72,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           const url = self.$parent.dialogId === 0 ? '/Rule/add' : '/Rule/edit'
-          http.send({ url: url, sendType: 'post', param: this.operForm, showSuccessTip: true }).then(data => {
+          http.send({ sendType: 'post', url: url, param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               self.$refs[formName].resetFields()
               self.toggleDialog(false)
@@ -97,8 +97,8 @@ export default {
       this.operForm.rule_title = 'Menu-XXX-XXX'
     },
     handleElement: function () {
-      this.operForm.rule_name = '【元素】XXX==XXX'
-      this.operForm.rule_title = 'Element-XXX-XXX'
+      this.operForm.rule_name = '【元素】XXX'
+      this.operForm.rule_title = 'Element-XXX'
     }
   },
   watch: {
