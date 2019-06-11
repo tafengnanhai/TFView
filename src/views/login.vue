@@ -78,7 +78,6 @@ export default {
                           this.$store.commit('initAccount', { userid: checkData.extra.userid, username: this.operForm.username, token: checkData.extra.token, rules: ruleData.extra })
                           this.$router.push('/')
                         })
-
                       }
                     })
                   }
