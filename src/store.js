@@ -50,6 +50,10 @@ export default new Vuex.Store({
       ) {
         router.push({ path: '/login', query: { from: 'timeout' } })
       }
+      // 多个窗口打开并重新登陆了新用户
+      if (lockr.get('userid') !== state.userid) {
+        location.href = '/index/main'
+      }
     },
     toggleMenu: state => {
       state.isCollapse = !state.isCollapse
@@ -110,9 +114,9 @@ export default new Vuex.Store({
         state.userid !== 1 &&
         !state.rules.includes(`Action${path.replace(/\//g, '-')}`)
       ) {
-        return { code: 1, msg: '没有权限' }
+        return { code: 1, msg: state.authTip }
       } else {
-        return { code: 0, msg: '拥有权限' }
+        return { code: 0, msg: '操作成功' }
       }
     },
     checkRuleElement: state => element => {
