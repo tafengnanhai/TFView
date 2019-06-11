@@ -94,7 +94,7 @@ export default {
       this.$parent.$parent.$parent.$refs.tfHeader.$refs.adminEdit.toggleDialog(true)
     },
     checkMenu: function (index) {
-      return this.$store.state.userid === 1 || this.$store.state.rules.includes(`Menu${index.split('/').join('-')}`)
+      return this.$store.state.userid === 1 || this.$store.state.rules.includes(`Menu${index.replace(/\//g, '-')}`)
     }
   }
 }

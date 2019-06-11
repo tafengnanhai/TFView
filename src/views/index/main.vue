@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row :gutter="20">
+    <el-row :gutter="20" v-if="this.$store.getters.checkRuleElement('/index/main')">
       <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
         <el-card class="statCard">
           <el-row>
@@ -66,7 +66,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-card class="chartCard">
+    <el-card class="chartCard" v-if="this.$store.getters.checkRuleElement('/index/main')">
       <line-chart :chart-data="statWeekDiffData" :options="lineChartOption"></line-chart>
     </el-card>
     <el-timeline>

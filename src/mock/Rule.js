@@ -3,7 +3,7 @@ import store from '@/store'
 import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
-let maxId = 3
+let maxId = 5
 
 const extraData = {
   extra: [
@@ -29,6 +29,12 @@ const extraData = {
       rule_id: 4,
       rule_name: '【菜单】内容管理==文章管理',
       rule_title: 'Menu-article-index',
+      rule_condition: ''
+    },
+    {
+      rule_id: 5,
+      rule_name: '【元素】首页面板',
+      rule_title: 'Element-index-main',
       rule_condition: ''
     }
   ]

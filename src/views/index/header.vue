@@ -117,8 +117,8 @@ export default {
     },
     // 放到header中是为了避免没有权限的情况下仍然创建tab
     checkMenuFromUrl: function () {
-      if (this.$store.state.userid !== 1 && !this.$store.state.rules.includes(`Menu${this.$route.path.split('/').join('-')}`)) {
-        Message.error('没有权限')
+      if (this.$store.state.userid !== 1 && !this.$store.state.rules.includes(`Menu${this.$route.path.replace(/\//g, '-')}`)) {
+        Message.error(this.$store.state.authTip)
         this.$router.replace('/index/main')
         return false
       }

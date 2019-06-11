@@ -97,8 +97,8 @@ export default {
       this.operForm.rule_title = 'Menu-XXX-XXX'
     },
     handleElement: function () {
-      this.operForm.rule_name = '【元素】XXX'
-      this.operForm.rule_title = 'Element-XXX'
+      this.operForm.rule_name = '【元素】XXX==XXX'
+      this.operForm.rule_title = 'Element-XXX-XXX'
     }
   },
   watch: {

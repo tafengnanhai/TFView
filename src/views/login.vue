@@ -67,11 +67,11 @@ export default {
               if (checkData.extra.userid !== 1) {
                 http.send({ url: '/Access/getAccess', param: { params: { userid: checkData.extra.userid } } }).then(accessData => {
                   if (accessData.extra.length === 0) {
-                    Message.error('没有权限')
+                    Message.error(this.$store.state.authTip)
                   } else {
                     http.send({ url: '/Group/getGroup', param: { params: { groupIds: accessData.extra.join() } } }).then(groupData => {
                       if (groupData.extra.length === 0) {
-                        Message.error('没有权限')
+                        Message.error(this.$store.state.authTip)
                       } else {
                         http.send({ url: '/Rule/getRule', param: { params: { ruleIds: groupData.extra.join() } } }).then(ruleData => {
                           this.$store.commit('initAccount', { userid: checkData.extra.userid, username: this.operForm.username, token: checkData.extra.token, rules: ruleData.extra })

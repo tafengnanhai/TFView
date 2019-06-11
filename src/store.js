@@ -13,6 +13,7 @@ export default new Vuex.Store({
     token: '',
     testToken: 'this is test token which will be replaced by backend',
     rules: [],
+    authTip: '没有权限',
     regNew: false,
     regTotal: 1,
     pageSize: 8,
@@ -66,6 +67,12 @@ export default new Vuex.Store({
     updateReloadPageTime: state => {
       state.reloadPageTime = new Date().getTime()
     },
+    checkRuleAction: (state, path) => {
+      return state.rules.includes(`Action${path.replace(/\//g, '-')}`)
+    },
+    checkRuleElement: (state, element) => {
+      return state.rules.includes(`Element${element.replace(/\//g, '-')}`)
+    },
     logout: state => {
       lockr.rm('userid')
       lockr.rm('username')
@@ -94,6 +101,20 @@ export default new Vuex.Store({
     },
     logout: context => {
       context.commit('logout')
+    }
+  },
+  getters: {
+    checkRuleAction: state => path => {
+      return (
+        state.userid === 1 ||
+        state.rules.includes(`Action${path.replace(/\//g, '-')}`)
+      )
+    },
+    checkRuleElement: state => element => {
+      return (
+        state.userid === 1 ||
+        state.rules.includes(`Element${element.replace(/\//g, '-')}`)
+      )
     }
   }
 })
