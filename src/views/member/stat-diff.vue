@@ -27,18 +27,8 @@ export default {
       statWeekDiffData: {},
       statMonthDiffData: {},
       isShow: true,
-      stacked: true,
       lineChartOption: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            stacked: false
-          }],
-          xAxes: [{
-            stacked: false
-          }]
-        }
+        maintainAspectRatio: false
       }
     }
   },

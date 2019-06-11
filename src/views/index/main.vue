@@ -101,16 +101,7 @@ export default {
       statWeekDiffData: {},
       siteUpdateData: {},
       lineChartOption: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            stacked: false
-          }],
-          xAxes: [{
-            stacked: false
-          }]
-        }
+        maintainAspectRatio: false
       }
     }
   },
