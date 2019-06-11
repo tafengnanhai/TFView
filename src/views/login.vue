@@ -40,6 +40,9 @@
 import http from '@/plugins/http'
 import Message from '@/plugins/message'
 import '@/mock/Admin'
+import '@/mock/Access'
+import '@/mock/Group'
+import '@/mock/Rule'
 export default {
   name: 'login',
   data () {
@@ -58,10 +61,33 @@ export default {
     submitForm: function (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Admin/check', param: this.operForm, showSuccessTip: true }).then(data => {
-            if (data.code === 0) {
-              this.$store.commit('initAccount', { userid: data.extra.userid, username: this.operForm.username, token: data.extra.token })
-              this.$router.push('/')
+          // 实际开发时可以合并为一个请求
+          http.send({ url: '/Admin/check', sendType: 'post', param: this.operForm }).then(checkData => {
+            if (checkData.code === 0) {
+              if (checkData.extra.userid !== 1) {
+                http.send({ url: '/Access/getAccess', param: { params: { userid: checkData.extra.userid } } }).then(accessData => {
+                  if (accessData.extra.length === 0) {
+                    Message.error('没有权限')
+                  } else {
+                    http.send({ url: '/Group/getGroup', param: { params: { groupIds: accessData.extra.join() } } }).then(groupData => {
+                      if (groupData.extra.length === 0) {
+                        Message.error('没有权限')
+                      } else {
+                        http.send({ url: '/Rule/getRule', param: { params: { ruleIds: groupData.extra.join() } } }).then(ruleData => {
+                          console.log(ruleData)
+                          this.$store.commit('initAccount', { userid: checkData.extra.userid, username: this.operForm.username, token: checkData.extra.token, rules: ruleData.extra })
+                          this.$router.push('/')
+                        })
+
+                      }
+                    })
+                  }
+                })
+              } else {
+                Message.success(checkData.msg)
+                this.$store.commit('initAccount', { userid: checkData.extra.userid, username: this.operForm.username, token: checkData.extra.token, rules: [] })
+                this.$router.push('/')
+              }
             }
           })
         } else {

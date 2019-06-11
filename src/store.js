@@ -12,6 +12,7 @@ export default new Vuex.Store({
     username: '',
     token: '',
     testToken: 'this is test token which will be replaced by backend',
+    rules: [],
     regNew: false,
     regTotal: 1,
     pageSize: 8,
@@ -23,23 +24,28 @@ export default new Vuex.Store({
       lockr.set('userid', data.userid)
       lockr.set('username', data.username)
       lockr.set('token', data.token)
+      lockr.set('rules', data.rules)
       state.userid = data.userid
       state.username = data.username
       state.token = data.token
+      state.rules = data.rules
     },
     recoverAccount: state => {
       state.userid = lockr.get('userid', '')
       state.username = lockr.get('username', '')
       state.token = lockr.get('token', '')
+      state.rules = lockr.get('rules', [])
     },
     checkLoginStatus: state => {
       if (
         lockr.get('userid') === undefined ||
         lockr.get('username') === undefined ||
         lockr.get('token') === undefined ||
+        lockr.get('rules') === undefined ||
         state.userid === '' ||
         state.username === '' ||
-        state.token === ''
+        state.token === '' ||
+        state.rules === []
       ) {
         router.push({ path: '/login', query: { from: 'timeout' } })
       }
@@ -64,9 +70,11 @@ export default new Vuex.Store({
       lockr.rm('userid')
       lockr.rm('username')
       lockr.rm('token')
+      lockr.rm('rules')
       state.userid = ''
       state.username = ''
       state.token = ''
+      state.rules = []
       state.isCollapse = false
     }
   },

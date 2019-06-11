@@ -17,7 +17,13 @@ const extraData = {
       admin_id: 2,
       admin_username: 'other',
       admin_password: '123456',
-      admin_status: '0'
+      admin_status: '1'
+    },
+    {
+      admin_id: 3,
+      admin_username: 'test',
+      admin_password: '123456',
+      admin_status: '1'
     }
   ]
 }
@@ -89,7 +95,7 @@ Mock.mock(/\/Admin\/listAll/, 'get', options => {
 })
 
 Mock.mock(/\/Admin\/listForGroup/, 'get', options => {
-  dataListForGroup.extra = extraData.extra
+  dataListForGroup.extra = extraData.extra.slice(1)
   return dataListForGroup
 })
 

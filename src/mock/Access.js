@@ -4,16 +4,12 @@ import Tools from '@/plugins/tools'
 const extraData = {
   extra: [
     {
-      admin_id: 1,
+      admin_id: 2,
       group_id: 1
-    },
-    {
-      admin_id: 1,
-      group_id: 2
     },
     {
       admin_id: 2,
-      group_id: 1
+      group_id: 2
     }
   ]
 }
@@ -47,4 +43,17 @@ Mock.mock(/\/Access\/edit/, 'post', options => {
   })
 
   return dataSuccess
+})
+
+const accessData = {
+  code: 0,
+  msg: '操作成功'
+}
+
+Mock.mock(/\/Access\/getAccess/, 'get', options => {
+  const id = parseInt(Tools.getParam('userid', options.url))
+  accessData.extra = extraData.extra
+    .filter(item => item.admin_id === id)
+    .map(item => item.group_id)
+  return accessData
 })

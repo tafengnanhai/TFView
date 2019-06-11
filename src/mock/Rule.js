@@ -3,7 +3,7 @@ import store from '@/store'
 import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
-let maxId = 2
+let maxId = 3
 
 const extraData = {
   extra: [
@@ -17,6 +17,12 @@ const extraData = {
       rule_id: 2,
       rule_name: '【操作】首页面板==更新日志',
       rule_title: 'Action-Site-getUpdateRecords',
+      rule_condition: ''
+    },
+    {
+      rule_id: 3,
+      rule_name: '【菜单】首页面板',
+      rule_title: 'Menu-index-main',
       rule_condition: ''
     }
   ]
@@ -161,4 +167,17 @@ Mock.mock(/\/Rule\/del/, 'post', options => {
   dataListAll.total--
   dataEditSuccess.total = dataListAll.total
   return dataEditSuccess
+})
+
+const ruleData = {
+  code: 0,
+  msg: '操作成功'
+}
+
+Mock.mock(/\/Rule\/getRule/, 'get', options => {
+  const ids = Tools.getParam('ruleIds', options.url).split(',')
+  ruleData.extra = extraData.extra
+    .filter(item => ids.includes(item.rule_id.toString()))
+    .map(item => item.rule_title)
+  return ruleData
 })

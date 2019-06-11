@@ -65,7 +65,7 @@ export default {
       const self = this
       this.$refs[formName].validate(valid => {
         if (valid) {
-          http.send({ sendType: 'post', url: '/Message/edit', param: this.operForm, showSuccessTip: true }).then(data => {
+          http.send({ url: '/Message/edit', sendType: 'post', param: this.operForm, showSuccessTip: true }).then(data => {
             if (data.code === 0) {
               this.$store.dispatch('updateRegNewMsg', this.operForm)
               self.loadMine()

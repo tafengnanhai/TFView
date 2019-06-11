@@ -16,8 +16,8 @@ const extraData = {
     {
       group_id: 2,
       group_title: '测试用户组',
-      group_rules: '1',
-      group_status: '0'
+      group_rules: '1,2,3',
+      group_status: '1'
     }
   ]
 }
@@ -157,4 +157,27 @@ Mock.mock(/\/Group\/del/, 'post', options => {
   dataListAll.total--
   dataEditSuccess.total = dataListAll.total
   return dataEditSuccess
+})
+
+const groupData = {
+  code: 0,
+  msg: '操作成功'
+}
+
+Mock.mock(/\/Group\/getGroup/, 'get', options => {
+  const ids = Tools.getParam('groupIds', options.url).split(',')
+  const tempData = []
+  extraData.extra.forEach(item => {
+    if (ids.includes(item.group_id.toString())) {
+      item.group_rules.length > 0 &&
+        item.group_rules.split(',').forEach(rule => {
+          const tempRule = parseInt(rule)
+          if (!tempData.includes(tempRule)) {
+            tempData.push(tempRule)
+          }
+        })
+    }
+  })
+  groupData.extra = tempData
+  return groupData
 })
