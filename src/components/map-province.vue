@@ -218,8 +218,10 @@ export default {
     this.initChart()
     this.loadMine()
     window.onresize = () => {
-      document.getElementById('main').style.height = `${document.body.clientWidth * 0.35}px`
-      this.chart.resize()
+      if (this.$route.path === '/member/stat-now') {
+        document.getElementById('main').style.height = `${document.body.clientWidth * 0.35}px`
+        this.chart.resize()
+      }
     }
   },
   watch: {
