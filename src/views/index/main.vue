@@ -107,10 +107,10 @@ export default {
   },
   methods: {
     loadMine: function () {
-      http.send({ url: '/Member/getGeneralStat' }).then(data => {
+      this.$store.getters.checkRuleElement('/index/main') && http.send({ url: '/Member/getGeneralStat' }).then(data => {
         this.statTotal = data.extra
       })
-      http.send({ url: '/Member/getWeekDiffStat' }).then(data => {
+      this.$store.getters.checkRuleElement('/index/main') && http.send({ url: '/Member/getWeekDiffStat' }).then(data => {
         this.statWeekDiffData = data.extra
       })
       http.send({ url: '/Site/getUpdateRecords' }).then(data => {

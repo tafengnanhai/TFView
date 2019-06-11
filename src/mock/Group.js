@@ -169,7 +169,8 @@ Mock.mock(/\/Group\/getGroup/, 'get', options => {
   const tempData = []
   extraData.extra.forEach(item => {
     if (ids.includes(item.group_id.toString())) {
-      item.group_rules.length > 0 &&
+      item.group_status === '1' &&
+        item.group_rules.length > 0 &&
         item.group_rules.split(',').forEach(rule => {
           const tempRule = parseInt(rule)
           if (!tempData.includes(tempRule)) {

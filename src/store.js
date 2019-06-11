@@ -104,11 +104,16 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    // 为了使用return所以借用了下getters
     checkRuleAction: state => path => {
-      return (
-        state.userid === 1 ||
-        state.rules.includes(`Action${path.replace(/\//g, '-')}`)
-      )
+      if (
+        state.userid !== 1 &&
+        !state.rules.includes(`Action${path.replace(/\//g, '-')}`)
+      ) {
+        return { code: 1, msg: '没有权限' }
+      } else {
+        return { code: 0, msg: '拥有权限' }
+      }
     },
     checkRuleElement: state => element => {
       return (

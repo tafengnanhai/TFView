@@ -1,7 +1,9 @@
 import Mock from 'mockjs'
+import store from '@/store'
+
 const Random = Mock.Random
 
-const dataMemberGeneralStat = {
+const dataMemberGeneralStat = Mock.mock({
   code: 0,
   msg: '操作成功',
   extra: {
@@ -10,7 +12,7 @@ const dataMemberGeneralStat = {
     month: '@integer(10000, 100000)',
     all: '@integer(1000000, 10000000)'
   }
-}
+})
 // 模拟错误
 /* dataMemberGeneralStat = {
   code: 1,
@@ -22,8 +24,10 @@ const dataMemberGeneralStat = {
   code: -1,
   msg: '未登陆或超时，请重新登陆'
 } */
-Mock.mock(/\/Member\/getGeneralStat/, 'get', dataMemberGeneralStat)
-
+Mock.mock(/\/Member\/getGeneralStat/, 'get', options => {
+  const authResult = store.getters.checkRuleAction(options.url)
+  return authResult.code === 0 ? dataMemberGeneralStat : authResult
+})
 const dataMemberDayDiff = {
   code: 0,
   msg: '操作成功',
