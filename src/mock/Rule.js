@@ -24,6 +24,12 @@ const extraData = {
       rule_name: '【菜单】首页面板',
       rule_title: 'Menu-index-main',
       rule_condition: ''
+    },
+    {
+      rule_id: 4,
+      rule_name: '【菜单】内容管理==文章管理',
+      rule_title: 'Menu-article-index',
+      rule_condition: ''
     }
   ]
 }

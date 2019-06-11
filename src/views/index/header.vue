@@ -115,16 +115,25 @@ export default {
       this.$store.dispatch('updateReloadPageTime')
       Loading.close()
     },
+    // 放到header中是为了避免没有权限的情况下仍然创建tab
+    checkMenuFromUrl: function () {
+      if (this.$store.state.userid !== 1 && !this.$store.state.rules.includes(`Menu${this.$route.path.split('/').join('-')}`)) {
+        Message.error('没有权限')
+        this.$router.replace('/index/main')
+        return false
+      }
+      return true
+    },
     loadMine () {
       // empty for change password call
     }
   },
   mounted: function () {
-    this.addTab()
+    this.checkMenuFromUrl() && this.addTab()
   },
   watch: {
     '$route': function (to, from) {
-      this.addTab()
+      this.checkMenuFromUrl() && this.addTab()
     }
   }
 }

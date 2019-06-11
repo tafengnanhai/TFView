@@ -10,13 +10,13 @@ const extraData = {
     {
       group_id: 1,
       group_title: '系统用户组',
-      group_rules: '1,2',
+      group_rules: '1,2,3',
       group_status: '1'
     },
     {
       group_id: 2,
       group_title: '测试用户组',
-      group_rules: '1,2,3',
+      group_rules: '1,2,3,4',
       group_status: '1'
     }
   ]

@@ -9,6 +9,7 @@
       :close-on-press-escape="true"
     >
       <el-form :model="operForm" ref="operForm" :rules="rules" label-width="80px">
+        <el-form-item label="说明">如果修改了规则，被授权用户需要重新登陆后生效</el-form-item>
         <el-form-item label="名称" prop="group_title">
           <el-input v-model.trim="operForm.group_title" maxlength="80" autocomplete="off" clearable></el-input>
         </el-form-item>

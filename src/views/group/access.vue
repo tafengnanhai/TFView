@@ -9,7 +9,8 @@
       :close-on-press-escape="true"
     >
       <el-form :model="operForm" ref="operForm" label-width="80px">
-        <el-form-item label="名称" prop="group_title">{{otherForm.group_title}}</el-form-item>
+        <el-form-item label="说明">如果修改了授权，被授权用户需要重新登陆后生效</el-form-item>
+        <el-form-item label="名称">{{otherForm.group_title}}</el-form-item>
         <el-form-item label="用户" prop="admin_id">
           <el-checkbox-group v-model="checkedGroupAccess" @change="handleCheckedChange">
             <el-checkbox

@@ -74,7 +74,6 @@ export default {
                         Message.error('没有权限')
                       } else {
                         http.send({ url: '/Rule/getRule', param: { params: { ruleIds: groupData.extra.join() } } }).then(ruleData => {
-                          console.log(ruleData)
                           this.$store.commit('initAccount', { userid: checkData.extra.userid, username: this.operForm.username, token: checkData.extra.token, rules: ruleData.extra })
                           this.$router.push('/')
                         })

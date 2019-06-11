@@ -16,47 +16,55 @@
       :collapse-transition="false"
       :unique-opened="true"
       :collapse="this.$store.state.isCollapse"
-      @select="selectMenu"
     >
-      <el-menu-item index="/index/main">
+      <el-menu-item
+        index="/index/main"
+        v-if="checkMenu('/index/main')/*为了统一入口，这里应该都能访问，可以在页面内使用Element-XXX的规则限制权限细节*/"
+      >
         <i class="el-icon-s-home"></i>
         <span slot="title">首页面板</span>
       </el-menu-item>
-      <el-submenu index="article">
+      <el-submenu index="article" v-if="checkMenu('/article/index') || checkMenu('/artsort/index')">
         <template slot="title">
           <i class="el-icon-document"></i>
           <span>内容管理</span>
         </template>
-        <el-menu-item index="/article/index">文章管理</el-menu-item>
-        <el-menu-item index="/artsort/index">分类管理</el-menu-item>
+        <el-menu-item index="/article/index" v-if="checkMenu('/article/index')">文章管理</el-menu-item>
+        <el-menu-item index="/artsort/index" v-if="checkMenu('/artsort/index') ">分类管理</el-menu-item>
       </el-submenu>
-      <el-submenu index="member-stat">
+      <el-submenu
+        index="member-stat"
+        v-if="checkMenu('/member/stat-diff') || checkMenu('/member/stat-city')  || checkMenu('/member/stat-now')"
+      >
         <template slot="title">
           <i class="el-icon-pie-chart"></i>
           <span>监控统计</span>
         </template>
-        <el-menu-item index="/member/stat-diff">注册对比</el-menu-item>
-        <el-menu-item index="/member/stat-city">城市统计</el-menu-item>
-        <el-menu-item index="/member/stat-now">实时活跃</el-menu-item>
+        <el-menu-item index="/member/stat-diff" v-if="checkMenu('/member/stat-diff')">注册对比</el-menu-item>
+        <el-menu-item index="/member/stat-city" v-if="checkMenu('/member/stat-city')">城市统计</el-menu-item>
+        <el-menu-item index="/member/stat-now" v-if="checkMenu('/member/stat-now')">实时活跃</el-menu-item>
       </el-submenu>
-      <el-submenu index="system">
+      <el-submenu
+        index="system"
+        v-if="checkMenu('/admin/index') || checkMenu('/group/index')  || checkMenu('/rule/index')"
+      >
         <template slot="title">
           <i class="el-icon-set-up"></i>
           <span>系统管理</span>
         </template>
-        <el-menu-item index="/admin/index">系统用户</el-menu-item>
-        <el-menu-item index="/group/index">分组管理</el-menu-item>
-        <el-menu-item index="/rule/index">规则管理</el-menu-item>
+        <el-menu-item index="/admin/index" v-if="checkMenu('/admin/index')">系统用户</el-menu-item>
+        <el-menu-item index="/group/index" v-if="checkMenu('/group/index')">分组管理</el-menu-item>
+        <el-menu-item index="/rule/index" v-if="checkMenu('/rule/index')">规则管理</el-menu-item>
       </el-submenu>
-      <el-submenu index="log">
+      <el-submenu index="log" v-if="checkMenu('/logsys/index') || checkMenu('/logmember/index')">
         <template slot="title">
           <i class="el-icon-postcard"></i>
           <span>日志管理</span>
         </template>
-        <el-menu-item index="/logsys/index">系统日志</el-menu-item>
-        <el-menu-item index="/logmember/index">用户日志</el-menu-item>
+        <el-menu-item index="/logsys/index" v-if="checkMenu('/logsys/index')">系统日志</el-menu-item>
+        <el-menu-item index="/logmember/index" v-if="checkMenu('/logmember/index')">用户日志</el-menu-item>
       </el-submenu>
-      <el-menu-item index="/message/edit">
+      <el-menu-item index="/message/edit" v-if="checkMenu('/message/edit')">
         <i class="el-icon-chat-line-round"></i>
         <span slot="title">消息提醒</span>
       </el-menu-item>
@@ -76,11 +84,6 @@
 import Message from '@/plugins/message'
 export default {
   name: 'tf-menu',
-  data () {
-    return {
-
-    }
-  },
   methods: {
     logout: function () {
       this.$store.dispatch('logout')
@@ -90,8 +93,8 @@ export default {
     changePassword: function () {
       this.$parent.$parent.$parent.$refs.tfHeader.$refs.adminEdit.toggleDialog(true)
     },
-    selectMenu: function (index, indexPath) {
-
+    checkMenu: function (index) {
+      return this.$store.state.userid === 1 || this.$store.state.rules.includes(`Menu${index.split('/').join('-')}`)
     }
   }
 }
