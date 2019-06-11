@@ -25,10 +25,11 @@ const dataMemberGeneralStat = Mock.mock({
   msg: '未登陆或超时，请重新登陆'
 } */
 Mock.mock(/\/Member\/getGeneralStat/, 'get', options => {
+  // 这里仅仅选择几个操作模拟下后端接口控制，实时开发时可以统一通过后端处理，不需要逐个调整（比如在基类中或者中间件等）
   const authResult = store.getters.checkRuleAction(options.url)
   return authResult.code === 0 ? dataMemberGeneralStat : authResult
 })
-const dataMemberDayDiff = {
+const dataMemberDayDiff = Mock.mock({
   code: 0,
   msg: '操作成功',
   extra: {
@@ -48,9 +49,12 @@ const dataMemberDayDiff = {
       }
     ]
   }
-}
+})
 
-Mock.mock(/\/Member\/getDayDiffStat/, 'get', dataMemberDayDiff)
+Mock.mock(/\/Member\/getDayDiffStat/, 'get', options => {
+  const authResult = store.getters.checkRuleAction(options.url)
+  return authResult.code === 0 ? dataMemberDayDiff : authResult
+})
 
 const dataMemberWeekDiff = {
   code: 0,
