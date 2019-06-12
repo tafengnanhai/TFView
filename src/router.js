@@ -105,7 +105,7 @@ export default new Router({
           path: '/rule/index',
           name: 'rule-index',
           meta: {
-            label: '权限管理',
+            label: '规则管理',
             keepAlive: true
           },
           components: {
