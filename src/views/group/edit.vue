@@ -129,6 +129,8 @@ export default {
           this.$nextTick(() => {
             this.$refs.operForm.resetFields()
           })
+          this.checkedGroupRules = []
+          this.updateChecked([])
           this.dialogLastOperation = 'add'
         }
       } else {
