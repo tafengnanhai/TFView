@@ -3,7 +3,7 @@ import store from '@/store'
 import Tools from '@/plugins/tools'
 
 const pageSize = store.state.pageSize
-let maxId = 2
+let maxId = 3
 
 const extraData = {
   extra: [
