@@ -77,13 +77,25 @@
         <el-menu-item @click="logout()">注销退出</el-menu-item>
       </el-submenu>
     </el-menu>
+    <admin-edit dialog-form-title="修改密码" ref="adminEdit"></admin-edit>
   </div>
 </template>
 
 <script>
 import Message from '@/plugins/message'
+import AdminEdit from '@/views/admin/edit.vue'
 export default {
   name: 'tf-menu',
+  components: {
+    AdminEdit
+  },
+  data () {
+    return {
+      dialogFormVisible: false,
+      dialogId: this.$store.state.userid,
+      dialogEditTime: 0
+    }
+  },
   methods: {
     logout: function () {
       this.$store.dispatch('logout')
@@ -91,10 +103,17 @@ export default {
       this.$router.replace('/login')
     },
     changePassword: function () {
-      this.$parent.$parent.$parent.$refs.tfHeader.$refs.adminEdit.toggleDialog(true)
+      this.toggleDialog(true)
+    },
+    toggleDialog: function (flag) {
+      flag && (this.dialogEditTime = new Date().getTime())
+      this.$refs.adminEdit.toggleDialog(flag)
     },
     checkMenu: function (index) {
       return this.$store.state.userid === 1 || this.$store.state.rules.includes(`Menu${index.replace(/\//g, '-')}`)
+    },
+    loadMine () {
+      // empty for change password call
     }
   }
 }
